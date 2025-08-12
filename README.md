@@ -4,6 +4,9 @@
 
 An application which demonstrates the major features of Next.js
 
+TODO - home page
+- make same design and layout as other app
+
 ### Routing
 
 Basic routing - `/routes/basic`
@@ -50,14 +53,6 @@ Streaming  - `/streaming`
 Server Action - `/server-action`.
 - A page with a form that uses a Server Action to update some data and then revalidates cached data or updates the UI without a separate API route.
  
-### Middleware
-
-AB-testing - `/middleware/ab-testing`
-- Redirect a percentage of users to an alternative version of a page (e.g., `/home-a` vs. `/home-b`) or inject a feature flag into the request, which components can then read to render different UI.
-
-User Info logging - `/middleware/log`
-- Log the user's IP, useragent, requested path, timestamp
-
 ### Route Handlers
 
 GET request - `/route-handlers/GET`
@@ -69,6 +64,14 @@ POST request - `/route-handlers/POST`
 - On submission, use fetch to POST the data to the Route.
 - Display a success message or error to the user.
 - On success, show what the user entered.
+
+### Middleware
+
+AB-testing - `/middleware/ab-testing`
+- Redirect a percentage of users to an alternative version of a page (e.g., `/home-a` vs. `/home-b`) or inject a feature flag into the request, which components can then read to render different UI.
+
+User Info logging - `/middleware/log`
+- Log the user's IP, useragent, requested path, timestamp
 
 ### Image Optimization??
 
