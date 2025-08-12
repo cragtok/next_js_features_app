@@ -15,24 +15,24 @@ Dynamic routing - `/routes/dynamic/[slug]`
 - Display the dynamic segment back to the user.
 - Pre-render certain unique dynamic routes.
 
-### Data Fetching
+### Rendering and Data Fetching
 
-SSR - `/data-fetching/ssr`
+SSR - `/rendering/ssr`
 - A page that displays data that changes frequently, like current stock prices or a real-time news feed.
 - Use server component
 - Use a loading UI
 - May also add manual delay for testing
 
-SSG - `/data-fetching/ssg`
+SSG - `/rendering/ssg`
 - A static page that pre-renders during build time.
 - Example: A static blog page with a few pre-rendered posts.
 
-ISR  - `/data-fetching/isr`
+ISR  - `/rendering/isr`
 - A page that displays content (e.g., a product list) that is mostly static but might need occasional updates.
 - Show how the content updates after a specified revalidate time without a full redeploy.
 - Example: ISR page that shows time and date, caches page for 30s and then renders it again with new time and date
 
-CSR - `/data-fetching/csr`
+CSR - `/rendering/csr`
 - Using `useEffect` or a client-side data fetching library (like SWR or React Query) in a Client Component.
 - Add some dynamic features
 
