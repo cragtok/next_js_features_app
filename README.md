@@ -5,7 +5,8 @@
 An application which demonstrates the major features of Next.js
 
 TODO - home page
-- make same design and layout as other app
+- change feature description text
+- Icons??
 
 ### Routing
 
