@@ -4,9 +4,11 @@
 
 An application which demonstrates the major features of Next.js
 
-TODO - home page
-- change feature description text
-- Icons??
+TODO
+- home page
+    - change feature description text
+    - Icons??
+- NotFound page
 
 ### Routing
 
