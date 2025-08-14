@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
-import Image from "next/image";
 import "./globals.css";
+
+import Header from "./(home)/Header";
 
 const notoSans = Noto_Sans({
     variable: "--font-noto-sans",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     description: "An app demonstrating basic Next.js features",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -23,15 +24,7 @@ export default function RootLayout({
             <body
                 className={`${notoSans.variable} mx-10 antialiased bg-neutral-100`}
             >
-                <div className="mx-auto my-0 flex justify-center mt-15">
-                    <Image
-                        src="/vercel.svg"
-                        className="bg-brand-700 rounded-[8] border-3 border-brand-700"
-                        alt="logo"
-                        width={80}
-                        height={80}
-                    />
-                </div>
+                <Header />
                 {children}
             </body>
         </html>
