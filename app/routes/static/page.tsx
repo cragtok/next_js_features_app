@@ -9,7 +9,7 @@ export default function Page() {
                 This is a page routed using a simple static route{" "}
                 <span className="text-accent-500 font-semibold whitespace-nowrap">
                     /routes/static
-                </span>{" "}
+                </span>
                 . In the Next.js App Router, static routes are defined by
                 creating a folder structure within the{" "}
                 <span className="text-accent-500 font-semibold whitespace-nowrap">

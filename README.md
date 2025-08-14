@@ -6,13 +6,16 @@ An application which demonstrates the major features of Next.js
 
 TODO
 - Routing
-    - Basic Routing
-    - Dynamic Routing
+    - [X] Basic Routing
+    - [ ] Dynamic Routing
 - home page
     - change feature description text
     - Icons??
 - NotFound page
 - convert routeTitles to output of reducing pageRoutes
+- extract common page template
+- Accessibility
+- SEO and Metadata
 
 ### Routing
 
