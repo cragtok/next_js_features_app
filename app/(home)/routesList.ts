@@ -5,14 +5,14 @@ const pageRoutes: PageRoute[] = [
         route: "Routing",
         subRoutes: [
             {
-                title: "Basic Routing",
-                href: "/routes/basic",
-                description: "Routing basic URLs.",
+                title: "Static Routing",
+                href: "/routes/static",
+                description: "Routing with static URLs.",
             },
             {
                 title: "Dynamic Routing",
-                href: "/routes/dynamic/hello-world",
-                description: "Routing URL with dynamic segments.",
+                href: "/routes/dynamic",
+                description: "Routing with dynamic URLs.",
             },
         ],
     },
