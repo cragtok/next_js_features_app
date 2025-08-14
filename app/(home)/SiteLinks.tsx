@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import CardLink from "./CardLink";
 import { PageRoute, SubRoute } from "./types";
-import pageRoutes from "./routesList";
+import { pageRoutes } from "./routesList";
 
 const renderSubRoutes = (subRoutes: SubRoute[]) => {
     return subRoutes.map((subRoute: SubRoute) => (

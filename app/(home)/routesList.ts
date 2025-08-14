@@ -1,6 +1,21 @@
 import { PageRoute } from "./types";
 
-const pageRoutes: PageRoute[] = [
+export const routeTitles: Record<string, string> = {
+    "/routes/static": "Static Routing",
+    "/routes/dynamic": "Dynamic Routing",
+    "/rendering/ssr": "Server Side Rendering (SSR)",
+    "/rendering/ssg": "Static Site Generation (SSG)",
+    "/rendering/isr": "Incremental Static Regeneration (ISR)",
+    "/rendering/csr": "Client Side Rendering (CSR)",
+    "/streaming": "Streaming",
+    "/server-actions": "Server Action",
+    "/route-handlers/GET": "GET Request",
+    "/route-handlers/POST": "POST Request",
+    "/middleware/ab-testing": "A/B Testing",
+    "/middleware/log": "Request Info Logging",
+};
+
+export const pageRoutes: PageRoute[] = [
     {
         route: "Routing",
         subRoutes: [
@@ -60,8 +75,8 @@ const pageRoutes: PageRoute[] = [
         route: "Server Actions",
         subRoutes: [
             {
-                title: "Server Action",
-                href: "/server-action",
+                title: "Server Actions",
+                href: "/server-actions",
                 description:
                     "Functions that run on the server and can be called from client components.",
             },
@@ -99,5 +114,3 @@ const pageRoutes: PageRoute[] = [
         ],
     },
 ];
-
-export default pageRoutes;

@@ -12,6 +12,7 @@ TODO
     - change feature description text
     - Icons??
 - NotFound page
+- convert routeTitles to output of reducing pageRoutes
 
 ### Routing
 

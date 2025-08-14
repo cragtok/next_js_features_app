@@ -1,18 +1,16 @@
 "use client";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import BreadcrumbMenu from "./BreadcrumbMenu";
+import { routeTitles } from "./routesList";
 
 export default function Header() {
     const pathname = usePathname();
     const isHomePage = pathname === "/";
+
+    const routePath: string[] = isHomePage
+        ? []
+        : ["Home", routeTitles[pathname]];
 
     return (
         <header className="">
@@ -28,27 +26,7 @@ export default function Header() {
                 </div>
             )}
 
-            {!isHomePage && (
-                <Breadcrumb className="flex justify-center mt-10">
-                    <BreadcrumbList>
-                        <BreadcrumbItem className="font-bold text-brand-500 hover:text-brand-300">
-                            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator className="text-brand-300" />
-                        <BreadcrumbItem className="font-bold text-brand-500">
-                            <BreadcrumbLink href="/components">
-                                Components
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator className="text-brand-300" />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage className="font-bold text-accent-500">
-                                Breadcrumb
-                            </BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
-            )}
+            {!isHomePage && <BreadcrumbMenu routePath={routePath} />}
         </header>
     );
 }
