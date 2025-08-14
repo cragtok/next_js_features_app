@@ -9,16 +9,28 @@ export default function Page() {
                 This is a page routed using a simple static route{" "}
                 <span className="text-accent-500 font-semibold whitespace-nowrap">
                     /routes/static
-                </span>
-                . It was made by creating an{" "}
-                <span className="text-accent-500 font-semibold whitespace-nowrap">
-                    /app/routes/static
                 </span>{" "}
-                folder containing a{" "}
+                . In the Next.js App Router, static routes are defined by
+                creating a folder structure within the{" "}
+                <span className="text-accent-500 font-semibold whitespace-nowrap">
+                    app
+                </span>{" "}
+                directory, where each folder represents a segment of the URL
+                path, and a{" "}
                 <span className="text-accent-500 font-semibold whitespace-nowrap">
                     page.tsx
                 </span>{" "}
-                file.
+                file inside the innermost folder makes that route segment
+                publicly accessible. For example, the page for this route was
+                made by creating an{" "}
+                <span className="text-accent-500 font-semibold whitespace-nowrap">
+                    app/routes/static/page.tsx
+                </span>{" "}
+                file. You can see that the{" "}
+                <span className="text-accent-500 font-semibold whitespace-nowrap">
+                    /routes/static
+                </span>{" "}
+                part of the file path become part of the route.
             </p>
         </div>
     );
