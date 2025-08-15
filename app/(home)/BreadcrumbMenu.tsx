@@ -24,7 +24,9 @@ export default function BreadcrumbMenu({ routePath }: Props) {
                         return (
                             <BreadcrumbItem key={crypto.randomUUID()}>
                                 <BreadcrumbPage className="font-bold text-accent-500">
-                                    {pathObj.title}
+                                    {pathObj.title.length < 25
+                                        ? pathObj.title
+                                        : `${pathObj.title.substring(0, 25)}...`}
                                 </BreadcrumbPage>
                             </BreadcrumbItem>
                         );
@@ -34,7 +36,9 @@ export default function BreadcrumbMenu({ routePath }: Props) {
                         <Fragment key={crypto.randomUUID()}>
                             <BreadcrumbItem className="font-bold text-brand-500 hover:text-brand-300">
                                 <BreadcrumbLink href={pathObj.href}>
-                                    {pathObj.title}
+                                    {pathObj.title.length < 25
+                                        ? pathObj.title
+                                        : `${pathObj.title.substring(0, 25)}...`}
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator className="text-brand-300" />
