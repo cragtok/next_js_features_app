@@ -12,9 +12,11 @@ export default function Header() {
 
     const dynamicRoutePattern = /^\/routes\/dynamic\/(.*)/;
 
-    let routePath: SubRoute[] = [routeObjects["/"]];
+    let routePath: SubRoute[] = [];
 
-    if (pathname.match(dynamicRoutePattern)) {
+    if (isHomePage) {
+        routePath = [routeObjects["/"]];
+    } else if (pathname.match(dynamicRoutePattern)) {
         const match = pathname.match(dynamicRoutePattern);
         if (match) {
             routePath = [
@@ -23,9 +25,11 @@ export default function Header() {
                 { ...routeObjects["/routes/dynamic*"], title: match[1] },
             ];
         }
-    } else {
+    } else if (routeObjects.hasOwnProperty(pathname)) {
         routePath = [routeObjects["/"], routeObjects[pathname]];
     }
+
+    const isValidRoute = routePath.length > 0;
 
     return (
         <header className="">
@@ -42,7 +46,9 @@ export default function Header() {
             )}
 
             <Suspense fallback={<p>Loading...</p>}>
-                {!isHomePage && <BreadcrumbMenu routePath={routePath} />}
+                {isValidRoute && !isHomePage && (
+                    <BreadcrumbMenu routePath={routePath} />
+                )}
             </Suspense>
         </header>
     );
