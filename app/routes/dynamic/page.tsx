@@ -61,6 +61,19 @@ export default function Page() {
 
             <section className="flex flex-col gap-8">
                 <h2 className="text-brand-700 font-extrabold text-2xl">
+                    Dynamic Route Form
+                </h2>
+
+                <p className="text-brand-500 max-w-prose text-justify">
+                    Enter a dynamic route segment in the form below to
+                    automatically navigate to that route:
+                </p>
+
+                <DynamicRouteForm />
+            </section>
+
+            <section className="flex flex-col gap-8 pb-18">
+                <h2 className="text-brand-700 font-extrabold text-2xl">
                     Dynamic Route Examples
                 </h2>
 
@@ -103,19 +116,6 @@ export default function Page() {
                         </Link>
                     </li>
                 </ul>
-            </section>
-
-            <section className="flex flex-col gap-8 pb-18">
-                <h2 className="text-brand-700 font-extrabold text-2xl">
-                    Dynamic Route Form
-                </h2>
-
-                <p className="text-brand-500 max-w-prose text-justify">
-                    Or, enter a dynamic route segment in the form below and
-                    automatically navigate to that route:
-                </p>
-
-                <DynamicRouteForm />
             </section>
         </div>
     );
