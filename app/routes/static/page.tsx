@@ -1,18 +1,10 @@
-import {
-    Card,
-    CardAction,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import FolderStructureCards from "../FolderStructureCards";
 
 export default function Page() {
     return (
         <div className="flex flex-col pt-10 gap-8 items-center max-sm:text-sm">
             <h1 className="text-brand-700 font-extrabold text-4xl text-center">
-                Static Route
+                Static Routing
             </h1>
 
             <section>
@@ -54,38 +46,9 @@ export default function Page() {
                 </p>
 
                 <div className="text-sm">
-                    <Card className="py-3 bg-neutral-100 rounded-md">
-                        <CardHeader>
-                            <CardTitle className="flex gap-2 text-accent-500 font-semibold">
-                                <span>🗁</span>
-                                <span>app</span>
-                            </CardTitle>
-                        </CardHeader>
-                    </Card>
-                    <Card className="py-3 bg-neutral-100 rounded-md">
-                        <CardHeader>
-                            <CardTitle className="pl-6 flex gap-2 text-accent-500 font-semibold">
-                                <span>🗁</span>
-                                <span>routes</span>
-                            </CardTitle>
-                        </CardHeader>
-                    </Card>
-                    <Card className="py-3 bg-neutral-100 rounded-md">
-                        <CardHeader>
-                            <CardTitle className="pl-12 flex gap-2 text-accent-500 font-semibold">
-                                <span>🗁</span>
-                                <span>static</span>
-                            </CardTitle>
-                        </CardHeader>
-                    </Card>
-                    <Card className="py-3 bg-neutral-100 rounded-md">
-                        <CardHeader>
-                            <CardTitle className="pl-18 flex gap-2 text-accent-500 font-semibold">
-                                <span>🗐</span>
-                                <span>page.tsx</span>
-                            </CardTitle>
-                        </CardHeader>
-                    </Card>
+                    <FolderStructureCards
+                        folderPath={["app", "routes", "static", "page.tsx"]}
+                    />
                 </div>
             </section>
         </div>
