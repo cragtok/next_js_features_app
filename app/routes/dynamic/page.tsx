@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { DynamicRouteForm } from "./DynamicRouteForm";
+import FolderStructureCards from "../FolderStructureCards";
 
 export default function Page() {
     return (
         <div className="flex flex-col pt-10 gap-10 items-center text-center max-sm:text-sm">
             <h1 className="text-brand-700 font-extrabold text-4xl">
-                Dynamic Route
+                Dynamic Routing
             </h1>
 
-            <section>
+            <section className="flex flex-col gap-8">
                 <p className="text-brand-500 max-w-prose text-justify">
                     In Next.js, you can create a dynamic route by creating a{" "}
                     <span className="text-accent-500 font-semibold whitespace-nowrap">
@@ -44,6 +45,18 @@ export default function Page() {
                     </span>{" "}
                     prop.
                 </p>
+
+                <div className="max-[300px]:text-xs text-sm">
+                    <FolderStructureCards
+                        folderPath={[
+                            "app",
+                            "routes",
+                            "dynamic",
+                            "[slug]",
+                            "page.tsx",
+                        ]}
+                    />
+                </div>
             </section>
 
             <section className="flex flex-col gap-8">
