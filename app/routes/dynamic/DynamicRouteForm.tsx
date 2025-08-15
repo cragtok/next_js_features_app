@@ -4,7 +4,11 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export const DynamicRouteForm = () => {
+interface Props {
+    baseRoute: string;
+}
+
+export const DynamicRouteForm = ({ baseRoute }: Props) => {
     const [value, setValue] = useState("");
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -20,8 +24,8 @@ export const DynamicRouteForm = () => {
             return;
         }
 
-        const dynamicPath = `dynamic/${encodeURIComponent(trimmedValue)}`;
-        router.push(dynamicPath);
+        const dynamicPath = encodeURIComponent(trimmedValue);
+        router.push(`${baseRoute}/${dynamicPath}`);
         setValue("");
     };
 

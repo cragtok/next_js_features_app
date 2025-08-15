@@ -70,7 +70,7 @@ export default function Page() {
                     automatically navigate to that route:
                 </p>
 
-                <DynamicRouteForm />
+                <DynamicRouteForm baseRoute="/routes/dynamic" />
             </section>
 
             <section className="flex flex-col gap-8 pb-18">
