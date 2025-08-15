@@ -43,7 +43,8 @@ export default function Page() {
                     <span className="text-accent-500 font-semibold whitespace-nowrap">
                         slug
                     </span>{" "}
-                    prop.
+                    prop. The page will be rendered dynamically using Server
+                    Side Rendering (SSR).
                 </p>
 
                 <div className="max-[300px]:text-xs text-sm">
@@ -61,7 +62,7 @@ export default function Page() {
 
             <section className="flex flex-col gap-8">
                 <h2 className="text-brand-700 font-extrabold text-2xl">
-                    Dynamic Route Form
+                    Dynamic Route Navigation
                 </h2>
 
                 <p className="text-brand-500 max-w-prose text-justify">
@@ -74,12 +75,29 @@ export default function Page() {
 
             <section className="flex flex-col gap-8 pb-18">
                 <h2 className="text-brand-700 font-extrabold text-2xl">
-                    Dynamic Route Examples
+                    Cached Dynamic Routes
                 </h2>
 
                 <p className="text-brand-500  max-w-prose text-justify">
-                    To see dynamic routes in action, visit some of these routes
-                    with various dynamic segments:
+                    Some dynamically routed pages can be statically generated in
+                    Next.js. This can be done by adding a{" "}
+                    <span className="text-accent-500 font-semibold whitespace-nowrap">
+                        generateStaticParams()
+                    </span>{" "}
+                    function to the{" "}
+                    <span className="text-accent-500 font-semibold whitespace-nowrap">
+                        page.tsx
+                    </span>{" "}
+                    file. The function must return an array of objects
+                    containing the dynamic routes you want to statically
+                    generate. This will cause the page corresponding to the
+                    route to be made statically during build time and thus load
+                    faster than a dynamic route.
+                </p>
+
+                <p className="text-brand-500  max-w-prose text-justify">
+                    In this app, the following dynamic routes have been set to
+                    be statically generated:
                 </p>
 
                 <ul className="text-left list-disc max-w-prose list-outside pl-4 marker:text-accent-700">
