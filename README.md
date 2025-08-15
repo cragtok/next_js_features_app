@@ -5,17 +5,18 @@
 An application which demonstrates the major features of Next.js
 
 TODO
-- Routing
+- [X] Routing
     - [X] Basic Routing
-    - [.] Dynamic Routing
-        - [X] Deal with breadcrumb menu
-        - [ ] Add cached dynamic routes and mention in other page
-        - [ ] Add nav form to slug page
+    - [X] Dynamic Routing
+- [ ] Rendering and Data Fetching
+    - [ ] SSR
 - home page
     - change feature description text
     - Icons??
 - NotFound page
+- Route length limit
 - refactor types
+- refactor Header component logic
 - routeTitles
     - convert routeTitles to output of reducing pageRoutes
     - Refactor routePath array calculation
