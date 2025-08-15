@@ -6,8 +6,11 @@ An application which demonstrates the major features of Next.js
 
 TODO
 - Routing
-    - [X] Basic Routing
+    - [ ] Basic Routing
+        - [ ] Separate the text in to paragraphs or make a guide on folder structure
     - [ ] Dynamic Routing
+        - [ ] Deal with breadcrumb menu
+        - [ ] Add cached dynamic routes and mention in other page
 - home page
     - change feature description text
     - Icons??
