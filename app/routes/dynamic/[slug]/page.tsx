@@ -1,5 +1,7 @@
 import { PageWrapper } from "@/components/general/PageWrapper";
 import { DynamicRouteForm } from "../DynamicRouteForm";
+import ParagraphWrapper from "@/components/general/ParagraphWrapper";
+import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 
 const slugs = ["dynamic_route", "1ae64431", "helloWorld", "123456"];
 export async function generateStaticParams() {
@@ -19,18 +21,20 @@ export default async function Page({
     return (
         <PageWrapper pageTitle="Dynamic Route">
             <section>
-                <p className="text-brand-500 max-w-prose wrap-anywhere text-justify">
+                <ParagraphWrapper>
                     You have entered a page with a dynamic route segment:{" "}
-                    <span className="text-accent-500 font-semibold">
+                    <TextAccentWrapper classNameOverride="break-all">
                         {slug}
-                    </span>
-                </p>
+                    </TextAccentWrapper>
+                </ParagraphWrapper>
                 <br />
                 {slugs.includes(slug) && (
-                    <p className="text-brand-500 max-w-prose wrap-anywhere text-justify">
-                        This dynamic route segment is statically generated at
-                        build time.
-                    </p>
+                    <ParagraphWrapper>
+                        <TextAccentWrapper classNameOverride="font-normal italic">
+                            This dynamic route segment is statically generated
+                            at build time.
+                        </TextAccentWrapper>
+                    </ParagraphWrapper>
                 )}
             </section>
 
@@ -39,10 +43,10 @@ export default async function Page({
                     Dynamic Route Navigation
                 </h2>
 
-                <p className="text-brand-500 max-w-prose text-justify">
+                <ParagraphWrapper>
                     Enter a dynamic route segment in the form below to
                     automatically navigate to that route:
-                </p>
+                </ParagraphWrapper>
 
                 <DynamicRouteForm baseRoute="/routes/dynamic" />
             </section>

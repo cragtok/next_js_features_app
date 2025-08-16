@@ -1,28 +1,23 @@
 import { PageWrapper } from "@/components/general/PageWrapper";
 import FolderStructureCards from "../FolderStructureCards";
+import ParagraphWrapper from "@/components/general/ParagraphWrapper";
+import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 
 export default function Page() {
     return (
         <PageWrapper pageTitle="Static Routing">
             <section>
-                <p className="text-brand-500 max-w-prose text-justify">
+                <ParagraphWrapper>
                     This page is routed using a simple static route{" "}
-                    <span className="text-accent-500 font-semibold whitespace-nowrap">
-                        /routes/static
-                    </span>
-                    . In the Next.js App Router, static routes are defined by
+                    <TextAccentWrapper>/routes/static</TextAccentWrapper>. In
+                    the Next.js App Router, static routes are defined by
                     creating a folder structure within the{" "}
-                    <span className="text-accent-500 font-semibold whitespace-nowrap">
-                        app
-                    </span>{" "}
-                    directory, where each nested folder represents a segment of
-                    the URL path, and a{" "}
-                    <span className="text-accent-500 font-semibold whitespace-nowrap">
-                        page.tsx
-                    </span>{" "}
+                    <TextAccentWrapper>app</TextAccentWrapper>. In directory,
+                    where each nested folder represents a segment of the URL
+                    path, and a <TextAccentWrapper>page.tsx</TextAccentWrapper>{" "}
                     file inside the innermost folder makes that route segment
                     publicly accessible.
-                </p>
+                </ParagraphWrapper>
             </section>
 
             <section className="flex flex-col gap-6">
@@ -30,17 +25,15 @@ export default function Page() {
                     Folder Structure For This Page
                 </h2>
 
-                <p className="text-brand-500 max-w-prose text-justify">
+                <ParagraphWrapper>
                     The page for this route was made by creating an{" "}
-                    <span className="text-accent-500 font-semibold whitespace-nowrap">
+                    <TextAccentWrapper>
                         app/routes/static/page.tsx
-                    </span>{" "}
+                    </TextAccentWrapper>{" "}
                     file. You can see that the{" "}
-                    <span className="text-accent-500 font-semibold whitespace-nowrap">
-                        /routes/static
-                    </span>{" "}
-                    part of the file path appears in the URL route.
-                </p>
+                    <TextAccentWrapper>/routes/static</TextAccentWrapper> part
+                    of the file path appears in the URL route.
+                </ParagraphWrapper>
 
                 <div className="text-sm">
                     <FolderStructureCards

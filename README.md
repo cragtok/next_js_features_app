@@ -8,6 +8,7 @@ Features
 - [X] Routing
     - [X] Basic Routing
     - [X] Dynamic Routing
+- [ ] Extract common section component
 - [ ] Rendering and Data Fetching
     - [ ] SSR
 - home page
