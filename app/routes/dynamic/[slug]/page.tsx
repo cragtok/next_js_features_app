@@ -1,3 +1,4 @@
+import { PageWrapper } from "@/components/general/PageWrapper";
 import { DynamicRouteForm } from "../DynamicRouteForm";
 
 const slugs = ["dynamic_route", "1ae64431", "helloWorld", "123456"];
@@ -16,27 +17,24 @@ export default async function Page({
     const { slug } = await params;
 
     return (
-        <div className="flex flex-col pt-10 gap-8 items-center text-center">
-            <h1 className="text-brand-700 font-extrabold text-4xl">
-                Dynamic Route
-            </h1>
-
+        <PageWrapper pageTitle="Dynamic Route">
             <section>
-                <p className="text-brand-500 max-w-prose wrap-anywhere">
+                <p className="text-brand-500 max-w-prose wrap-anywhere text-justify">
                     You have entered a page with a dynamic route segment:{" "}
                     <span className="text-accent-500 font-semibold">
                         {slug}
                     </span>
                 </p>
-                <br/>
+                <br />
                 {slugs.includes(slug) && (
-                    <p className="text-brand-500 max-w-prose wrap-anywhere">
-                        This dynamic route segment is statically generated at build time.
+                    <p className="text-brand-500 max-w-prose wrap-anywhere text-justify">
+                        This dynamic route segment is statically generated at
+                        build time.
                     </p>
                 )}
             </section>
 
-            <section className="flex flex-col gap-8 pb-12">
+            <section className="flex flex-col gap-8">
                 <h2 className="text-brand-700 font-extrabold text-2xl">
                     Dynamic Route Navigation
                 </h2>
@@ -48,6 +46,6 @@ export default async function Page({
 
                 <DynamicRouteForm baseRoute="/routes/dynamic" />
             </section>
-        </div>
+        </PageWrapper>
     );
 }

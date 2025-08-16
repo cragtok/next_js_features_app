@@ -1,14 +1,11 @@
+import { PageWrapper } from "@/components/general/PageWrapper";
 import FolderStructureCards from "../FolderStructureCards";
 
 export default function Page() {
     return (
-        <div className="flex flex-col pt-10 gap-8 items-center max-sm:text-sm">
-            <h1 className="text-brand-700 font-extrabold text-4xl text-center">
-                Static Routing
-            </h1>
-
+        <PageWrapper pageTitle="Static Routing">
             <section>
-                <p className="text-brand-500 max-w-prose">
+                <p className="text-brand-500 max-w-prose text-justify">
                     This page is routed using a simple static route{" "}
                     <span className="text-accent-500 font-semibold whitespace-nowrap">
                         /routes/static
@@ -28,12 +25,12 @@ export default function Page() {
                 </p>
             </section>
 
-            <section className="flex flex-col gap-6 pb-10">
+            <section className="flex flex-col gap-6">
                 <h2 className="text-brand-700 font-extrabold text-2xl text-center">
                     Folder Structure For This Page
                 </h2>
 
-                <p className="text-brand-500 max-w-prose">
+                <p className="text-brand-500 max-w-prose text-justify">
                     The page for this route was made by creating an{" "}
                     <span className="text-accent-500 font-semibold whitespace-nowrap">
                         app/routes/static/page.tsx
@@ -51,6 +48,6 @@ export default function Page() {
                     />
                 </div>
             </section>
-        </div>
+        </PageWrapper>
     );
 }

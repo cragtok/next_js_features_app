@@ -4,7 +4,7 @@
 
 An application which demonstrates the major features of Next.js
 
-TODO
+Features
 - [X] Routing
     - [X] Basic Routing
     - [X] Dynamic Routing
@@ -13,6 +13,9 @@ TODO
 - home page
     - change feature description text
     - Icons??
+
+Cleanup, Refactor and Final Actions
+- Rename Routes
 - NotFound page
 - Route length limit
 - refactor types
@@ -20,9 +23,11 @@ TODO
 - routeTitles
     - convert routeTitles to output of reducing pageRoutes
     - Refactor routePath array calculation
-- extract common page template
+- Change description text on all pages
 - Accessibility
 - SEO and Metadata
+- Tests?
+- README
 
 ### Routing
 

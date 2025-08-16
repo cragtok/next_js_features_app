@@ -24,14 +24,14 @@ const renderRoutes = (pageRoutes: PageRoute[]) => {
         return (
             <AccordionItem
                 key={crypto.randomUUID()}
-                className="flex flex-col"
+                className="flex flex-col text-left px-2"
                 value={`item-${idx + 1}`}
             >
                 <AccordionTrigger className="font-extrabold text-brand-700">
                     {pageRoute.route}
                 </AccordionTrigger>
 
-                <AccordionContent className="flex flex-col gap-3 text-balance">
+                <AccordionContent className="flex flex-col gap-3">
                     {renderSubRoutes(pageRoute.subRoutes)}
                 </AccordionContent>
             </AccordionItem>
@@ -41,10 +41,8 @@ const renderRoutes = (pageRoutes: PageRoute[]) => {
 
 export default function SiteLinks() {
     return (
-        <>
-            <Accordion type="multiple" className="w-full flex flex-col gap-3">
-                {renderRoutes(pageRoutes)}
-            </Accordion>
-        </>
+        <Accordion type="multiple" className="w-full flex flex-col gap-3">
+            {renderRoutes(pageRoutes)}
+        </Accordion>
     );
 }
