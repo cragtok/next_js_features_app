@@ -10,7 +10,6 @@ Features
     - [X] Dynamic Routing
 - [.] Rendering and Data Fetching
     - [X] SSR
-    - [ ] Link refactor
     - [ ] SSG
 - home page
     - change feature description text
