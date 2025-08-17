@@ -8,14 +8,16 @@ Features
 - [X] Routing
     - [X] Basic Routing
     - [X] Dynamic Routing
-- [ ] Extract common section component
 - [ ] Rendering and Data Fetching
     - [ ] SSR
+    - [ ] Link refactor
+    - [ ] SSG
 - home page
     - change feature description text
     - Icons??
 
 Cleanup, Refactor and Final Actions
+- Use env vars for API urls
 - Rename Routes
 - NotFound page
 - Route length limit
@@ -53,7 +55,7 @@ SSG - `/rendering/ssg`
 - A static page that pre-renders during build time.
 - Example: A static blog page with a few pre-rendered posts.
 
-ISR  - `/rendering/isr`
+ISR - `/rendering/isr`
 - A page that displays content (e.g., a product list) that is mostly static but might need occasional updates.
 - Show how the content updates after a specified revalidate time without a full redeploy.
 - Example: ISR page that shows time and date, caches page for 30s and then renders it again with new time and date
