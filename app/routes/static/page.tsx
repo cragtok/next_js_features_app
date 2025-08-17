@@ -2,11 +2,12 @@ import { PageWrapper } from "@/components/general/PageWrapper";
 import FolderStructureCards from "../FolderStructureCards";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
+import { SectionWrapper } from "@/components/general/SectionWrapper";
 
 export default function Page() {
     return (
         <PageWrapper pageTitle="Static Routing">
-            <section>
+            <SectionWrapper>
                 <ParagraphWrapper>
                     This page is routed using a simple static route{" "}
                     <TextAccentWrapper>/routes/static</TextAccentWrapper>. In
@@ -18,13 +19,9 @@ export default function Page() {
                     file inside the innermost folder makes that route segment
                     publicly accessible.
                 </ParagraphWrapper>
-            </section>
+            </SectionWrapper>
 
-            <section className="flex flex-col gap-6">
-                <h2 className="text-brand-700 font-extrabold text-2xl text-center">
-                    Folder Structure For This Page
-                </h2>
-
+            <SectionWrapper sectionTitle="Folder Structure For This Page">
                 <ParagraphWrapper>
                     The page for this route was made by creating an{" "}
                     <TextAccentWrapper>
@@ -40,7 +37,7 @@ export default function Page() {
                         folderPath={["app", "routes", "static", "page.tsx"]}
                     />
                 </div>
-            </section>
+            </SectionWrapper>
         </PageWrapper>
     );
 }

@@ -4,11 +4,12 @@ import FolderStructureCards from "../FolderStructureCards";
 import { PageWrapper } from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
+import { SectionWrapper } from "@/components/general/SectionWrapper";
 
 export default function Page() {
     return (
         <PageWrapper pageTitle="Dynamic Routing">
-            <section className="flex flex-col gap-8">
+            <SectionWrapper>
                 <ParagraphWrapper>
                     In Next.js, you can create a dynamic route by creating a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file inside
@@ -45,26 +46,18 @@ export default function Page() {
                         ]}
                     />
                 </div>
-            </section>
+            </SectionWrapper>
 
-            <section className="flex flex-col gap-8">
-                <h2 className="text-brand-700 font-extrabold text-2xl">
-                    Dynamic Route Navigation
-                </h2>
-
+            <SectionWrapper sectionTitle="Dynamic Route Navigation">
                 <ParagraphWrapper>
                     Enter a dynamic route segment in the form below to
                     automatically navigate to that route:
                 </ParagraphWrapper>
 
                 <DynamicRouteForm baseRoute="/routes/dynamic" />
-            </section>
+            </SectionWrapper>
 
-            <section className="flex flex-col gap-8">
-                <h2 className="text-brand-700 font-extrabold text-2xl">
-                    Cached Dynamic Routes
-                </h2>
-
+            <SectionWrapper sectionTitle="Cached Dynamic Routes">
                 <ParagraphWrapper>
                     Some dynamically routed pages can be statically generated in
                     Next.js. This can be done by adding a{" "}
@@ -119,7 +112,7 @@ export default function Page() {
                         </Link>
                     </li>
                 </ul>
-            </section>
+            </SectionWrapper>
         </PageWrapper>
     );
 }
