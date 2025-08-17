@@ -25,25 +25,24 @@ export const routeObjects: Record<string, SubRoute> = {
     "/rendering/ssr": {
         title: "Server Side Rendering (SSR)",
         description:
-            "Content is rendered on the server and sent to the client as complete HTML.",
+            "Rendering the page content on the server for each request.",
         href: "/rendering/ssr",
     },
     "/rendering/ssg": {
         title: "Static Site Generation (SSG)",
-        description: "HTML is generated at build time and served from a CDN.",
+        description:
+            "Rendering page content once on the server during build time.",
         href: "/rendering/ssg",
     },
     "/rendering/isr": {
         title: "Incremental Static Regeneration (ISR)",
         description:
-            "Static pages can be updated after the site has been built.",
+            "Updating a static page with new content after a certain time period.",
         href: "/rendering/isr",
     },
     "/rendering/csr": {
         title: "Client Side Rendering (CSR)",
-        description:
-            "The browser downloads a minimal HTML page and JavaScript renders the rest.",
-
+        description: "Rendering the page on the client via JavaScript.",
         href: "/rendering/csr",
     },
     "/streaming": {
@@ -107,25 +106,24 @@ export const pageRoutes: PageRoute[] = [
                 title: "Server Side Rendering (SSR)",
                 href: "/rendering/ssr",
                 description:
-                    "Content is rendered on the server and sent to the client as complete HTML.",
+                    "Rendering the page content on the server for each request.",
             },
             {
                 title: "Static Site Generation (SSG)",
                 href: "/rendering/ssg",
                 description:
-                    "HTML is generated at build time and served from a CDN.",
+                    "Rendering page content once on the server during build time.",
             },
             {
                 title: "Incremental Static Regeneration (ISR)",
                 href: "/rendering/isr",
                 description:
-                    "Static pages can be updated after the site has been built.",
+                    "Updating a static page with new content after a certain time period.",
             },
             {
                 title: "Client Side Rendering (CSR)",
                 href: "/rendering/csr",
-                description:
-                    "The browser downloads a minimal HTML page and JavaScript renders the rest.",
+                description: "Rendering the page on the client via JavaScript.",
             },
         ],
     },
