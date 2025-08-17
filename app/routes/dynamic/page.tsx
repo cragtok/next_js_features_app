@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { DynamicRouteForm } from "./DynamicRouteForm";
 import FolderStructureCards from "../FolderStructureCards";
 import { PageWrapper } from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import { SectionWrapper } from "@/components/general/SectionWrapper";
+import LinkWrapper from "@/components/general/LinkWrapper";
 
 export default function Page() {
     return (
@@ -80,36 +80,24 @@ export default function Page() {
 
                 <ul className="text-left list-disc max-w-prose list-outside pl-4 marker:text-accent-700">
                     <li>
-                        <Link
-                            href="/routes/dynamic/dynamic_route"
-                            className="text-accent-500 font-semibold hover:underline"
-                        >
+                        <LinkWrapper href="/routes/dynamic/dynamic_route">
                             /routes/dynamic/dynamic_route
-                        </Link>
+                        </LinkWrapper>
                     </li>
                     <li>
-                        <Link
-                            href="/routes/dynamic/1ae64431"
-                            className="text-accent-500 font-semibold hover:underline"
-                        >
+                        <LinkWrapper href="/routes/dynamic/1ae64431">
                             /routes/dynamic/1ae64431
-                        </Link>
+                        </LinkWrapper>
                     </li>
                     <li>
-                        <Link
-                            href="/routes/dynamic/helloWorld"
-                            className="text-accent-500 font-semibold hover:underline"
-                        >
+                        <LinkWrapper href="/routes/dynamic/helloWorld">
                             /routes/dynamic/helloWorld
-                        </Link>
+                        </LinkWrapper>
                     </li>
                     <li>
-                        <Link
-                            href="/routes/dynamic/123456"
-                            className="text-accent-500 font-semibold hover:underline"
-                        >
+                        <LinkWrapper href="/routes/dynamic/123456">
                             /routes/dynamic/123456
-                        </Link>
+                        </LinkWrapper>
                     </li>
                 </ul>
             </SectionWrapper>

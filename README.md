@@ -8,8 +8,8 @@ Features
 - [X] Routing
     - [X] Basic Routing
     - [X] Dynamic Routing
-- [ ] Rendering and Data Fetching
-    - [ ] SSR
+- [.] Rendering and Data Fetching
+    - [X] SSR
     - [ ] Link refactor
     - [ ] SSG
 - home page

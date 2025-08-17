@@ -2,11 +2,11 @@ import { PageWrapper } from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import { SectionWrapper } from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 import QuoteCard from "./QuoteCard";
 import { Card, CardContent } from "@/components/ui/card";
+import LinkWrapper from "@/components/general/LinkWrapper";
 
 export default function Page() {
     const QuoteSkeleton = () => (
@@ -51,16 +51,10 @@ export default function Page() {
                 classNameOverride="gap-12"
             >
                 <ParagraphWrapper>
-                    To demonstrate SSR, this page will fetch a random quote from
-                    the{" "}
-                    <TextAccentWrapper>
-                        <Link
-                            href="https://thequoteshub.com/api/"
-                            className="underline hover:text-accent-700"
-                        >
-                            The Quotes Hub API
-                        </Link>
-                    </TextAccentWrapper>{" "}
+                    To demonstrate SSR, this page will fetch a random quote from{" "}
+                    <LinkWrapper href="https://thequoteshub.com/api/">
+                        The Quotes Hub API
+                    </LinkWrapper>{" "}
                     each time it is refreshed:
                 </ParagraphWrapper>
 

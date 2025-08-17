@@ -1,8 +1,7 @@
 import { PageWrapper } from "@/components/general/PageWrapper";
 import SiteLinks from "./SiteLinks";
-import Link from "next/link";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
-import TextAccentWrapper from "@/components/general/TextAccentWrapper";
+import LinkWrapper from "@/components/general/LinkWrapper";
 
 export default function Page() {
     return (
@@ -17,9 +16,9 @@ export default function Page() {
             <ParagraphWrapper classNameOverride="max-w-md">
                 To see the code or run the app on your machine, check out the
                 Github repo:{" "}
-                <TextAccentWrapper>
-                    <Link href="www.github.com">https://github.com</Link>
-                </TextAccentWrapper>
+                <LinkWrapper href="https://www.github.com">
+                    github.com
+                </LinkWrapper>
             </ParagraphWrapper>
 
             <div className="w-full max-w-screen-md md:mx-auto mt-10">
