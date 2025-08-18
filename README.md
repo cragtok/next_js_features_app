@@ -11,6 +11,9 @@ Features
 - [.] Rendering and Data Fetching
     - [X] SSR
     - [ ] SSG
+        - [ ] Make request using Gemini API
+    - [ ] Erro boundaries - test with SSG
+    - [ ] ISR
 - home page
     - change feature description text
     - Icons??

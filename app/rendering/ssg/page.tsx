@@ -2,20 +2,33 @@ import { PageWrapper } from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import { SectionWrapper } from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { fetchCityDateTimes } from "./geminiCall";
 
-export default function Page() {
+export const dynamic = "force-static";
+
+export default async function Page() {
+    const cityDateTimes = await fetchCityDateTimes();
+
+    // const cityDateTimes = [
+    //     { city: "New York", date: "18/08/2025", time: "04:45 AM" },
+    //     { city: "London", date: "18/08/2025", time: "09:45 AM" },
+    //     { city: "Tokyo", date: "18/08/2025", time: "05:45 PM" },
+    //     { city: "Dubai", date: "18/08/2025", time: "12:45 PM" },
+    // ];
+
     return (
         <PageWrapper pageTitle="Static Site Generation">
             <SectionWrapper>
                 <ParagraphWrapper>
                     In{" "}
                     <TextAccentWrapper>
-                        Server Site Generation (SSG)
+                        Static Site Generation (SSG)
                     </TextAccentWrapper>{" "}
                     , a page is rendered once on the server during build time.
-                    The page content can then be fetched from the server once
-                    and stored on the browser. This makes it instantaneously
-                    accessible from the browser without needing to make another
+                    The page content can then be fetched once during the initial
+                    load and stored on the browser. This makes it
+                    instantaneously accessible without needing to make another
                     request to the server. SSG is the default behavior for
                     Server Components unless specific data fetching options
                     (like <TextAccentWrapper>revalidate = 0</TextAccentWrapper>{" "}
@@ -36,12 +49,39 @@ export default function Page() {
                     pages involving content that needs to be fresh on every
                     request, such as stock prices or news headlines.
                 </ParagraphWrapper>
+            </SectionWrapper>
 
+            <SectionWrapper sectionTitle="Build Time Data Fetching">
                 <ParagraphWrapper>
-                    This page was generated at build time. It contains no
-                    dynamic code or content. You can refresh this page as many
-                    times as you want, and you will get the same content.
+                    At build time, this page fetched the dates and times of
+                    various cities. This data will remain cached on the browser
+                    and does not need to be fetched on page refresh.
                 </ParagraphWrapper>
+
+                <div className="flex flex-col gap-4">
+                    {cityDateTimes.map((cdt) => (
+                        <Card
+                            key={crypto.randomUUID()}
+                            className="bg-neutral-100"
+                        >
+                            <CardHeader>
+                                <CardTitle className="text-accent-700 group-hover:underline">
+                                    {cdt.city}
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-brand-500 text">
+                                    <span className="font-semibold">Date:</span>{" "}
+                                    {cdt.date}
+                                </p>
+                                <p className="text-brand-500">
+                                    <span className="font-semibold">Time:</span>{" "}
+                                    {cdt.time}
+                                </p>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
             </SectionWrapper>
         </PageWrapper>
     );

@@ -8,6 +8,8 @@ import QuoteCard from "./QuoteCard";
 import { Card, CardContent } from "@/components/ui/card";
 import LinkWrapper from "@/components/general/LinkWrapper";
 
+export const dynamic = "force-dynamic";
+
 export default function Page() {
     const QuoteSkeleton = () => (
         <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
