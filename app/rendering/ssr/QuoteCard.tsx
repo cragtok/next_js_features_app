@@ -5,7 +5,7 @@ interface Quote {
     author: string;
 }
 
-const API_URL = "https://thequoteshub.com/api/random-quote";
+const API_URL = process.env.QUOTES_API_URL || "";
 
 export default async function QuoteCard() {
     let quoteData: Quote | null = null;
