@@ -8,10 +8,9 @@ Features
 - [X] Routing
     - [X] Basic Routing
     - [X] Dynamic Routing
-- [.] Rendering and Data Fetching
+- [o] Rendering and Data Fetching
     - [X] SSR
-    - [ ] SSG
-        - [ ] Make request using Gemini API
+    - [X] SSG
     - [ ] Erro boundaries - test with SSG
     - [ ] ISR
 - home page
