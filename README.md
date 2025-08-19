@@ -8,19 +8,26 @@ Features
 - [X] Routing
     - [X] Basic Routing
     - [X] Dynamic Routing
-- [o] Rendering and Data Fetching
+- [X] Rendering and Data Fetching
     - [X] SSR
     - [X] SSG
-    - [ ] ISR
-        - [ ] Refactor
-    - [ ] Figure out way to fix SSG ai hallucinations, or use another API instead
+    - [X] ISR
+    - [X] CSR
+- Eslint for React Query
+- [ ] Streaming
 - home page
+    - smaller font size on smaller screens?
     - change feature description text
     - Icons??
+    - Make sitelinks client component which remembers opened sections?
 
 Cleanup, Refactor and Final Actions 
+- extract common card components for rendering data?
+- Custom error message for missing API env data ("x API url missing")
+- server-only and client-only
+- Use generic environment variable names for APIs
 - check which expoerts should be Default vs named exports
-- Rename Routes
+- Rename Routes??
 - DAL
 - NotFound page
 - Route length limit

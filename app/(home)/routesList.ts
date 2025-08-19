@@ -42,7 +42,8 @@ export const routeObjects: Record<string, SubRoute> = {
     },
     "/rendering/csr": {
         title: "Client Side Rendering (CSR)",
-        description: "Rendering the page on the client via JavaScript.",
+        description:
+            "Rendering a page on the client via JavaScript and some basic HTML.",
         href: "/rendering/csr",
     },
     "/streaming": {
@@ -123,7 +124,8 @@ export const pageRoutes: PageRoute[] = [
             {
                 title: "Client Side Rendering (CSR)",
                 href: "/rendering/csr",
-                description: "Rendering the page on the client via JavaScript.",
+                description:
+                    "Rendering a page on the client via JavaScript and some basic HTML.",
             },
         ],
     },
