@@ -46,10 +46,15 @@ export const routeObjects: Record<string, SubRoute> = {
             "Rendering a page on the client via JavaScript and some basic HTML.",
         href: "/rendering/csr",
     },
-    "/streaming": {
-        title: "Streaming",
-        description: "Data is sent in chunks and rendered as it arrives.",
-        href: "/streaming",
+    "/streaming/loading": {
+        title: "Streaming With Loading.tsx",
+        href: "/streaming/loading",
+        description: "Streaming an entire page with a loading.tsx file.",
+    },
+    "/streaming/suspense": {
+        title: "Streaming With Suspense",
+        href: "/streaming/suspense",
+        description: "Streaming parts of a page with Suspense boundaries.",
     },
     "/server-actions": {
         title: "Server Actions",
@@ -133,10 +138,15 @@ export const pageRoutes: PageRoute[] = [
         route: "Streaming",
         subRoutes: [
             {
-                title: "Streaming",
-                href: "/streaming",
+                title: "Streaming With Loading.tsx",
+                href: "/streaming/loading",
+                description: "Streaming an entire page with a loading.tsx file.",
+            },
+            {
+                title: "Streaming With Suspense",
+                href: "/streaming/suspense",
                 description:
-                    "Data is sent in chunks and rendered as it arrives.",
+                    "Streaming parts of a page with Suspense boundaries.",
             },
         ],
     },
