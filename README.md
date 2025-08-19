@@ -13,7 +13,6 @@ Features
     - [X] SSG
     - [X] ISR
     - [X] CSR
-- Eslint for React Query
 - [ ] Streaming
 - home page
     - smaller font size on smaller screens?
@@ -22,7 +21,11 @@ Features
     - Make sitelinks client component which remembers opened sections?
 
 Cleanup, Refactor and Final Actions 
+- Check offline data fetching
+- Move components used across routes in components/general folder
+- mention app router in home page
 - extract common card components for rendering data?
+- Rethink smaller screen font sizes - also for h1s and h2s
 - Custom error message for missing API env data ("x API url missing")
 - server-only and client-only
 - Use generic environment variable names for APIs
