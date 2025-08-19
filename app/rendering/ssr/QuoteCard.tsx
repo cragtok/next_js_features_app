@@ -40,7 +40,7 @@ export default async function QuoteCard() {
                         </figcaption>
                     </figure>
                 ) : (
-                    <blockquote className="text-status-danger-500">
+                    <blockquote className="text-status-danger-500 font-semibold">
                         Failed to load quote. Please try refreshing the page.
                     </blockquote>
                 )}
