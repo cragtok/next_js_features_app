@@ -32,7 +32,7 @@ export default function Page() {
                     of the file path appears in the URL route.
                 </ParagraphWrapper>
 
-                <div className="text-sm">
+                <div className="text-xs">
                     <FolderStructureCards
                         folderPath={["app", "routes", "static", "page.tsx"]}
                     />

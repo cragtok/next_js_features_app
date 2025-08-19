@@ -35,7 +35,7 @@ export default function Page() {
                     Rendering (SSR).
                 </ParagraphWrapper>
 
-                <div className="max-[300px]:text-xs text-sm">
+                <div className="text-xs">
                     <FolderStructureCards
                         folderPath={[
                             "app",
