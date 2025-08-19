@@ -35,7 +35,7 @@ export const routeObjects: Record<string, SubRoute> = {
         href: "/rendering/ssg",
     },
     "/rendering/isr": {
-        title: "Incremental Static Regeneration (ISR)",
+        title: "Incremental Static Regeneration",
         description:
             "Updating a static page with new content after a certain time period.",
         href: "/rendering/isr",

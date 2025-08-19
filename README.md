@@ -11,15 +11,17 @@ Features
 - [o] Rendering and Data Fetching
     - [X] SSR
     - [X] SSG
-    - [ ] Erro boundaries - test with SSG
     - [ ] ISR
+        - [ ] Refactor
+    - [ ] Figure out way to fix SSG ai hallucinations, or use another API instead
 - home page
     - change feature description text
     - Icons??
 
-Cleanup, Refactor and Final Actions
-- Use env vars for API urls
+Cleanup, Refactor and Final Actions 
+- check which expoerts should be Default vs named exports
 - Rename Routes
+- DAL
 - NotFound page
 - Route length limit
 - refactor types
