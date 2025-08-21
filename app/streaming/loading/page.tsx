@@ -4,6 +4,8 @@ import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import { SectionWrapper } from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 
+export const dynamic = 'force-dynamic';
+
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export default async function Page() {
