@@ -21,7 +21,7 @@ const systemInstruction = `
             time: <Time in 'hh:mm a' format>
         }
         """
-        Do not wrap the response in any markers such as backticks, as it must be able to be directly processed using JavaScript's 'JSON.parse' function.
+        Do not wrap the answer in any markers such as backticks ('\`'), as it must be able to be directly processed using JavaScript's 'JSON.parse' function.
         `;
 
 async function fetchCityDateTimes(): Promise<CityDateTime[]> {
@@ -33,6 +33,14 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
         console.log(
             `[Gemini Call] Requesting content: ${cacheBustingContents.substring(0, 100)}...`
         );
+
+        // return [
+        //     {
+        //         city: "Dubai",
+        //         time: "DD/MM/YY",
+        //         date: "12:23",
+        //     },
+        // ];
 
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash-lite",

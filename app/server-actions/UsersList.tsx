@@ -1,4 +1,4 @@
-import { getCachedUsers, User } from "./databaseHandler";
+import { getCachedUsers, User } from "@/lib/database/databaseHandler";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default async function UsersList() {

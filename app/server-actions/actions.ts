@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
 import { revalidateTag } from "next/cache";
-import { addUserToDb } from "./databaseHandler";
+import { addUserToDb } from "@/lib/database/databaseHandler";
 
 export interface FormState {
     message: string;
