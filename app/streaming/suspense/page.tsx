@@ -6,6 +6,8 @@ import { DelayedImageComponent } from "./DelayedImageComponent";
 import { Suspense } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 
+export const dynamic = 'force-dynamic';
+
 export default function Page() {
     return (
         <PageWrapper pageTitle="Streaming with Suspense">
