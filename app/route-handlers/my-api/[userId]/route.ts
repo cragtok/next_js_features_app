@@ -1,19 +1,9 @@
-import { deleteUserInDb, updateUserInDb } from "@/lib/database/databaseHandler";
-import * as z from "zod";
-
-const putUserSchema = z.object({
-    username: z
-        .string()
-        .min(5, "Username must be at least 5 characters long.")
-        .max(50, "Username must not exceed 50 characters"),
-    password: z
-        .string()
-        .min(5, "Password must be at least 5 characters long.")
-        .max(50, "Password must not exceed 50 characters"),
-    email: z
-        .email("Invalid email address.")
-        .max(50, "Email must not exceed 50 characters"),
-});
+import {
+    deleteUserInDb,
+    findUserInDb,
+    updateUserInDb,
+} from "@/lib/database/databaseHandler";
+import { parseUserBody } from "../utils";
 
 export async function PUT(
     request: Request,
@@ -27,46 +17,51 @@ export async function PUT(
             `PUT method called with userid: ${userId} and body: ${JSON.stringify(body)}`
         );
 
-        const parsedBody = putUserSchema.safeParse({
+        const parseResult = parseUserBody({
             username: body.username,
             email: body.email,
             password: body.password,
         });
 
-        if (!parsedBody.success) {
-            const errors: Record<string, string> = {};
-            parsedBody.error.issues.forEach((issue) => {
-                if (issue.path[0]) {
-                    errors[issue.path[0].toString()] = issue.message;
-                }
-            });
-            return Response.json({
-                success: false,
-                message: "User Update Failed.",
-                errors: errors,
-            });
+        if (!parseResult.success) {
+            return Response.json(
+                {
+                    message: "Missing or invalid user data.",
+                    errors: parseResult.result,
+                },
+                { status: 400 }
+            );
         }
 
-        const updatedUser = await updateUserInDb(userId, {
-            username: parsedBody.data.username,
-            email: parsedBody.data.email,
-            password: parsedBody.data.password,
+        const foundUser = await findUserInDb(userId);
+
+        if (!foundUser) {
+            return Response.json(
+                {
+                    message: `User with id ${userId} not found.`,
+                },
+                { status: 404 }
+            );
+        }
+
+        const updatedUser = await updateUserInDb({
+            id: foundUser.id,
+            username: parseResult.result.username,
+            email: parseResult.result.email,
+            password: parseResult.result.password,
         });
 
-        if (updatedUser) {
-            return Response.json({ data: updatedUser, success: true });
-        } else {
-            return Response.json({
-                message: `User with id ${userId} not found.`,
-                success: false,
-            });
-        }
+        return Response.json({ data: updatedUser });
     } catch (error) {
         console.error(error);
-        return Response.json({
-            success: false,
-            message: "Failed to update user.",
-        });
+        let message = "Failed to update user.";
+        let status = 500;
+        if (error instanceof SyntaxError) {
+            message = error.message;
+            status = 400;
+        }
+
+        return Response.json({ message }, { status });
     }
 }
 
@@ -79,21 +74,28 @@ export async function DELETE(
     try {
         console.log(`DELETE method called with userid: ${userId}`);
 
-        const deletedUser = await deleteUserInDb(userId);
+        const foundUser = await findUserInDb(userId);
 
-        if (deletedUser) {
-            return Response.json({ data: deletedUser, success: true });
-        } else {
-            return Response.json({
-                message: `User with id ${userId} not found.`,
-                success: false,
-            });
+        if (!foundUser) {
+            return Response.json(
+                {
+                    message: `User with id ${userId} not found.`,
+                },
+                { status: 404 }
+            );
         }
+
+        await deleteUserInDb(userId);
+        return Response.json({ data: foundUser });
     } catch (error) {
         console.error(error);
-        return Response.json({
-            success: false,
-            message: "Failed to update user.",
-        });
+        let message = "Failed to delete user.";
+        let status = 500;
+        if (error instanceof SyntaxError) {
+            message = error.message;
+            status = 400;
+        }
+
+        return Response.json({ message }, { status });
     }
 }
