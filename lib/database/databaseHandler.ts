@@ -3,12 +3,15 @@ import fs from "fs/promises";
 import path from "path";
 
 interface User {
+    id: string;
     username: string;
     email: string;
     password: string;
 }
 
 const DATA_FILE_PATH = path.join(process.cwd(), "data", "mockDb.json");
+
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 async function readDbFile(): Promise<User[]> {
     try {
@@ -35,6 +38,7 @@ async function writeDbFile(data: User[]): Promise<void> {
 
 const getCachedUsers = unstable_cache(
     async () => {
+        await delay(2000);
         console.log("[unstable_cache] Fetching data from mockDb.json...");
         const items = await readDbFile();
         console.log(
@@ -45,11 +49,12 @@ const getCachedUsers = unstable_cache(
     ["db-users-cache"],
     {
         tags: ["db-users"],
-        revalidate: false
+        revalidate: false,
     }
 );
 
 async function addUserToDb(newUser: User): Promise<void> {
+    await delay(1000);
     const users = await readDbFile();
     users.push(newUser);
     await writeDbFile(users);
