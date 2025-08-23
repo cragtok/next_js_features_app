@@ -10,7 +10,7 @@ export default function Header() {
     const pathname = usePathname();
     const isHomePage = pathname === "/";
 
-    const dynamicRoutePattern = /^\/routes\/dynamic\/(.*)/;
+    const dynamicRoutePattern = /^\/routing\/dynamic\/(.*)/;
 
     let routePath: SubRoute[] = [];
 
@@ -21,8 +21,8 @@ export default function Header() {
         if (match) {
             routePath = [
                 routeObjects["/"],
-                routeObjects["/routes/dynamic"],
-                { ...routeObjects["/routes/dynamic*"], title: match[1] },
+                routeObjects["/routing/dynamic"],
+                { ...routeObjects["/routing/dynamic*"], title: match[1] },
             ];
         }
     } else if (routeObjects.hasOwnProperty(pathname)) {

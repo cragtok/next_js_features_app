@@ -44,7 +44,7 @@ export default async function Page({
                     automatically navigate to that route:
                 </ParagraphWrapper>
 
-                <DynamicRouteForm baseRoute="/routes/dynamic" />
+                <DynamicRouteForm baseRoute="/routing/dynamic" />
             </SectionWrapper>
         </PageWrapper>
     );

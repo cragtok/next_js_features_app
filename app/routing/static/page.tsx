@@ -10,7 +10,7 @@ export default function Page() {
             <SectionWrapper>
                 <ParagraphWrapper>
                     This page is routed using a simple static route{" "}
-                    <TextAccentWrapper>/routes/static</TextAccentWrapper>. In
+                    <TextAccentWrapper>/routing/static</TextAccentWrapper>. In
                     the Next.js App Router, static routes are defined by
                     creating a folder structure within the{" "}
                     <TextAccentWrapper>app</TextAccentWrapper>. In directory,
@@ -25,16 +25,16 @@ export default function Page() {
                 <ParagraphWrapper>
                     The page for this route was made by creating an{" "}
                     <TextAccentWrapper>
-                        app/routes/static/page.tsx
+                        app/routing/static/page.tsx
                     </TextAccentWrapper>{" "}
                     file. You can see that the{" "}
-                    <TextAccentWrapper>/routes/static</TextAccentWrapper> part
+                    <TextAccentWrapper>/routing/static</TextAccentWrapper> part
                     of the file path appears in the URL route.
                 </ParagraphWrapper>
 
                 <div className="text-xs">
                     <FolderStructureCards
-                        folderPath={["app", "routes", "static", "page.tsx"]}
+                        folderPath={["app", "routing", "static", "page.tsx"]}
                     />
                 </div>
             </SectionWrapper>

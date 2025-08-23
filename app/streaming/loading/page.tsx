@@ -1,4 +1,4 @@
-import FolderStructureCards from "@/app/routes/FolderStructureCards";
+import FolderStructureCards from "@/app/routing/FolderStructureCards";
 import { PageWrapper } from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import { SectionWrapper } from "@/components/general/SectionWrapper";

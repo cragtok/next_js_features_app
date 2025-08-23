@@ -18,13 +18,13 @@ export default function Page() {
                     which can be accessed in the page. For example, in this app
                     a dynamic route was made by creating a folder{" "}
                     <TextAccentWrapper>
-                        app/routes/dynamic/[slug]
+                        app/routing/dynamic/[slug]
                     </TextAccentWrapper>{" "}
                     and placing a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file inside
                     it. So now all routes with the format{" "}
                     <TextAccentWrapper>
-                        /routes/dynamic/[slug]
+                        /routing/dynamic/[slug]
                     </TextAccentWrapper>{" "}
                     have the <TextAccentWrapper>[slug]</TextAccentWrapper>{" "}
                     portion of the URL as the dynamic segment, which is
@@ -39,7 +39,7 @@ export default function Page() {
                     <FolderStructureCards
                         folderPath={[
                             "app",
-                            "routes",
+                            "routing",
                             "dynamic",
                             "[slug]",
                             "page.tsx",
@@ -54,7 +54,7 @@ export default function Page() {
                     automatically navigate to that route:
                 </ParagraphWrapper>
 
-                <DynamicRouteForm baseRoute="/routes/dynamic" />
+                <DynamicRouteForm baseRoute="/routing/dynamic" />
             </SectionWrapper>
 
             <SectionWrapper sectionTitle="Cached Dynamic Routes">
@@ -80,23 +80,23 @@ export default function Page() {
 
                 <ul className="text-left list-disc max-w-prose list-outside pl-4 marker:text-accent-700">
                     <li>
-                        <LinkWrapper href="/routes/dynamic/dynamic_route">
-                            /routes/dynamic/dynamic_route
+                        <LinkWrapper href="/routing/dynamic/dynamic_route">
+                            /routing/dynamic/dynamic_route
                         </LinkWrapper>
                     </li>
                     <li>
-                        <LinkWrapper href="/routes/dynamic/1ae64431">
-                            /routes/dynamic/1ae64431
+                        <LinkWrapper href="/routing/dynamic/1ae64431">
+                            /routing/dynamic/1ae64431
                         </LinkWrapper>
                     </li>
                     <li>
-                        <LinkWrapper href="/routes/dynamic/helloWorld">
-                            /routes/dynamic/helloWorld
+                        <LinkWrapper href="/routing/dynamic/helloWorld">
+                            /routing/dynamic/helloWorld
                         </LinkWrapper>
                     </li>
                     <li>
-                        <LinkWrapper href="/routes/dynamic/123456">
-                            /routes/dynamic/123456
+                        <LinkWrapper href="/routing/dynamic/123456">
+                            /routing/dynamic/123456
                         </LinkWrapper>
                     </li>
                 </ul>

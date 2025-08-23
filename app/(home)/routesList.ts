@@ -6,18 +6,18 @@ export const routeObjects: Record<string, SubRoute> = {
         description: "Routing with static URLs.",
         href: "/",
     },
-    "/routes/static": {
+    "/routing/static": {
         title: "Static Routing",
         description: "Routing with static URLs.",
-        href: "/routes/static",
+        href: "/routing/static",
     },
-    "/routes/dynamic": {
+    "/routing/dynamic": {
         title: "Dynamic Routing",
         description: "Routing with dynamic URLs.",
-        href: "/routes/dynamic",
+        href: "/routing/dynamic",
     },
 
-    "/routes/dynamic/*": {
+    "/routing/dynamic/*": {
         title: "Dynamic Routing",
         description: "Routing with dynamic URLs.",
         href: "",
@@ -62,18 +62,10 @@ export const routeObjects: Record<string, SubRoute> = {
             "Functions that run on the server and can be called from client components.",
         href: "/server-actions",
     },
-
-    "/route-handlers/GET": {
-        title: "GET Request",
-        description: "Handling a GET request with a route handler.",
-        href: "/route-handlers/GET",
-    },
-
-    "/route-handlers/POST": {
-        title: "POST Request",
-        description: "Handling a POST request with a route handler.",
-
-        href: "/route-handlers/POST",
+    "/route-handlers": {
+        title: "Route Handlers",
+        href: "/route-handlers",
+        description: "Basic CRUD operations via Route Handlers.",
     },
     "/middleware/ab-testing": {
         title: "A/B Testing",
@@ -95,12 +87,12 @@ export const pageRoutes: PageRoute[] = [
         subRoutes: [
             {
                 title: "Static Routing",
-                href: "/routes/static",
+                href: "/routing/static",
                 description: "Routing with static URLs.",
             },
             {
                 title: "Dynamic Routing",
-                href: "/routes/dynamic",
+                href: "/routing/dynamic",
                 description: "Routing with dynamic URLs.",
             },
         ],
@@ -140,7 +132,8 @@ export const pageRoutes: PageRoute[] = [
             {
                 title: "Streaming With Loading.tsx",
                 href: "/streaming/loading",
-                description: "Streaming an entire page with a loading.tsx file.",
+                description:
+                    "Streaming an entire page with a loading.tsx file.",
             },
             {
                 title: "Streaming With Suspense",
@@ -165,14 +158,9 @@ export const pageRoutes: PageRoute[] = [
         route: "Route Handlers",
         subRoutes: [
             {
-                title: "GET Request",
-                href: "/route-handlers/GET",
-                description: "Handling a GET request with a route handler.",
-            },
-            {
-                title: "POST Request",
-                href: "/route-handlers/POST",
-                description: "Handling a POST request with a route handler.",
+                title: "Route Handlers",
+                href: "/route-handlers",
+                description: "Basic CRUD operations via Route Handlers.",
             },
         ],
     },
