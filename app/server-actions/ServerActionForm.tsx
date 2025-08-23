@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useActionState, useState, useEffect } from "react";
 import { createUser, FormState } from "./actions";
+import { USER_LIST_SECTION_ID } from "./constants";
 
 const initialState: FormState = {
     message: "",
@@ -30,8 +31,6 @@ const ServerActionForm = () => {
     const [displayErrors, setDisplayErrors] = useState<Record<string, string>>(
         {}
     );
-    const [showStateMessage, setShowStateMessage] = useState(false);
-
     useEffect(() => {
         if (state.errors) {
             setDisplayErrors(state.errors);
@@ -39,11 +38,15 @@ const ServerActionForm = () => {
             setDisplayErrors({});
         }
         if (state.message === "User created successfully!") {
-
-            setShowStateMessage(true);
             setUsername("");
             setEmail("");
             setPassword("");
+
+            const userListSection =
+                document.getElementById(USER_LIST_SECTION_ID);
+            if (userListSection) {
+                userListSection.scrollIntoView({ behavior: "smooth" });
+            }
         }
     }, [state]);
 
@@ -55,10 +58,6 @@ const ServerActionForm = () => {
             setEmail(value);
         } else if (name === "password") {
             setPassword(value);
-        }
-
-        if (showStateMessage) {
-            setShowStateMessage(false);
         }
 
         if (displayErrors[name]) {
@@ -162,13 +161,6 @@ const ServerActionForm = () => {
                             >
                                 {pending ? "Submitting..." : "Submit"}
                             </Button>
-                            {state?.message &&
-                                showStateMessage &&
-                                state.message.includes("successfully") && (
-                                    <p className="text-status-success-500 text-sm max-[450px]:text-xs">
-                                        {state.message}
-                                    </p>
-                                )}
                         </CardFooter>
                     </form>
                 </CardContent>

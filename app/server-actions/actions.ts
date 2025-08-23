@@ -51,15 +51,13 @@ export async function createUser(
     }
 
     const rawFormData = {
+        id: crypto.randomUUID(),
         username: parsed.data.username,
         email: parsed.data.email,
         password: parsed.data.password,
     };
 
     console.log("Form data received:", rawFormData);
-
-    // Simulate a delay for network request
-    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     await addUserToDb(rawFormData);
 
