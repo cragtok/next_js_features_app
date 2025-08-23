@@ -53,12 +53,51 @@ const getCachedUsers = unstable_cache(
     }
 );
 
-async function addUserToDb(newUser: User): Promise<void> {
+async function addUserToDb(newUser: User): Promise<User> {
     await delay(1000);
     const users = await readDbFile();
     users.push(newUser);
     await writeDbFile(users);
-    console.log(`[addItemToDb] Added new item: ${newUser}`);
+    console.log(`[addItemToDb] Added new item: ${JSON.stringify(newUser)}`);
+    return newUser;
 }
 
-export { getCachedUsers, addUserToDb, type User };
+async function findUserInDb(userId: string): Promise<User | null> {
+    const users = await readDbFile();
+    const foundUser = users.find((user) => user.id === userId);
+
+    if (foundUser) {
+        return foundUser;
+    }
+
+    return null;
+}
+
+async function updateUserInDb(updatedUser: User): Promise<User | null> {
+    const users = await readDbFile();
+
+    const updatedUsers = users.map((user) =>
+        user.id === updatedUser.id ? updatedUser : user
+    );
+
+    await writeDbFile(updatedUsers);
+
+    return updatedUser;
+}
+
+async function deleteUserInDb(userId: string) {
+    const users = await readDbFile();
+
+    const updatedUsers = users.filter((user) => user.id !== userId);
+
+    await writeDbFile(updatedUsers);
+}
+
+export {
+    getCachedUsers,
+    addUserToDb,
+    findUserInDb,
+    updateUserInDb,
+    deleteUserInDb,
+    type User,
+};
