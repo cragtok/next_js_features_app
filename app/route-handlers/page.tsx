@@ -81,12 +81,26 @@ export default function RouteHandlersPage() {
                 <div className="text-xs">
                     <FolderStructureCards
                         folderPath={[
-                            "app",
-                            "route-handlers",
-                            "my-api",
-                            "route.ts (FILE)",
-                            "[userId]",
-                            "route.ts",
+                            { name: "app", type: "folder" },
+                            {
+                                name: "route-handlers",
+                                type: "folder",
+                                children: [{ name: "page.tsx", type: "file" }],
+                            },
+                            {
+                                name: "my-api",
+                                type: "folder",
+                                children: [
+                                    { name: "route.ts", type: "file" },
+                                    {
+                                        name: "[userId]",
+                                        type: "folder",
+                                        children: [
+                                            { name: "route.ts", type: "file" },
+                                        ],
+                                    },
+                                ],
+                            },
                         ]}
                     />
                 </div>

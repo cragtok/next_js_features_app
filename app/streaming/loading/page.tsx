@@ -4,7 +4,7 @@ import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import { SectionWrapper } from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -48,10 +48,16 @@ export default async function Page() {
                 <div className="text-xs">
                     <FolderStructureCards
                         folderPath={[
-                            "app",
-                            "streaming",
-                            "loading",
-                            "page.tsx/loading.ts",
+                            { name: "app", type: "folder" },
+                            { name: "streaming", type: "folder" },
+                            {
+                                name: "loading",
+                                type: "folder",
+                                children: [
+                                    { name: "page.tsx", type: "file" },
+                                    { name: "loading.tsx", type: "file" },
+                                ],
+                            },
                         ]}
                     />
                 </div>

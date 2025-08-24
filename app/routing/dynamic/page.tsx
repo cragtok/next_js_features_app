@@ -38,11 +38,22 @@ export default function Page() {
                 <div className="text-xs">
                     <FolderStructureCards
                         folderPath={[
-                            "app",
-                            "routing",
-                            "dynamic",
-                            "[slug]",
-                            "page.tsx",
+                            { name: "app", type: "folder" },
+                            { name: "routing", type: "folder" },
+                            {
+                                name: "dynamic",
+                                type: "folder",
+                                children: [
+                                    { name: "page.tsx", type: "file" },
+                                    {
+                                        name: "[slug]",
+                                        type: "folder",
+                                        children: [
+                                            { name: "page.tsx", type: "file" },
+                                        ],
+                                    },
+                                ],
+                            },
                         ]}
                     />
                 </div>

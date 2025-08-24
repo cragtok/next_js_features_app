@@ -34,7 +34,12 @@ export default function Page() {
 
                 <div className="text-xs">
                     <FolderStructureCards
-                        folderPath={["app", "routing", "static", "page.tsx"]}
+                        folderPath={[
+                            { type: "folder", name: "app" },
+                            { type: "folder", name: "routing" },
+                            { type: "folder", name: "static" },
+                            { type: "file", name: "page.tsx" },
+                        ]}
                     />
                 </div>
             </SectionWrapper>
