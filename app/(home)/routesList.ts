@@ -68,13 +68,13 @@ export const routeObjects: Record<string, SubRoute> = {
         description: "Basic CRUD operations via Route Handlers.",
     },
     "/middleware/ab-testing": {
-        title: "A/B Testing",
+        title: "Middleware A/B Testing",
 
         description: "Using middleware to run A/B tests.",
         href: "/middleware/ab-testing",
     },
     "/middleware/log": {
-        title: "Request Info Logging",
+        title: "Middleware Request Logging",
         description:
             "Using middleware to log information about incoming requests.",
         href: "/middleware/log",
@@ -168,12 +168,12 @@ export const pageRoutes: PageRoute[] = [
         route: "Middleware",
         subRoutes: [
             {
-                title: "A/B Testing",
+                title: "Middleware A/B Testing",
                 href: "/middleware/ab-testing",
                 description: "Using middleware to run A/B tests.",
             },
             {
-                title: "Request Info Logging",
+                title: "Middleware Request Logging",
                 href: "/middleware/log",
                 description:
                     "Using middleware to log information about incoming requests.",
