@@ -134,7 +134,7 @@ export default function UsersList() {
                     user.id === updatedUser.id ? updatedUser : user
                 )
             );
-            toast.success("Successfully created user!", {
+            toast.success("Successfully edited user!", {
                 position: "top-center",
                 richColors: true,
             });

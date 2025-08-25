@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import UsersList from "./UsersList";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Toaster } from "sonner";
 
 const UsersSkeleton = () => (
     <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
@@ -22,6 +23,7 @@ const UsersSkeleton = () => (
 export default async function ServerFunctionsPage() {
     return (
         <PageWrapper pageTitle="Server Actions">
+            <Toaster />
             <ParagraphWrapper>
                 <TextAccentWrapper>Server Actions</TextAccentWrapper> are
                 functions that are executed on the server after a request from a
