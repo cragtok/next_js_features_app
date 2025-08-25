@@ -1,9 +1,21 @@
 import { getCachedUsers, User } from "@/lib/database/databaseHandler";
 import { Card, CardContent } from "@/components/ui/card";
 import { USER_LIST_SECTION_ID } from "./constants";
+import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 
 export default async function UsersList() {
     const cachedUsers: User[] = await getCachedUsers();
+
+    if (cachedUsers.length < 1) {
+        return (
+            <Card className="bg-neutral-100">
+                <CardContent className="">
+                    <TextAccentWrapper>No Users In Database</TextAccentWrapper>
+                </CardContent>
+            </Card>
+        );
+    }
+
     return (
         <div className="flex flex-col gap-3 text-sm">
             {cachedUsers.map((user, idx) => (
