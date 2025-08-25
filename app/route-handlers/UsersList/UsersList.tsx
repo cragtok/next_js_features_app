@@ -79,8 +79,6 @@ export default function UsersList() {
         }
         try {
             await deleteUser(userId);
-            setUsers((prev) => prev.filter((user) => user.id !== userId));
-
             toast.success("Successfully deleted user!", {
                 position: "top-center",
                 richColors: true,
@@ -91,6 +89,8 @@ export default function UsersList() {
                 position: "top-center",
                 richColors: true,
             });
+        } finally {
+            setUsers((prev) => prev.filter((user) => user.id !== userId));
         }
     };
 
