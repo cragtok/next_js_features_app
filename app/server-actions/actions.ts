@@ -1,6 +1,5 @@
 "use server";
 import { z } from "zod";
-import { revalidateTag } from "next/cache";
 import { addUserToDb } from "@/lib/database/databaseHandler";
 
 export interface FormState {
@@ -60,8 +59,6 @@ export async function createUser(
     console.log("Form data received:", rawFormData);
 
     await addUserToDb(rawFormData);
-
-    revalidateTag("db-users");
 
     return {
         message: "User created successfully!",
