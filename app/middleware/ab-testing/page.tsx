@@ -31,7 +31,7 @@ export default function ABTestingPage() {
                     browser specifying the group they are in. The cookie is
                     accessed on the page, and based on its value the appropriate
                     text is shown. The cookie persists for{" "}
-                    <TextAccentWrapper>10 seconds</TextAccentWrapper>, so if you
+                    <TextAccentWrapper>5 seconds</TextAccentWrapper>, so if you
                     want to have a chance to be placed in the other group,
                     simply refresh the browser after this time has passed.
                 </ParagraphWrapper>
