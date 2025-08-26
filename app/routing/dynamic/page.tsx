@@ -15,10 +15,12 @@ export default function Page() {
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file inside
                     a folder whose name is enclosed in square brackets. The
                     square brackets denote the dynamic portion of the route
-                    which can be accessed in the page. For example, in this app
-                    a dynamic route was made by creating a folder{" "}
+                    which can be accessed in the page.
+                </ParagraphWrapper>
+                <ParagraphWrapper>
+                    In this app a dynamic route was made by creating a folder{" "}
                     <TextAccentWrapper>
-                        app/routing/dynamic/[slug]
+                        app/routing/dynamic/[slug]/
                     </TextAccentWrapper>{" "}
                     and placing a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file inside
