@@ -50,18 +50,6 @@ export default function UsersList() {
         );
     }
 
-    if (users.length === 0) {
-        return (
-            <Card className="bg-neutral-100">
-                <CardHeader>
-                    <CardTitle className="text-accent-500 wrap-anywhere">
-                        No Users In Database
-                    </CardTitle>
-                </CardHeader>
-            </Card>
-        );
-    }
-
     const toggleEditMode = (userId: string) => {
         setEditMode((prev) => {
             const newEditMode = {
@@ -148,6 +136,22 @@ export default function UsersList() {
 
         toggleEditMode(originalUser.id);
     };
+
+    if (users.length === 0) {
+        return (
+            <>
+                <Toaster />
+                <CreateUserForm handleCreateUser={handleCreateUser} />
+                <Card className="bg-neutral-100">
+                    <CardHeader>
+                        <CardTitle className="text-accent-500 wrap-anywhere">
+                            No Users In Database
+                        </CardTitle>
+                    </CardHeader>
+                </Card>
+            </>
+        );
+    }
 
     return (
         <>
