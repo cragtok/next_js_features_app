@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import {
     Accordion,
     AccordionTrigger,
@@ -7,6 +10,7 @@ import {
 import CardLink from "./CardLink";
 import { PageRoute, SubRoute } from "./types";
 import { pageRoutes } from "./routesList";
+import LoadingSpinner from "../streaming/suspense/LoadingSpinner";
 
 const renderSubRoutes = (subRoutes: SubRoute[]) => {
     return subRoutes.map((subRoute: SubRoute) => (
@@ -40,8 +44,41 @@ const renderRoutes = (pageRoutes: PageRoute[]) => {
 };
 
 export default function SiteLinks() {
+    const LOCAL_STORAGE_KEY = "accordion-open-items";
+    const [openItems, setOpenItems] = useState<string[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const savedState = sessionStorage.getItem(LOCAL_STORAGE_KEY);
+            if (savedState) {
+                setOpenItems(JSON.parse(savedState));
+            }
+        }
+        setIsLoading(false);
+    }, []);
+
+    useEffect(() => {
+        if (typeof window !== "undefined" && !isLoading) {
+            sessionStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(openItems));
+        }
+    }, [openItems, isLoading]);
+
+    if (isLoading) {
+        return (
+            <div className="flex flex-col justify-center text-center text-brand-500">
+                <LoadingSpinner />
+            </div>
+        );
+    }
+
     return (
-        <Accordion type="multiple" className="w-full flex flex-col gap-3">
+        <Accordion
+            type="multiple"
+            className="w-full flex flex-col gap-3"
+            value={openItems}
+            onValueChange={setOpenItems}
+        >
             {renderRoutes(pageRoutes)}
         </Accordion>
     );
