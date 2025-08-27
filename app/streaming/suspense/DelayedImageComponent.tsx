@@ -10,11 +10,11 @@ interface Props {
     delaySeconds: number;
 }
 
-async function DelayedImageComponent({
+const DelayedImageComponent = async ({
     imagePath,
     componentNumber,
     delaySeconds,
-}: Props) {
+}: Props) => {
     await delay(delaySeconds * 1000);
     return (
         <Card className="bg-neutral-100 w-full">
@@ -39,6 +39,6 @@ async function DelayedImageComponent({
             </CardContent>
         </Card>
     );
-}
+};
 
 export default DelayedImageComponent;

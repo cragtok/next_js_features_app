@@ -8,11 +8,7 @@ interface Props {
     children: React.ReactNode;
     href: string;
 }
-export default function LinkWrapper({
-    classNameOverride,
-    children,
-    href,
-}: Props) {
+const LinkWrapper = ({ classNameOverride, children, href }: Props) => {
     const defaultStyles =
         "text-accent-500 font-semibold whitespace-normal break-words inline-block underline hover:text-accent-700";
     const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
@@ -21,4 +17,6 @@ export default function LinkWrapper({
             {children}
         </Link>
     );
-}
+};
+
+export default LinkWrapper;

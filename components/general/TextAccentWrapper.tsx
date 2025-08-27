@@ -6,12 +6,11 @@ interface Props {
     classNameOverride?: string;
     children: React.ReactNode;
 }
-export default function TextAccentWrapper({
-    classNameOverride,
-    children,
-}: Props) {
+const TextAccentWrapper = ({ classNameOverride, children }: Props) => {
     const defaultStyles =
         "text-accent-500 font-semibold whitespace-normal break-words inline-block";
     const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
     return <span className={mergedStyles}> {children} </span>;
-}
+};
+
+export default TextAccentWrapper;

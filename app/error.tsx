@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 
-interface ErrorProps {
+interface Props {
     error: Error;
     reset: () => void;
 }
 
-function GlobalError({ error, reset }: ErrorProps) {
+function GlobalError({ error, reset }: Props) {
     useEffect(() => {
         console.error("Caught global error:", error);
     }, [error]);

@@ -5,7 +5,7 @@ interface Props {
     pageTitle?: string;
 }
 
-export default function PageWrapper({ children, pageTitle }: Props) {
+const PageWrapper = ({ children, pageTitle }: Props) => {
     return (
         <div className="flex flex-col pt-10 gap-10 items-center text-center max-sm:text-sm pb-10">
             {pageTitle && (
@@ -16,4 +16,6 @@ export default function PageWrapper({ children, pageTitle }: Props) {
             {children}
         </div>
     );
-}
+};
+
+export default PageWrapper;

@@ -78,7 +78,7 @@ const renderFolderPath = (folder: Folder, initialLeftPadding: number) => {
     );
 };
 
-export default function FolderStructureCards({ folderPath }: Props) {
+const FolderStructureCards = ({ folderPath }: Props) => {
     let leftPadding = 0;
     return (
         <>
@@ -101,4 +101,6 @@ export default function FolderStructureCards({ folderPath }: Props) {
             })}
         </>
     );
-}
+};
+
+export default FolderStructureCards;

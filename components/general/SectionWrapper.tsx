@@ -8,11 +8,11 @@ interface Props {
     classNameOverride?: string;
 }
 
-export default function SectionWrapper({
+const SectionWrapper = ({
     children,
     sectionTitle,
     classNameOverride,
-}: Props) {
+}: Props) => {
     const defaultStyles = "flex flex-col gap-8";
     const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
     return (
@@ -25,4 +25,6 @@ export default function SectionWrapper({
             {children}
         </section>
     );
-}
+};
+
+export default SectionWrapper;
