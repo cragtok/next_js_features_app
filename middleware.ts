@@ -6,7 +6,6 @@ export function middleware(request: NextRequest) {
     const response = NextResponse.next();
 
     if (pathname.startsWith("/middleware/ab-testing")) {
-        console.log("A/B Test");
         let abTestGroup = request.cookies.get("ab-test-group")?.value;
 
         if (!abTestGroup) {
@@ -28,10 +27,6 @@ export function middleware(request: NextRequest) {
         const serverTime = new Date().toISOString();
 
         const userAgent = request.headers.get("user-agent") || "N/A";
-        console.log(
-            `Request Log: IP=${ip}, Time=${serverTime}, User-Agent=${userAgent}`
-        );
-
         const country = request.headers.get("x-geo-country");
         const region = request.headers.get("x-geo-region");
         const city = request.headers.get("x-geo-city");

@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm run seed && NODE_ENV=development next dev --turbopack",
+    "dev": "NODE_ENV=development next dev --turbopack",
     "build": "next build",
     "start": "NODE_ENV=production next start",
     "lint": "next lint",
-    "seed": "tsx ./scripts/seed.ts"
+    "seed": "tsx ./scripts/seed.ts",
+    "dev:seed": "pnpm run seed && pnpm run dev",
+    "build:seed": "pnpm run seed && pnpm run build"
   },
   "dependencies": {
     "@google/genai": "^1.14.0",

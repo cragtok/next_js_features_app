@@ -13,16 +13,28 @@ Features
     - [X] SSG
     - [X] ISR
     - [X] CSR
-- [ ] Streaming
-- home page
-    - smaller font size on smaller screens?
-    - change feature description text
-    - Icons??
-    - Make sitelinks client component which remembers opened sections?
+- [X] Streaming
+- [X] Server Actions
+- [X] Route Handlers
+- [X] Middleware
+- Switch to SQLLite DB
 
 Cleanup, Refactor and Final Actions 
+- Fix loading issue in server-actions page
+- loading UI for images in suspense loading page
+- User creation and update form placeholder text in route handlers page
+- Fix text layouts?
+- Refresh buttons on mobile
+- Replace Card with simpler?
+- dismiss button on notifications
+- Central location for Toaster??
+- Potential concurrency issues accessing db file
+- File import path format
 - Check offline data fetching
+- better data validation
+- Env variable central location with error handling
 - Move components used across routes in components/general folder
+- DAL?
 - mention app router in home page
 - extract common card components for rendering data?
 - Rethink smaller screen font sizes - also for h1s and h2s
@@ -33,6 +45,7 @@ Cleanup, Refactor and Final Actions
 - Rename Routes??
 - DAL
 - NotFound page
+- User DTO
 - Route length limit
 - refactor types
 - refactor Header component logic
@@ -42,8 +55,10 @@ Cleanup, Refactor and Final Actions
 - Change description text on all pages
 - Accessibility
 - SEO and Metadata
-- Tests?
+- Tests
 - README
+- Deploy
+    - Test middleware features
 
 ### Routing
 
@@ -110,14 +125,6 @@ AB-testing - `/middleware/ab-testing`
 
 User Info logging - `/middleware/log`
 - Log the user's IP, useragent, requested path, timestamp
-
-### Image Optimization??
-
-A page with several images, demonstrating lazy loading, different image sizes for responsiveness, and improved performance metrics.
-
-## Partial Prerendering??
-
-mabye
 
 ## Getting Started
 
