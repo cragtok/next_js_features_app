@@ -1,9 +1,9 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Fragment } from "react";
 
-interface Props {
-    folderPath: (File | Folder)[];
-}
+const LEFT_PADDING_INCREMENT = 25;
+
+type FolderItem = File | Folder;
 
 interface File {
     type: "file";
@@ -13,12 +13,18 @@ interface File {
 interface Folder {
     type: "folder";
     name: string;
-    children?: (File | Folder)[];
+    children?: FolderItem[];
 }
 
-const LEFT_PADDING_INCREMENT = 25;
+interface Props {
+    folderPath: FolderItem[];
+}
 
-const renderItem = (type: string, name: string, leftPadding: number) => {
+const renderItem = (
+    type: "file" | "folder",
+    name: string,
+    leftPadding: number
+) => {
     return (
         <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
             <CardHeader>
@@ -42,65 +48,47 @@ const renderFile = (name: string, leftPadding: number) =>
 const renderFolder = (name: string, leftPadding: number) =>
     renderItem("folder", name, leftPadding);
 
-const renderSubFolder = (
-    subFolder: (File | Folder)[],
-    initialLeftPadding: number
-) => (
-    <>
-        {subFolder.map((item: File | Folder) => {
-            return (
-                <Fragment key={crypto.randomUUID()}>
-                    {item.type === "file"
-                        ? renderFile(
-                            item.name,
-                            initialLeftPadding + LEFT_PADDING_INCREMENT
-                        )
-                        : renderFolderPath(
-                            item,
-                            initialLeftPadding + LEFT_PADDING_INCREMENT
-                        )}
-                </Fragment>
-            );
-        })}
-    </>
-);
+const renderSubFolders = (subFolderItems: FolderItem[], leftPadding: number) =>
+    subFolderItems.map((item: FolderItem) => {
+        return (
+            <Fragment key={crypto.randomUUID()}>
+                {item.type === "file"
+                    ? renderFile(
+                        item.name,
+                        leftPadding + LEFT_PADDING_INCREMENT
+                    )
+                    : renderFolderTree(
+                        item,
+                        leftPadding + LEFT_PADDING_INCREMENT
+                    )}
+            </Fragment>
+        );
+    });
 
-const renderFolderPath = (folder: Folder, initialLeftPadding: number) => {
+const renderFolderTree = (folder: Folder, leftPadding: number) => {
     if (!folder.children) {
-        return renderFolder(folder.name, initialLeftPadding);
+        return renderFolder(folder.name, leftPadding);
     }
 
     return (
         <>
-            {renderFolder(folder.name, initialLeftPadding)}
-            {renderSubFolder(folder.children, initialLeftPadding)}
+            {renderFolder(folder.name, leftPadding)}
+            {renderSubFolders(folder.children, leftPadding)}
         </>
     );
 };
 
 const FolderStructureCards = ({ folderPath }: Props) => {
-    let leftPadding = 0;
-    return (
-        <>
-            {folderPath.map((item) => {
-                const currentLeftPadding = leftPadding;
-                leftPadding += LEFT_PADDING_INCREMENT;
-
-                if (item.type === "file") {
-                    return (
-                        <Fragment key={crypto.randomUUID()}>
-                            {renderFile(item.name, currentLeftPadding)}
-                        </Fragment>
-                    );
-                }
-                return (
-                    <Fragment key={crypto.randomUUID()}>
-                        {renderFolderPath(item, currentLeftPadding)}
-                    </Fragment>
-                );
-            })}
-        </>
-    );
+    return folderPath.map((item, idx) => {
+        const leftPadding = idx * LEFT_PADDING_INCREMENT;
+        return (
+            <Fragment key={crypto.randomUUID()}>
+                {item.type === "file"
+                    ? renderFile(item.name, leftPadding)
+                    : renderFolderTree(item, leftPadding)}
+            </Fragment>
+        );
+    });
 };
 
 export default FolderStructureCards;
