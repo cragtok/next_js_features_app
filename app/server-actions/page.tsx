@@ -20,7 +20,7 @@ const UsersSkeleton = () => (
     </Card>
 );
 
-export default async function ServerFunctionsPage() {
+async function Page() {
     return (
         <PageWrapper pageTitle="Server Actions">
             <Toaster />
@@ -77,3 +77,5 @@ export default async function ServerFunctionsPage() {
         </PageWrapper>
     );
 }
+
+export default Page;

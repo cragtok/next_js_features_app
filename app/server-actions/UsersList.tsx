@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { USER_LIST_SECTION_ID } from "./constants";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 
-export default async function UsersList() {
+const UsersList = async () => {
     const cachedUsers: User[] = await getCachedUsers();
 
     if (cachedUsers.length < 1) {
@@ -46,4 +46,6 @@ export default async function UsersList() {
             ))}
         </div>
     );
-}
+};
+
+export default UsersList;
