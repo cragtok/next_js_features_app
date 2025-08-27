@@ -56,8 +56,6 @@ export async function createUser(
         password: parsed.data.password,
     };
 
-    console.log("Form data received:", rawFormData);
-
     await addUserToDb(rawFormData);
 
     return {

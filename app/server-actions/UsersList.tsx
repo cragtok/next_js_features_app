@@ -4,9 +4,9 @@ import { USER_LIST_SECTION_ID } from "./constants";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 
 const UsersList = async () => {
-    const cachedUsers: User[] = await getCachedUsers();
+    const users: User[] = await getCachedUsers();
 
-    if (cachedUsers.length < 1) {
+    if (users.length < 1) {
         return (
             <Card className="bg-neutral-100">
                 <CardContent className="">
@@ -18,12 +18,12 @@ const UsersList = async () => {
 
     return (
         <div className="flex flex-col gap-3 text-sm">
-            {cachedUsers.map((user, idx) => (
+            {users.map((user, idx) => (
                 <Card
                     key={user.id}
                     className="bg-neutral-100"
                     id={
-                        idx === cachedUsers.length - 1
+                        idx === users.length - 1
                             ? USER_LIST_SECTION_ID
                             : undefined
                     }
