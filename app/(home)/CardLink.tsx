@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-
 import { SubRoute } from "./types";
 
 const CardLink = ({ title, description, href }: SubRoute) => {

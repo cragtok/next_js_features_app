@@ -5,7 +5,7 @@ import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 
 import ABTestClientComponent from "./ABTestClientComponent";
 
-export default function Page() {
+function Page() {
     return (
         <PageWrapper pageTitle="A/B Testing Middleware">
             <SectionWrapper>
@@ -43,3 +43,5 @@ export default function Page() {
         </PageWrapper>
     );
 }
+
+export default Page;

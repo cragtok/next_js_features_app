@@ -6,7 +6,7 @@ import { routeObjects } from "./routesList";
 import { Suspense } from "react";
 import { SubRoute } from "./types";
 
-function Header() {
+const Header = () => {
     const pathname = usePathname();
     const isHomePage = pathname === "/";
 
@@ -52,6 +52,6 @@ function Header() {
             </Suspense>
         </header>
     );
-}
+};
 
 export default Header;
