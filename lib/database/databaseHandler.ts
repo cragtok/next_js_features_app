@@ -1,6 +1,6 @@
 import { revalidateTag, unstable_cache } from "next/cache";
-import fs from "fs/promises";
 import path from "path";
+import Database from "better-sqlite3";
 
 interface User {
     id: string;
@@ -9,42 +9,27 @@ interface User {
     password: string;
 }
 
-const DB_FILE_PATH = path.join(process.cwd(), "data", "mockDb.json");
+const DB_FILE_PATH = path.join(process.cwd(), "data", "app.db");
 const DB_CACHE_PATH = "db-users-path";
 const DB_CACHE_TAG = "db-users-tag";
 
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+const db = new Database(DB_FILE_PATH, { verbose: console.log });
+db.pragma("journal_mode = WAL");
 
-async function readDbFile(): Promise<User[]> {
-    try {
-        const fileContent = await fs.readFile(DB_FILE_PATH, "utf-8");
-        return JSON.parse(fileContent);
-    } catch (error) {
-        console.error("Error reading from mockDb.json:", error);
-        return [];
-    }
-}
-
-async function writeDbFile(data: User[]): Promise<void> {
-    try {
-        await fs.writeFile(
-            DB_FILE_PATH,
-            JSON.stringify(data, null, 2),
-            "utf-8"
-        );
-        revalidateTag(DB_CACHE_TAG);
-    } catch (error) {
-        console.error("Error writing to mockDb.json:", error);
-        throw new Error("Failed to write to mock database file.");
-    }
-}
+db.exec(`
+      CREATE TABLE IF NOT EXISTS users (
+        id TEXT PRIMARY KEY,
+        username TEXT NOT NULL,
+        email TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL
+      );
+`);
 
 const getCachedUsers = unstable_cache(
     async () => {
-        await delay(2000);
         console.log("[unstable_cache] Fetching data from mockDb.json...");
         try {
-            const items = await readDbFile();
+            const items = db.prepare("SELECT * FROM users").all() as User[];
             console.log(
                 `[unstable_cache] Data fetched. Total items: ${items.length}`
             );
@@ -62,18 +47,19 @@ const getCachedUsers = unstable_cache(
 );
 
 async function addUserToDb(newUser: User): Promise<User> {
-    await delay(1000);
-    const users = await readDbFile();
-    users.push(newUser);
-    await writeDbFile(users);
+    db.prepare(
+        "INSERT INTO users (id, username, email, password) VALUES(?, ?, ?, ?)"
+    ).run(newUser.id, newUser.username, newUser.email, newUser.password);
+
     console.log(`[addItemToDb] Added new item: ${JSON.stringify(newUser)}`);
     revalidateTag(DB_CACHE_TAG);
     return newUser;
 }
 
 async function findUserInDb(userId: string): Promise<User | null> {
-    const users = await readDbFile();
-    const foundUser = users.find((user) => user.id === userId);
+    const foundUser = db
+        .prepare("SELECT * FROM users WHERE id = ? ")
+        .get(userId) as User | undefined;
     if (foundUser) {
         return foundUser;
     }
@@ -81,27 +67,48 @@ async function findUserInDb(userId: string): Promise<User | null> {
 }
 
 async function updateUserInDb(updatedUser: User): Promise<User | null> {
-    const users = await readDbFile();
-    const updatedUsers = users.map((user) =>
-        user.id === updatedUser.id ? updatedUser : user
+    db.prepare(
+        "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?"
+    ).run(
+        updatedUser.username,
+        updatedUser.email,
+        updatedUser.password,
+        updatedUser.id
     );
-    await writeDbFile(updatedUsers);
     revalidateTag(DB_CACHE_TAG);
     return updatedUser;
 }
 
 async function deleteUserInDb(userId: string) {
-    const users = await readDbFile();
-    const updatedUsers = users.filter((user) => user.id !== userId);
-    await writeDbFile(updatedUsers);
+    db.prepare("DELETE FROM users WHERE id = ?").run(userId);
     revalidateTag(DB_CACHE_TAG);
 }
 
+async function clearDb(): Promise<void> {
+    db.prepare("DELETE FROM users").run();
+    console.log("[clearDb] All users deleted.");
+}
+
+async function seedDb(usersToSeed: User[]): Promise<void> {
+    const insert = db.prepare(
+        "INSERT INTO users (id, username, email, password) VALUES(?, ?, ?, ?)"
+    );
+    db.transaction((users) => {
+        for (const user of users) {
+            insert.run(user.id, user.username, user.email, user.password);
+        }
+    })(usersToSeed);
+    console.log(`[seedDb] ${usersToSeed.length} users seeded.`);
+}
+
 export {
+    db,
     getCachedUsers,
     addUserToDb,
     findUserInDb,
     updateUserInDb,
     deleteUserInDb,
+    clearDb,
+    seedDb,
     type User,
 };
