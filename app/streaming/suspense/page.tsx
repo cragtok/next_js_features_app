@@ -2,11 +2,11 @@ import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-import { DelayedImageComponent } from "./DelayedImageComponent";
+import DelayedImageComponent from "./DelayedImageComponent";
 import { Suspense } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default function Page() {
     return (

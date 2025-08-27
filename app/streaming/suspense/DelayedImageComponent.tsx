@@ -10,7 +10,7 @@ interface Props {
     delaySeconds: number;
 }
 
-export async function DelayedImageComponent({
+async function DelayedImageComponent({
     imagePath,
     componentNumber,
     delaySeconds,
@@ -40,3 +40,5 @@ export async function DelayedImageComponent({
         </Card>
     );
 }
+
+export default DelayedImageComponent;
