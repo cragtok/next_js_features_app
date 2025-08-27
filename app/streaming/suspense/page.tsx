@@ -2,7 +2,7 @@ import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-import DelayedImageComponent from "./DelayedImageComponent";
+import DelayedImageCard from "./DelayedImageCard";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
 
@@ -20,9 +20,10 @@ function Page() {
                 </ParagraphWrapper>
                 {[1, 2, 3].map((num) => (
                     <Suspense key={num} fallback={<LoadingSpinner />}>
-                        <DelayedImageComponent
+                        <DelayedImageCard
                             imagePath={`/nature-image-${num}.jpg`}
-                            componentNumber={num}
+                            title={`Component ${num}`}
+                            alt={`Nature Image ${num}`}
                             delaySeconds={num * 2}
                         />
                     </Suspense>
