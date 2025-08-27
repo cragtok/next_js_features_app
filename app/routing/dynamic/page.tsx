@@ -1,6 +1,6 @@
 import { DynamicRouteForm } from "./DynamicRouteForm";
 import FolderStructureCards from "@/components/general/FolderStructureCards";
-import { PageWrapper } from "@/components/general/PageWrapper";
+import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import { SectionWrapper } from "@/components/general/SectionWrapper";

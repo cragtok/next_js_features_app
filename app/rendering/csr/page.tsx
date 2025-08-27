@@ -1,5 +1,5 @@
 "use client";
-import { PageWrapper } from "@/components/general/PageWrapper";
+import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import { SectionWrapper } from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";

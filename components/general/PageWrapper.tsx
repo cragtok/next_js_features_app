@@ -5,7 +5,7 @@ interface Props {
     pageTitle?: string;
 }
 
-export function PageWrapper({ children, pageTitle }: Props) {
+export default function PageWrapper({ children, pageTitle }: Props) {
     return (
         <div className="flex flex-col pt-10 gap-10 items-center text-center max-sm:text-sm pb-10">
             {pageTitle && (

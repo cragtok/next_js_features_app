@@ -1,4 +1,4 @@
-import { PageWrapper } from "@/components/general/PageWrapper";
+import PageWrapper from "@/components/general/PageWrapper";
 
 export default function Loading() {
     return (

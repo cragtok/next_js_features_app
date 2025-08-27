@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { PageWrapper } from "@/components/general/PageWrapper";
+import PageWrapper from "@/components/general/PageWrapper";
 import { Button } from "@/components/ui/button";
 import { SectionWrapper } from "@/components/general/SectionWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";

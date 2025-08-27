@@ -1,4 +1,4 @@
-import { PageWrapper } from "@/components/general/PageWrapper";
+import PageWrapper from "@/components/general/PageWrapper";
 import SiteLinks from "./SiteLinks";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import LinkWrapper from "@/components/general/LinkWrapper";

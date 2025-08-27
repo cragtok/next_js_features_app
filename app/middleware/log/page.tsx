@@ -1,4 +1,4 @@
-import { PageWrapper } from "@/components/general/PageWrapper";
+import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import { headers } from "next/headers";
 import { SectionWrapper } from "@/components/general/SectionWrapper";
