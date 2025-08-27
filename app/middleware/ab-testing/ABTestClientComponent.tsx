@@ -1,6 +1,6 @@
 "use client";
 
-import LoadingSpinner from "@/app/streaming/suspense/LoadingSpinner";
+import LoadingSpinner from "@/components/general/LoadingSpinner";
 import { useEffect, useState } from "react";
 
 export default function ABTestClientComponent() {

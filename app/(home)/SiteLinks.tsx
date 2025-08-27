@@ -10,7 +10,7 @@ import {
 import CardLink from "./CardLink";
 import { PageRoute, SubRoute } from "./types";
 import { pageRoutes } from "./routesList";
-import LoadingSpinner from "../streaming/suspense/LoadingSpinner";
+import LoadingSpinner from "@/components/general/LoadingSpinner";
 
 const renderSubRoutes = (subRoutes: SubRoute[]) => {
     return subRoutes.map((subRoute: SubRoute) => (

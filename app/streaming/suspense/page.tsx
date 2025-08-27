@@ -4,7 +4,7 @@ import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import DelayedImageComponent from "./DelayedImageComponent";
 import { Suspense } from "react";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "@/components/general/LoadingSpinner";
 
 export const dynamic = "force-dynamic";
 
