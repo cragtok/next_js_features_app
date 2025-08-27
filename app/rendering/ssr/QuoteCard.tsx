@@ -7,7 +7,7 @@ interface Quote {
 
 const API_URL = process.env.QUOTES_API_URL || "";
 
-export default async function QuoteCard() {
+const QuoteCard = async () => {
     let quoteData: Quote | null = null;
 
     try {
@@ -47,4 +47,6 @@ export default async function QuoteCard() {
             </CardContent>
         </Card>
     );
-}
+};
+
+export default QuoteCard;

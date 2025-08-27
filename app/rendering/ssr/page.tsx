@@ -10,7 +10,7 @@ import LinkWrapper from "@/components/general/LinkWrapper";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
+function Page() {
     const QuoteSkeleton = () => (
         <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
             <CardContent className="space-y-3">
@@ -67,3 +67,5 @@ export default function Page() {
         </PageWrapper>
     );
 }
+
+export default Page;
