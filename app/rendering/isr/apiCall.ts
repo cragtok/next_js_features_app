@@ -19,7 +19,7 @@ interface ApiResponse {
     data: Payload;
 }
 
-export interface CryptoData {
+interface CryptoData {
     symbol: string;
     status: string;
     price: string;
@@ -27,9 +27,9 @@ export interface CryptoData {
 
 // Sometimes the API does not return the price for a particular coin
 // In that case we show its previous price, which is stored here
-export const oldPrices: Record<string, string> = {};
+const oldPrices: Record<string, string> = {};
 
-export async function fetchPrices(): Promise<CryptoData[]> {
+async function fetchPrices(): Promise<CryptoData[]> {
     if (!API_KEY || !API_BATCH_URL) {
         throw new Error("Missing API Key or URL.");
     }
@@ -71,3 +71,5 @@ export async function fetchPrices(): Promise<CryptoData[]> {
     console.log(result);
     return result;
 }
+
+export { fetchPrices, oldPrices, type CryptoData };
