@@ -2,7 +2,7 @@ import PageWrapper from "@/components/general/PageWrapper";
 import { DynamicRouteForm } from "../DynamicRouteForm";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-import { SectionWrapper } from "@/components/general/SectionWrapper";
+import SectionWrapper from "@/components/general/SectionWrapper";
 
 const slugs = ["dynamic_route", "1ae64431", "helloWorld", "123456"];
 export async function generateStaticParams() {

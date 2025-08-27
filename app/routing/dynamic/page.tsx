@@ -3,7 +3,7 @@ import FolderStructureCards from "@/components/general/FolderStructureCards";
 import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-import { SectionWrapper } from "@/components/general/SectionWrapper";
+import SectionWrapper from "@/components/general/SectionWrapper";
 import LinkWrapper from "@/components/general/LinkWrapper";
 
 export default function Page() {

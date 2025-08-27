@@ -1,6 +1,6 @@
 import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
-import { SectionWrapper } from "@/components/general/SectionWrapper";
+import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { fetchCityDateTimes } from "./geminiCall";

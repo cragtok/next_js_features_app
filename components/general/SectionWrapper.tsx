@@ -8,7 +8,7 @@ interface Props {
     classNameOverride?: string;
 }
 
-export function SectionWrapper({
+export default function SectionWrapper({
     children,
     sectionTitle,
     classNameOverride,

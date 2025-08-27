@@ -1,7 +1,7 @@
 import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import { headers } from "next/headers";
-import { SectionWrapper } from "@/components/general/SectionWrapper";
+import SectionWrapper from "@/components/general/SectionWrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function LogPage() {
