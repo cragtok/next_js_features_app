@@ -1,5 +1,5 @@
 import PageWrapper from "@/components/general/PageWrapper";
-import { DynamicRouteForm } from "../DynamicRouteForm";
+import DynamicRouteForm from "../DynamicRouteForm";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";

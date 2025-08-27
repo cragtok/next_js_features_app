@@ -8,7 +8,7 @@ interface Props {
     baseRoute: string;
 }
 
-export const DynamicRouteForm = ({ baseRoute }: Props) => {
+const DynamicRouteForm = ({ baseRoute }: Props) => {
     const [value, setValue] = useState("");
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -65,3 +65,5 @@ export const DynamicRouteForm = ({ baseRoute }: Props) => {
         </div>
     );
 };
+
+export default DynamicRouteForm;
