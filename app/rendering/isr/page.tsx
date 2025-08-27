@@ -7,7 +7,7 @@ export const revalidate = 20;
 import { fetchPrices, CryptoData } from "./apiCall";
 import CryptoPricesCard from "./CryptoPricesCard";
 
-export default async function Page() {
+async function Page() {
     let cryptoPrices: CryptoData[] = [];
     try {
         cryptoPrices = await fetchPrices();
@@ -67,3 +67,5 @@ export default async function Page() {
         </PageWrapper>
     );
 }
+
+export default Page;

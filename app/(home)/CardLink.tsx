@@ -2,7 +2,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { SubRoute } from "./types";
 
-const CardLink = ({ title, description, href }: SubRoute) => {
+type Props = SubRoute;
+
+const CardLink = ({ title, description, href }: Props) => {
     return (
         <Link href={href} className="group">
             <Card className="bg-neutral-100">

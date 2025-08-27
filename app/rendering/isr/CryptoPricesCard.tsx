@@ -1,11 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CryptoData, oldPrices } from "./apiCall";
 
-interface CryptoPricesCardProps {
+interface Props {
     prices: CryptoData[];
 }
 
-export default function CryptoPricesCard({ prices }: CryptoPricesCardProps) {
+function CryptoPricesCard({ prices }: Props) {
     return (
         <>
             {prices.length ? (
@@ -46,3 +46,5 @@ export default function CryptoPricesCard({ prices }: CryptoPricesCardProps) {
         </>
     );
 }
+
+export default CryptoPricesCard;
