@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Suspense } from "react";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 
 const JOKE_API_URL = process.env.NEXT_PUBLIC_JOKE_API_URL;
@@ -54,31 +53,29 @@ const JokeFetcher = () => {
         refetch();
     };
 
+    if (isFetching) {
+        return <JokeSkeleton />;
+    }
+
     return (
-        <Suspense fallback={<JokeSkeleton />}>
-            {isFetching ? (
-                <JokeSkeleton />
-            ) : (
-                <Card className="max-w-prose bg-neutral-100 rounded-md pt-5 pb-3">
-                    <CardContent>
-                        {isError ? (
-                            <TextAccentWrapper classNameOverride="italic text-status-danger-500 text-center">
-                                {
-                                    "Failed to load joke. Please try fetching again."
-                                }
-                            </TextAccentWrapper>
-                        ) : joke ? (
-                            <TextAccentWrapper classNameOverride="italic text-center">
-                                {joke}
-                            </TextAccentWrapper>
-                        ) : (
-                            <TextAccentWrapper classNameOverride="text-center text-brand-500">
-                                {"Click the button to fetch a joke."}
-                            </TextAccentWrapper>
-                        )}
-                    </CardContent>
-                </Card>
-            )}
+        <>
+            <Card className="max-w-prose bg-neutral-100 rounded-md pt-5 pb-3">
+                <CardContent>
+                    {isError ? (
+                        <TextAccentWrapper classNameOverride="italic text-status-danger-500 text-center">
+                            {"Failed to load joke. Please try fetching again."}
+                        </TextAccentWrapper>
+                    ) : joke ? (
+                        <TextAccentWrapper classNameOverride="italic text-center">
+                            {joke}
+                        </TextAccentWrapper>
+                    ) : (
+                        <TextAccentWrapper classNameOverride="text-center text-brand-500">
+                            {"Click the button to fetch a joke."}
+                        </TextAccentWrapper>
+                    )}
+                </CardContent>
+            </Card>
 
             <Button
                 className="bg-brand-500"
@@ -87,7 +84,7 @@ const JokeFetcher = () => {
             >
                 Fetch Joke
             </Button>
-        </Suspense>
+        </>
     );
 };
 
