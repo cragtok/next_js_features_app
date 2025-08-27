@@ -14,13 +14,11 @@ import { Label } from "@/components/ui/label";
 import { User } from "./api-client";
 import { parseUserBody } from "../my-api/utils";
 
-interface CreateUserFormProps {
+interface Props {
     handleCreateUser: (user: Omit<User, "id">) => Promise<void>;
 }
 
-export default function CreateUserForm({
-    handleCreateUser,
-}: CreateUserFormProps) {
+const CreateUserForm = ({ handleCreateUser }: Props) => {
     const [newUserName, setNewUserName] = useState("");
     const [newUserEmail, setNewUserEmail] = useState("");
     const [newUserPassword, setNewUserPassword] = useState("");
@@ -138,4 +136,6 @@ export default function CreateUserForm({
             </AccordionItem>
         </Accordion>
     );
-}
+};
+
+export default CreateUserForm;

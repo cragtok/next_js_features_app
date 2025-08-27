@@ -1,4 +1,4 @@
-export interface User {
+interface User {
     id: string;
     username: string;
     email: string;
@@ -7,7 +7,7 @@ export interface User {
 
 const API_BASE_URL = "/route-handlers/my-api";
 
-export async function fetchAllUsers(): Promise<User[]> {
+async function fetchAllUsers(): Promise<User[]> {
     const response = await fetch(API_BASE_URL);
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -16,7 +16,7 @@ export async function fetchAllUsers(): Promise<User[]> {
     return data.data || [];
 }
 
-export async function createUser(user: Omit<User, "id">): Promise<User> {
+async function createUser(user: Omit<User, "id">): Promise<User> {
     const response = await fetch(API_BASE_URL, {
         method: "POST",
         headers: {
@@ -33,7 +33,7 @@ export async function createUser(user: Omit<User, "id">): Promise<User> {
     return data.data;
 }
 
-export async function updateUser(user: User): Promise<User> {
+async function updateUser(user: User): Promise<User> {
     const updatedFields = {
         username: user.username,
         email: user.email,
@@ -56,7 +56,7 @@ export async function updateUser(user: User): Promise<User> {
     return data.data;
 }
 
-export async function deleteUser(userId: string): Promise<void> {
+async function deleteUser(userId: string): Promise<void> {
     const response = await fetch(`${API_BASE_URL}/${userId}`, {
         method: "DELETE",
         headers: {
@@ -68,3 +68,5 @@ export async function deleteUser(userId: string): Promise<void> {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
 }
+
+export { fetchAllUsers, createUser, updateUser, deleteUser, type User };

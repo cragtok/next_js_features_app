@@ -16,7 +16,7 @@ import UserInfo from "./UserInfo";
 import EditUserForm from "./EditUserForm";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function UsersList() {
+const UsersList = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
     const [editMode, setEditMode] = useState<Record<string, boolean>>({});
@@ -205,4 +205,6 @@ export default function UsersList() {
             ))}
         </>
     );
-}
+};
+
+export default UsersList;

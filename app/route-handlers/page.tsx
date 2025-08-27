@@ -5,7 +5,7 @@ import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import FolderStructureCards from "@/components/general/FolderStructureCards";
 import UsersList from "./UsersList/UsersList";
 
-export default function RouteHandlersPage() {
+function Page() {
     return (
         <PageWrapper pageTitle="Route Handlers">
             <SectionWrapper>
@@ -124,3 +124,5 @@ export default function RouteHandlersPage() {
         </PageWrapper>
     );
 }
+
+export default Page;

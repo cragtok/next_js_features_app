@@ -1,7 +1,7 @@
 import { getCachedUsers, addUserToDb } from "@/lib/database/databaseHandler";
 import { parseUserBody } from "./utils";
 
-export async function GET(_request: Request) {
+async function GET(_request: Request) {
     console.log("GET method called");
     try {
         const users = await getCachedUsers();
@@ -17,7 +17,7 @@ export async function GET(_request: Request) {
     }
 }
 
-export async function POST(request: Request) {
+async function POST(request: Request) {
     try {
         const body = await request.json();
         console.log(`POST method called with body: ${JSON.stringify(body)}`);
@@ -64,3 +64,5 @@ export async function POST(request: Request) {
         );
     }
 }
+
+export { GET, POST };

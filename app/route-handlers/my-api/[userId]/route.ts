@@ -5,7 +5,7 @@ import {
 } from "@/lib/database/databaseHandler";
 import { parseUserBody } from "../utils";
 
-export async function PUT(
+async function PUT(
     request: Request,
     { params }: { params: Promise<{ userId: string }> }
 ) {
@@ -65,7 +65,7 @@ export async function PUT(
     }
 }
 
-export async function DELETE(
+async function DELETE(
     _request: Request,
     { params }: { params: Promise<{ userId: string }> }
 ) {
@@ -99,3 +99,5 @@ export async function DELETE(
         return Response.json({ message }, { status });
     }
 }
+
+export { PUT, DELETE };
