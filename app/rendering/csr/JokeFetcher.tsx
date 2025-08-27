@@ -37,7 +37,7 @@ const fetchJoke = async (): Promise<string> => {
     return data.joke;
 };
 
-export default function JokeFetcher() {
+const JokeFetcher = () => {
     const {
         data: joke,
         isFetching,
@@ -89,4 +89,6 @@ export default function JokeFetcher() {
             </Button>
         </Suspense>
     );
-}
+};
+
+export default JokeFetcher;
