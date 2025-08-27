@@ -13,7 +13,7 @@ const DB_FILE_PATH = path.join(process.cwd(), "data", "app.db");
 const DB_CACHE_PATH = "db-users-path";
 const DB_CACHE_TAG = "db-users-tag";
 
-const db = new Database(DB_FILE_PATH, { verbose: console.log });
+const db = new Database(DB_FILE_PATH);
 db.pragma("journal_mode = WAL");
 
 db.exec(`
