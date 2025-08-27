@@ -6,7 +6,7 @@ import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import LinkWrapper from "@/components/general/LinkWrapper";
 
-export default function Page() {
+function Page() {
     return (
         <PageWrapper pageTitle="Dynamic Routing">
             <SectionWrapper>
@@ -117,3 +117,5 @@ export default function Page() {
         </PageWrapper>
     );
 }
+
+export default Page;

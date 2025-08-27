@@ -5,6 +5,7 @@ import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 
 const slugs = ["dynamic_route", "1ae64431", "helloWorld", "123456"];
+
 export async function generateStaticParams() {
     const slugs = ["dynamic_route", "1ae64431", "helloWorld", "123456"];
     return slugs.map((slug) => ({
@@ -12,11 +13,7 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function Page({
-    params,
-}: {
-    params: Promise<{ slug: string }>;
-}) {
+async function Page({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
 
     return (
@@ -49,3 +46,5 @@ export default async function Page({
         </PageWrapper>
     );
 }
+
+export default Page;

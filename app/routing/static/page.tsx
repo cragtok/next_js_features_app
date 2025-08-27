@@ -4,7 +4,7 @@ import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 
-export default function Page() {
+function Page() {
     return (
         <PageWrapper pageTitle="Static Routing">
             <SectionWrapper>
@@ -46,3 +46,5 @@ export default function Page() {
         </PageWrapper>
     );
 }
+
+export default Page;
