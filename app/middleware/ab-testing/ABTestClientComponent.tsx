@@ -3,7 +3,7 @@
 import LoadingSpinner from "@/components/general/LoadingSpinner";
 import { useEffect, useState } from "react";
 
-export default function ABTestClientComponent() {
+const ABTestClientComponent = () => {
     const [abTestGroup, setAbTestGroup] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -49,4 +49,6 @@ export default function ABTestClientComponent() {
             )}
         </div>
     );
-}
+};
+
+export default ABTestClientComponent;

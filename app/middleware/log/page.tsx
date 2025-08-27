@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default async function LogPage() {
+export default async function Page() {
     const headersList = await headers();
     const ip = headersList.get("x-request-ip") || "N/A";
     const serverTimeRaw = headersList.get("x-server-time") || "N/A";
