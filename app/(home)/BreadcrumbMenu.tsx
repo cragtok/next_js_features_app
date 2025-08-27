@@ -18,7 +18,7 @@ interface Props {
 const FLEX_BREAKPOINT_WIDTH = 280;
 const MAX_URL_LENGTH = 36;
 
-export default function BreadcrumbMenu({ routePath }: Props) {
+const BreadcrumbMenu = ({ routePath }: Props) => {
     const [isSmall, setIsSmall] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
@@ -87,4 +87,6 @@ export default function BreadcrumbMenu({ routePath }: Props) {
             </BreadcrumbList>
         </Breadcrumb>
     );
-}
+};
+
+export default BreadcrumbMenu;

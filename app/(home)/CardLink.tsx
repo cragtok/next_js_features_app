@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { SubRoute } from "./types";
 
-export default function CardLink({ title, description, href }: SubRoute) {
+const CardLink = ({ title, description, href }: SubRoute) => {
     return (
         <Link href={href} className="group">
             <Card className="bg-neutral-100">
@@ -18,4 +18,6 @@ export default function CardLink({ title, description, href }: SubRoute) {
             </Card>
         </Link>
     );
-}
+};
+
+export default CardLink;

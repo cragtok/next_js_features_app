@@ -43,7 +43,7 @@ const renderRoutes = (pageRoutes: PageRoute[]) => {
     });
 };
 
-export default function SiteLinks() {
+const SiteLinks = () => {
     const LOCAL_STORAGE_KEY = "accordion-open-items";
     const [openItems, setOpenItems] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -60,7 +60,10 @@ export default function SiteLinks() {
 
     useEffect(() => {
         if (typeof window !== "undefined" && !isLoading) {
-            sessionStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(openItems));
+            sessionStorage.setItem(
+                LOCAL_STORAGE_KEY,
+                JSON.stringify(openItems)
+            );
         }
     }, [openItems, isLoading]);
 
@@ -82,4 +85,6 @@ export default function SiteLinks() {
             {renderRoutes(pageRoutes)}
         </Accordion>
     );
-}
+};
+
+export default SiteLinks;

@@ -11,7 +11,7 @@ interface ErrorProps {
     reset: () => void;
 }
 
-export default function GlobalError({ error, reset }: ErrorProps) {
+function GlobalError({ error, reset }: ErrorProps) {
     useEffect(() => {
         console.error("Caught global error:", error);
     }, [error]);
@@ -54,3 +54,5 @@ export default function GlobalError({ error, reset }: ErrorProps) {
         </PageWrapper>
     );
 }
+
+export default GlobalError;

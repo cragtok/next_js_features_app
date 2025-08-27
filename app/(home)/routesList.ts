@@ -1,6 +1,6 @@
 import { PageRoute, SubRoute } from "./types";
 
-export const routeObjects: Record<string, SubRoute> = {
+const routeObjects: Record<string, SubRoute> = {
     "/": {
         title: "Home",
         description: "Routing with static URLs.",
@@ -81,7 +81,7 @@ export const routeObjects: Record<string, SubRoute> = {
     },
 };
 
-export const pageRoutes: PageRoute[] = [
+const pageRoutes: PageRoute[] = [
     {
         route: "Routing",
         subRoutes: [
@@ -181,3 +181,5 @@ export const pageRoutes: PageRoute[] = [
         ],
     },
 ];
+
+export { routeObjects, pageRoutes };

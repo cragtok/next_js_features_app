@@ -3,7 +3,7 @@ import SiteLinks from "./SiteLinks";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import LinkWrapper from "@/components/general/LinkWrapper";
 
-export default function Page() {
+function Page() {
     return (
         <PageWrapper pageTitle="Next.js Features App">
             <ParagraphWrapper classNameOverride="max-w-md">
@@ -27,3 +27,5 @@ export default function Page() {
         </PageWrapper>
     );
 }
+
+export default Page;

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
-import "./globals.css";
-
 import Header from "./(home)/Header";
+
+import "./globals.css";
 
 const notoSans = Noto_Sans({
     variable: "--font-noto-sans",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description: "An app demonstrating basic Next.js features",
 };
 
-export default async function RootLayout({
+async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -30,3 +30,5 @@ export default async function RootLayout({
         </html>
     );
 }
+
+export default RootLayout;
