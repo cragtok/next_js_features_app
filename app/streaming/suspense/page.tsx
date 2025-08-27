@@ -8,7 +8,7 @@ import LoadingSpinner from "@/components/general/LoadingSpinner";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
+function Page() {
     return (
         <PageWrapper pageTitle="Streaming with Suspense">
             <SectionWrapper>
@@ -53,3 +53,5 @@ export default function Page() {
         </PageWrapper>
     );
 }
+
+export default Page;

@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-export default async function Page() {
+async function Page() {
     await delay(2000);
 
     return (
@@ -65,3 +65,5 @@ export default async function Page() {
         </PageWrapper>
     );
 }
+
+export default Page;

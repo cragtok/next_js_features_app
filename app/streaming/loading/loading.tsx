@@ -1,6 +1,6 @@
 import PageWrapper from "@/components/general/PageWrapper";
 
-export default function Loading() {
+function Loading() {
     return (
         <PageWrapper pageTitle="Loading...">
             <div className="w-full max-w-lg space-y-3 pt-10">
@@ -16,3 +16,5 @@ export default function Loading() {
         </PageWrapper>
     );
 }
+
+export default Loading;
