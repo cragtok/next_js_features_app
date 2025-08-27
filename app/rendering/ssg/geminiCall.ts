@@ -8,9 +8,9 @@ interface CityDateTime {
     time: string;
 }
 
-const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 const baseContents =
     "Give me the current date and time for these cities: New York, London, Tokyo, and Dubai.";
+
 const systemInstruction = `
         Your answer must be in the format of an array of JSON objects.
         Each object must contain three keys: 'city', 'date', 'time' and is of this format:
@@ -29,6 +29,7 @@ const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 async function fetchCityDateTimes(): Promise<CityDateTime[]> {
     const MAX_RETRIES = 5;
     const RETRY_DELAY_MS = 1000;
+    const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
     for (let i = 0; i < MAX_RETRIES; i++) {
         try {
@@ -66,4 +67,4 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
     throw new Error("Gemini error: Max retries reached.");
 }
 
-export { type CityDateTime, fetchCityDateTimes };
+export { fetchCityDateTimes };

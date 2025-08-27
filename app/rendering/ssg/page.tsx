@@ -7,15 +7,8 @@ import { fetchCityDateTimes } from "./geminiCall";
 
 export const dynamic = "force-static";
 
-export default async function Page() {
+async function Page() {
     const cityDateTimes = await fetchCityDateTimes();
-
-    // const cityDateTimes = [
-    //     { city: "New York", date: "18/08/2025", time: "04:45 AM" },
-    //     { city: "London", date: "18/08/2025", time: "09:45 AM" },
-    //     { city: "Tokyo", date: "18/08/2025", time: "05:45 PM" },
-    //     { city: "Dubai", date: "18/08/2025", time: "12:45 PM" },
-    // ];
 
     return (
         <PageWrapper pageTitle="Static Site Generation">
@@ -86,3 +79,5 @@ export default async function Page() {
         </PageWrapper>
     );
 }
+
+export default Page;
