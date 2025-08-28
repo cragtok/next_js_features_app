@@ -9,21 +9,33 @@ import {
 } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { User } from "./api-client";
 import { parseUserBody } from "../my-api/utils";
+import UserCreationFormFields from "@/components/general/UserCreationFormFields";
 
 interface Props {
     handleCreateUser: (user: Omit<User, "id">) => Promise<void>;
 }
 
 const CreateUserForm = ({ handleCreateUser }: Props) => {
-    const [newUserName, setNewUserName] = useState("");
-    const [newUserEmail, setNewUserEmail] = useState("");
-    const [newUserPassword, setNewUserPassword] = useState("");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errorMessages, setErrorMessages] = useState<Partial<User>>({});
+    const [displayErrors, setDisplayErrors] = useState<Record<string, string>>(
+        {}
+    );
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        if (name === "username") {
+            setUsername(value);
+        } else if (name === "email") {
+            setEmail(value);
+        } else if (name === "password") {
+            setPassword(value);
+        }
+    };
 
     const onSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -31,13 +43,13 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
 
         try {
             const parseResult = parseUserBody({
-                username: newUserName,
-                email: newUserEmail,
-                password: newUserPassword,
+                username: username,
+                email: email,
+                password: password,
             });
 
             if (!parseResult.success) {
-                setErrorMessages(parseResult.result);
+                setDisplayErrors(parseResult.result);
                 return;
             }
 
@@ -46,10 +58,10 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                 email: parseResult.result.email,
                 password: parseResult.result.password,
             });
-            setNewUserName("");
-            setNewUserEmail("");
-            setNewUserPassword("");
-            setErrorMessages({});
+            setUsername("");
+            setEmail("");
+            setPassword("");
+            setDisplayErrors({});
         } catch (e) {
             console.error(e);
         } finally {
@@ -70,56 +82,13 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                         </CardHeader>
                         <CardContent>
                             <form className="grid gap-6">
-                                <div className="grid gap-2">
-                                    <Label htmlFor="new-username">
-                                        Username
-                                    </Label>
-                                    <Input
-                                        id="new-username"
-                                        value={newUserName}
-                                        onChange={(e) =>
-                                            setNewUserName(e.target.value)
-                                        }
-                                    />
-                                    {errorMessages.username && (
-                                        <p className="text-left text-status-danger-500">
-                                            {errorMessages.username}
-                                        </p>
-                                    )}
-                                </div>
-                                <div className="grid gap-2">
-                                    <Label htmlFor="new-email">Email</Label>
-                                    <Input
-                                        id="new-email"
-                                        value={newUserEmail}
-                                        onChange={(e) =>
-                                            setNewUserEmail(e.target.value)
-                                        }
-                                    />
-                                    {errorMessages.email && (
-                                        <p className="text-left text-status-danger-500">
-                                            {errorMessages.email}
-                                        </p>
-                                    )}
-                                </div>
-                                <div className="grid gap-2">
-                                    <Label htmlFor="new-password">
-                                        Password
-                                    </Label>
-                                    <Input
-                                        id="new-password"
-                                        type="password"
-                                        value={newUserPassword}
-                                        onChange={(e) =>
-                                            setNewUserPassword(e.target.value)
-                                        }
-                                    />
-                                    {errorMessages.password && (
-                                        <p className="text-left text-status-danger-500">
-                                            {errorMessages.password}
-                                        </p>
-                                    )}
-                                </div>
+                                <UserCreationFormFields
+                                    displayErrors={displayErrors}
+                                    username={username}
+                                    password={password}
+                                    email={email}
+                                    handleInputChange={handleInputChange}
+                                />
                                 <Button
                                     onClick={onSubmit}
                                     className="mt-4 bg-brand-700 hover:bg-brand-800"
