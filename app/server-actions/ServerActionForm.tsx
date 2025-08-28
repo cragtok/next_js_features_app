@@ -8,11 +8,12 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { useActionState, useState, useEffect } from "react";
+import { useActionState, useEffect } from "react";
 import { createUser, FormState } from "./actions";
 import { USER_LIST_SECTION_ID } from "./constants";
 import { toast } from "sonner";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields";
+import useUserFormFields from "@/components/hooks/useUserFormFields";
 
 const initialState: FormState = {
     message: "",
@@ -25,12 +26,15 @@ const ServerActionForm = () => {
         initialState
     );
 
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [displayErrors, setDisplayErrors] = useState<Record<string, string>>(
-        {}
-    );
+    const {
+        username,
+        email,
+        password,
+        displayErrors,
+        setDisplayErrors,
+        handleInputChange,
+        resetFields,
+    } = useUserFormFields();
 
     useEffect(() => {
         if (state.errors) {
@@ -39,9 +43,7 @@ const ServerActionForm = () => {
             setDisplayErrors({});
         }
         if (state.message === "User created successfully!") {
-            setUsername("");
-            setEmail("");
-            setPassword("");
+            resetFields();
             const userListSection =
                 document.getElementById(USER_LIST_SECTION_ID);
             if (userListSection) {
@@ -52,26 +54,7 @@ const ServerActionForm = () => {
                 richColors: true,
             });
         }
-    }, [state]);
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        if (name === "username") {
-            setUsername(value);
-        } else if (name === "email") {
-            setEmail(value);
-        } else if (name === "password") {
-            setPassword(value);
-        }
-
-        if (displayErrors[name]) {
-            setDisplayErrors((prev) => {
-                const newErrors = { ...prev };
-                delete newErrors[name];
-                return newErrors;
-            });
-        }
-    };
+    }, [state, setDisplayErrors, resetFields]);
 
     return (
         <div>

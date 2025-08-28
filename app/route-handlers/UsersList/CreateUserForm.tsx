@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
     Accordion,
     AccordionContent,
@@ -12,30 +11,24 @@ import { Button } from "@/components/ui/button";
 import { User } from "./api-client";
 import { parseUserBody } from "../my-api/utils";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields";
+import useUserFormFields from "@/components/hooks/useUserFormFields";
 
 interface Props {
     handleCreateUser: (user: Omit<User, "id">) => Promise<void>;
 }
 
 const CreateUserForm = ({ handleCreateUser }: Props) => {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [displayErrors, setDisplayErrors] = useState<Record<string, string>>(
-        {}
-    );
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        if (name === "username") {
-            setUsername(value);
-        } else if (name === "email") {
-            setEmail(value);
-        } else if (name === "password") {
-            setPassword(value);
-        }
-    };
+    const {
+        username,
+        email,
+        password,
+        isSubmitting,
+        setIsSubmitting,
+        displayErrors,
+        setDisplayErrors,
+        handleInputChange,
+        resetFields,
+    } = useUserFormFields();
 
     const onSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -58,10 +51,7 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                 email: parseResult.result.email,
                 password: parseResult.result.password,
             });
-            setUsername("");
-            setEmail("");
-            setPassword("");
-            setDisplayErrors({});
+            resetFields();
         } catch (e) {
             console.error(e);
         } finally {
