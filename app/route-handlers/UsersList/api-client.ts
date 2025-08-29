@@ -25,11 +25,12 @@ async function createUser(user: Omit<User, "id">): Promise<User> {
         body: JSON.stringify(user),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(data.message);
     }
 
-    const data = await response.json();
     return data.data;
 }
 
@@ -48,11 +49,12 @@ async function updateUser(user: User): Promise<User> {
         body: JSON.stringify(updatedFields),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(data.message);
     }
 
-    const data = await response.json();
     return data.data;
 }
 

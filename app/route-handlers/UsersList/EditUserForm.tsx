@@ -8,7 +8,7 @@ import { parseUserBody } from "../my-api/utils";
 
 interface Props {
     user: User;
-    handleSubmit: (user: User) => Promise<void>;
+    handleSubmit: (user: User) => Promise<boolean>;
 }
 
 const EditUserForm = ({ user, handleSubmit }: Props) => {

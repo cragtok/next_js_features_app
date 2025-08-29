@@ -4,6 +4,7 @@ import {
     updateUserInDb,
 } from "@/lib/database/databaseHandler";
 import { parseUserBody } from "../utils";
+import { SqliteError } from "better-sqlite3";
 
 async function PUT(
     request: Request,
@@ -58,6 +59,15 @@ async function PUT(
         let status = 500;
         if (error instanceof SyntaxError) {
             message = error.message;
+            status = 400;
+        } else if (
+            error instanceof SqliteError &&
+            error.code == "SQLITE_CONSTRAINT_UNIQUE"
+        ) {
+            const duplicateUserField = error.message
+                .split(": ")[1]
+                .split(".")[1];
+            message = `User with ${duplicateUserField} already exists`;
             status = 400;
         }
 

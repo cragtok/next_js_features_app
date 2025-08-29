@@ -14,7 +14,7 @@ import UserCreationFormFields from "@/components/general/UserCreationFormFields"
 import useUserFormFields from "@/components/hooks/useUserFormFields";
 
 interface Props {
-    handleCreateUser: (user: Omit<User, "id">) => Promise<void>;
+    handleCreateUser: (user: Omit<User, "id">) => Promise<boolean>;
 }
 
 const CreateUserForm = ({ handleCreateUser }: Props) => {
@@ -46,12 +46,15 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                 return;
             }
 
-            await handleCreateUser({
-                username: parseResult.result.username,
-                email: parseResult.result.email,
-                password: parseResult.result.password,
-            });
-            resetFields();
+            if (
+                await handleCreateUser({
+                    username: parseResult.result.username,
+                    email: parseResult.result.email,
+                    password: parseResult.result.password,
+                })
+            ) {
+                resetFields();
+            }
         } catch (e) {
             console.error(e);
         } finally {

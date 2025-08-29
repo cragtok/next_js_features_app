@@ -1,6 +1,7 @@
 "use server";
 import { z } from "zod";
 import { addUserToDb } from "@/lib/database/databaseHandler";
+import { SqliteError } from "better-sqlite3";
 
 export interface FormState {
     message: string;
@@ -56,7 +57,25 @@ export async function createUser(
         password: parsed.data.password,
     };
 
-    await addUserToDb(rawFormData);
+    try {
+        await addUserToDb(rawFormData);
+    } catch (error) {
+        if (
+            error instanceof SqliteError &&
+            error.code == "SQLITE_CONSTRAINT_UNIQUE"
+        ) {
+            const duplicateUserField = error.message
+                .split(": ")[1]
+                .split(".")[1];
+            const duplicateFieldMessage = `User with ${duplicateUserField} already exists`;
+            return {
+                message: "User Creation Failed.",
+                errors: {
+                    [duplicateUserField]: duplicateFieldMessage,
+                },
+            };
+        }
+    }
 
     return {
         message: "User created successfully!",

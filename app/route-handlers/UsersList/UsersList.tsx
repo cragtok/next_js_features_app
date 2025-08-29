@@ -96,12 +96,14 @@ const UsersList = () => {
                     block: "end",
                 });
             }, 2);
+            return true;
         } catch (error) {
-            console.error(error);
-            toast.error("Error creating user!", {
+            const e = error as Error;
+            toast.error(e.message, {
                 position: "top-center",
                 richColors: true,
             });
+            return false;
         }
     };
 
@@ -112,8 +114,10 @@ const UsersList = () => {
             originalUser.email == editedUser.email
         ) {
             toggleEditMode(originalUser.id);
-            return;
+            return false;
         }
+
+        let result = null;
 
         try {
             const updatedUser = await updateUser(editedUser);
@@ -122,19 +126,25 @@ const UsersList = () => {
                     user.id === updatedUser.id ? updatedUser : user
                 )
             );
+            result = true;
+        } catch (error) {
+            const e = error as Error;
+            toast.error(e.message, {
+                position: "top-center",
+                richColors: true,
+            });
+            result = false;
+        }
+
+        if (result) {
             toast.success("Successfully edited user!", {
                 position: "top-center",
                 richColors: true,
             });
-        } catch (error) {
-            console.error(error);
-            toast.error("Error updating user!", {
-                position: "top-center",
-                richColors: true,
-            });
+            toggleEditMode(originalUser.id);
         }
 
-        toggleEditMode(originalUser.id);
+        return result;
     };
 
     if (users.length === 0) {
