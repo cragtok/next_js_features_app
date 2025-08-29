@@ -13,6 +13,7 @@ interface User {
 const DB_FILE_PATH = path.join(process.cwd(), "data", "app.db");
 const DB_CACHE_PATH = "db-users-path";
 const DB_CACHE_TAG = "db-users-tag";
+const MAX_USERS = 10;
 
 const db = new Database(DB_FILE_PATH);
 db.pragma("journal_mode = WAL");
@@ -26,6 +27,20 @@ db.exec(`
         createdAt TEXT DEFAULT CURRENT_TIMESTAMP
       );
 `);
+
+async function deleteOldestUser() {
+    const oldestUser = db
+        .prepare("SELECT id FROM users ORDER BY createdAt ASC LIMIT 1")
+        .get() as { id: string } | undefined;
+
+    if (oldestUser) {
+        db.prepare("DELETE FROM users WHERE id = ?").run(oldestUser.id);
+        console.log(
+            `[deleteOldestUser] Deleted oldest user with ID: ${oldestUser.id}`
+        );
+        revalidateTag(DB_CACHE_TAG);
+    }
+}
 
 const getCachedUsers = unstable_cache(
     async () => {
@@ -49,6 +64,14 @@ const getCachedUsers = unstable_cache(
 );
 
 async function addUserToDb(newUser: Omit<User, "createdAt">): Promise<User> {
+    const { count } = db
+        .prepare("SELECT COUNT(*) as count FROM users")
+        .get() as { count: number };
+
+    if (count >= MAX_USERS) {
+        await deleteOldestUser();
+    }
+
     const createdAt = new Date().toISOString();
     db.prepare(
         "INSERT INTO users (id, username, email, password, createdAt) VALUES(?, ?, ?, ?, ?)"

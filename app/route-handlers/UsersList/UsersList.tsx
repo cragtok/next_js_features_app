@@ -71,18 +71,14 @@ const UsersList = () => {
         }
         try {
             await deleteUser(userId);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setUsers((prev) => prev.filter((user) => user.id !== userId));
             toast.success("Successfully deleted user!", {
                 position: "top-center",
                 richColors: true,
             });
-        } catch (error) {
-            console.error(error);
-            toast.error("Error deleting user!", {
-                position: "top-center",
-                richColors: true,
-            });
-        } finally {
-            setUsers((prev) => prev.filter((user) => user.id !== userId));
         }
     };
 
