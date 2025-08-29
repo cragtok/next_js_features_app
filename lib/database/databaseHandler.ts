@@ -7,6 +7,7 @@ interface User {
     username: string;
     email: string;
     password: string;
+    createdAt?: string;
 }
 
 const DB_FILE_PATH = path.join(process.cwd(), "data", "app.db");
@@ -21,7 +22,8 @@ db.exec(`
         id TEXT PRIMARY KEY,
         username TEXT NOT NULL UNIQUE,
         email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        createdAt TEXT DEFAULT CURRENT_TIMESTAMP
       );
 `);
 
@@ -46,14 +48,25 @@ const getCachedUsers = unstable_cache(
     }
 );
 
-async function addUserToDb(newUser: User): Promise<User> {
+async function addUserToDb(newUser: Omit<User, "createdAt">): Promise<User> {
+    const createdAt = new Date().toISOString();
     db.prepare(
-        "INSERT INTO users (id, username, email, password) VALUES(?, ?, ?, ?)"
-    ).run(newUser.id, newUser.username, newUser.email, newUser.password);
+        "INSERT INTO users (id, username, email, password, createdAt) VALUES(?, ?, ?, ?, ?)"
+    ).run(
+        newUser.id,
+        newUser.username,
+        newUser.email,
+        newUser.password,
+        createdAt
+    );
 
-    console.log(`[addItemToDb] Added new item: ${JSON.stringify(newUser)}`);
+    const addedUser = db
+        .prepare("SELECT * FROM users WHERE id = ?")
+        .get(newUser.id) as User;
+
+    console.log(`[addItemToDb] Added new item: ${JSON.stringify(addedUser)}`);
     revalidateTag(DB_CACHE_TAG);
-    return newUser;
+    return addedUser;
 }
 
 async function findUserInDb(userId: string): Promise<User | null> {
@@ -76,7 +89,12 @@ async function updateUserInDb(updatedUser: User): Promise<User | null> {
         updatedUser.id
     );
     revalidateTag(DB_CACHE_TAG);
-    return updatedUser;
+
+    const dbUser = db
+        .prepare("SELECT * FROM users WHERE id = ?")
+        .get(updatedUser.id) as User;
+
+    return dbUser;
 }
 
 async function deleteUserInDb(userId: string) {
@@ -91,11 +109,17 @@ async function clearDb(): Promise<void> {
 
 async function seedDb(usersToSeed: User[]): Promise<void> {
     const insert = db.prepare(
-        "INSERT INTO users (id, username, email, password) VALUES(?, ?, ?, ?)"
+        "INSERT INTO users (id, username, email, password, createdAt) VALUES(?, ?, ?, ?, ?)"
     );
     db.transaction((users) => {
         for (const user of users) {
-            insert.run(user.id, user.username, user.email, user.password);
+            insert.run(
+                user.id,
+                user.username,
+                user.email,
+                user.password,
+                new Date().toISOString()
+            );
         }
     })(usersToSeed);
     console.log(`[seedDb] ${usersToSeed.length} users seeded.`);

@@ -41,6 +41,14 @@ const UsersList = async () => {
                             <span className="font-semibold">Password:</span>{" "}
                             {user.password}
                         </p>
+                        {user.createdAt && (
+                            <p className="text-brand-500 text">
+                                <span className="font-semibold">
+                                    Created At:
+                                </span>{" "}
+                                {new Date(user.createdAt).toUTCString()}
+                            </p>
+                        )}
                     </CardContent>
                 </Card>
             ))}

@@ -5,10 +5,11 @@ import { RefObject } from "react";
 interface Props {
     email: string;
     password: string;
+    createdAt: string | undefined;
     lastItemRef: RefObject<HTMLDivElement | null> | null;
 }
 
-const UserInfo = ({ email, password, lastItemRef }: Props) => {
+const UserInfo = ({ email, password, lastItemRef, createdAt }: Props) => {
     return (
         <div className="mt-2 text-justify wrap-anywhere" ref={lastItemRef}>
             <p>
@@ -19,6 +20,13 @@ const UserInfo = ({ email, password, lastItemRef }: Props) => {
                 <span className="font-semibold">Password: </span>
                 {password}
             </p>
+
+            {createdAt && (
+                <p className="text-brand-500 text">
+                    <span className="font-semibold">Created At:</span>{" "}
+                    {new Date(createdAt).toUTCString()}
+                </p>
+            )}
         </div>
     );
 };

@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
-    User,
     deleteUser,
     createUser,
     fetchAllUsers,
     updateUser,
 } from "./api-client";
+import { User } from "@/lib/database/databaseHandler";
 import CreateUserForm from "./CreateUserForm";
 import { toast } from "sonner";
 import UserInfo from "./UserInfo";
@@ -205,6 +205,7 @@ const UsersList = () => {
                             <UserInfo
                                 email={user.email}
                                 password={user.password}
+                                createdAt={user.createdAt || undefined}
                                 lastItemRef={
                                     idx === users.length - 1
                                         ? lastItemRef

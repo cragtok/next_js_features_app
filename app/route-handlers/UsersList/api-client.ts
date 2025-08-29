@@ -1,9 +1,4 @@
-interface User {
-    id: string;
-    username: string;
-    email: string;
-    password: string;
-}
+import { User } from "@/lib/database/databaseHandler";
 
 const API_BASE_URL = "/route-handlers/my-api";
 
@@ -71,4 +66,4 @@ async function deleteUser(userId: string): Promise<void> {
     }
 }
 
-export { fetchAllUsers, createUser, updateUser, deleteUser, type User };
+export { fetchAllUsers, createUser, updateUser, deleteUser };
