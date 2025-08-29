@@ -32,8 +32,8 @@ export async function createUser(
     formData: FormData
 ): Promise<FormState> {
     const parsed = schema.safeParse({
-        username: formData.get("username"),
-        email: formData.get("email"),
+        username: (formData.get("username") as string).trim(),
+        email: (formData.get("email") as string).trim(),
         password: formData.get("password"),
     });
 

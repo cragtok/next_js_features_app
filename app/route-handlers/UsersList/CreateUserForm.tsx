@@ -34,11 +34,14 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
         event.preventDefault();
         setIsSubmitting(true);
 
+        const trimmedUsername = username.trim();
+        const trimmedEmail = email.trim();
+
         try {
             const parseResult = parseUserBody({
-                username: username,
-                email: email,
-                password: password,
+                username: trimmedUsername,
+                email: trimmedEmail,
+                password,
             });
 
             if (!parseResult.success) {

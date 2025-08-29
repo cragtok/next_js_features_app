@@ -37,10 +37,13 @@ const EditUserForm = ({ user, handleSubmit }: Props) => {
     const onSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
+        const trimmedUsername = editedUsername.trim();
+        const trimmedEmail = editedEmail.trim();
+
         const parseResult = parseUserBody({
-            username: editedUsername,
-            email: editedEmail,
-            password: editedPassword,
+            username: trimmedUsername,
+            email: trimmedEmail,
+            password,
         });
 
         if (!parseResult.success) {
@@ -53,9 +56,9 @@ const EditUserForm = ({ user, handleSubmit }: Props) => {
         try {
             await handleSubmit({
                 id: userId,
-                username: editedUsername,
-                email: editedEmail,
-                password: editedPassword,
+                username: parseResult.result.username,
+                email: parseResult.result.email,
+                password: parseResult.result.password,
             });
         } catch (e) {
             console.error(e);
