@@ -3,7 +3,7 @@ import {
     findUserInDb,
     updateUserInDb,
 } from "@/lib/database/databaseHandler";
-import { parseUserBody } from "../utils";
+import { parseUserBody } from "@/lib/utils";
 import { SqliteError } from "better-sqlite3";
 
 async function PUT(

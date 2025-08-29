@@ -1,7 +1,7 @@
 "use server";
-import { z } from "zod";
 import { addUserToDb } from "@/lib/database/databaseHandler";
 import { SqliteError } from "better-sqlite3";
+import { parseUserBody } from "@/lib/utils";
 
 export interface FormState {
     message: string;
@@ -13,48 +13,32 @@ export interface FormState {
     };
 }
 
-const schema = z.object({
-    username: z
-        .string()
-        .min(5, "Username must be at least 5 characters long.")
-        .max(50, "Username must not exceed 50 characters"),
-    password: z
-        .string()
-        .min(5, "Password must be at least 5 characters long.")
-        .max(50, "Password must not exceed 50 characters"),
-    email: z
-        .email("Invalid email address.")
-        .max(50, "Email must not exceed 50 characters"),
-});
-
 export async function createUser(
     prevState: FormState,
     formData: FormData
 ): Promise<FormState> {
-    const parsed = schema.safeParse({
-        username: (formData.get("username") as string).trim(),
-        email: (formData.get("email") as string).trim(),
-        password: formData.get("password"),
+    const username = (formData.get("username") as string).trim();
+    const email = (formData.get("email") as string).trim();
+    const password = formData.get("password") as string;
+
+    const parseResult = parseUserBody({
+        username: username,
+        email: email,
+        password,
     });
 
-    if (!parsed.success) {
-        const errors: Record<string, string> = {};
-        parsed.error.issues.forEach((issue) => {
-            if (issue.path[0]) {
-                errors[issue.path[0].toString()] = issue.message;
-            }
-        });
+    if (!parseResult.success) {
         return {
             message: "User Creation Failed.",
-            errors: errors,
+            errors: parseResult.result,
         };
     }
 
     const rawFormData = {
         id: crypto.randomUUID(),
-        username: parsed.data.username,
-        email: parsed.data.email,
-        password: parsed.data.password,
+        username: parseResult.result.username,
+        email: parseResult.result.email,
+        password: parseResult.result.password,
     };
 
     try {

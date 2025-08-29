@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { User } from "./api-client";
-import { parseUserBody } from "../my-api/utils";
+import { User } from "@/lib/database/databaseHandler";
+import { parseUserBody } from "@/lib/utils";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields";
 import useUserFormFields from "@/components/hooks/useUserFormFields";
 

@@ -2,9 +2,9 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { useState } from "react";
-import { User } from "./api-client";
+import { User } from "@/lib/database/databaseHandler";
 import { Button } from "@/components/ui/button";
-import { parseUserBody } from "../my-api/utils";
+import { parseUserBody } from "@/lib/utils";
 
 interface Props {
     user: User;
@@ -39,6 +39,7 @@ const EditUserForm = ({ user, handleSubmit }: Props) => {
 
         const trimmedUsername = editedUsername.trim();
         const trimmedEmail = editedEmail.trim();
+        const password = editedPassword;
 
         const parseResult = parseUserBody({
             username: trimmedUsername,

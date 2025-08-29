@@ -1,5 +1,5 @@
 import { getCachedUsers, addUserToDb } from "@/lib/database/databaseHandler";
-import { parseUserBody } from "./utils";
+import { parseUserBody } from "@/lib/utils";
 import { SqliteError } from "better-sqlite3";
 
 async function GET(_request: Request) {
