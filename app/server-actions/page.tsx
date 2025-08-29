@@ -4,12 +4,10 @@ import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import ServerActionForm from "./ServerActionForm";
 import UsersList from "./UsersList";
-import { Toaster } from "sonner";
 
 async function Page() {
     return (
         <PageWrapper pageTitle="Server Actions">
-            <Toaster />
             <ParagraphWrapper>
                 <TextAccentWrapper>Server Actions</TextAccentWrapper> are
                 functions that are executed on the server after a request from a

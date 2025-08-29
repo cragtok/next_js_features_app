@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 import Header from "./(home)/Header";
+import { Toaster } from "sonner";
 
 import "./globals.css";
 
@@ -26,6 +27,7 @@ async function RootLayout({
             >
                 <Header />
                 {children}
+                <Toaster />
             </body>
         </html>
     );

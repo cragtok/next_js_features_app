@@ -11,7 +11,7 @@ import {
     updateUser,
 } from "./api-client";
 import CreateUserForm from "./CreateUserForm";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import UserInfo from "./UserInfo";
 import EditUserForm from "./EditUserForm";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -150,7 +150,6 @@ const UsersList = () => {
     if (users.length === 0) {
         return (
             <>
-                <Toaster />
                 <CreateUserForm handleCreateUser={handleCreateUser} />
                 <Card className="bg-neutral-100">
                     <CardHeader>
@@ -165,7 +164,6 @@ const UsersList = () => {
 
     return (
         <>
-            <Toaster />
             <CreateUserForm handleCreateUser={handleCreateUser} />
             {users.map((user, idx) => (
                 <Card key={user.id} className="bg-neutral-100 text-brand-500">
