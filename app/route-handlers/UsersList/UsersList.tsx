@@ -29,6 +29,10 @@ const UsersList = () => {
                 setUsers(fetchedUsers);
             } catch (e) {
                 console.error(e);
+                toast.error("Error fetching users!", {
+                    position: "top-center",
+                    richColors: true,
+                });
             } finally {
                 setLoading(false);
             }
