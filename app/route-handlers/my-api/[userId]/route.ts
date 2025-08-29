@@ -96,7 +96,7 @@ async function DELETE(
         }
 
         await deleteUserInDb(userId);
-        return Response.json({ data: foundUser });
+        return new Response(null, { status: 204 });
     } catch (error) {
         console.error(error);
         let message = "Failed to delete user.";
