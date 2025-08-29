@@ -19,8 +19,8 @@ async function PUT(
         );
 
         const parseResult = parseUserBody({
-            username: body.username,
-            email: body.email,
+            username: body.username.trim(),
+            email: body.email.trim(),
             password: body.password,
         });
 

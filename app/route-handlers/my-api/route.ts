@@ -24,8 +24,8 @@ async function POST(request: Request) {
         console.log(`POST method called with body: ${JSON.stringify(body)}`);
 
         const parseResult = parseUserBody({
-            username: body.username,
-            email: body.email,
+            username: body.username.trim(),
+            email: body.email.trim(),
             password: body.password,
         });
 
