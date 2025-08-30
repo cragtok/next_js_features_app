@@ -12,10 +12,20 @@ interface ReturnValue {
     resetFields: () => void;
 }
 
-function useUserFormFields(): ReturnValue {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+interface Props {
+    originalUsername?: string;
+    originalEmail?: string;
+    originalPassword?: string;
+}
+
+function useUserFormFields({
+    originalUsername,
+    originalEmail,
+    originalPassword,
+}: Props = {}): ReturnValue {
+    const [username, setUsername] = useState(originalUsername || "");
+    const [email, setEmail] = useState(originalEmail || "");
+    const [password, setPassword] = useState(originalPassword || "");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [displayErrors, setDisplayErrors] = useState<Record<string, string>>(
         {}
@@ -44,11 +54,11 @@ function useUserFormFields(): ReturnValue {
     );
 
     const resetFields = useCallback(() => {
-        setUsername("");
-        setEmail("");
-        setPassword("");
+        setUsername(originalUsername || "");
+        setEmail(originalEmail || "");
+        setPassword(originalPassword || "");
         setDisplayErrors({});
-    }, []);
+    }, [originalEmail, originalPassword, originalUsername]);
 
     return {
         username,
