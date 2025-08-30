@@ -3,7 +3,7 @@ import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import FolderStructureCards from "@/components/general/FolderStructureCards";
-import UsersList from "./UsersList/UsersList";
+import UsersSection from "./UsersSection/UsersSection";
 
 function Page() {
     return (
@@ -119,7 +119,7 @@ function Page() {
                     handlers from the API.
                 </ParagraphWrapper>
 
-                <UsersList />
+                <UsersSection />
             </SectionWrapper>
         </PageWrapper>
     );

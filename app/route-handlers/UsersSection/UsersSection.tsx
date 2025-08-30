@@ -16,7 +16,7 @@ import UserInfo from "./UserInfo";
 import EditUserForm from "./EditUserForm";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const UsersList = () => {
+const UsersSection = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
     const [editMode, setEditMode] = useState<Record<string, boolean>>({});
@@ -216,4 +216,4 @@ const UsersList = () => {
     );
 };
 
-export default UsersList;
+export default UsersSection;
