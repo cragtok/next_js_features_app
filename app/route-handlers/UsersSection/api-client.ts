@@ -62,7 +62,7 @@ async function deleteUser(userId: string): Promise<void> {
     });
 
     if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error("Error deleting user");
     }
 }
 

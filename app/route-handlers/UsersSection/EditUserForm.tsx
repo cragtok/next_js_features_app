@@ -1,10 +1,9 @@
 "use client";
-import { Input } from "@/components/ui/input";
-import { Label } from "@radix-ui/react-label";
-import { useState } from "react";
 import { User } from "@/lib/database/databaseHandler";
 import { Button } from "@/components/ui/button";
 import { parseUserBody } from "@/lib/utils";
+import UserCreationFormFields from "@/components/general/UserCreationFormFields";
+import useUserFormFields from "@/components/hooks/useUserFormFields";
 
 interface Props {
     user: User;
@@ -12,34 +11,42 @@ interface Props {
 }
 
 const EditUserForm = ({ user, handleSubmit }: Props) => {
-    const userId = user.id;
-    const username = user.username;
-    const email = user.email;
-    const password = user.password;
+    const originalUserId = user.id;
+    const originalUsername = user.username;
+    const originalEmail = user.email;
+    const originalPassword = user.password;
 
-    const [editedUsername, setEditedUsername] = useState<string>(username);
-    const [editedEmail, setEditedEmail] = useState<string>(email);
-    const [editedPassword, setEditedPassword] = useState<string>(password);
-    const [errorMessages, setErrorMessages] = useState<Partial<User>>({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const {
+        username,
+        email,
+        password,
+        displayErrors,
+        setDisplayErrors,
+        isSubmitting,
+        setIsSubmitting,
+        handleInputChange,
+    } = useUserFormFields({
+        originalUsername,
+        originalEmail,
+        originalPassword,
+    });
 
     const onCancel = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         await handleSubmit({
-            id: userId,
-            username,
-            email,
-            password,
+            id: originalUserId,
+            username: originalUsername,
+            email: originalEmail,
+            password: originalPassword,
         });
     };
 
     const onSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        const trimmedUsername = editedUsername.trim();
-        const trimmedEmail = editedEmail.trim();
-        const password = editedPassword;
+        const trimmedUsername = username.trim();
+        const trimmedEmail = email.trim();
 
         const parseResult = parseUserBody({
             username: trimmedUsername,
@@ -48,7 +55,7 @@ const EditUserForm = ({ user, handleSubmit }: Props) => {
         });
 
         if (!parseResult.success) {
-            setErrorMessages(parseResult.result);
+            setDisplayErrors(parseResult.result);
             setIsSubmitting(false);
             return;
         }
@@ -56,7 +63,7 @@ const EditUserForm = ({ user, handleSubmit }: Props) => {
         setIsSubmitting(true);
         try {
             await handleSubmit({
-                id: userId,
+                id: originalUserId,
                 username: parseResult.result.username,
                 email: parseResult.result.email,
                 password: parseResult.result.password,
@@ -70,45 +77,13 @@ const EditUserForm = ({ user, handleSubmit }: Props) => {
 
     return (
         <form className="grid gap-4 text-left">
-            <div className="grid gap-2">
-                <Label htmlFor={`username-${userId}`}>Username</Label>
-                <Input
-                    id={`username-${userId}`}
-                    value={editedUsername}
-                    onChange={(e) => setEditedUsername(e.target.value)}
-                />
-                {errorMessages.username && (
-                    <p className="text-left text-status-danger-500">
-                        {errorMessages.username}
-                    </p>
-                )}
-            </div>
-            <div className="grid gap-2">
-                <Label htmlFor={`email-${userId}`}>Email</Label>
-                <Input
-                    id={`email-${userId}`}
-                    value={editedEmail}
-                    onChange={(e) => setEditedEmail(e.target.value)}
-                />
-                {errorMessages.email && (
-                    <p className="text-left text-status-danger-500">
-                        {errorMessages.email}
-                    </p>
-                )}
-            </div>
-            <div className="grid gap-2">
-                <Label htmlFor={`password-${userId}`}>Password</Label>
-                <Input
-                    id={`password-${userId}`}
-                    value={editedPassword}
-                    onChange={(e) => setEditedPassword(e.target.value)}
-                />
-                {errorMessages.password && (
-                    <p className="text-left text-status-danger-500">
-                        {errorMessages.password}
-                    </p>
-                )}
-            </div>
+            <UserCreationFormFields
+                displayErrors={displayErrors}
+                username={username}
+                email={email}
+                password={password}
+                handleInputChange={handleInputChange}
+            />
 
             <div className="flex gap-2">
                 <Button
