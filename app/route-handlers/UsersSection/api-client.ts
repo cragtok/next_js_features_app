@@ -1,6 +1,5 @@
 import { User } from "@/lib/database/databaseHandler";
-
-const API_BASE_URL = "/route-handlers/my-api";
+import { API_BASE_URL } from "./constants";
 
 async function fetchAllUsers(): Promise<User[]> {
     const response = await fetch(API_BASE_URL);
