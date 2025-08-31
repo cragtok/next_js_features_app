@@ -1,8 +1,10 @@
+import { notFound } from "next/navigation";
 import PageWrapper from "@/components/general/PageWrapper";
 import DynamicRouteForm from "../DynamicRouteForm";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
+import { MAX_SLUG_LENGTH } from "../constants";
 
 const slugs = ["dynamic_route", "1ae64431", "helloWorld", "123456"];
 
@@ -13,8 +15,12 @@ export async function generateStaticParams() {
     }));
 }
 
-async function Page({ params }: { params: Promise<{ slug: string }> }) {
-    const { slug } = await params;
+async function Page({ params }: { params: { slug: string } }) {
+    const { slug } = params;
+
+    if (slug.length > MAX_SLUG_LENGTH) {
+        return notFound();
+    }
 
     return (
         <PageWrapper pageTitle="Dynamic Route">

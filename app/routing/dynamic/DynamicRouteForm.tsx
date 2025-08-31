@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { MAX_SLUG_LENGTH } from "./constants";
 
 interface Props {
     baseRoute: string;
@@ -15,9 +16,14 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
 
     const router = useRouter();
 
-    const onSubmitForm = (event: React.FormEvent) => {
+    const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         const trimmedValue = value.trim();
+        if (trimmedValue.length > MAX_SLUG_LENGTH) {
+            setErrorMessage(`Route segment cannot have more than ${MAX_SLUG_LENGTH} characters`);
+            setShowError(true);
+            return;
+        }
         if (!trimmedValue) {
             setErrorMessage("URL is empty");
             setShowError(true);
@@ -40,12 +46,12 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
     return (
         <div>
             <form
-                onSubmit={onSubmitForm}
+                onSubmit={handleSubmit}
                 className="flex max-[500px]:flex-col flex-row justify-center gap-3"
             >
                 <div className="w-full">
                     <Input
-                    className="text-xs"
+                        className="text-xs"
                         placeholder="Enter a dynamic route segment"
                         type="text"
                         value={value}
