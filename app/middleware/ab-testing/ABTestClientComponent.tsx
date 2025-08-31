@@ -15,15 +15,18 @@ const ABTestClientComponent = () => {
         );
         if (abTestCookie) {
             setAbTestGroup(abTestCookie.split("=")[1]);
+        } else {
+            setAbTestGroup(null);
         }
         setIsLoading(false);
     }, []);
 
-    const AGroupText = (
-        <div className="font-semibold text-green-400">You are in group A</div>
-    );
-    const BGroupText = (
-        <div className="font-semibold text-blue-400">You are in group B</div>
+    const generateGroupOutput = (group: string) => (
+        <div
+            className={`font-semibold ${group === "A" ? "text-green-400" : "text-blue-400"}`}
+        >
+            You are in group {group}
+        </div>
     );
 
     if (isLoading) {
@@ -31,22 +34,18 @@ const ABTestClientComponent = () => {
     }
 
     if (!abTestGroup) {
-        <div className="mt-4 p-4 border rounded-md bg-neutral-100"></div>;
+        return (
+            <div className="mt-4 p-4 border rounded-md bg-neutral-100">
+                <div className="font-semibold text-status-danger-500">
+                    Error fetching cookie, please refresh page.
+                </div>
+            </div>
+        );
     }
 
     return (
         <div className="mt-4 p-4 border rounded-md bg-neutral-100">
-            {abTestGroup ? (
-                abTestGroup === "A" ? (
-                    AGroupText
-                ) : (
-                    BGroupText
-                )
-            ) : (
-                <div className="font-semibold text-status-danger-500">
-                    Error fetching cookie, please refresh page.
-                </div>
-            )}
+            {abTestGroup && generateGroupOutput(abTestGroup)}
         </div>
     );
 };
