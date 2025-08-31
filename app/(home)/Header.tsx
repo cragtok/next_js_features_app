@@ -8,21 +8,34 @@ import { SubRoute } from "./routesList";
 
 const Header = () => {
     const pathname = usePathname();
-    const isHomePage = pathname === "/";
 
-    const dynamicRoutePattern = /^\/routing\/dynamic\/(.*)/;
+    if (pathname === "/") {
+        return (
+            <header className="">
+                <div className="mx-auto my-0 flex justify-center mt-10">
+                    <Image
+                        src="/vercel.svg"
+                        className="bg-brand-700 rounded-[8] border-3 border-brand-700"
+                        alt="logo"
+                        width={80}
+                        height={80}
+                    />
+                </div>
+            </header>
+        );
+    }
 
     let routePath: SubRoute[] = [];
+    // match the '/routing/dynamic/*' path
+    const dynamicRoutePattern = /^\/routing\/dynamic\/(.*)/;
 
-    if (isHomePage) {
-        routePath = [routeObjects["/"]];
-    } else if (pathname.match(dynamicRoutePattern)) {
+    if (pathname.match(dynamicRoutePattern)) {
         const match = pathname.match(dynamicRoutePattern);
         if (match) {
             routePath = [
                 routeObjects["/"],
                 routeObjects["/routing/dynamic"],
-                { ...routeObjects["/routing/dynamic*"], title: match[1] },
+                { ...routeObjects["/routing/dynamic*"], title: match[1] }, // Set page title as dynamic route segment
             ];
         }
     } else if (routeObjects.hasOwnProperty(pathname)) {
@@ -33,22 +46,8 @@ const Header = () => {
 
     return (
         <header className="">
-            {isHomePage && (
-                <div className="mx-auto my-0 flex justify-center mt-10">
-                    <Image
-                        src="/vercel.svg"
-                        className="bg-brand-700 rounded-[8] border-3 border-brand-700"
-                        alt="logo"
-                        width={80}
-                        height={80}
-                    />
-                </div>
-            )}
-
             <Suspense fallback={<p>Loading...</p>}>
-                {isValidRoute && !isHomePage && (
-                    <BreadcrumbMenu routePath={routePath} />
-                )}
+                {isValidRoute && <BreadcrumbMenu routePath={routePath} />}
             </Suspense>
         </header>
     );

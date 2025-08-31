@@ -11,21 +11,21 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { SubRoute } from "./routesList";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
+const FLEX_BREAKPOINT_WIDTH = 280;
+const MAX_URL_LENGTH = 36;
+
 interface Props {
     routePath: SubRoute[];
 }
 
-const FLEX_BREAKPOINT_WIDTH = 280;
-const MAX_URL_LENGTH = 36;
+const trimExcessURL = (url: string) =>
+    url.length < MAX_URL_LENGTH
+        ? url
+        : `${url.substring(0, MAX_URL_LENGTH)}...`;
 
 const BreadcrumbMenu = ({ routePath }: Props) => {
     const [isSmall, setIsSmall] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
-
-    const trimExcessURL = (url: string) =>
-        url.length < MAX_URL_LENGTH
-            ? url
-            : `${url.substring(0, MAX_URL_LENGTH)}...`;
 
     useEffect(() => {
         const observer = new ResizeObserver((entries) => {
