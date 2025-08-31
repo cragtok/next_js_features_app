@@ -12,18 +12,20 @@ import { PageRoute, SubRoute } from "./routesList";
 import { pageRoutes } from "./routesList";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
 
-const renderSubRoutes = (subRoutes: SubRoute[]) => {
-    return subRoutes.map((subRoute: SubRoute) => (
-        <CardLink
-            key={crypto.randomUUID()}
-            href={subRoute.href}
-            title={subRoute.title}
-            description={subRoute.description}
-        />
-    ));
-};
+const LOCAL_STORAGE_KEY = "accordion-open-items";
 
 const renderRoutes = (pageRoutes: PageRoute[]) => {
+    const renderSubRoutes = (subRoutes: SubRoute[]) => {
+        return subRoutes.map((subRoute: SubRoute) => (
+            <CardLink
+                key={crypto.randomUUID()}
+                href={subRoute.href}
+                title={subRoute.title}
+                description={subRoute.description}
+            />
+        ));
+    };
+
     return pageRoutes.map((pageRoute: PageRoute, idx) => {
         return (
             <AccordionItem
@@ -44,7 +46,6 @@ const renderRoutes = (pageRoutes: PageRoute[]) => {
 };
 
 const SiteLinks = () => {
-    const LOCAL_STORAGE_KEY = "accordion-open-items";
     const [openItems, setOpenItems] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
