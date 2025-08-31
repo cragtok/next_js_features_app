@@ -2,19 +2,11 @@ import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-export const revalidate = 20;
-
-import { fetchPrices, CryptoData } from "./apiCall";
 import CryptoPricesCard from "./CryptoPricesCard";
 
-async function Page() {
-    let cryptoPrices: CryptoData[] = [];
-    try {
-        cryptoPrices = await fetchPrices();
-    } catch (error) {
-        console.error(error);
-    }
+export const revalidate = 20;
 
+async function Page() {
     return (
         <PageWrapper pageTitle="Incremental Static Regeneration (ISR)">
             <SectionWrapper>
@@ -62,7 +54,7 @@ async function Page() {
                     In order to see updated prices, you must refresh the page
                     after this time.
                 </ParagraphWrapper>
-                <CryptoPricesCard prices={cryptoPrices} />
+                <CryptoPricesCard />
             </SectionWrapper>
         </PageWrapper>
     );

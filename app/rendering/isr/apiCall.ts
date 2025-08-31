@@ -1,5 +1,4 @@
-const API_KEY = process.env.TWELVE_DATA_API_KEY;
-const API_BATCH_URL = process.env.TWELVE_DATA_API_BATCH_URL;
+import { API_KEY, API_BATCH_URL } from "./constants";
 
 interface RequestBody {
     [key: string]: {
@@ -7,7 +6,7 @@ interface RequestBody {
     };
 }
 
-interface Payload {
+interface APIPayload {
     status: string;
     response: {
         price: string;
@@ -16,7 +15,7 @@ interface Payload {
 interface ApiResponse {
     code: number;
     status: string;
-    data: Payload;
+    data: APIPayload;
 }
 
 interface CryptoData {
@@ -25,9 +24,32 @@ interface CryptoData {
     price: string;
 }
 
-// Sometimes the API does not return the price for a particular coin
-// In that case we show its previous price, which is stored here
+// Sometimes the API does not return the price for a particular coin.
+// In that case we show its previous price, which is stored here.
 const oldPrices: Record<string, string> = {};
+
+const formatPayload = (payload: APIPayload): CryptoData[] =>
+    Object.entries(payload)
+        .map(([symbol, value]) => {
+            let price;
+            if (value.response.price) {
+                oldPrices[symbol] = value.response.price;
+                price = value.response.price;
+            } else {
+                price = oldPrices[symbol];
+            }
+            return {
+                symbol: symbol,
+                status: value.status,
+                price,
+            };
+        })
+        .sort((a, b) => (a.symbol >= b.symbol ? 1 : -1));
+
+const generateCoinURL = (coin: string) =>
+    `/price?symbol=${coin}/USD&apikey=${API_KEY}`;
+
+const apiCallURL = `${API_BATCH_URL}?apikey=${API_KEY}`;
 
 async function fetchPrices(): Promise<CryptoData[]> {
     if (!API_KEY || !API_BATCH_URL) {
@@ -40,11 +62,11 @@ async function fetchPrices(): Promise<CryptoData[]> {
 
     for (const coin of coinsList) {
         body[coin] = {
-            url: `/price?symbol=${coin}/USD&apikey=${API_KEY}`,
+            url: generateCoinURL(coin),
         };
     }
 
-    const response = await fetch(`${API_BATCH_URL}?apikey=${API_KEY}`, {
+    const response = await fetch(apiCallURL, {
         method: "POST",
         body: JSON.stringify(body),
     });
@@ -54,20 +76,9 @@ async function fetchPrices(): Promise<CryptoData[]> {
     }
 
     const responseJson: ApiResponse = await response.json();
-    const payload: Payload = responseJson.data;
+    const payload: APIPayload = responseJson.data;
+    const result = formatPayload(payload);
 
-    const result: CryptoData[] = Object.entries(payload)
-        .map(([symbol, value]) => {
-            if (value.response.price) {
-                oldPrices[symbol] = value.response.price;
-            }
-            return {
-                symbol: symbol,
-                status: value.status,
-                price: value.response.price,
-            };
-        })
-        .sort((a, b) => (a.symbol >= b.symbol ? 1 : -1));
     console.log(result);
     return result;
 }
