@@ -2,7 +2,7 @@ import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import { headers } from "next/headers";
 import SectionWrapper from "@/components/general/SectionWrapper";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import RequestInfoCard from "./RequestInfoCard";
 
 async function Page() {
     const headersList = await headers();
@@ -30,49 +30,10 @@ async function Page() {
 
             <SectionWrapper sectionTitle="Request Information">
                 <div className="flex flex-col gap-3 max-w-lg">
-                    <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
-                        <CardHeader>
-                            <CardTitle className="text-accent-500 font-semibold">
-                                IP Address
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-brand-500">{ip}</p>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
-                        <CardHeader>
-                            <CardTitle className="text-accent-500 font-semibold">
-                                Server Time
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-brand-500">{serverTime}</p>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
-                        <CardHeader>
-                            <CardTitle className="text-accent-500 font-semibold">
-                                Geo Location
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-brand-500">{geoLocation}</p>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="bg-neutral-100 rounded-md pt-5 pb-3 text-center">
-                        <CardHeader>
-                            <CardTitle className="text-accent-500 font-semibold">
-                                User Agent
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-brand-500">{userAgent}</p>
-                        </CardContent>
-                    </Card>
+                    <RequestInfoCard title="IP Address" info={ip} />
+                    <RequestInfoCard title="Server Time" info={serverTime} />
+                    <RequestInfoCard title="Geo Location" info={geoLocation} />
+                    <RequestInfoCard title="User Agent" info={userAgent} />
                 </div>
             </SectionWrapper>
         </PageWrapper>
