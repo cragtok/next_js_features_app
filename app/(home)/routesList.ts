@@ -1,86 +1,5 @@
 import { PageRoute, SubRoute } from "./types";
 
-const routeObjects: Record<string, SubRoute> = {
-    "/": {
-        title: "Home",
-        description: "Routing with static URLs.",
-        href: "/",
-    },
-    "/routing/static": {
-        title: "Static Routing",
-        description: "Routing with static URLs.",
-        href: "/routing/static",
-    },
-    "/routing/dynamic": {
-        title: "Dynamic Routing",
-        description: "Routing with dynamic URLs.",
-        href: "/routing/dynamic",
-    },
-
-    "/routing/dynamic/*": {
-        title: "Dynamic Routing",
-        description: "Routing with dynamic URLs.",
-        href: "",
-    },
-    "/rendering/ssr": {
-        title: "Server Side Rendering (SSR)",
-        description:
-            "Rendering the page content on the server for each request.",
-        href: "/rendering/ssr",
-    },
-    "/rendering/ssg": {
-        title: "Static Site Generation (SSG)",
-        description:
-            "Rendering page content once on the server during build time.",
-        href: "/rendering/ssg",
-    },
-    "/rendering/isr": {
-        title: "Incremental Static Regeneration",
-        description:
-            "Updating a static page with new content after a certain time period.",
-        href: "/rendering/isr",
-    },
-    "/rendering/csr": {
-        title: "Client Side Rendering (CSR)",
-        description:
-            "Rendering a page on the client via JavaScript and some basic HTML.",
-        href: "/rendering/csr",
-    },
-    "/streaming/loading": {
-        title: "Streaming With Loading.tsx",
-        href: "/streaming/loading",
-        description: "Streaming an entire page with a loading.tsx file.",
-    },
-    "/streaming/suspense": {
-        title: "Streaming With Suspense",
-        href: "/streaming/suspense",
-        description: "Streaming parts of a page with Suspense boundaries.",
-    },
-    "/server-actions": {
-        title: "Server Actions",
-        description:
-            "Functions that run on the server and can be called from client components.",
-        href: "/server-actions",
-    },
-    "/route-handlers": {
-        title: "Route Handlers",
-        href: "/route-handlers",
-        description: "Basic CRUD operations via Route Handlers.",
-    },
-    "/middleware/ab-testing": {
-        title: "Middleware A/B Testing",
-
-        description: "Using middleware to run A/B tests.",
-        href: "/middleware/ab-testing",
-    },
-    "/middleware/log": {
-        title: "Middleware Request Logging",
-        description:
-            "Using middleware to log information about incoming requests.",
-        href: "/middleware/log",
-    },
-};
-
 const pageRoutes: PageRoute[] = [
     {
         route: "Routing",
@@ -181,5 +100,28 @@ const pageRoutes: PageRoute[] = [
         ],
     },
 ];
+
+const routeObjects = (function() {
+    const routeObjects: Record<string, SubRoute> = pageRoutes.reduce(
+        (acc: Record<string, SubRoute>, pageRoute: PageRoute) => {
+            pageRoute.subRoutes.forEach((subRoute) => {
+                acc[subRoute.href] = subRoute;
+            });
+            return acc;
+        },
+        {}
+    );
+    routeObjects["/routing/dynamic/*"] = {
+        title: "Dynamic Routing",
+        description: "Routing with dynamic URLs.",
+        href: "",
+    };
+    routeObjects["/"] = {
+        title: "Home",
+        description: "Home page.",
+        href: "/",
+    };
+    return routeObjects;
+})();
 
 export { routeObjects, pageRoutes };
