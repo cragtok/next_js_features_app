@@ -8,7 +8,7 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { SubRoute } from "./routesList";
+import { SubRoute } from "@/lib/routesList";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
 const FLEX_BREAKPOINT_WIDTH = 280;

@@ -2,9 +2,8 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import BreadcrumbMenu from "./BreadcrumbMenu";
-import { routeObjects } from "./routesList";
 import { Suspense } from "react";
-import { SubRoute } from "./routesList";
+import { SubRoute, routeObjects } from "@/lib/routesList";
 
 const Header = () => {
     const pathname = usePathname();

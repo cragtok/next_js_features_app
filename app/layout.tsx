@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
-import Header from "./(home)/Header";
+import Header from "@/components/general/Header/Header";
 import { Toaster } from "sonner";
 
 import "./globals.css";

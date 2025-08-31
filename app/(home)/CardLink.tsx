@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { SubRoute } from "./routesList";
+import { SubRoute } from "@/lib/routesList";
 
 type Props = SubRoute;
 
