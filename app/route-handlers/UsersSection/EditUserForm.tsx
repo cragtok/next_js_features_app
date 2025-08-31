@@ -3,7 +3,7 @@ import { User } from "@/lib/database/databaseHandler";
 import { Button } from "@/components/ui/button";
 import { parseUserBody } from "@/lib/utils";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields";
-import useUserFormFields from "@/components/hooks/useUserFormFields";
+import useUserFormFields from "@/hooks/useUserFormFields";
 
 interface Props {
     user: User;

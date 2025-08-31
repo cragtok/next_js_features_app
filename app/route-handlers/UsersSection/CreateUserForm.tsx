@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { User } from "@/lib/database/databaseHandler";
 import { parseUserBody } from "@/lib/utils";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields";
-import useUserFormFields from "@/components/hooks/useUserFormFields";
+import useUserFormFields from "@/hooks/useUserFormFields";
 
 interface Props {
     handleCreateUser: (user: Omit<User, "id">) => Promise<boolean>;

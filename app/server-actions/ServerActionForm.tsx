@@ -13,7 +13,7 @@ import { createUser, FormState } from "./actions";
 import { USER_LIST_SECTION_ID } from "./constants";
 import { toast } from "sonner";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields";
-import useUserFormFields from "@/components/hooks/useUserFormFields";
+import useUserFormFields from "@/hooks/useUserFormFields";
 
 const initialState: FormState = {
     message: "",
