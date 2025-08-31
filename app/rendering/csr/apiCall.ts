@@ -1,4 +1,4 @@
-const JOKE_API_URL = process.env.NEXT_PUBLIC_JOKE_API_URL;
+import { JOKE_API_URL } from "./constants";
 
 export const fetchJoke = async (): Promise<string> => {
     if (!JOKE_API_URL) {
