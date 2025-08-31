@@ -1,11 +1,7 @@
-import { JOKE_API_URL } from "./constants";
+import { clientEnv } from "@/lib/clientEnv";
 
 export const fetchJoke = async (): Promise<string> => {
-    if (!JOKE_API_URL) {
-        throw new Error("Missing joke API URL.");
-    }
-
-    const response = await fetch(JOKE_API_URL, {
+    const response = await fetch(clientEnv.NEXT_PUBLIC_JOKE_API_URL, {
         headers: {
             Accept: "application/json",
         },
@@ -18,4 +14,3 @@ export const fetchJoke = async (): Promise<string> => {
     const data = await response.json();
     return data.joke;
 };
-

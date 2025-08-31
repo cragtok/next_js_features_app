@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { GEMINI_API_KEY } from "./constants";
+import { serverEnv } from "@/lib/serverEnv";
 
 interface CityDateTime {
     city: string;
@@ -26,13 +26,9 @@ const systemInstruction = `
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 async function fetchCityDateTimes(): Promise<CityDateTime[]> {
-    if (!GEMINI_API_KEY) {
-        throw new Error("Missing Gemini API key");
-    }
-
     const MAX_RETRIES = 5;
     const RETRY_DELAY_MS = 1000;
-    const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+    const ai = new GoogleGenAI({ apiKey: serverEnv.GEMINI_API_KEY });
 
     for (let i = 0; i < MAX_RETRIES; i++) {
         try {

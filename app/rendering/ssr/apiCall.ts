@@ -1,4 +1,4 @@
-import { API_URL } from "./constants";
+import { serverEnv } from "@/lib/serverEnv";
 
 interface Quote {
     quote: string;
@@ -6,14 +6,10 @@ interface Quote {
 }
 
 async function fetchQuote() {
-    if (!API_URL) {
-        throw new Error("Missing Quote API URL");
-    }
-
     let quoteData: Quote | null = null;
 
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(serverEnv.QUOTES_API_URL, {
             cache: "no-store",
         });
 

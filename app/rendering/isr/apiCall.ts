@@ -1,4 +1,4 @@
-import { API_KEY, API_BATCH_URL } from "./constants";
+import { serverEnv } from "@/lib/serverEnv";
 
 interface RequestBody {
     [key: string]: {
@@ -47,15 +47,11 @@ const formatPayload = (payload: APIPayload): CryptoData[] =>
         .sort((a, b) => (a.symbol >= b.symbol ? 1 : -1));
 
 const generateCoinURL = (coin: string) =>
-    `/price?symbol=${coin}/USD&apikey=${API_KEY}`;
+    `/price?symbol=${coin}/USD&apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
 
-const apiCallURL = `${API_BATCH_URL}?apikey=${API_KEY}`;
+const apiCallURL = `${serverEnv.TWELVE_DATA_API_BATCH_URL}?apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
 
 async function fetchPrices(): Promise<CryptoData[]> {
-    if (!API_KEY || !API_BATCH_URL) {
-        throw new Error("Missing API Key or URL.");
-    }
-
     const coinsList = ["BTC", "ETH", "XMR", "XRP"];
 
     const body: RequestBody = {};
