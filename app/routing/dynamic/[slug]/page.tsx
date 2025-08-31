@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import PageWrapper from "@/components/general/PageWrapper";
 import DynamicRouteForm from "../DynamicRouteForm";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
@@ -15,11 +14,11 @@ export async function generateStaticParams() {
     }));
 }
 
-async function Page({ params }: { params: { slug: string } }) {
-    const { slug } = params;
+async function Page({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
 
     if (slug.length > MAX_SLUG_LENGTH) {
-        return notFound();
+        throw new Error("Max slug length exceeded")
     }
 
     return (

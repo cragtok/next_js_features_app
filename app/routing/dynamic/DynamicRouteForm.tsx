@@ -24,6 +24,7 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
             setShowError(true);
             return;
         }
+
         if (!trimmedValue) {
             setErrorMessage("URL is empty");
             setShowError(true);
