@@ -1,31 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 
-interface Quote {
-    quote: string;
-    author: string;
-}
-
-const API_URL = process.env.QUOTES_API_URL || "";
+import { Quote, fetchQuote } from "./apiCall";
 
 const QuoteCard = async () => {
-    let quoteData: Quote | null = null;
-
-    try {
-        const response = await fetch(API_URL, {
-            cache: "no-store",
-        });
-        if (response.ok) {
-            const data = await response.json();
-            if (data && data.text && data.author) {
-                quoteData = {
-                    quote: data.text,
-                    author: data.author,
-                };
-            }
-        }
-    } catch (error) {
-        console.error("Failed to fetch quote:", error);
-    }
+    const quoteData: Quote | null = await fetchQuote();
 
     return (
         <Card className="max-w-prose bg-neutral-100 rounded-md pt-5 pb-3">
