@@ -1,6 +1,11 @@
 import { revalidateTag, unstable_cache } from "next/cache";
-import path from "path";
 import Database from "better-sqlite3";
+import {
+    DB_CACHE_TAG,
+    DB_FILE_PATH,
+    DB_CACHE_PATH,
+    MAX_USERS,
+} from "./constants";
 
 interface User {
     id: string;
@@ -9,11 +14,6 @@ interface User {
     password: string;
     createdAt?: string;
 }
-
-const DB_FILE_PATH = path.join(process.cwd(), "data", "app.db");
-const DB_CACHE_PATH = "db-users-path";
-const DB_CACHE_TAG = "db-users-tag";
-const MAX_USERS = 10;
 
 const db = new Database(DB_FILE_PATH);
 db.pragma("journal_mode = WAL");
