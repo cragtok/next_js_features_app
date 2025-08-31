@@ -8,7 +8,7 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { SubRoute } from "./types";
+import { SubRoute } from "./routesList";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
 interface Props {

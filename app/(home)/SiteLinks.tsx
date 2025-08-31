@@ -8,7 +8,7 @@ import {
     AccordionContent,
 } from "@/components/ui/accordion";
 import CardLink from "./CardLink";
-import { PageRoute, SubRoute } from "./types";
+import { PageRoute, SubRoute } from "./routesList";
 import { pageRoutes } from "./routesList";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
 

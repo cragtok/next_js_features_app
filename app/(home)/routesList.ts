@@ -1,4 +1,13 @@
-import { PageRoute, SubRoute } from "./types";
+interface SubRoute {
+    title: string;
+    href: string;
+    description: string;
+}
+
+interface PageRoute {
+    route: string;
+    subRoutes: SubRoute[];
+}
 
 const pageRoutes: PageRoute[] = [
     {
@@ -124,4 +133,4 @@ const routeObjects = (function() {
     return routeObjects;
 })();
 
-export { routeObjects, pageRoutes };
+export { routeObjects, pageRoutes, type SubRoute, type PageRoute };

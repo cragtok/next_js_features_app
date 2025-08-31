@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import BreadcrumbMenu from "./BreadcrumbMenu";
 import { routeObjects } from "./routesList";
 import { Suspense } from "react";
-import { SubRoute } from "./types";
+import { SubRoute } from "./routesList";
 
 const Header = () => {
     const pathname = usePathname();
