@@ -8,7 +8,7 @@ interface Props {
 }
 const ParagraphWrapper = ({ classNameOverride, children }: Props) => {
     const defaultStyles =
-        "text-brand-500 max-w-prose max-[410px]:text-center text-justify";
+        "text-brand-500 max-w-prose max-[410px]:text-center max-[410px]:text-sm text-justify";
     const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
     return <p className={mergedStyles}>{children}</p>;
 };
