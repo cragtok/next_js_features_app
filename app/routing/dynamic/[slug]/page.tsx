@@ -18,18 +18,20 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
 
     if (slug.length > MAX_SLUG_LENGTH) {
-        throw new Error("Max slug length exceeded")
+        throw new Error("Max slug length exceeded");
     }
 
     return (
         <PageWrapper pageTitle="Dynamic Route">
-            <SectionWrapper>
+            <SectionWrapper classNameOverride="items-center gap-4">
                 <ParagraphWrapper classNameOverride={"text-center"}>
-                    You have entered a page with a dynamic route segment:{" "}
-                    <TextAccentWrapper classNameOverride="break-all">
-                        {slug}
-                    </TextAccentWrapper>
+                    You have entered a page with a dynamic route segment:
                 </ParagraphWrapper>
+
+                <div className="mt-4 p-4 border rounded-md bg-neutral-100">
+                    <div className="font-semibold text-accent-500 wrap-anywhere">{slug}</div>
+                </div>
+
                 {slugs.includes(slug) && (
                     <ParagraphWrapper classNameOverride={"text-center"}>
                         <TextAccentWrapper classNameOverride="font-normal italic">
