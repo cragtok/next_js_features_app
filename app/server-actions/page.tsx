@@ -21,7 +21,7 @@ async function Page() {
             </ParagraphWrapper>
 
             <SectionWrapper sectionTitle="User List">
-                <ParagraphWrapper classNameOverride="text-center">
+                <ParagraphWrapper>
                     This is a list of users, simulating a data fetch from a mock
                     database that is located as a file in{" "}
                     <TextAccentWrapper>

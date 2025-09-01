@@ -8,7 +8,7 @@ interface Props {
 }
 const TextAccentWrapper = ({ classNameOverride, children }: Props) => {
     const defaultStyles =
-        "text-accent-500 font-semibold whitespace-normal break-words";
+        "text-accent-500 font-semibold ";
     const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
 
     return <span className={mergedStyles}> {children} </span>;

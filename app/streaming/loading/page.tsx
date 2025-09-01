@@ -27,7 +27,7 @@ async function Page() {
                     <TextAccentWrapper>loading.tsx</TextAccentWrapper> is
                     immediately streamed to the client, providing an instant
                     loading UI. Once the data is ready, the actual page content
-                    replaces the loading fallback.{" "}
+                    replaces the loading fallback.
                 </ParagraphWrapper>
             </SectionWrapper>
 
