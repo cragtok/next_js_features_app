@@ -1,6 +1,7 @@
 import FolderStructureCards from "@/components/general/FolderStructureCards";
 import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
+import PathWithBreaks from "@/components/general/PathWithBreaks";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 
@@ -32,11 +33,11 @@ async function Page() {
 
             <SectionWrapper sectionTitle="Folder Structure For This Page">
                 <ParagraphWrapper>
-                    The page for this route was implemented by creating an{" "}
+                    For this route an{" "}
                     <TextAccentWrapper>
-                        app/streaming/loading/
+                        <PathWithBreaks text="app/streaming/loading/" />
                     </TextAccentWrapper>{" "}
-                    folder containing a{" "}
+                    folder was created, and filled with a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file and a{" "}
                     <TextAccentWrapper>loading.tsx</TextAccentWrapper> file. As
                     a result, the content of this page will appear after a

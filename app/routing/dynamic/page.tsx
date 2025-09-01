@@ -5,6 +5,7 @@ import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import LinkWrapper from "@/components/general/LinkWrapper";
+import PathWithBreaks from "@/components/general/PathWithBreaks";
 
 function Page() {
     return (
@@ -20,13 +21,13 @@ function Page() {
                 <ParagraphWrapper>
                     In this app a dynamic route was made by creating a folder{" "}
                     <TextAccentWrapper>
-                        app/routing/dynamic/[slug]/
+                        <PathWithBreaks text="app/routing/dynamic/[slug]/" />
                     </TextAccentWrapper>{" "}
                     and placing a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file inside
                     it. So now all routes with the format{" "}
                     <TextAccentWrapper>
-                        /routing/dynamic/[slug]
+                        <PathWithBreaks text="/routing/dynamic/[slug]" />
                     </TextAccentWrapper>{" "}
                     have the <TextAccentWrapper>[slug]</TextAccentWrapper>{" "}
                     portion of the URL as the dynamic segment, which is
@@ -91,7 +92,7 @@ function Page() {
                     be statically generated:
                 </ParagraphWrapper>
 
-                <ul className="text-left list-disc max-w-prose list-outside pl-4 marker:text-accent-700">
+                <ul className="text-left list-disc max-w-prose text-sm list-outside pl-4 marker:text-accent-700">
                     <li>
                         <LinkWrapper href="/routing/dynamic/dynamic_route">
                             /routing/dynamic/dynamic_route

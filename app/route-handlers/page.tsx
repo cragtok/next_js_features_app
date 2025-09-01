@@ -4,6 +4,7 @@ import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import FolderStructureCards from "@/components/general/FolderStructureCards";
 import UsersSection from "./UsersSection/UsersSection";
+import PathWithBreaks from "@/components/general/PathWithBreaks";
 
 function Page() {
     return (
@@ -45,14 +46,14 @@ function Page() {
                 <ParagraphWrapper>
                     There is a{" "}
                     <TextAccentWrapper>
-                        /route-handlers/my-api
+                        <PathWithBreaks text="/route-handlers/my-api" />
                     </TextAccentWrapper>{" "}
                     API route which handles{" "}
                     <TextAccentWrapper>GET</TextAccentWrapper> and{" "}
                     <TextAccentWrapper>POST</TextAccentWrapper> requests. This
                     was done by creating a{" "}
                     <TextAccentWrapper>
-                        /route-handlers/my-api/
+                        <PathWithBreaks text="/route-handlers/my-api" />
                     </TextAccentWrapper>{" "}
                     folder containing a{" "}
                     <TextAccentWrapper>route.ts</TextAccentWrapper> file
@@ -66,7 +67,7 @@ function Page() {
                     field of a user from the URL. The API route formats for
                     these methods will be in the form{" "}
                     <TextAccentWrapper>
-                        /route-handlers/my-api/[userId]
+                        <PathWithBreaks text="/route-handlers/my-api/[userId]" />
                     </TextAccentWrapper>
                     , where we want to extract the{" "}
                     <TextAccentWrapper>userId</TextAccentWrapper> portion.

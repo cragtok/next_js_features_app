@@ -4,6 +4,7 @@ import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import ServerActionForm from "./ServerActionForm";
 import UsersList from "./UsersList";
+import PathWithBreaks from "@/components/general/PathWithBreaks";
 
 async function Page() {
     return (
@@ -23,10 +24,12 @@ async function Page() {
                 <ParagraphWrapper classNameOverride="text-center">
                     This is a list of users, simulating a data fetch from a mock
                     database that is located as a file in{" "}
-                    <TextAccentWrapper>data/mockDb.json</TextAccentWrapper>:
+                    <TextAccentWrapper>
+                        <PathWithBreaks text="data/mockDb.json" />
+                    </TextAccentWrapper>
                 </ParagraphWrapper>
+                .
                 <UsersList />
-
                 <ParagraphWrapper>
                     The users list is fetched within an{" "}
                     <TextAccentWrapper>unstable_cache</TextAccentWrapper>{" "}
