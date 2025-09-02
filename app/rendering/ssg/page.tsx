@@ -2,8 +2,8 @@ import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { fetchCityDateTimes } from "./apiCall";
+import CityDateTimeCard from "./CityDateTimeCard";
 
 export const dynamic = "force-static";
 
@@ -53,26 +53,7 @@ async function Page() {
 
                 <div className="flex flex-col gap-4">
                     {cityDateTimes.map((cdt) => (
-                        <Card
-                            key={crypto.randomUUID()}
-                            className="bg-neutral-100"
-                        >
-                            <CardHeader>
-                                <CardTitle className="text-accent-700 group-hover:underline">
-                                    {cdt.city}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-brand-500 text">
-                                    <span className="font-semibold">Date:</span>{" "}
-                                    {cdt.date}
-                                </p>
-                                <p className="text-brand-500">
-                                    <span className="font-semibold">Time:</span>{" "}
-                                    {cdt.time}
-                                </p>
-                            </CardContent>
-                        </Card>
+                        <CityDateTimeCard key={crypto.randomUUID()} cityDateTime={cdt} />
                     ))}
                 </div>
             </SectionWrapper>
