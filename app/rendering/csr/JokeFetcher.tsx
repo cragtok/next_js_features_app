@@ -33,32 +33,34 @@ const JokeFetcher = () => {
         refetch();
     };
 
-    if (isFetching) {
-        return <JokeSkeleton />;
-    }
-
     return (
         <>
-            <Card className="max-w-prose bg-neutral-100 rounded-md pt-5 pb-3">
-                <CardContent>
-                    {isError ? (
-                        <TextAccentWrapper classNameOverride="italic text-status-danger-500 text-center">
-                            {"Failed to load joke. Please try fetching again."}
-                        </TextAccentWrapper>
-                    ) : joke ? (
-                        <TextAccentWrapper classNameOverride="italic text-center">
-                            {joke}
-                        </TextAccentWrapper>
-                    ) : (
-                        <TextAccentWrapper classNameOverride="text-center text-brand-500">
-                            {"Click the button to fetch a joke."}
-                        </TextAccentWrapper>
-                    )}
-                </CardContent>
-            </Card>
+            {isFetching ? (
+                <JokeSkeleton />
+            ) : (
+                <Card className="max-w-prose bg-neutral-100 text-center rounded-md pt-5 pb-3 max-[400px]:text-center max-[450px]:text-sm">
+                    <CardContent>
+                        {isError ? (
+                            <TextAccentWrapper classNameOverride="italic text-status-danger-500 text-center">
+                                {
+                                    "Failed to load joke. Please try fetching again."
+                                }
+                            </TextAccentWrapper>
+                        ) : joke ? (
+                            <TextAccentWrapper classNameOverride="italic text-center">
+                                {joke}
+                            </TextAccentWrapper>
+                        ) : (
+                            <TextAccentWrapper classNameOverride="text-center text-brand-500">
+                                {"Click the button to fetch a joke."}
+                            </TextAccentWrapper>
+                        )}
+                    </CardContent>
+                </Card>
+            )}
 
             <Button
-                className="bg-brand-500"
+                className="bg-brand-500 hover:bg-brand-700"
                 onClick={handleClick}
                 disabled={isFetching}
             >
