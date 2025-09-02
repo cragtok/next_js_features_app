@@ -1,10 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-interface CityDateTime {
-    city: string;
-    date: string;
-    time: string;
-}
+import CardWrapper from "@/components/general/CardWrapper";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CityDateTime } from "./apiCall";
 
 interface Props {
     cityDateTime: CityDateTime;
@@ -12,10 +8,7 @@ interface Props {
 
 const CityDateTimeCard = ({ cityDateTime }: Props) => {
     return (
-        <Card
-            key={crypto.randomUUID()}
-            className="max-w-prose bg-neutral-100 text-center rounded-md pt-5 pb-3 max-[400px]:text-center max-[450px]:text-sm"
-        >
+        <CardWrapper>
             <CardHeader>
                 <CardTitle className="text-accent-700 group-hover:underline">
                     {cityDateTime.city}
@@ -31,7 +24,7 @@ const CityDateTimeCard = ({ cityDateTime }: Props) => {
                     {cityDateTime.time}
                 </p>
             </CardContent>
-        </Card>
+        </CardWrapper>
     );
 };
 

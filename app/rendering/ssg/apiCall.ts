@@ -66,4 +66,4 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
     throw new Error("Gemini error: Max retries reached.");
 }
 
-export { fetchCityDateTimes };
+export { fetchCityDateTimes, type CityDateTime };

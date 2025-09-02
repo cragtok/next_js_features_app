@@ -51,7 +51,7 @@ async function Page() {
                     and does not need to be fetched on page refresh.
                 </ParagraphWrapper>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col">
                     {cityDateTimes.map((cdt) => (
                         <CityDateTimeCard key={crypto.randomUUID()} cityDateTime={cdt} />
                     ))}
