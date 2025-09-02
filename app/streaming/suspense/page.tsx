@@ -7,7 +7,8 @@ import { Suspense } from "react";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
 
 export const dynamic = "force-dynamic";
-export const CARD_DELAY_INTERVAL_SECONDS = 1;
+
+const CARD_DELAY_INTERVAL_SECONDS = 1;
 
 function Page() {
     return (
