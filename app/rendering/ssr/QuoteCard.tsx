@@ -1,19 +1,20 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 
 import { Quote, fetchQuote } from "./apiCall";
+import CardWrapper from "@/components/general/CardWrapper";
 
 const QuoteCard = async () => {
     const quoteData: Quote | null = await fetchQuote();
 
     return (
-        <Card className="max-w-prose bg-neutral-100 rounded-md pt-5 pb-3">
+        <CardWrapper classNameOverride="text-justify">
             <CardContent>
                 {quoteData ? (
-                    <figure className="max-[410px]:text-center text-justify text-accent-500">
+                    <figure className="text-accent-500 flex flex-col gap-3">
                         <blockquote className="italic">
                             &quot;{quoteData.quote}&quot;
                         </blockquote>
-                        <figcaption className="italic font-semibold">
+                        <figcaption className="italic font-semibold self-end">
                             — {quoteData.author}
                         </figcaption>
                     </figure>
@@ -23,7 +24,7 @@ const QuoteCard = async () => {
                     </blockquote>
                 )}
             </CardContent>
-        </Card>
+        </CardWrapper>
     );
 };
 
