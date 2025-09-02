@@ -1,12 +1,12 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import { fetchJoke } from "./apiCall";
 import CardWrapper from "@/components/general/CardWrapper";
+import ButtonWrapper from "@/components/general/ButtonWrapper";
 
 const JokeSkeleton = () => (
     <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
@@ -60,13 +60,9 @@ const JokeFetcher = () => {
                 </CardWrapper>
             )}
 
-            <Button
-                className="bg-brand-500 hover:bg-brand-700"
-                onClick={handleClick}
-                disabled={isFetching}
-            >
+            <ButtonWrapper onClick={handleClick} disabled={isFetching}>
                 Fetch Joke
-            </Button>
+            </ButtonWrapper>
         </>
     );
 };
