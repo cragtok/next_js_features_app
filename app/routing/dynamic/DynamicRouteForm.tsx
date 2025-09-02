@@ -33,6 +33,26 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
             return;
         }
 
+        if (
+            trimmedValue.startsWith("http://") ||
+            trimmedValue.startsWith("https://") ||
+            trimmedValue.startsWith("//")
+        ) {
+            setErrorMessage(
+                "External URLs are not allowed in dynamic route segments."
+            );
+            setShowError(true);
+            return;
+        }
+
+        if (!/^[a-zA-Z0-9\-\/]+$/.test(trimmedValue)) {
+            setErrorMessage(
+                "Invalid characters in route segment. Only alphanumeric, hyphens, and forward slashes are allowed."
+            );
+            setShowError(true);
+            return;
+        }
+
         const dynamicPath = trimmedValue;
         router.push(`${baseRoute}/${dynamicPath}`);
         setValue("");
