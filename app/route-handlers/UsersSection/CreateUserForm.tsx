@@ -7,7 +7,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import ButtonWrapper from "@/components/general/ButtonWrapper";
 import { User } from "@/lib/database/databaseHandler";
 import { parseUserBody } from "@/lib/utils";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields";
@@ -83,15 +83,14 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                                     email={email}
                                     handleInputChange={handleInputChange}
                                 />
-                                <Button
+                                <ButtonWrapper
                                     onClick={onSubmit}
-                                    className="w-full bg-brand-700 hover:bg-brand-900"
                                     disabled={isSubmitting}
                                 >
                                     {!isSubmitting
                                         ? "Create User"
                                         : "Creating..."}
-                                </Button>
+                                </ButtonWrapper>
                             </form>
                         </CardContent>
                     </CardWrapper>
