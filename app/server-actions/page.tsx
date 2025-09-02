@@ -30,7 +30,7 @@ async function Page() {
                     The users are fetched within an{" "}
                     <TextAccentWrapper>unstable_cache</TextAccentWrapper>{" "}
                     function, since it is meant to run a database query. If you
-                    are fetching data from a remote API, you can use the
+                    are fetching data from a remote API, you can use the{" "}
                     <TextAccentWrapper>fetch</TextAccentWrapper> function
                     instead. In order to identify the data in the cache, it is
                     marked with a{" "}

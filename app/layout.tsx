@@ -27,7 +27,7 @@ async function RootLayout({
             >
                 <Header />
                 {children}
-                <Toaster />
+                <Toaster closeButton={true} />
             </body>
         </html>
     );
