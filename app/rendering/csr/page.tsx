@@ -1,4 +1,3 @@
-"use client";
 import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
@@ -14,19 +13,16 @@ function Page() {
                     <ParagraphWrapper>
                         In{" "}
                         <TextAccentWrapper>
-                            {" "}
-                            Client-Side Rendering (CSR){" "}
+                            Client-Side Rendering (CSR)
                         </TextAccentWrapper>
                         , the page content is primarily rendered in the browser
-                        after the initial HTML is loaded. Unlike Server-Side
-                        Rendering (SSR) or Static Site Generation (SSG), the
-                        server sends a minimal HTML shell, and JavaScript then
-                        fetches data and builds the rest of the page directly on
-                        the client. This approach is suitable for highly
-                        interactive pages or dashboards where data changes
-                        frequently and real-time updates are crucial, as it
-                        allows for dynamic content without requiring a full page
-                        reload from the server.
+                        after some initial HTML is loaded from the server.
+                        JavaScript then fetches data and builds the rest of the
+                        page directly on the client. This approach is suitable
+                        for highly interactive pages or dashboards where data
+                        changes frequently and real-time updates are crucial, as
+                        it allows for dynamic content without requiring a full
+                        page reload from the server.
                     </ParagraphWrapper>
 
                     <ParagraphWrapper>
@@ -39,14 +35,8 @@ function Page() {
                         <TextAccentWrapper>useEffect</TextAccentWrapper> hook,
                         often combined with{" "}
                         <TextAccentWrapper>fetch</TextAccentWrapper> or a data
-                        fetching library like React Query. Additionally, using{" "}
-                        <TextAccentWrapper>next/dynamic</TextAccentWrapper>{" "}
-                        imports with{" "}
-                        <TextAccentWrapper>ssr: false</TextAccentWrapper> for
-                        specific components ensures they are only rendered on
-                        the client, effectively making parts or all of the page
-                        client-side rendered. Also, code that directly accesses
-                        browser-specific APIs like{" "}
+                        fetching library like React Query. Also, code that
+                        directly accesses browser-specific APIs like{" "}
                         <TextAccentWrapper>window</TextAccentWrapper> or{" "}
                         <TextAccentWrapper>document</TextAccentWrapper> outside
                         of <TextAccentWrapper>useEffect</TextAccentWrapper> will
@@ -59,10 +49,10 @@ function Page() {
                         to a more interactive experience for the user. However,
                         it may lead to slower initial load times on the client
                         as the page needs time render before it can be
-                        interacted with. Also, it can significantly impact SEO
+                        interacted with. Also, it can negatively impact SEO
                         since any web crawler accessing the page will only
-                        receive a basic skeleton page instead of a page with
-                        meaningful content.
+                        receive a basic skeleton page instead of a complete page
+                        with meaningful content.
                     </ParagraphWrapper>
                 </SectionWrapper>
 
@@ -72,8 +62,8 @@ function Page() {
                         fetch a new joke each time the button is clicked. All
                         the request logic is done on the client side.
                         Internally, the page is implemented as Server Component
-                        that wraps a Client Component performing all the
-                        fetching and rendering of the data.
+                        that wraps a Client Component performing all the data
+                        fetching.
                     </ParagraphWrapper>
                     <JokeFetcher />
                 </SectionWrapper>
