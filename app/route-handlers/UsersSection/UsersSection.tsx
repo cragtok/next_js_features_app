@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import UserInfo from "./UserInfo";
 import EditUserForm from "./EditUserForm";
 import { Skeleton } from "@/components/ui/skeleton";
+import CardWrapper from "@/components/general/CardWrapper";
 
 const UsersSection = () => {
     const [users, setUsers] = useState<User[]>([]);
@@ -151,13 +152,13 @@ const UsersSection = () => {
         return (
             <>
                 <CreateUserForm handleCreateUser={handleCreateUser} />
-                <Card className="bg-neutral-100">
+                <CardWrapper>
                     <CardHeader>
                         <CardTitle className="text-accent-500 wrap-anywhere">
                             No Users In Database
                         </CardTitle>
                     </CardHeader>
-                </Card>
+                </CardWrapper>
             </>
         );
     }
@@ -166,51 +167,53 @@ const UsersSection = () => {
         <>
             <CreateUserForm handleCreateUser={handleCreateUser} />
             {users.map((user, idx) => (
-                <Card key={user.id} className="bg-neutral-100 text-brand-500">
-                    <CardHeader className="flex flex-col gap-2 align-center">
-                        <CardTitle className="text-accent-500 wrap-anywhere">
-                            {user.username}
-                        </CardTitle>
+                <Fragment key={user.id}>
+                    <CardWrapper classNameOverride="text-justify">
+                        <CardHeader className="flex flex-col gap-2 ">
+                            <CardTitle className="text-accent-500 wrap-anywhere">
+                                {user.username}
+                            </CardTitle>
 
-                        <div className="flex flex-row gap-2">
-                            {!editMode[user.id] && (
+                            <div className="flex flex-row gap-2">
+                                {!editMode[user.id] && (
+                                    <Button
+                                        className="bg-brand-500 hover:bg-brand-700 w-12 h-8 text-xs"
+                                        onClick={() => toggleEditMode(user.id)}
+                                    >
+                                        Edit
+                                    </Button>
+                                )}
                                 <Button
-                                    className="bg-brand-500 hover:bg-brand-700 w-12 h-8 text-xs"
-                                    onClick={() => toggleEditMode(user.id)}
+                                    onClick={() => handleDeleteUser(user.id)}
+                                    className="bg-status-danger-500 hover:bg-status-danger-700 w-14 h-8 text-xs"
                                 >
-                                    Edit
+                                    Delete
                                 </Button>
+                            </div>
+                        </CardHeader>
+                        <CardContent>
+                            {editMode[user.id] ? (
+                                <EditUserForm
+                                    user={user}
+                                    handleSubmit={(editedUser) =>
+                                        handleEditUser(user, editedUser)
+                                    }
+                                />
+                            ) : (
+                                <UserInfo
+                                    email={user.email}
+                                    password={user.password}
+                                    createdAt={user.createdAt || undefined}
+                                    lastItemRef={
+                                        idx === users.length - 1
+                                            ? lastItemRef
+                                            : null
+                                    }
+                                />
                             )}
-                            <Button
-                                onClick={() => handleDeleteUser(user.id)}
-                                className="bg-status-danger-500 hover:bg-status-danger-700 w-14 h-8 text-xs"
-                            >
-                                Delete
-                            </Button>
-                        </div>
-                    </CardHeader>
-                    <CardContent>
-                        {editMode[user.id] ? (
-                            <EditUserForm
-                                user={user}
-                                handleSubmit={(editedUser) =>
-                                    handleEditUser(user, editedUser)
-                                }
-                            />
-                        ) : (
-                            <UserInfo
-                                email={user.email}
-                                password={user.password}
-                                createdAt={user.createdAt || undefined}
-                                lastItemRef={
-                                    idx === users.length - 1
-                                        ? lastItemRef
-                                        : null
-                                }
-                            />
-                        )}
-                    </CardContent>
-                </Card>
+                        </CardContent>
+                    </CardWrapper>
+                </Fragment>
             ))}
         </>
     );

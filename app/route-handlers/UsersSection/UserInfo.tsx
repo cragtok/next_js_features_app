@@ -11,7 +11,7 @@ interface Props {
 
 const UserInfo = ({ email, password, lastItemRef, createdAt }: Props) => {
     return (
-        <div className="mt-2 text-justify wrap-anywhere" ref={lastItemRef}>
+        <div className="text-brand-500" ref={lastItemRef}>
             <p>
                 <span className="font-semibold">Email: </span>
                 {email}
@@ -21,7 +21,7 @@ const UserInfo = ({ email, password, lastItemRef, createdAt }: Props) => {
                 {password}
             </p>
             {createdAt && (
-                <p className="text-brand-500 text">
+                <p>
                     <span className="font-semibold">Created At:</span>{" "}
                     {new Date(createdAt).toUTCString()}
                 </p>
