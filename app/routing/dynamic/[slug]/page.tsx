@@ -4,6 +4,8 @@ import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import { MAX_SLUG_LENGTH } from "../constants";
+import CardWrapper from "@/components/general/CardWrapper";
+import { CardContent } from "@/components/ui/card";
 
 const slugs = ["dynamic_route", "1ae64431", "helloWorld", "123456"];
 
@@ -28,9 +30,13 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
                     You have entered a page with a dynamic route segment:
                 </ParagraphWrapper>
 
-                <div className="mt-4 p-4 border rounded-md bg-neutral-100">
-                    <div className="font-semibold text-accent-500 wrap-anywhere">{slug}</div>
-                </div>
+                <CardWrapper>
+                    <CardContent>
+                        <p className="font-semibold text-accent-500 wrap-anywhere">
+                            {slug}
+                        </p>
+                    </CardContent>
+                </CardWrapper>
 
                 {slugs.includes(slug) && (
                     <ParagraphWrapper classNameOverride={"text-center"}>
