@@ -20,7 +20,9 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
         event.preventDefault();
         const trimmedValue = value.trim();
         if (trimmedValue.length > MAX_SLUG_LENGTH) {
-            setErrorMessage(`Route segment cannot have more than ${MAX_SLUG_LENGTH} characters`);
+            setErrorMessage(
+                `Route segment cannot have more than ${MAX_SLUG_LENGTH} characters`
+            );
             setShowError(true);
             return;
         }
@@ -31,7 +33,7 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
             return;
         }
 
-        const dynamicPath = encodeURIComponent(trimmedValue);
+        const dynamicPath = trimmedValue;
         router.push(`${baseRoute}/${dynamicPath}`);
         setValue("");
     };
