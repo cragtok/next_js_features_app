@@ -1,3 +1,4 @@
+import CardWrapper from "@/components/general/CardWrapper";
 import { Card, CardContent } from "@/components/ui/card";
 import { User } from "@/lib/database/databaseHandler";
 
@@ -8,11 +9,8 @@ interface Props {
 
 const UserCard = ({ user, id }: Props) => {
     return (
-        <Card
-            className="max-w-prose bg-neutral-100 text-justify rounded-md pt-5 pb-3 max-[400px]:text-center max-[450px]:text-sm"
-            id={id}
-        >
-            <CardContent>
+        <CardWrapper classNameOverride="text-justify">
+            <CardContent id={id}>
                 <p className="text-brand-500 text">
                     <span className="font-semibold">Username:</span>{" "}
                     {user.username}
@@ -31,7 +29,7 @@ const UserCard = ({ user, id }: Props) => {
                     </p>
                 )}
             </CardContent>
-        </Card>
+        </CardWrapper>
     );
 };
 

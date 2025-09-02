@@ -18,7 +18,7 @@ const UsersList = async () => {
     }
 
     return (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col">
             {users.map((user, idx) => (
                 <UserCard
                     key={user.id}
