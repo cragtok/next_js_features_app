@@ -6,12 +6,13 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { User } from "@/lib/database/databaseHandler";
 import { parseUserBody } from "@/lib/utils";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields";
 import useUserFormFields from "@/hooks/useUserFormFields";
+import CardWrapper from "@/components/general/CardWrapper";
 
 interface Props {
     handleCreateUser: (user: Omit<User, "id">) => Promise<boolean>;
@@ -71,13 +72,10 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                 <AccordionTrigger className="font-extrabold text-brand-700">
                     Create New User
                 </AccordionTrigger>
-                <AccordionContent>
-                    <Card className="bg-neutral-100 text-brand-500">
-                        <CardHeader>
-                            <CardTitle>New User Details</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <form className="grid gap-6">
+                <AccordionContent className="flex flex-col justify-center">
+                    <CardWrapper classNameOverride="text-justify max-w-full">
+                        <CardContent className="text-brand-500">
+                            <form className="flex flex-col gap-6">
                                 <UserCreationFormFields
                                     displayErrors={displayErrors}
                                     username={username}
@@ -87,7 +85,7 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                                 />
                                 <Button
                                     onClick={onSubmit}
-                                    className="mt-4 bg-brand-700 hover:bg-brand-800"
+                                    className="w-full bg-brand-700 hover:bg-brand-900"
                                     disabled={isSubmitting}
                                 >
                                     {!isSubmitting
@@ -96,7 +94,7 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                                 </Button>
                             </form>
                         </CardContent>
-                    </Card>
+                    </CardWrapper>
                 </AccordionContent>
             </AccordionItem>
         </Accordion>
