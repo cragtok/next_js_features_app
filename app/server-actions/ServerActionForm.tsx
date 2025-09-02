@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
@@ -13,6 +12,7 @@ import { USER_LIST_SECTION_ID } from "./constants";
 import { toast } from "sonner";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields";
 import useUserFormFields from "@/hooks/useUserFormFields";
+import ButtonWrapper from "@/components/general/ButtonWrapper";
 
 const initialState: FormState = {
     message: "",
@@ -73,13 +73,9 @@ const ServerActionForm = () => {
                             password={password}
                             handleInputChange={handleInputChange}
                         />
-                        <Button
-                            type="submit"
-                            className="w-full bg-brand-700 hover:bg-brand-900"
-                            disabled={pending}
-                        >
+                        <ButtonWrapper type="submit" disabled={pending}>
                             {pending ? "Submitting..." : "Submit"}
-                        </Button>
+                        </ButtonWrapper>
                     </form>
                 </CardContent>
             </Card>
