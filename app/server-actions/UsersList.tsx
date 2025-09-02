@@ -1,7 +1,8 @@
 import { getCachedUsers, User } from "@/lib/database/databaseHandler";
-import { Card, CardContent } from "@/components/ui/card";
+import UserCard from "./UserCard";
 import { USER_LIST_SECTION_ID } from "./constants";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
+import { Card, CardContent } from "@/components/ui/card";
 
 const UsersList = async () => {
     const users: User[] = await getCachedUsers();
@@ -17,40 +18,17 @@ const UsersList = async () => {
     }
 
     return (
-        <div className="flex flex-col gap-3 text-sm">
+        <div className="flex flex-col gap-3">
             {users.map((user, idx) => (
-                <Card
+                <UserCard
                     key={user.id}
-                    className="bg-neutral-100"
+                    user={user}
                     id={
                         idx === users.length - 1
                             ? USER_LIST_SECTION_ID
                             : undefined
                     }
-                >
-                    <CardContent className="text-justify">
-                        <p className="text-brand-500 text">
-                            <span className="font-semibold">Username:</span>{" "}
-                            {user.username}
-                        </p>
-                        <p className="text-brand-500 text">
-                            <span className="font-semibold">Email:</span>{" "}
-                            {user.email}
-                        </p>
-                        <p className="text-brand-500 text">
-                            <span className="font-semibold">Password:</span>{" "}
-                            {user.password}
-                        </p>
-                        {user.createdAt && (
-                            <p className="text-brand-500 text">
-                                <span className="font-semibold">
-                                    Created At:
-                                </span>{" "}
-                                {new Date(user.createdAt).toUTCString()}
-                            </p>
-                        )}
-                    </CardContent>
-                </Card>
+                />
             ))}
         </div>
     );

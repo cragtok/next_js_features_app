@@ -27,8 +27,8 @@ async function Page() {
                     <TextAccentWrapper>
                         <PathWithBreaks text="data/mockDb.json" />
                     </TextAccentWrapper>
+                    .
                 </ParagraphWrapper>
-                .
                 <UsersList />
                 <ParagraphWrapper>
                     The users list is fetched within an{" "}

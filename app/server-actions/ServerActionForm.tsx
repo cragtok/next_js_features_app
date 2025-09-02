@@ -4,7 +4,6 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
@@ -58,15 +57,15 @@ const ServerActionForm = () => {
 
     return (
         <div>
-            <Card className="w-full bg-neutral-100 max-[450px]:text-xs">
-                <CardHeader className="text-brand-700">
+            <Card className="max-w-prose bg-neutral-100 text-center rounded-md pt-5 pb-3 max-[400px]:text-center max-[450px]:text-sm">
+                <CardHeader className="text-brand-500">
                     <CardTitle>Create an Account</CardTitle>
                     <CardDescription>
                         Enter your details below to create a new account
                     </CardDescription>
                 </CardHeader>
-                <CardContent className="text-brand-500 max-[450px]:text-xs ">
-                    <form action={formAction}>
+                <CardContent className="text-brand-500">
+                    <form action={formAction} className="flex flex-col gap-6">
                         <UserCreationFormFields
                             displayErrors={displayErrors}
                             username={username}
@@ -74,15 +73,13 @@ const ServerActionForm = () => {
                             password={password}
                             handleInputChange={handleInputChange}
                         />
-                        <CardFooter className="flex-col gap-2 mt-6">
-                            <Button
-                                type="submit"
-                                className="w-full bg-brand-700 hover:bg-brand-900"
-                                disabled={pending}
-                            >
-                                {pending ? "Submitting..." : "Submit"}
-                            </Button>
-                        </CardFooter>
+                        <Button
+                            type="submit"
+                            className="w-full bg-brand-700 hover:bg-brand-900"
+                            disabled={pending}
+                        >
+                            {pending ? "Submitting..." : "Submit"}
+                        </Button>
                     </form>
                 </CardContent>
             </Card>
