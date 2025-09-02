@@ -1,4 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import CardWrapper from "@/components/general/CardWrapper";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface Props {
     title: string;
@@ -7,7 +8,7 @@ interface Props {
 
 const RequestInfoCard = ({ title, info }: Props) => {
     return (
-        <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
+        <CardWrapper>
             <CardHeader>
                 <CardTitle className="text-accent-500 font-semibold">
                     {title}
@@ -16,7 +17,7 @@ const RequestInfoCard = ({ title, info }: Props) => {
             <CardContent>
                 <p className="text-brand-500">{info}</p>
             </CardContent>
-        </Card>
+        </CardWrapper>
     );
 };
 

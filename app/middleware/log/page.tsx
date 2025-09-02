@@ -29,7 +29,7 @@ async function Page() {
             </SectionWrapper>
 
             <SectionWrapper sectionTitle="Request Information">
-                <div className="flex flex-col gap-3 max-w-lg">
+                <div className="flex flex-col max-w-prose">
                     <RequestInfoCard title="IP Address" info={ip} />
                     <RequestInfoCard title="Server Time" info={serverTime} />
                     <RequestInfoCard title="Geo Location" info={geoLocation} />

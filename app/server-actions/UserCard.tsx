@@ -1,5 +1,5 @@
 import CardWrapper from "@/components/general/CardWrapper";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { User } from "@/lib/database/databaseHandler";
 
 interface Props {
