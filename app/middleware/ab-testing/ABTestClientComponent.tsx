@@ -35,7 +35,7 @@ const ABTestClientComponent = () => {
 
     if (!abTestGroup) {
         return (
-            <div className="mt-4 p-4 border rounded-md bg-neutral-100">
+            <div className="mt-4 p-4 border rounded-md bg-neutral-100 text-center">
                 <div className="font-semibold text-status-danger-500">
                     Error fetching cookie, please refresh page.
                 </div>
@@ -44,7 +44,7 @@ const ABTestClientComponent = () => {
     }
 
     return (
-        <div className="mt-4 p-4 border rounded-md bg-neutral-100">
+        <div className="mt-4 p-4 border rounded-md bg-neutral-100 text-center">
             {abTestGroup && generateGroupOutput(abTestGroup)}
         </div>
     );
