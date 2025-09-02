@@ -1,25 +1,26 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { fetchPrices } from "./apiCall";
+import CardWrapper from "@/components/general/CardWrapper";
 
 async function CryptoPricesCard() {
     const prices = await fetchPrices();
 
     if (!prices.length) {
         return (
-            <Card className="bg-neutral-100">
+            <CardWrapper>
                 <CardContent>
                     <p className="text-status-danger-500 font-semibold">
                         Failed to load prices. Please try refreshing the page.
                     </p>
                 </CardContent>
-            </Card>
+            </CardWrapper>
         );
     }
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col">
             {prices.map((cryptoData) => (
-                <Card key={cryptoData.symbol} className="bg-neutral-100">
+                <CardWrapper key={cryptoData.symbol}>
                     <CardHeader>
                         <CardTitle className="text-accent-700 group-hover:underline">
                             {cryptoData.symbol}
@@ -31,7 +32,7 @@ async function CryptoPricesCard() {
                             {cryptoData.price}
                         </p>
                     </CardContent>
-                </Card>
+                </CardWrapper>
             ))}
         </div>
     );
