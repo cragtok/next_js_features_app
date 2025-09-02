@@ -48,7 +48,7 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
         <div>
             <form
                 onSubmit={handleSubmit}
-                className="flex max-[500px]:flex-col flex-row justify-center gap-3"
+                className="flex max-[500px]:flex-col flex-row justify-center gap-3 text-brand-500"
             >
                 <div className="w-full">
                     <Input
