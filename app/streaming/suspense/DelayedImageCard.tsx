@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import ParagraphWrapper from "@/components/general/ParagraphWrapper";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import CardWrapper from "@/components/general/CardWrapper";
 
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -19,12 +19,12 @@ const DelayedImageCard = async ({
 }: Props) => {
     await delay(delaySeconds * 1000);
     return (
-        <Card className="bg-neutral-100 w-full">
-            <CardHeader className="text-brand-700">
+        <CardWrapper>
+            <CardHeader className="text-brand-500">
                 <CardTitle>{title}</CardTitle>
             </CardHeader>
             <CardContent className="flex max-[628px]:flex-col flex-row gap-6">
-                <div className="relative rounded-md overflow-hidden flex-1 max-[628px]:min-h-[100px]">
+                <div className="relative rounded-md overflow-hidden flex-1 max-[628px]:min-h-[150px]">
                     <Image
                         src={imagePath}
                         alt={alt}
@@ -33,14 +33,14 @@ const DelayedImageCard = async ({
                         sizes="100%"
                     />
                 </div>
-                <ParagraphWrapper classNameOverride="text-sm flex-2">
+                <p className="text-brand-500 min-[400px]:text-justify text-pretty leading-6 flex-2 text-sm">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                     Omnis odio id reiciendis. Blanditiis amet doloremque aperiam
                     voluptatibus magnam aut, accusamus temporibus culpa
                     voluptatem placeat est magni eum dolore sunt ipsam?
-                </ParagraphWrapper>
+                </p>
             </CardContent>
-        </Card>
+        </CardWrapper>
     );
 };
 
