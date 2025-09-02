@@ -6,10 +6,16 @@ import React from "react";
 interface Props extends React.ComponentPropsWithoutRef<"button"> {
     children: React.ReactNode;
     classNameOverride?: string;
+    buttonColor?: string;
 }
 
-const ButtonWrapper = ({ children, classNameOverride, ...rest }: Props) => {
-    const defaultStyles = "bg-brand-500 hover:bg-brand-700";
+const ButtonWrapper = ({
+    children,
+    classNameOverride,
+    buttonColor = "brand",
+    ...rest
+}: Props) => {
+    const defaultStyles = `bg-${buttonColor}-500 hover:bg-${buttonColor}-700`;
     const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
     return (
         <Button className={mergedStyles} {...rest}>
