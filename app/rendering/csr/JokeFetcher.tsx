@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import { fetchJoke } from "./apiCall";
+import CardWrapper from "@/components/general/CardWrapper";
 
 const JokeSkeleton = () => (
     <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
@@ -38,7 +39,7 @@ const JokeFetcher = () => {
             {isFetching ? (
                 <JokeSkeleton />
             ) : (
-                <Card className="max-w-prose bg-neutral-100 text-center rounded-md pt-5 pb-3 max-[400px]:text-center max-[450px]:text-sm">
+                <CardWrapper>
                     <CardContent>
                         {isError ? (
                             <TextAccentWrapper classNameOverride="italic text-status-danger-500 text-center">
@@ -56,7 +57,7 @@ const JokeFetcher = () => {
                             </TextAccentWrapper>
                         )}
                     </CardContent>
-                </Card>
+                </CardWrapper>
             )}
 
             <Button
