@@ -31,25 +31,22 @@ function Page() {
                         Server-Side Rendering (SSR){" "}
                     </TextAccentWrapper>{" "}
                     involves rendering HTML on the server for each incoming
-                    request. Server Components are used to create SSR pages. The
-                    static HTML sent by the server is{" "}
+                    request. The static HTML sent by the server is then{" "}
                     <TextAccentWrapper>
                         &quot;hydrated&quot;
                     </TextAccentWrapper>{" "}
-                    on the client, leading to a fully interactive web page. You
-                    can directly fetch data in Server Components using native or
-                    third-party data fetching libraries. This results in the
-                    client receiving a fully formed HTML page, leading to better
-                    SEO for the sitemaster and faster initial page loads for the
-                    user. However, SSR can lead to a higher load on the server
-                    due to the data fetching and HTML generation. Thus, it
-                    should be used with caution for pages with lots of content
-                    and data fetching.
+                    on the client, leading to a fully interactive web page. This
+                    results in the client receiving a fully formed HTML page,
+                    leading to better SEO for the site and faster initial page
+                    loads for the user. However, SSR can lead to a higher load
+                    on the server due to the data fetching and HTML generation.
+                    Thus, it should be used with caution for pages with lots of
+                    content and data fetching.
                 </ParagraphWrapper>
             </SectionWrapper>
 
             <SectionWrapper
-                sectionTitle="Dynamic Data Fetching"
+                sectionTitle="Server-Side Data Fetching"
                 classNameOverride="gap-12"
             >
                 <ParagraphWrapper>
@@ -57,7 +54,8 @@ function Page() {
                     <LinkWrapper href="https://thequoteshub.com/api/">
                         The Quotes Hub API
                     </LinkWrapper>{" "}
-                    each time it is refreshed:
+                    each time it is refreshed. The data is fetched entirely on
+                    the server.
                 </ParagraphWrapper>
 
                 <Suspense fallback={<QuoteSkeleton />}>
