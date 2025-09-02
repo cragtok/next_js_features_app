@@ -6,20 +6,19 @@ import SectionWrapper from "@/components/general/SectionWrapper";
 import { MAX_SLUG_LENGTH } from "../constants";
 import CardWrapper from "@/components/general/CardWrapper";
 import { CardContent } from "@/components/ui/card";
-
-const slugs = ["dynamic_route", "1ae64431", "helloWorld", "123456"];
+import { STATIC_ROUTES } from "../constants";
 
 export async function generateStaticParams() {
-    const slugs = ["dynamic_route", "1ae64431", "helloWorld", "123456"];
-    return slugs.map((slug) => ({
-        slug: slug,
+    return STATIC_ROUTES.map((route) => ({
+        slug: route.split("/"),
     }));
 }
 
-async function Page({ params }: { params: Promise<{ slug: string }> }) {
+async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
     const { slug } = await params;
+    const joinedSlug = slug.join("/");
 
-    if (slug.length > MAX_SLUG_LENGTH) {
+    if (joinedSlug.length > MAX_SLUG_LENGTH) {
         throw new Error("Max slug length exceeded");
     }
 
@@ -33,12 +32,12 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
                 <CardWrapper>
                     <CardContent>
                         <p className="font-semibold text-accent-500 wrap-anywhere">
-                            {slug}
+                            {joinedSlug}
                         </p>
                     </CardContent>
                 </CardWrapper>
 
-                {slugs.includes(slug) && (
+                {STATIC_ROUTES.includes(joinedSlug) && (
                     <ParagraphWrapper classNameOverride={"text-center"}>
                         <TextAccentWrapper classNameOverride="font-normal italic">
                             This dynamic route segment is statically generated
