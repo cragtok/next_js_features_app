@@ -7,10 +7,11 @@ import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 
 export const dynamic = "force-dynamic";
 
+const DELAY_SECONDS = 2;
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 async function Page() {
-    await delay(2000);
+    await delay(DELAY_SECONDS * 1000);
 
     return (
         <PageWrapper pageTitle="Streaming with Loading.tsx">
@@ -18,16 +19,17 @@ async function Page() {
                 <ParagraphWrapper>
                     This page demonstrates streaming using a{" "}
                     <TextAccentWrapper>loading.tsx</TextAccentWrapper> file. In
-                    this setup, you place this file within a route segment
-                    folder, and Next.js automatically wraps the corresponding{" "}
-                    <TextAccentWrapper>page.tsx</TextAccentWrapper> with a
-                    Suspense boundary. While the data for the{" "}
+                    this setup, you place a{" "}
+                    <TextAccentWrapper>loading.tsx</TextAccentWrapper> file
+                    containing the loading UI within a route segment folder
+                    where the <TextAccentWrapper>page.tsx</TextAccentWrapper>{" "}
+                    file is located. Next.js then automatically streams the
+                    loading UI while the data for the{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> is being
-                    fetched on the server, the content of{" "}
-                    <TextAccentWrapper>loading.tsx</TextAccentWrapper> is
-                    immediately streamed to the client, providing an instant
-                    loading UI. Once the data is ready, the actual page content
-                    replaces the loading fallback.
+                    fetched on the server. Once the data is ready, the actual
+                    page content replaces the loading fallback. This provides
+                    visual feedback to the user indicating that the page is
+                    being loaded, leading to a better user experience.
                 </ParagraphWrapper>
             </SectionWrapper>
 
@@ -40,8 +42,9 @@ async function Page() {
                     folder was created, and filled with a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file and a{" "}
                     <TextAccentWrapper>loading.tsx</TextAccentWrapper> file. As
-                    a result, the content of this page will appear after a
-                    2-second delay, during which time the{" "}
+                    a result, the content of this page will appear after a{" "}
+                    <TextAccentWrapper> {DELAY_SECONDS}s</TextAccentWrapper>{" "}
+                    delay, during which time the{" "}
                     <TextAccentWrapper>loading.tsx</TextAccentWrapper> fallback
                     will be displayed.
                 </ParagraphWrapper>
