@@ -43,18 +43,14 @@ function Page() {
                     progressively rendered. By wrapping individual components or
                     sections of your UI with React&apos;s{" "}
                     <TextAccentWrapper>Suspense</TextAccentWrapper> component,
-                    you can specify a{" "}
-                    <TextAccentWrapper>fallback</TextAccentWrapper> UI to be
-                    displayed immediately while the wrapped component (often a
-                    Server Component fetching data) is still loading. This
-                    allows the rest of the page to render and stream to the
-                    client without being blocked by slower data fetches,
-                    improving perceived performance and user interactivity. Once
-                    the data for the suspended component is ready, its content
-                    is streamed in, seamlessly replacing the fallback. This
-                    approach is ideal for scenarios where different parts of a
-                    page have varying data loading times, enabling a more
-                    dynamic and responsive user experience.
+                    you can specify a fallback UI to be displayed immediately
+                    while the wrapped component (often a Server Component
+                    fetching data) is still loading. Once the data for the
+                    suspended component is ready, its content is streamed in,
+                    seamlessly replacing the fallback. This approach is ideal
+                    for scenarios where different parts of a page have varying
+                    data loading times, enabling a more dynamic and responsive
+                    user experience.
                 </ParagraphWrapper>
             </SectionWrapper>
         </PageWrapper>
