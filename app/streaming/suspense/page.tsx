@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
 
 export const dynamic = "force-dynamic";
+export const CARD_DELAY_INTERVAL_SECONDS = 1;
 
 function Page() {
     return (
@@ -16,7 +17,11 @@ function Page() {
                     To demonstrate streaming with{" "}
                     <TextAccentWrapper>Suspense</TextAccentWrapper>, this
                     section renders three components that are loaded after each
-                    other with a 2 second gap.
+                    other with a{" "}
+                    <TextAccentWrapper>
+                        {CARD_DELAY_INTERVAL_SECONDS}s{" "}
+                    </TextAccentWrapper>{" "}
+                    gap in between.
                 </ParagraphWrapper>
                 {[1, 2, 3].map((num) => (
                     <Suspense key={num} fallback={<LoadingSpinner />}>
@@ -24,7 +29,7 @@ function Page() {
                             imagePath={`/nature-image-${num}.jpg`}
                             title={`Component ${num}`}
                             alt={`Nature Image ${num}`}
-                            delaySeconds={num * 2}
+                            delaySeconds={num * CARD_DELAY_INTERVAL_SECONDS}
                         />
                     </Suspense>
                 ))}
