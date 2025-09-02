@@ -1,9 +1,9 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { MAX_SLUG_LENGTH } from "./constants";
+import ButtonWrapper from "@/components/general/ButtonWrapper";
 
 interface Props {
     baseRoute: string;
@@ -87,9 +87,7 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
                     )}
                 </div>
 
-                <Button className="bg-brand-500 hover:bg-brand-700">
-                    Navigate
-                </Button>
+                <ButtonWrapper>Navigate</ButtonWrapper>
             </form>
         </div>
     );
