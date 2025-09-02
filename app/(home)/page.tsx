@@ -59,15 +59,15 @@ function Page() {
     return (
         <PageWrapper pageTitle="Next.js Features App">
             <ParagraphWrapper classNameOverride="max-w-md">
-                This project demonstrates the core features of Next.js. It was
-                made by me to learn and practice my Next.js skills. All features
-                are separated into different categories, and can be visited down
-                below.
+                This is an application that demonstrates the core features of
+                Next.js. It consists of several pages each dedicated to
+                demonstrating and explaining a different Next.js feature. I made
+                this app to learn about Next.js and practice my Next.js skills.
             </ParagraphWrapper>
 
             <ParagraphWrapper classNameOverride="max-w-md">
-                To see the code or run the app on your machine, check out the
-                Github repo:{" "}
+                To view the source code of this application or run it on your
+                own machine, check out the Github repo:{" "}
                 <LinkWrapper href="https://www.github.com">
                     github.com
                 </LinkWrapper>
