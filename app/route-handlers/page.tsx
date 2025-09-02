@@ -17,7 +17,7 @@ function Page() {
                     directly within the{" "}
                     <TextAccentWrapper>app</TextAccentWrapper> directory. Using
                     them, you can build RESTful APIs, handle webhooks, or
-                    perform server-side logic for various HTTP methods ({" "}
+                    perform server-side logic for various HTTP methods (
                     <TextAccentWrapper>GET</TextAccentWrapper>,{" "}
                     <TextAccentWrapper>POST</TextAccentWrapper>,{" "}
                     <TextAccentWrapper>PUT</TextAccentWrapper>,{" "}

@@ -17,7 +17,7 @@ async function Page() {
                     In{" "}
                     <TextAccentWrapper>
                         Static Site Generation (SSG)
-                    </TextAccentWrapper>{" "}
+                    </TextAccentWrapper>
                     , a page is rendered once on the server during build time.
                     The page content can then be fetched once during the initial
                     load and stored entirely on the browser. This makes it

@@ -135,7 +135,7 @@ function Page() {
                     <TextAccentWrapper>
                         <PathWithBreaks text="/routing/dynamic/[...slug]" />
                     </TextAccentWrapper>{" "}
-                    route by setting the dynamic
+                    route by setting the dynamic{" "}
                     <TextAccentWrapper>[...slug]</TextAccentWrapper> portion in
                     the form below:
                 </ParagraphWrapper>{" "}

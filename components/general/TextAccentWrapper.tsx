@@ -7,11 +7,10 @@ interface Props {
     children: React.ReactNode;
 }
 const TextAccentWrapper = ({ classNameOverride, children }: Props) => {
-    const defaultStyles =
-        "text-accent-500 font-semibold";
+    const defaultStyles = "text-accent-500 font-semibold";
     const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
 
-    return <span className={mergedStyles}> {children} </span>;
+    return <span className={mergedStyles}>{children}</span>;
 };
 
 export default TextAccentWrapper;

@@ -16,7 +16,7 @@ function Page() {
                     </TextAccentWrapper>
                     . In Next.js, static routes are defined by creating a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file either
-                    directly inside the
+                    directly inside the{" "}
                     <TextAccentWrapper>app</TextAccentWrapper> folder or inside
                     any of its sub-folders. Each nested folder represents a
                     segment of the URL path, and a{" "}
