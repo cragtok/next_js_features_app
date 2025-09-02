@@ -14,8 +14,8 @@ function Page() {
                     <TextAccentWrapper>A/B testing</TextAccentWrapper> using
                     Next.js Middleware. In this type of testing, two versions of
                     an application, page or feature are shown to different
-                    groups of users to determine their response to each one.
-                    Users can be segmented at random or using some criteria.
+                    groups of users to analyze their response to each one. Users
+                    can be segmented at random or using some criteria.
                 </ParagraphWrapper>
 
                 <ParagraphWrapper>
@@ -24,8 +24,9 @@ function Page() {
                     <span className="font-semibold text-green-400">green</span>{" "}
                     text below, while the second group will see{" "}
                     <span className="font-semibold text-blue-400">blue</span>{" "}
-                    text. This user segmentation is done in the Next.js
-                    middleware file{" "}
+                    text. This user segmentation is done completely using
+                    Next.js middleware. The logic is placed in the Nest.js
+                    middleware file
                     <TextAccentWrapper>middleware.ts</TextAccentWrapper>. Each
                     time a user visits the page, a cookie is sent to their
                     browser specifying the group they are in. The cookie is
