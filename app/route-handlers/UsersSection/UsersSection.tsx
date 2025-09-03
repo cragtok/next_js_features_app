@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useEffect, useRef, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     deleteUser,
     createUser,
@@ -13,9 +13,9 @@ import CreateUserForm from "./CreateUserForm";
 import { toast } from "sonner";
 import UserInfo from "./UserInfo";
 import EditUserForm from "./EditUserForm";
-import { Skeleton } from "@/components/ui/skeleton";
 import CardWrapper from "@/components/general/CardWrapper";
 import ButtonWrapper from "@/components/general/ButtonWrapper";
+import LoadingSkeleton from "@/components/general/LoadingSkeleton";
 
 const UsersSection = () => {
     const [users, setUsers] = useState<User[]>([]);
@@ -43,16 +43,7 @@ const UsersSection = () => {
     }, []);
 
     if (loading) {
-        return (
-            <Card className="bg-neutral-100">
-                <CardHeader>
-                    <Skeleton className="h-4 w-full bg-brand-50" />
-                    <Skeleton className="h-4 w-full bg-brand-50" />
-                    <Skeleton className="h-4 w-full bg-brand-50" />
-                    <Skeleton className="h-4 w-full bg-brand-50" />
-                </CardHeader>
-            </Card>
-        );
+        return <LoadingSkeleton numRows={4} />;
     }
 
     const toggleEditMode = (userId: string) => {
