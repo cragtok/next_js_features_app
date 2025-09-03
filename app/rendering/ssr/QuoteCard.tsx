@@ -19,7 +19,7 @@ const QuoteCard = async () => {
                         </figcaption>
                     </figure>
                 ) : (
-                    <blockquote className="text-status-danger-500 font-semibold">
+                    <blockquote className="text-status-danger-500 font-semibold text-center">
                         Failed to load quote. Please try refreshing the page.
                     </blockquote>
                 )}

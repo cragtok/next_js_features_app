@@ -2,26 +2,14 @@ import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-import { Skeleton } from "@/components/ui/skeleton";
+import LoadingSkeleton from "@/components/general/LoadingSkeleton";
 import { Suspense } from "react";
 import QuoteCard from "./QuoteCard";
-import { Card, CardContent } from "@/components/ui/card";
 import LinkWrapper from "@/components/general/LinkWrapper";
 
 export const dynamic = "force-dynamic";
 
 function Page() {
-    const QuoteSkeleton = () => (
-        <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
-            <CardContent className="space-y-3">
-                <Skeleton className="h-4 w-full bg-brand-50" />
-                <Skeleton className="h-4 w-full bg-brand-50" />
-                <Skeleton className="h-4 w-full bg-brand-50" />
-                <Skeleton className="h-4 w-full bg-brand-50" />
-            </CardContent>
-        </Card>
-    );
-
     return (
         <PageWrapper pageTitle="Server Side Rendering">
             <SectionWrapper>
@@ -58,7 +46,7 @@ function Page() {
                     the server.
                 </ParagraphWrapper>
 
-                <Suspense fallback={<QuoteSkeleton />}>
+                <Suspense fallback={<LoadingSkeleton numRows={4} />}>
                     <QuoteCard />
                 </Suspense>
             </SectionWrapper>
