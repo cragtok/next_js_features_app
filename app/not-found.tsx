@@ -2,9 +2,9 @@
 import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import ButtonWrapper from "@/components/general/ButtonWrapper";
 
 function NotFound() {
     const router = useRouter();
@@ -33,12 +33,12 @@ function NotFound() {
                     The page you are trying to visit does not exist.
                 </ParagraphWrapper>
 
-                <Button
-                    className="bg-brand-500 hover:bg-brand-700 font-semibold max-w-prose"
+                <ButtonWrapper
+                    classNameOverride="font-semibold"
                     onClick={handleGoBack}
                 >
                     Go Back
-                </Button>
+                </ButtonWrapper>
             </SectionWrapper>
         </PageWrapper>
     );
