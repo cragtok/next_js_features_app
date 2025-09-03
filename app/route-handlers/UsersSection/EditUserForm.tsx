@@ -1,6 +1,6 @@
 "use client";
 import { User } from "@/lib/database/databaseHandler";
-import { Button } from "@/components/ui/button";
+import ButtonWrapper from "@/components/general/ButtonWrapper";
 import { parseUserBody } from "@/lib/utils";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields";
 import useUserFormFields from "@/hooks/useUserFormFields";
@@ -86,21 +86,22 @@ const EditUserForm = ({ user, handleSubmit }: Props) => {
             />
 
             <div className="flex gap-2">
-                <Button
-                    className="bg-status-warning-500 hover:bg-status-warning-700 w-14 h-8 text-xs"
+                <ButtonWrapper
+                    buttonColor="status-warning"
+                    classNameOverride="w-14 h-8 text-xs"
                     onClick={onSubmit}
                     disabled={isSubmitting}
                 >
                     Save
-                </Button>
+                </ButtonWrapper>
 
-                <Button
-                    className="bg-brand-500 hover:bg-brand-700 w-14 h-8 text-xs"
+                <ButtonWrapper
                     onClick={onCancel}
+                    classNameOverride="w-14 h-8 text-xs"
                     disabled={isSubmitting}
                 >
                     Cancel
-                </Button>
+                </ButtonWrapper>
             </div>
         </form>
     );
