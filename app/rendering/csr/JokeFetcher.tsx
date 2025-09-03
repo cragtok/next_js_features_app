@@ -1,21 +1,12 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { CardContent } from "@/components/ui/card";
+import LoadingSkeleton from "@/components/general/LoadingSkeleton";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import { fetchJoke } from "./apiCall";
 import CardWrapper from "@/components/general/CardWrapper";
 import ButtonWrapper from "@/components/general/ButtonWrapper";
-
-const JokeSkeleton = () => (
-    <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
-        <CardContent className="space-y-3">
-            <Skeleton className="h-4 w-full bg-brand-50" />
-            <Skeleton className="h-4 w-full bg-brand-50" />
-        </CardContent>
-    </Card>
-);
 
 const JokeFetcher = () => {
     const {
@@ -37,7 +28,7 @@ const JokeFetcher = () => {
     return (
         <>
             {isFetching ? (
-                <JokeSkeleton />
+                <LoadingSkeleton numRows={4} />
             ) : (
                 <CardWrapper>
                     <CardContent>
