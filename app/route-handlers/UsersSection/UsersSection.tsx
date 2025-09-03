@@ -2,7 +2,6 @@
 
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
     deleteUser,
     createUser,
@@ -16,6 +15,7 @@ import UserInfo from "./UserInfo";
 import EditUserForm from "./EditUserForm";
 import { Skeleton } from "@/components/ui/skeleton";
 import CardWrapper from "@/components/general/CardWrapper";
+import ButtonWrapper from "@/components/general/ButtonWrapper";
 
 const UsersSection = () => {
     const [users, setUsers] = useState<User[]>([]);
@@ -176,19 +176,20 @@ const UsersSection = () => {
 
                             <div className="flex flex-row gap-2">
                                 {!editMode[user.id] && (
-                                    <Button
-                                        className="bg-brand-500 hover:bg-brand-700 w-12 h-8 text-xs"
+                                    <ButtonWrapper
+                                        classNameOverride="w-12 h-8 text-xs"
                                         onClick={() => toggleEditMode(user.id)}
                                     >
                                         Edit
-                                    </Button>
+                                    </ButtonWrapper>
                                 )}
-                                <Button
+                                <ButtonWrapper
                                     onClick={() => handleDeleteUser(user.id)}
-                                    className="bg-status-danger-500 hover:bg-status-danger-700 w-14 h-8 text-xs"
+                                    classNameOverride="w-14 h-8 text-xs"
+                                    buttonColor="status-danger"
                                 >
                                     Delete
-                                </Button>
+                                </ButtonWrapper>
                             </div>
                         </CardHeader>
                         <CardContent>
