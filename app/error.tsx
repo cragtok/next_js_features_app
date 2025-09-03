@@ -2,9 +2,9 @@
 
 import { useEffect } from "react";
 import PageWrapper from "@/components/general/PageWrapper";
-import { Button } from "@/components/ui/button";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
+import ButtonWrapper from "@/components/general/ButtonWrapper";
 
 interface Props {
     error: Error;
@@ -27,12 +27,12 @@ function GlobalError({ error, reset }: Props) {
                     try again.
                 </ParagraphWrapper>
 
-                <Button
-                    className="bg-brand-500 hover:bg-brand-700 font-semibold"
+                <ButtonWrapper
+                    classNameOverride="font-semibold"
                     onClick={reset}
                 >
                     Try Again
-                </Button>
+                </ButtonWrapper>
             </SectionWrapper>
 
             {process.env.NODE_ENV === "development" && (
