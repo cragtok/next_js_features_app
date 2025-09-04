@@ -17,18 +17,35 @@ import CardWrapper from "@/components/general/CardWrapper";
 import ButtonWrapper from "@/components/general/ButtonWrapper";
 import LoadingSkeleton from "@/components/general/LoadingSkeleton";
 
+interface UserCardStatus {
+    isEditing: boolean;
+    isDeleting: boolean;
+}
+
+type UserCardStatusRecord = Record<string, UserCardStatus>;
+
 const UsersSection = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
-    const [editMode, setEditMode] = useState<Record<string, boolean>>({});
+    const [userCardStatus, setUserCardStatus] = useState<UserCardStatusRecord>(
+        {}
+    );
     const lastItemRef = useRef<HTMLDivElement>(null);
-    const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
         async function loadUsers() {
             try {
                 const fetchedUsers = await fetchAllUsers();
                 setUsers(fetchedUsers);
+
+                const userIdMap: UserCardStatusRecord = {};
+                fetchedUsers.forEach((user) => {
+                    userIdMap[user.id] = {
+                        isEditing: false,
+                        isDeleting: false,
+                    };
+                });
+                setUserCardStatus(userIdMap);
             } catch (e) {
                 console.error(e);
                 toast.error("Error fetching users!", {
@@ -48,13 +65,26 @@ const UsersSection = () => {
     }
 
     const toggleEditMode = (userId: string) => {
-        setEditMode((prev) => {
-            const newEditMode = {
+        setUserCardStatus((prev) => {
+            const oldValue = prev[userId].isEditing;
+            const newStatus = {
                 ...prev,
-                [userId]: !prev[userId],
+                [userId]: { ...prev[userId], isEditing: !oldValue },
             };
 
-            return newEditMode;
+            return newStatus;
+        });
+    };
+
+    const toggleDeleteMode = (userId: string) => {
+        setUserCardStatus((prev) => {
+            const oldValue = prev[userId].isDeleting;
+            const newStatus = {
+                ...prev,
+                [userId]: { ...prev[userId], isDeleting: !oldValue },
+            };
+
+            return newStatus;
         });
     };
 
@@ -62,7 +92,8 @@ const UsersSection = () => {
         if (!window.confirm("Are you sure you want to delete the user?")) {
             return;
         }
-        setIsDeleting(true);
+        toggleDeleteMode(userId);
+
         try {
             await deleteUser(userId);
         } catch (error) {
@@ -73,7 +104,7 @@ const UsersSection = () => {
                 position: "top-center",
                 richColors: true,
             });
-            setIsDeleting(false);
+            toggleDeleteMode(userId);
         }
     };
 
@@ -81,6 +112,19 @@ const UsersSection = () => {
         try {
             const newUser = await createUser(newUserFields);
             setUsers((prev) => [...prev, newUser]);
+
+            setUserCardStatus((prev) => {
+                const newStatus = {
+                    ...prev,
+                    [newUser.id]: {
+                        isEditing: false,
+                        isDeleting: false,
+                    },
+                };
+
+                return newStatus;
+            });
+
             toast.success("Successfully created user!", {
                 position: "top-center",
                 richColors: true,
@@ -169,11 +213,13 @@ const UsersSection = () => {
                             </CardTitle>
 
                             <div className="flex flex-row gap-2">
-                                {!editMode[user.id] && (
+                                {!userCardStatus[user.id].isEditing && (
                                     <ButtonWrapper
                                         classNameOverride="w-12 h-8 text-xs"
                                         onClick={() => toggleEditMode(user.id)}
-                                        disabled={isDeleting}
+                                        disabled={
+                                            userCardStatus[user.id].isEditing
+                                        }
                                     >
                                         Edit
                                     </ButtonWrapper>
@@ -182,14 +228,16 @@ const UsersSection = () => {
                                     onClick={() => handleDeleteUser(user.id)}
                                     classNameOverride="w-14 h-8 text-xs"
                                     buttonColor="status-danger"
-                                    disabled={isDeleting}
+                                    disabled={
+                                        userCardStatus[user.id].isDeleting
+                                    }
                                 >
                                     Delete
                                 </ButtonWrapper>
                             </div>
                         </CardHeader>
                         <CardContent>
-                            {editMode[user.id] ? (
+                            {userCardStatus[user.id].isEditing ? (
                                 <EditUserForm
                                     user={user}
                                     handleSubmit={(editedUser) =>
