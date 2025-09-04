@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { serverEnv } from "@/lib/serverEnv";
+import { serverEnv } from "@/lib/env/serverEnv";
 import { delay } from "@/lib/utils";
 
 interface CityDateTime {

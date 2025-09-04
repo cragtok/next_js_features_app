@@ -1,4 +1,4 @@
-import { serverEnv } from "@/lib/serverEnv";
+import { serverEnv } from "@/lib/env/serverEnv";
 
 interface Quote {
     quote: string;

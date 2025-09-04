@@ -1,4 +1,4 @@
-import { clientEnv } from "@/lib/clientEnv";
+import { clientEnv } from "@/lib/env/clientEnv";
 
 export const fetchJoke = async (): Promise<string> => {
     const response = await fetch(clientEnv.NEXT_PUBLIC_JOKE_API_URL, {
