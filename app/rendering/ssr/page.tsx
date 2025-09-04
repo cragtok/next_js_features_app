@@ -35,7 +35,7 @@ function Page() {
 
             <SectionWrapper
                 sectionTitle="Server-Side Data Fetching"
-                classNameOverride="gap-12"
+                classNameOverride="gap-8"
             >
                 <ParagraphWrapper>
                     To demonstrate SSR, this page will fetch a random quote from{" "}
