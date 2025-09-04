@@ -25,7 +25,7 @@ function Page() {
                     text below, while the second group will see{" "}
                     <span className="font-semibold text-blue-400">blue</span>{" "}
                     text. This user segmentation is done completely using
-                    Next.js middleware. The logic is placed in the Nest.js
+                    Next.js middleware. The logic is placed in the Next.js
                     middleware file{" "}
                     <TextAccentWrapper>middleware.ts</TextAccentWrapper>. Each
                     time a user visits the page, a cookie is sent to their
