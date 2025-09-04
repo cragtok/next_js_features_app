@@ -23,12 +23,6 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^5.85.5
     version: 5.85.5(react@19.1.0)
-  '@types/better-sqlite3':
-    specifier: ^7.6.13
-    version: 7.6.13
-  '@types/uuid':
-    specifier: ^10.0.0
-    version: 10.0.0
   better-sqlite3:
     specifier: ^12.2.0
     version: 12.2.0
@@ -79,6 +73,9 @@ devDependencies:
   '@tailwindcss/postcss':
     specifier: ^4
     version: 4.1.12
+  '@types/better-sqlite3':
+    specifier: ^7.6.13
+    version: 7.6.13
   '@types/node':
     specifier: ^20
     version: 20.19.11
@@ -88,6 +85,9 @@ devDependencies:
   '@types/react-dom':
     specifier: ^19
     version: 19.1.7(@types/react@19.1.10)
+  '@types/uuid':
+    specifier: ^10.0.0
+    version: 10.0.0
   eslint:
     specifier: ^9
     version: 9.33.0
@@ -1320,7 +1320,7 @@ packages:
     resolution: {integrity: sha512-NMv9ASNARoKksWtsq/SHakpYAYnhBrQgGD8zkLYk/jaK8jUGn08CfEdTRgYhMypUQAfzSP8W6gNLe0q19/t4VA==}
     dependencies:
       '@types/node': 20.19.11
-    dev: false
+    dev: true
 
   /@types/estree@1.0.8:
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
@@ -1338,6 +1338,7 @@ packages:
     resolution: {integrity: sha512-uug3FEEGv0r+jrecvUUpbY8lLisvIjg6AAic6a2bSP5OEOLeJsDSnvhCDov7ipFFMXS3orMpzlmi0ZcuGkBbow==}
     dependencies:
       undici-types: 6.21.0
+    dev: true
 
   /@types/react-dom@19.1.7(@types/react@19.1.10):
     resolution: {integrity: sha512-i5ZzwYpqjmrKenzkoLM2Ibzt6mAsM7pxB6BCIouEVVmgiqaMj1TjaK7hnA36hbW5aZv20kx7Lw6hWzPWg0Rurw==}
@@ -1353,7 +1354,7 @@ packages:
 
   /@types/uuid@10.0.0:
     resolution: {integrity: sha512-7gqG38EyHgyP1S+7+xomFtL+ZNHcKv6DwNaCZmJmo1vgMugyF3TCnXVg4t1uk89mLNwnLtnY3TpOpCOyp1/xHQ==}
-    dev: false
+    dev: true
 
   /@typescript-eslint/eslint-plugin@8.39.1(@typescript-eslint/parser@8.39.1)(eslint@9.33.0)(typescript@5.9.2):
     resolution: {integrity: sha512-yYegZ5n3Yr6eOcqgj2nJH8cH/ZZgF+l0YIdKILSDjYFRjgYQMgv/lRjV5Z7Up04b9VYUondt8EPMqg7kTWgJ2g==}
@@ -4373,6 +4374,7 @@ packages:
 
   /undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+    dev: true
 
   /unrs-resolver@1.11.1:
     resolution: {integrity: sha512-bSjt9pjaEBnNiGgc9rUiHGKv5l4/TGzDmYw3RhnkJGtLhbnnA/5qJj7x3dNDCRx/PJxu774LlH8lCOlB4hEfKg==}
