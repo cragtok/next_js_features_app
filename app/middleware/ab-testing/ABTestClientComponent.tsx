@@ -1,6 +1,7 @@
 "use client";
 
 import LoadingSpinner from "@/components/general/LoadingSpinner";
+import RefreshButton from "@/components/general/RefreshButton";
 import { useEffect, useState } from "react";
 
 const ABTestClientComponent = () => {
@@ -35,18 +36,24 @@ const ABTestClientComponent = () => {
 
     if (!abTestGroup) {
         return (
-            <div className="mt-4 p-4 border rounded-md bg-neutral-100 text-center">
-                <div className="font-semibold text-status-danger-500">
-                    Error fetching cookie, please refresh page.
+            <>
+                <div className="mt-4 p-4 border rounded-md bg-neutral-100 text-center">
+                    <div className="font-semibold text-status-danger-500">
+                        Error fetching cookie, please refresh page.
+                    </div>
                 </div>
-            </div>
+                <RefreshButton>Refresh Page</RefreshButton>
+            </>
         );
     }
 
     return (
-        <div className="mt-4 p-4 border rounded-md bg-neutral-100 text-center">
-            {abTestGroup && generateGroupOutput(abTestGroup)}
-        </div>
+        <>
+            <div className="mt-4 p-4 border rounded-md bg-neutral-100 text-center">
+                {abTestGroup && generateGroupOutput(abTestGroup)}
+            </div>
+            <RefreshButton>Refresh Page</RefreshButton>
+        </>
     );
 };
 
