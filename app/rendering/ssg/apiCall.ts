@@ -56,6 +56,10 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
             console.log(response.text);
             return JSON.parse(response.text);
         } catch (error) {
+            // Sometimes the response from Gemini comes wrapped in backticks,
+            // despite providing system instructions.
+            // So we retry the Gemini call until we get the response
+            // in the proper format.
             console.error(`Attempt ${i + 1} failed:`, error);
             if (i < MAX_RETRIES - 1) {
                 await delay(RETRY_DELAY_MS);
