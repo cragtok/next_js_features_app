@@ -10,7 +10,7 @@ const UsersList = async () => {
     if (users.length < 1) {
         return (
             <Card className="bg-neutral-100">
-                <CardContent className="">
+                <CardContent className="text-center">
                     <TextAccentWrapper>No Users In Database</TextAccentWrapper>
                 </CardContent>
             </Card>
