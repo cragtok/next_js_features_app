@@ -1,5 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { serverEnv } from "@/lib/serverEnv";
+import { delay } from "@/lib/utils";
 
 interface CityDateTime {
     city: string;
@@ -22,8 +23,6 @@ const systemInstruction = `
         """
         Do not wrap the answer in any markers such as backticks ('\`'), as it must be able to be directly processed using JavaScript's 'JSON.parse' function.
         `;
-
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 async function fetchCityDateTimes(): Promise<CityDateTime[]> {
     const MAX_RETRIES = 5;

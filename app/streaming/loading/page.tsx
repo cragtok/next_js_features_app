@@ -4,11 +4,11 @@ import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import PathWithBreaks from "@/components/general/PathWithBreaks";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
+import { delay } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
 const DELAY_SECONDS = 2;
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 async function Page() {
     await delay(DELAY_SECONDS * 1000);

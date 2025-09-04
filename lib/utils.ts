@@ -76,4 +76,6 @@ function processEnv<T extends z.ZodSchema>(
     return parsed.data;
 }
 
-export { cn, parseUserBody, processEnv };
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+export { cn, parseUserBody, processEnv, delay };

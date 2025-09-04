@@ -8,11 +8,11 @@ import LinkWrapper from "@/components/general/LinkWrapper";
 
 const SCROLL_POSITION_KEY = "home-page-scroll-position";
 
-const debounce = (func: () => void, delay: number) => {
+const debounce = (func: () => void, delaySeconds: number) => {
     let timeout: NodeJS.Timeout;
     return () => {
         clearTimeout(timeout);
-        timeout = setTimeout(() => func(), delay);
+        timeout = setTimeout(() => func(), delaySeconds);
     };
 };
 

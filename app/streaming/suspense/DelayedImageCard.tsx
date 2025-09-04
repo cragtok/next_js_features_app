@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CardWrapper from "@/components/general/CardWrapper";
-
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+import { delay } from "@/lib/utils";
 
 interface Props {
     imagePath: string;
