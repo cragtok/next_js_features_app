@@ -1,6 +1,5 @@
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 import React from "react";
-import { twMerge } from "tailwind-merge";
 
 interface Props {
     classNameOverride?: string;
@@ -9,7 +8,7 @@ interface Props {
 const ParagraphWrapper = ({ classNameOverride, children }: Props) => {
     const defaultStyles =
         "text-brand-500 max-w-prose max-[400px]:text-center max-[450px]:text-sm text-justify leading-8 text-pretty";
-    const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
+    const mergedStyles = cn([defaultStyles, classNameOverride]);
     return <p className={mergedStyles}>{children}</p>;
 };
 

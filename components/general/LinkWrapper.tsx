@@ -1,7 +1,6 @@
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
-import { twMerge } from "tailwind-merge";
 
 interface Props {
     classNameOverride?: string;
@@ -11,7 +10,7 @@ interface Props {
 const LinkWrapper = ({ classNameOverride, children, href }: Props) => {
     const defaultStyles =
         "text-accent-500 font-semibold whitespace-normal break-words inline-block underline hover:text-accent-700";
-    const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
+    const mergedStyles = cn([defaultStyles, classNameOverride]);
     return (
         <Link href={href} className={mergedStyles}>
             {children}

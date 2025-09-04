@@ -1,6 +1,5 @@
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 import React from "react";
-import { twMerge } from "tailwind-merge";
 
 interface Props {
     children: React.ReactNode;
@@ -14,7 +13,7 @@ const SectionWrapper = ({
     classNameOverride,
 }: Props) => {
     const defaultStyles = "flex flex-col gap-8";
-    const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
+    const mergedStyles = cn([defaultStyles, classNameOverride]);
     return (
         <section className={mergedStyles}>
             {sectionTitle && (

@@ -1,6 +1,5 @@
-import clsx from "clsx";
 import React from "react";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 interface Props {
     classNameOverride?: string;
@@ -8,7 +7,7 @@ interface Props {
 }
 const TextAccentWrapper = ({ classNameOverride, children }: Props) => {
     const defaultStyles = "text-accent-500 font-semibold";
-    const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
+    const mergedStyles = cn([defaultStyles, classNameOverride]);
 
     return <span className={mergedStyles}>{children}</span>;
 };

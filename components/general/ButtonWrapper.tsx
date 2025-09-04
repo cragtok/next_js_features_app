@@ -1,7 +1,6 @@
-import clsx from "clsx";
 import { Button } from "@/components/ui/button";
-import { twMerge } from "tailwind-merge";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 interface Props extends React.ComponentPropsWithoutRef<"button"> {
     children: React.ReactNode;
@@ -16,7 +15,7 @@ const ButtonWrapper = ({
     ...rest
 }: Props) => {
     const defaultStyles = `bg-${buttonColor}-500 hover:bg-${buttonColor}-700`;
-    const mergedStyles = twMerge(clsx(defaultStyles, classNameOverride));
+    const mergedStyles = cn([defaultStyles, classNameOverride]);
     return (
         <Button className={mergedStyles} {...rest}>
             {children}
