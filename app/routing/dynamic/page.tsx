@@ -50,7 +50,7 @@ function Page() {
                     single word like{" "}
                     <TextAccentWrapper>
                         /routing/dynamic/segment
-                    </TextAccentWrapper>
+                    </TextAccentWrapper>{" "}
                     as well as those containing multiple forward slashes like{" "}
                     <TextAccentWrapper>
                         /routing/dynamic/a/b/c

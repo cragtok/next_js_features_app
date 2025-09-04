@@ -23,7 +23,7 @@ function Page() {
                     <TextAccentWrapper>PUT</TextAccentWrapper>,{" "}
                     <TextAccentWrapper>DELETE</TextAccentWrapper>, etc). To
                     create them, you export functions with corresponding HTTP
-                    method names (e.g.,{" "}
+                    method names (e.g.{" "}
                     <TextAccentWrapper>GET</TextAccentWrapper>,{" "}
                     <TextAccentWrapper>POST</TextAccentWrapper>) from a{" "}
                     <TextAccentWrapper>route.ts</TextAccentWrapper> file, and

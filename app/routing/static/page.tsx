@@ -30,7 +30,7 @@ function Page() {
                 <ParagraphWrapper>
                     This route was made by creating an{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file within
-                    the
+                    the{" "}
                     <TextAccentWrapper>
                         <PathWithBreaks text="app/routing/static/" />
                     </TextAccentWrapper>{" "}

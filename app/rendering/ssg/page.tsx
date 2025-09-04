@@ -31,8 +31,8 @@ async function Page() {
                         cache: &quot;no-store&quot;
                     </TextAccentWrapper>{" "}
                     with <TextAccentWrapper>fetch</TextAccentWrapper>) or
-                    dynamic functions ({" "}
-                    <TextAccentWrapper>headers()</TextAccentWrapper>,{" "}
+                    dynamic functions (
+                    <TextAccentWrapper>headers()</TextAccentWrapper>,
                     <TextAccentWrapper>cookies()</TextAccentWrapper>) are used,
                     which opt the component into dynamic rendering. SSG offers
                     many benefits like exceptional speed, low server load, SEO
