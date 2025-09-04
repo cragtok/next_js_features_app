@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { processEnv } from "./utils";
+import "server-only";
 
 const serverSchema = z.object({
     NODE_ENV: z
