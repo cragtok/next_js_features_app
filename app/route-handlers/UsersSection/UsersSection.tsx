@@ -22,6 +22,7 @@ const UsersSection = () => {
     const [loading, setLoading] = useState(true);
     const [editMode, setEditMode] = useState<Record<string, boolean>>({});
     const lastItemRef = useRef<HTMLDivElement>(null);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
         async function loadUsers() {
@@ -61,6 +62,7 @@ const UsersSection = () => {
         if (!window.confirm("Are you sure you want to delete the user?")) {
             return;
         }
+        setIsDeleting(true);
         try {
             await deleteUser(userId);
         } catch (error) {
@@ -71,6 +73,7 @@ const UsersSection = () => {
                 position: "top-center",
                 richColors: true,
             });
+            setIsDeleting(false);
         }
     };
 
@@ -170,6 +173,7 @@ const UsersSection = () => {
                                     <ButtonWrapper
                                         classNameOverride="w-12 h-8 text-xs"
                                         onClick={() => toggleEditMode(user.id)}
+                                        disabled={isDeleting}
                                     >
                                         Edit
                                     </ButtonWrapper>
@@ -178,6 +182,7 @@ const UsersSection = () => {
                                     onClick={() => handleDeleteUser(user.id)}
                                     classNameOverride="w-14 h-8 text-xs"
                                     buttonColor="status-danger"
+                                    disabled={isDeleting}
                                 >
                                     Delete
                                 </ButtonWrapper>

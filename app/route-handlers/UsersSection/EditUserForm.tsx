@@ -78,6 +78,7 @@ const EditUserForm = ({ user, handleSubmit }: Props) => {
     return (
         <form className="grid gap-4 text-left text-brand-500">
             <UserCreationFormFields
+                disableInputs={isSubmitting}
                 displayErrors={displayErrors}
                 username={username}
                 email={email}

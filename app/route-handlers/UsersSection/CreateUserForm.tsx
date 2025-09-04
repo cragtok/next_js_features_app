@@ -77,6 +77,7 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                         <CardContent className="text-brand-500">
                             <form className="flex flex-col gap-6">
                                 <UserCreationFormFields
+                                    disableInputs={isSubmitting}
                                     displayErrors={displayErrors}
                                     username={username}
                                     password={password}

@@ -12,6 +12,7 @@ interface Props {
     email: string;
     password: string;
     handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    disableInputs?: boolean;
 }
 
 const UserCreationFormFields = ({
@@ -20,6 +21,7 @@ const UserCreationFormFields = ({
     email,
     password,
     handleInputChange,
+    disableInputs = false,
 }: Props) => {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -37,6 +39,7 @@ const UserCreationFormFields = ({
                     Username
                 </Label>
                 <Input
+                    disabled={disableInputs}
                     className="max-[450px]:text-xs"
                     id="username"
                     name="username"
@@ -59,6 +62,7 @@ const UserCreationFormFields = ({
                     Email
                 </Label>
                 <Input
+                    disabled={disableInputs}
                     id="email"
                     name="email"
                     type="text"
@@ -84,6 +88,7 @@ const UserCreationFormFields = ({
                 </div>
                 <div className="relative">
                     <Input
+                        disabled={disableInputs}
                         id="password"
                         name="password"
                         type={showPassword ? "text" : "password"}
