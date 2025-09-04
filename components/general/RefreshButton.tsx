@@ -12,7 +12,9 @@ const RefreshButton = ({ children, ...rest }: Props) => {
 
     const handleClick = () => {
         setIsRefreshing(true);
-        window.location.reload();
+        if (typeof window !== "undefined") {
+            window.location.reload();
+        }
     };
 
     return (
