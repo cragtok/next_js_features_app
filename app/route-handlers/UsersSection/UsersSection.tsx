@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useEffect, useRef, useState } from "react";
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardHeader, CardTitle } from "@/components/ui/card";
 import {
     deleteUser,
     createUser,
@@ -11,25 +11,13 @@ import {
 import { User } from "@/lib/database/databaseHandler";
 import CreateUserForm from "./CreateUserForm";
 import { toast } from "sonner";
-import UserInfo from "./UserInfo";
-import EditUserForm from "./EditUserForm";
 import CardWrapper from "@/components/general/CardWrapper";
-import ButtonWrapper from "@/components/general/ButtonWrapper";
 import LoadingSkeleton from "@/components/general/LoadingSkeleton";
-
-interface UserCardStatus {
-    isEditing: boolean;
-    isDeleting: boolean;
-}
-
-type UserCardStatusRecord = Record<string, UserCardStatus>;
+import UserCardContainer from "./UserCardContainer";
 
 const UsersSection = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
-    const [userCardStatus, setUserCardStatus] = useState<UserCardStatusRecord>(
-        {}
-    );
     const lastItemRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -37,15 +25,6 @@ const UsersSection = () => {
             try {
                 const fetchedUsers = await fetchAllUsers();
                 setUsers(fetchedUsers);
-
-                const userIdMap: UserCardStatusRecord = {};
-                fetchedUsers.forEach((user) => {
-                    userIdMap[user.id] = {
-                        isEditing: false,
-                        isDeleting: false,
-                    };
-                });
-                setUserCardStatus(userIdMap);
             } catch (e) {
                 console.error(e);
                 toast.error("Error fetching users!", {
@@ -64,35 +43,10 @@ const UsersSection = () => {
         return <LoadingSkeleton numRows={4} />;
     }
 
-    const toggleEditMode = (userId: string) => {
-        setUserCardStatus((prev) => {
-            const oldValue = prev[userId].isEditing;
-            const newStatus = {
-                ...prev,
-                [userId]: { ...prev[userId], isEditing: !oldValue },
-            };
-
-            return newStatus;
-        });
-    };
-
-    const toggleDeleteMode = (userId: string) => {
-        setUserCardStatus((prev) => {
-            const oldValue = prev[userId].isDeleting;
-            const newStatus = {
-                ...prev,
-                [userId]: { ...prev[userId], isDeleting: !oldValue },
-            };
-
-            return newStatus;
-        });
-    };
-
     const handleDeleteUser = async (userId: string) => {
         if (!window.confirm("Are you sure you want to delete the user?")) {
             return;
         }
-        toggleDeleteMode(userId);
 
         try {
             await deleteUser(userId);
@@ -104,7 +58,6 @@ const UsersSection = () => {
                 position: "top-center",
                 richColors: true,
             });
-            toggleDeleteMode(userId);
         }
     };
 
@@ -112,18 +65,6 @@ const UsersSection = () => {
         try {
             const newUser = await createUser(newUserFields);
             setUsers((prev) => [...prev, newUser]);
-
-            setUserCardStatus((prev) => {
-                const newStatus = {
-                    ...prev,
-                    [newUser.id]: {
-                        isEditing: false,
-                        isDeleting: false,
-                    },
-                };
-
-                return newStatus;
-            });
 
             toast.success("Successfully created user!", {
                 position: "top-center",
@@ -146,16 +87,7 @@ const UsersSection = () => {
         }
     };
 
-    const handleEditUser = async (originalUser: User, editedUser: User) => {
-        if (
-            originalUser.username == editedUser.username &&
-            originalUser.password == editedUser.password &&
-            originalUser.email == editedUser.email
-        ) {
-            toggleEditMode(originalUser.id);
-            return false;
-        }
-
+    const handleEditUser = async (editedUser: User) => {
         let result = null;
 
         try {
@@ -180,7 +112,6 @@ const UsersSection = () => {
                 position: "top-center",
                 richColors: true,
             });
-            toggleEditMode(originalUser.id);
         }
 
         return result;
@@ -206,58 +137,14 @@ const UsersSection = () => {
             <CreateUserForm handleCreateUser={handleCreateUser} />
             {users.map((user, idx) => (
                 <Fragment key={user.id}>
-                    <CardWrapper classNameOverride="text-justify">
-                        <CardHeader className="flex flex-col gap-2 ">
-                            <CardTitle className="text-accent-500 wrap-anywhere">
-                                {user.username}
-                            </CardTitle>
-
-                            <div className="flex flex-row gap-2">
-                                {!userCardStatus[user.id].isEditing && (
-                                    <ButtonWrapper
-                                        classNameOverride="w-12 h-8 text-xs"
-                                        onClick={() => toggleEditMode(user.id)}
-                                        disabled={
-                                            userCardStatus[user.id].isEditing
-                                        }
-                                    >
-                                        Edit
-                                    </ButtonWrapper>
-                                )}
-                                <ButtonWrapper
-                                    onClick={() => handleDeleteUser(user.id)}
-                                    classNameOverride="w-14 h-8 text-xs"
-                                    buttonColor="status-danger"
-                                    disabled={
-                                        userCardStatus[user.id].isDeleting
-                                    }
-                                >
-                                    Delete
-                                </ButtonWrapper>
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            {userCardStatus[user.id].isEditing ? (
-                                <EditUserForm
-                                    user={user}
-                                    handleSubmit={(editedUser) =>
-                                        handleEditUser(user, editedUser)
-                                    }
-                                />
-                            ) : (
-                                <UserInfo
-                                    email={user.email}
-                                    password={user.password}
-                                    createdAt={user.createdAt || undefined}
-                                    lastItemRef={
-                                        idx === users.length - 1
-                                            ? lastItemRef
-                                            : null
-                                    }
-                                />
-                            )}
-                        </CardContent>
-                    </CardWrapper>
+                    <UserCardContainer
+                        user={user}
+                        onDelete={handleDeleteUser}
+                        onUpdate={handleEditUser}
+                        lastItemRef={
+                            idx === users.length - 1 ? lastItemRef : null
+                        }
+                    />
                 </Fragment>
             ))}
         </>

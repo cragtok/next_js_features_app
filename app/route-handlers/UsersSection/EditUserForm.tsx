@@ -8,9 +8,10 @@ import useUserFormFields from "@/hooks/useUserFormFields";
 interface Props {
     user: User;
     handleSubmit: (user: User) => Promise<boolean>;
+    handleCancel: () => void;
 }
 
-const EditUserForm = ({ user, handleSubmit }: Props) => {
+const EditUserForm = ({ user, handleSubmit, handleCancel }: Props) => {
     const originalUserId = user.id;
     const originalUsername = user.username;
     const originalEmail = user.email;
@@ -25,6 +26,7 @@ const EditUserForm = ({ user, handleSubmit }: Props) => {
         isSubmitting,
         setIsSubmitting,
         handleInputChange,
+        resetFields,
     } = useUserFormFields({
         originalUsername,
         originalEmail,
@@ -33,17 +35,13 @@ const EditUserForm = ({ user, handleSubmit }: Props) => {
 
     const onCancel = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-
-        await handleSubmit({
-            id: originalUserId,
-            username: originalUsername,
-            email: originalEmail,
-            password: originalPassword,
-        });
+        resetFields();
+        handleCancel();
     };
 
     const onSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        setIsSubmitting(true);
 
         const trimmedUsername = username.trim();
         const trimmedEmail = email.trim();
@@ -60,7 +58,16 @@ const EditUserForm = ({ user, handleSubmit }: Props) => {
             return;
         }
 
-        setIsSubmitting(true);
+        if (
+            originalUsername === parseResult.result.username &&
+            originalPassword === parseResult.result.password &&
+            originalEmail === parseResult.result.email
+        ) {
+            setIsSubmitting(false);
+            handleCancel();
+            return;
+        }
+
         try {
             await handleSubmit({
                 id: originalUserId,
