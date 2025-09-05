@@ -5,9 +5,9 @@ import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import { Card, CardContent } from "@/components/ui/card";
 
 const UsersList = async () => {
-    const users: User[] = await getCachedUsers();
+    const users: User[] | undefined = await getCachedUsers();
 
-    if (users.length < 1) {
+    if (!users || users.length < 1) {
         return (
             <Card className="bg-neutral-100">
                 <CardContent className="text-center">
