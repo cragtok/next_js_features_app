@@ -7,7 +7,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { useActionState, useEffect } from "react";
-import { createUser, FormState } from "./actions";
+import { createUserAction, FormState } from "./actions";
 import { USER_LIST_SECTION_ID } from "./constants";
 import { toast } from "sonner";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields";
@@ -21,7 +21,7 @@ const initialState: FormState = {
 
 const ServerActionForm = () => {
     const [state, formAction, pending] = useActionState(
-        createUser,
+        createUserAction,
         initialState
     );
 

@@ -2,6 +2,7 @@
 import { addUserToDb } from "@/lib/database/databaseHandler";
 import { SqliteError } from "better-sqlite3";
 import { parseUserBody } from "@/lib/utils";
+import logger from "@/lib/logging/logger";
 
 export interface FormState {
     message: string;
@@ -13,13 +14,21 @@ export interface FormState {
     };
 }
 
-export async function createUser(
+export async function createUserAction(
     prevState: FormState,
     formData: FormData
 ): Promise<FormState> {
     const username = (formData.get("username") as string).trim();
     const email = (formData.get("email") as string).trim();
     const password = formData.get("password") as string;
+
+    logger.debug("createUserAction", "Form data received:", {
+        formData: {
+            username,
+            email,
+            password,
+        },
+    });
 
     const parseResult = parseUserBody({
         username: username,
@@ -28,6 +37,9 @@ export async function createUser(
     });
 
     if (!parseResult.success) {
+        logger.error("createUserAction", "Form data parsing failed.", {
+            errors: parseResult.result,
+        });
         return {
             message: "User Creation Failed.",
             errors: parseResult.result,
@@ -52,6 +64,10 @@ export async function createUser(
                 .split(": ")[1]
                 .split(".")[1];
             const duplicateFieldMessage = `User with ${duplicateUserField} already exists`;
+            logger.error("createUserAction", "User creation failed.", {
+                [duplicateUserField]: duplicateFieldMessage,
+            });
+
             return {
                 message: "User Creation Failed.",
                 errors: {
@@ -60,6 +76,10 @@ export async function createUser(
             };
         }
     }
+
+    logger.info("createUserAction", "User created successfully", {
+        id: rawFormData.id,
+    });
 
     return {
         message: "User created successfully!",
