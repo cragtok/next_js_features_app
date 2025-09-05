@@ -1,11 +1,16 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import logger from "./lib/logging/logger";
 
 export function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     const response = NextResponse.next();
 
     if (pathname.startsWith("/middleware/ab-testing")) {
+        logger.info(
+            "/middleware/ab-testing | middleware.ts",
+            "Middleware function running."
+        );
         let abTestGroup = request.cookies.get("ab-test-group")?.value;
 
         if (!abTestGroup) {
@@ -19,6 +24,10 @@ export function middleware(request: NextRequest) {
     }
 
     if (pathname.startsWith("/middleware/log")) {
+        logger.info(
+            "/middleware/log | middleware.ts",
+            "Middleware function running."
+        );
         const ip =
             request.headers.get("x-forwarded-for") ||
             request.headers.get("x-real-ip") ||
