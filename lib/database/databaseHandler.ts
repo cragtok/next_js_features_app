@@ -36,9 +36,9 @@ async function deleteOldestUser() {
 
     if (oldestUser) {
         db.prepare("DELETE FROM users WHERE id = ?").run(oldestUser.id);
-        logger.debug(
-            `[deleteOldestUser]: Deleted oldest user with ID: ${oldestUser.id}`
-        );
+        logger.info("deleteOldestUser", "Deleted oldest user.", {
+            id: oldestUser.id,
+        });
         revalidateTag(DB_CACHE_TAG);
     }
 }
@@ -47,13 +47,19 @@ const getCachedUsers = unstable_cache(
     async () => {
         try {
             const items = db.prepare("SELECT * FROM users").all() as User[];
-            logger.debug(
-                `[unstable_cache]: Data fetched. Total items: ${items.length}`
+            logger.info(
+                "getCachedUsers",
+                "Users fetched from database cache.",
+                {
+                    numUsers: items.length,
+                }
             );
             return items;
         } catch (error) {
             logger.error(
-                "[unstable_cache]: Failed to read from database cache"
+                "getCachedUsers",
+                "Failed to read from database cache.",
+                error as Error
             );
         }
     },
@@ -88,7 +94,8 @@ async function addUserToDb(newUser: Omit<User, "createdAt">): Promise<User> {
         .prepare("SELECT * FROM users WHERE id = ?")
         .get(newUser.id) as User;
 
-    logger.debug(addedUser, `[addItemToDb]: Added new item:`);
+    logger.info("addItemToDb", "Added new user.", { id: addedUser.id });
+    logger.debug("addItemToDb", "Added new user:", addedUser);
     revalidateTag(DB_CACHE_TAG);
     return addedUser;
 }
@@ -103,32 +110,36 @@ async function findUserInDb(userId: string): Promise<User | null> {
     return null;
 }
 
-async function updateUserInDb(updatedUser: User): Promise<User | null> {
+async function updateUserInDb(user: User): Promise<User> {
     db.prepare(
         "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?"
-    ).run(
-        updatedUser.username,
-        updatedUser.email,
-        updatedUser.password,
-        updatedUser.id
-    );
+    ).run(user.username, user.email, user.password, user.id);
     revalidateTag(DB_CACHE_TAG);
 
-    const dbUser = db
+    const updatedUser = db
         .prepare("SELECT * FROM users WHERE id = ?")
-        .get(updatedUser.id) as User;
-
-    return dbUser;
+        .get(user.id) as User;
+    logger.info("updateUserInDb", "Updated user.", {
+        id: updatedUser.id,
+    });
+    logger.debug("updateUserInDb", `Updated user:`, {
+        oldUser: user,
+        newUser: updatedUser,
+    });
+    return updatedUser;
 }
 
 async function deleteUserInDb(userId: string) {
     db.prepare("DELETE FROM users WHERE id = ?").run(userId);
+    logger.info("deleteUserInDb", "Deleted user.", {
+        id: userId,
+    });
     revalidateTag(DB_CACHE_TAG);
 }
 
 async function clearDb(): Promise<void> {
     db.prepare("DELETE FROM users").run();
-    logger.debug("[clearDb]: All users deleted");
+    logger.info("clearDb", "All users deleted.");
 }
 
 async function seedDb(usersToSeed: User[]): Promise<void> {
@@ -146,7 +157,9 @@ async function seedDb(usersToSeed: User[]): Promise<void> {
             );
         }
     })(usersToSeed);
-    logger.debug(`[seedDb]: ${usersToSeed.length} users seeded`);
+    logger.info("seedDb", "Users seeded.", {
+        numUsers: usersToSeed.length,
+    });
 }
 
 export {

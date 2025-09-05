@@ -25,12 +25,12 @@ const mockUsers: User[] = [
 
 async function runSeed() {
     try {
-        logger.info("[runSeed]: Starting database seeding...");
+        logger.info("runSeed", "Starting database seeding...");
         await clearDb();
         await seedDb(mockUsers);
-        logger.info("[runSeed]: Database seeding complete");
+        logger.info("runSeed", "Database seeding complete.");
     } catch (error) {
-        logger.error(`[runSeed]: Database seeding failed: ${error}`);
+        logger.fatal("runSeed", `Database seeding failed.`, error as Error);
         process.exit(1);
     }
 }
