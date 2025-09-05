@@ -6,6 +6,7 @@ import {
     DB_CACHE_PATH,
     MAX_USERS,
 } from "./constants";
+import logger from "@/lib/logging/logger";
 
 interface User {
     id: string;
@@ -35,8 +36,8 @@ async function deleteOldestUser() {
 
     if (oldestUser) {
         db.prepare("DELETE FROM users WHERE id = ?").run(oldestUser.id);
-        console.log(
-            `[deleteOldestUser] Deleted oldest user with ID: ${oldestUser.id}`
+        logger.debug(
+            `[deleteOldestUser]: Deleted oldest user with ID: ${oldestUser.id}`
         );
         revalidateTag(DB_CACHE_TAG);
     }
@@ -44,16 +45,16 @@ async function deleteOldestUser() {
 
 const getCachedUsers = unstable_cache(
     async () => {
-        console.log("[unstable_cache] Fetching data from mockDb.json...");
         try {
             const items = db.prepare("SELECT * FROM users").all() as User[];
-            console.log(
-                `[unstable_cache] Data fetched. Total items: ${items.length}`
+            logger.debug(
+                `[unstable_cache]: Data fetched. Total items: ${items.length}`
             );
             return items;
         } catch (error) {
-            console.error(error);
-            throw new Error("Failed to read from database cache.");
+            logger.error(
+                "[unstable_cache]: Failed to read from database cache"
+            );
         }
     },
     [DB_CACHE_PATH],
@@ -87,7 +88,7 @@ async function addUserToDb(newUser: Omit<User, "createdAt">): Promise<User> {
         .prepare("SELECT * FROM users WHERE id = ?")
         .get(newUser.id) as User;
 
-    console.log(`[addItemToDb] Added new item: ${JSON.stringify(addedUser)}`);
+    logger.debug(addedUser, `[addItemToDb]: Added new item:`);
     revalidateTag(DB_CACHE_TAG);
     return addedUser;
 }
@@ -127,7 +128,7 @@ async function deleteUserInDb(userId: string) {
 
 async function clearDb(): Promise<void> {
     db.prepare("DELETE FROM users").run();
-    console.log("[clearDb] All users deleted.");
+    logger.debug("[clearDb]: All users deleted");
 }
 
 async function seedDb(usersToSeed: User[]): Promise<void> {
@@ -145,7 +146,7 @@ async function seedDb(usersToSeed: User[]): Promise<void> {
             );
         }
     })(usersToSeed);
-    console.log(`[seedDb] ${usersToSeed.length} users seeded.`);
+    logger.debug(`[seedDb]: ${usersToSeed.length} users seeded`);
 }
 
 export {

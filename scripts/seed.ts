@@ -1,5 +1,6 @@
 import { clearDb, seedDb, type User } from "@/lib/database/databaseHandler";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import logger from "@/lib/logging/logger";
 
 const mockUsers: User[] = [
     {
@@ -24,12 +25,12 @@ const mockUsers: User[] = [
 
 async function runSeed() {
     try {
-        console.log("Starting database seeding...");
+        logger.info("[runSeed]: Starting database seeding...");
         await clearDb();
         await seedDb(mockUsers);
-        console.log("Database seeding complete.");
+        logger.info("[runSeed]: Database seeding complete");
     } catch (error) {
-        console.error("Database seeding failed:", error);
+        logger.error(`[runSeed]: Database seeding failed: ${error}`);
         process.exit(1);
     }
 }
