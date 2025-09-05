@@ -1,27 +1,41 @@
 import { getCachedUsers, addUserToDb } from "@/lib/database/databaseHandler";
 import { parseUserBody } from "@/lib/utils";
 import { SqliteError } from "better-sqlite3";
+import logger from "@/lib/logging/logger";
+
+const API_ROUTE = "/my-api";
 
 async function GET(_request: Request) {
-    console.log("GET method called");
+    logger.info(`${API_ROUTE} | GET`, "Request received.");
     try {
         const users = await getCachedUsers();
+        logger.info(`${API_ROUTE} | GET`, `Users fetched.`, {
+            numUsers: users?.length,
+            status: 200,
+        });
         return Response.json({ data: users });
     } catch (error) {
-        console.error(error);
+        const message = "Failed to return users.";
+        const status = 500;
+        logger.error(`${API_ROUTE} | GET`, message, {
+            status: 500,
+            error: error as Error,
+        });
         return Response.json(
             {
-                message: "Failed to fetch users",
+                message,
             },
-            { status: 500 }
+            { status }
         );
     }
 }
 
 async function POST(request: Request) {
+    logger.info(`${API_ROUTE} | POST`, "Request received.");
+    let body = null;
     try {
-        const body = await request.json();
-        console.log(`POST method called with body: ${JSON.stringify(body)}`);
+        body = await request.json();
+        logger.debug(`${API_ROUTE} | POST`, `Request body received:`, body);
 
         const parseResult = parseUserBody({
             username: body.username.trim(),
@@ -30,12 +44,20 @@ async function POST(request: Request) {
         });
 
         if (!parseResult.success) {
+            const message = "Missing or invalid user data.";
+            const errors = parseResult.result;
+            const status = 400;
+            logger.error(`${API_ROUTE} | POST`, message, {
+                body,
+                errors,
+                status,
+            });
             return Response.json(
                 {
                     message: "Missing or invalid user data.",
                     errors: parseResult.result,
                 },
-                { status: 400 }
+                { status }
             );
         }
 
@@ -46,9 +68,13 @@ async function POST(request: Request) {
             password: parseResult.result.password,
         });
 
-        return Response.json({ data: newUser });
+        logger.info(`${API_ROUTE} | POST`, `New user created.`, {
+            id: newUser.id,
+            status: 201,
+        });
+
+        return Response.json({ data: newUser }, { status: 201 });
     } catch (error) {
-        console.error(error);
         let message = "Failed to create new user.";
         let status = 500;
 
@@ -62,9 +88,15 @@ async function POST(request: Request) {
             const duplicateUserField = error.message
                 .split(": ")[1]
                 .split(".")[1];
-            message = `User with ${duplicateUserField} already exists`;
+            message = `User with ${duplicateUserField} already exists.`;
             status = 400;
         }
+
+        logger.error(`${API_ROUTE} | POST`, message, {
+            status,
+            body,
+            error: error as Error,
+        });
 
         return Response.json(
             {
