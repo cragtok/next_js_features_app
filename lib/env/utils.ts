@@ -8,7 +8,7 @@ function processEnv<T extends z.ZodSchema>(
 
     if (!parsed.success) {
         console.error(
-            "❌ Invalid client environment variables:",
+            "❌ Invalid environment variables:",
             z.treeifyError(parsed.error).errors,
             "\nFull error:",
             parsed.error // Log the Zod error for detailed context
