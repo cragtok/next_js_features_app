@@ -1,6 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { serverEnv } from "@/lib/env/serverEnv";
 import { delay } from "@/lib/utils";
+import logger from "@/lib/logging/logger";
 
 interface CityDateTime {
     city: string;
@@ -35,9 +36,9 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
             // This makes each request's contents slightly different, forcing a new lookup.
             const cacheBustingContents = `${baseContents} (Request Time: ${new Date().toISOString()})`;
 
-            console.log(
-                `[Gemini Call] Requesting content: ${cacheBustingContents.substring(0, 100)}... (Attempt ${i + 1}/${MAX_RETRIES})`
-            );
+            logger.info("fetchCityDateTimes", `Fetching city date times...`, {
+                attempt: i + 1,
+            });
 
             const response = await ai.models.generateContent({
                 model: "gemini-2.5-flash-lite",
@@ -53,14 +54,21 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
                 throw new Error("Error: missing or malformated response");
             }
 
-            console.log(response.text);
-            return JSON.parse(response.text);
+            const cityDateTimes = JSON.parse(response.text);
+            logger.info("fetchCityDateTimes", "Fetched city date times:", {
+                data: cityDateTimes,
+            });
+            return cityDateTimes;
         } catch (error) {
             // Sometimes the response from Gemini comes wrapped in backticks,
             // despite providing system instructions.
             // So we retry the Gemini call until we get the response
             // in the proper format.
-            console.error(`Attempt ${i + 1} failed:`, error);
+            logger.error(
+                "apiCall",
+                `Gemini call attempt ${i + 1} failed:`,
+                error as Error
+            );
             if (i < MAX_RETRIES - 1) {
                 await delay(RETRY_DELAY_MS);
             }
