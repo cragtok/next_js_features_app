@@ -1,4 +1,5 @@
 import { serverEnv } from "@/lib/env/serverEnv";
+import logger from "@/lib/logging/logger";
 
 interface RequestBody {
     [key: string]: {
@@ -62,12 +63,16 @@ async function fetchPrices(): Promise<CryptoData[]> {
         };
     }
 
+    logger.info("fetchPrices", "Fetcing crypto prices...");
     const response = await fetch(apiCallURL, {
         method: "POST",
         body: JSON.stringify(body),
     });
 
     if (!response.ok) {
+        logger.error("fetchPrices", "Failed to fetch crypto prices.", {
+            status: response.status,
+        });
         return [];
     }
 
@@ -75,7 +80,10 @@ async function fetchPrices(): Promise<CryptoData[]> {
     const payload: APIPayload = responseJson.data;
     const result = formatPayload(payload);
 
-    console.log(result);
+    logger.debug("fetchPrices", "Fetched crypto prices:", {
+        data: result,
+    });
+    logger.info("fetchPrices", "Fetched crypto prices.");
     return result;
 }
 
