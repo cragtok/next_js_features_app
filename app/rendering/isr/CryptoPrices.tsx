@@ -1,11 +1,11 @@
 import { CardContent } from "@/components/ui/card";
-import { fetchPrices, CryptoData } from "./apiCall";
+import { fetchPrices } from "./apiCall";
 import CryptoPricesCard from "./CryptoPricesCard";
 import CardWrapper from "@/components/general/CardWrapper";
 import RefreshButton from "@/components/general/RefreshButton";
 
 async function CryptoPrices() {
-    const prices: CryptoData[] = await fetchPrices();
+    const prices = await fetchPrices();
 
     if (!prices.length) {
         return (

@@ -64,26 +64,34 @@ async function fetchPrices(): Promise<CryptoData[]> {
     }
 
     logger.info("fetchPrices", "Fetcing crypto prices...");
-    const response = await fetch(apiCallURL, {
-        method: "POST",
-        body: JSON.stringify(body),
-    });
 
-    if (!response.ok) {
-        logger.error("fetchPrices", "Failed to fetch crypto prices.", {
-            status: response.status,
+    let result: CryptoData[] = [];
+    try {
+        const response = await fetch(apiCallURL, {
+            method: "POST",
+            body: JSON.stringify(body),
         });
-        return [];
+
+        if (!response.ok) {
+            logger.error("fetchPrices", "Failed to fetch crypto prices.", {
+                status: response.status,
+            });
+            return [];
+        }
+
+        const responseJson: ApiResponse = await response.json();
+        const payload: APIPayload = responseJson.data;
+        result = formatPayload(payload);
+
+        logger.debug("fetchPrices", "Fetched crypto prices:", {
+            data: result,
+        });
+        logger.info("fetchPrices", "Fetched crypto prices.");
+    } catch (error) {
+        logger.error("fetchPrices", "Failed to fetch crypto prices.", {
+            error: error as Error,
+        });
     }
-
-    const responseJson: ApiResponse = await response.json();
-    const payload: APIPayload = responseJson.data;
-    const result = formatPayload(payload);
-
-    logger.debug("fetchPrices", "Fetched crypto prices:", {
-        data: result,
-    });
-    logger.info("fetchPrices", "Fetched crypto prices.");
     return result;
 }
 
