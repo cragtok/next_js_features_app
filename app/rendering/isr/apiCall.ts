@@ -63,7 +63,7 @@ async function fetchPrices(): Promise<CryptoData[]> {
     }
     const logger = getLogger();
 
-    logger.info("fetchPrices", "Fetcing crypto prices...");
+    logger.info("fetchPrices", "Fetching crypto prices...");
 
     let result: CryptoData[] = [];
     try {

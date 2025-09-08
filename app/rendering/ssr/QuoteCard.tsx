@@ -3,11 +3,10 @@ import { CardContent } from "@/components/ui/card";
 import { Quote, fetchQuote } from "./apiCall";
 import CardWrapper from "@/components/general/CardWrapper";
 import RefreshButton from "@/components/general/RefreshButton";
-import { headers } from "next/headers";
+import { extractUserRequestId } from "@/lib/headers/extractUserRequestId";
 
 const QuoteCard = async () => {
-    const headersList = await headers();
-    const requestId = headersList.get("x-user-session-id") || undefined;
+    const requestId = await extractUserRequestId();
 
     let quoteData: Quote | null = null;
     let errorMessage: string | null = null;

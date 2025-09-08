@@ -1,14 +1,13 @@
 import { getCachedUsers, addUserToDb } from "@/lib/database/databaseHandler";
 import { parseUserBody } from "@/lib/utils";
+import { extractUserRequestId } from "@/lib/headers/extractUserRequestId";
 import { SqliteError } from "better-sqlite3";
 import { getLogger } from "@/lib/logging/logger";
-import { headers } from "next/headers";
 
 const API_ROUTE = "/my-api";
 
 async function GET(_request: Request) {
-    const headersList = await headers();
-    const requestId = headersList.get("x-user-session-id") || undefined;
+    const requestId = await extractUserRequestId();
 
     const loggerScope = `${API_ROUTE} | GET`;
     const logger = getLogger(requestId);
@@ -44,8 +43,7 @@ async function GET(_request: Request) {
 }
 
 async function POST(request: Request) {
-    const headersList = await headers();
-    const requestId = headersList.get("x-user-session-id") || undefined;
+    const requestId = await extractUserRequestId();
 
     const loggerScope = `${API_ROUTE} | POST`;
     const logger = getLogger(requestId);

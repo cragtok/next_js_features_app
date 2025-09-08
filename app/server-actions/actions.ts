@@ -2,8 +2,8 @@
 import { addUserToDb } from "@/lib/database/databaseHandler";
 import { SqliteError } from "better-sqlite3";
 import { parseUserBody } from "@/lib/utils";
+import { extractUserRequestId } from "@/lib/headers/extractUserRequestId";
 import { getLogger } from "@/lib/logging/logger";
-import { headers } from "next/headers";
 
 export interface FormState {
     message: string;
@@ -19,8 +19,7 @@ export async function createUserAction(
     prevState: FormState,
     formData: FormData
 ): Promise<FormState> {
-    const headersList = await headers();
-    const requestId = headersList.get("x-user-session-id") || undefined;
+    const requestId = await extractUserRequestId();
 
     const logger = getLogger(requestId);
 
