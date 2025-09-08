@@ -1,20 +1,35 @@
 import type { Metadata } from "next";
-import { Noto_Sans } from "next/font/google";
 import Header from "@/components/general/Header/Header";
 import { Toaster } from "sonner";
+import localFont from "next/font/local";
 
 import "./globals.css";
-
-const notoSans = Noto_Sans({
-    variable: "--font-noto-sans",
-    subsets: ["latin"],
-    fallback: ["system-ui", "Arial", "sans-serif"],
-});
 
 export const metadata: Metadata = {
     title: "Next.js Features App",
     description: "An app demonstrating basic Next.js features",
 };
+
+const myFont = localFont({
+    src: [
+        {
+            path: "../public/fonts/NotoSans-Regular.ttf",
+            weight: "400",
+            style: "normal",
+        },
+        {
+            path: "../public/fonts/NotoSans-SemiBold.ttf",
+            weight: "600",
+            style: "normal",
+        },
+        {
+            path: "../public/fonts/NotoSans-Bold.ttf",
+            weight: "700",
+            style: "normal",
+        },
+    ],
+    fallback: ["system-ui", "arial"],
+});
 
 async function RootLayout({
     children,
@@ -23,9 +38,7 @@ async function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body
-                className={`${notoSans.variable} mx-10 antialiased bg-neutral-100`}
-            >
+            <body className={`${myFont} mx-10 antialiased bg-neutral-100`}>
                 <Header />
                 {children}
                 <Toaster closeButton={true} />
