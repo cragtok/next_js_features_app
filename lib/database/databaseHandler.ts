@@ -107,7 +107,9 @@ async function addUserToDb(
 
     const logger = getLogger(`${CURRENT_FILE_NAME} | addUserToDb`, requestId);
     logger.info("Added new user.", { id: addedUser.id });
-    logger.debug("Added new user:", addedUser);
+    logger.debug("New user:", {
+        addedUser,
+    });
 
     revalidateTag(DB_CACHE_TAG);
     return addedUser;
