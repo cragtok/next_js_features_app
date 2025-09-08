@@ -1,13 +1,34 @@
-import { getCachedUsers, User } from "@/lib/database/databaseHandler";
+import { User } from "@/lib/database/databaseHandler";
 import UserCard from "./UserCard";
 import { USER_LIST_SECTION_ID } from "./constants";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import { Card, CardContent } from "@/components/ui/card";
+import { retrieveUsersFromDb } from "./databaseCall";
 
 const UsersList = async () => {
-    const users: User[] | undefined = await getCachedUsers();
+    let users: User[] | undefined;
+    let errorMessage: string = "Error retrieving users";
 
-    if (!users || users.length < 1) {
+    try {
+        users = await retrieveUsersFromDb();
+    } catch (error) {
+        console.error(error);
+        errorMessage = (error as Error).message;
+    }
+
+    if (!users) {
+        return (
+            <Card className="bg-neutral-100">
+                <CardContent className="text-center">
+                    <TextAccentWrapper classNameOverride="text-status-danger-500">
+                        {errorMessage}
+                    </TextAccentWrapper>
+                </CardContent>
+            </Card>
+        );
+    }
+
+    if (users.length < 1) {
         return (
             <Card className="bg-neutral-100">
                 <CardContent className="text-center">
