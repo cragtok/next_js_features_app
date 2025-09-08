@@ -78,7 +78,6 @@ async function POST(request: Request) {
 
         const newUser = await addUserToDb(
             {
-                id: crypto.randomUUID(),
                 username: parseResult.result.username,
                 email: parseResult.result.email,
                 password: parseResult.result.password,

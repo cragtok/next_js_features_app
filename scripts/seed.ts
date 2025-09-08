@@ -7,21 +7,18 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const CURRENT_FILE_NAME = path.basename(__filename);
 
-const mockUsers: User[] = [
+const mockUsers = [
     {
-        id: uuidv4(),
         username: "john_doe",
         email: "john.doe@example.com",
         password: "password123",
     },
     {
-        id: uuidv4(),
         username: "jane_smith",
         email: "jane.smith@example.com",
         password: "securepass",
     },
     {
-        id: uuidv4(),
         username: "peter_jones",
         email: "peter.jones@example.com",
         password: "mysecret",

@@ -63,7 +63,6 @@ export async function createUserAction(
     }
 
     const rawFormData = {
-        id: crypto.randomUUID(),
         username: parseResult.result.username,
         email: parseResult.result.email,
         password: parseResult.result.password,

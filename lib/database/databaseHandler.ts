@@ -18,6 +18,8 @@ interface User {
     createdAt?: string;
 }
 
+type UserDTO = Omit<User, "id">;
+
 const db = new Database(DB_FILE_PATH);
 db.pragma("journal_mode = WAL");
 
@@ -78,7 +80,7 @@ const getCachedUsers = unstable_cache(
 );
 
 async function addUserToDb(
-    newUser: Omit<User, "createdAt">,
+    newUser: UserDTO,
     requestId?: string
 ): Promise<User> {
     const { count } = db
@@ -89,20 +91,15 @@ async function addUserToDb(
         await deleteOldestUser(requestId);
     }
 
+    const id = crypto.randomUUID();
     const createdAt = new Date().toISOString();
     db.prepare(
         "INSERT INTO users (id, username, email, password, createdAt) VALUES(?, ?, ?, ?, ?)"
-    ).run(
-        newUser.id,
-        newUser.username,
-        newUser.email,
-        newUser.password,
-        createdAt
-    );
+    ).run(id, newUser.username, newUser.email, newUser.password, createdAt);
 
     const addedUser = db
         .prepare("SELECT * FROM users WHERE id = ?")
-        .get(newUser.id) as User;
+        .get(id) as User;
 
     const logger = getLogger(`${CURRENT_FILE_NAME} | addUserToDb`, requestId);
     logger.info("Added new user.", { id: addedUser.id });
@@ -159,7 +156,7 @@ async function clearDb(): Promise<void> {
     logger.info("All users deleted.");
 }
 
-async function seedDb(usersToSeed: User[]): Promise<void> {
+async function seedDb(usersToSeed: UserDTO[]): Promise<void> {
     const insert = db.prepare(
         "INSERT INTO users (id, username, email, password, createdAt) VALUES(?, ?, ?, ?, ?)"
     );
@@ -189,4 +186,5 @@ export {
     clearDb,
     seedDb,
     type User,
+    type UserDTO,
 };
