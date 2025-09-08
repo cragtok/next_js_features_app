@@ -5,7 +5,8 @@ import {
 } from "@/lib/database/databaseHandler";
 import { parseUserBody } from "@/lib/utils";
 import { SqliteError } from "better-sqlite3";
-import logger from "@/lib/logging/logger";
+import { getLogger } from "@/lib/logging/logger";
+import { headers } from "next/headers";
 
 const API_ROUTE = "/my-api";
 
@@ -13,13 +14,20 @@ async function PUT(
     request: Request,
     { params }: { params: Promise<{ userId: string }> }
 ) {
+    const headersList = await headers();
+    const requestId = headersList.get("x-user-session-id") || undefined;
+
     const { userId } = await params;
-    logger.info(`${API_ROUTE}/${userId} | PUT`, "Request received.");
+
+    const loggerScope = `${API_ROUTE}/${userId} | PUT`;
+    const logger = getLogger(requestId);
+
+    logger.info(loggerScope, "Request received.");
 
     let body = null;
     try {
         body = await request.json();
-        logger.debug(`${API_ROUTE}/${userId} | PUT`, "Request body received:", {
+        logger.debug(loggerScope, "Request body received:", {
             body,
         });
 
@@ -33,7 +41,7 @@ async function PUT(
             const message = "Missing or invalid user data.";
             const errors = parseResult.result;
             const status = 400;
-            logger.error(`${API_ROUTE}/${userId} | PUT`, message, {
+            logger.error(loggerScope, message, {
                 body,
                 status,
                 errors,
@@ -51,7 +59,7 @@ async function PUT(
 
         if (!foundUser) {
             const status = 404;
-            logger.error(`${API_ROUTE}/${userId} | PUT`, "User not found.", {
+            logger.error(loggerScope, "User not found.", {
                 status,
             });
             return Response.json(
@@ -62,15 +70,21 @@ async function PUT(
             );
         }
 
-        const updatedUser = await updateUserInDb({
-            id: foundUser.id,
-            username: parseResult.result.username,
-            email: parseResult.result.email,
-            password: parseResult.result.password,
-        });
+        const updatedUser = await updateUserInDb(
+            {
+                id: foundUser.id,
+                username: parseResult.result.username,
+                email: parseResult.result.email,
+                password: parseResult.result.password,
+            },
+            requestId
+        );
 
-        logger.info(`${API_ROUTE}/${userId} | PUT`, `User updated.`, {
+        logger.info(loggerScope, `User updated.`, {
             status: 200,
+        });
+        logger.debug(loggerScope, `Updated user:`, {
+            updatedUser,
         });
         return Response.json({ data: updatedUser });
     } catch (error) {
@@ -89,10 +103,11 @@ async function PUT(
             message = `User with ${duplicateUserField} already exists.`;
             status = 400;
         }
-        logger.error(`${API_ROUTE}/${userId} | PUT`, message, {
+        logger.error(loggerScope, message, {
             body,
             status,
-            error: error as Error,
+            message: (error as Error).message,
+            stack: (error as Error).stack,
         });
 
         return Response.json({ message }, { status });
@@ -103,8 +118,15 @@ async function DELETE(
     _request: Request,
     { params }: { params: Promise<{ userId: string }> }
 ) {
+    const headersList = await headers();
+    const requestId = headersList.get("x-user-session-id") || undefined;
+
     const { userId } = await params;
-    logger.info(`${API_ROUTE}/${userId} | DELETE`, "Request received.");
+
+    const loggerScope = `${API_ROUTE}/${userId} | DELETE`;
+    const logger = getLogger(requestId);
+
+    logger.info(loggerScope, "Request received.");
 
     try {
         const foundUser = await findUserInDb(userId);
@@ -112,9 +134,8 @@ async function DELETE(
         if (!foundUser) {
             const message = `User with id ${userId} not found.`;
             const status = 404;
-            logger.error(`${API_ROUTE}/${userId} | DELETE`, "User not found.", {
+            logger.error(loggerScope, "User not found.", {
                 status,
-                id: userId,
             });
             return Response.json(
                 {
@@ -124,8 +145,8 @@ async function DELETE(
             );
         }
 
-        await deleteUserInDb(userId);
-        logger.info(`${API_ROUTE}/${userId} | DELETE`, `User deleted.`, {
+        await deleteUserInDb(userId, requestId);
+        logger.info(loggerScope, `User deleted.`, {
             status: 204,
         });
         return new Response(null, { status: 204 });
@@ -136,9 +157,10 @@ async function DELETE(
             message = error.message;
             status = 400;
         }
-        logger.error(`${API_ROUTE}/${userId} | DELETE`, message, {
+        logger.error(loggerScope, message, {
             status,
-            error: error as Error,
+            message: (error as Error).message,
+            stack: (error as Error).stack,
         });
 
         return Response.json({ message }, { status });

@@ -1,25 +1,38 @@
 import { getCachedUsers, addUserToDb } from "@/lib/database/databaseHandler";
 import { parseUserBody } from "@/lib/utils";
 import { SqliteError } from "better-sqlite3";
-import logger from "@/lib/logging/logger";
+import { getLogger } from "@/lib/logging/logger";
+import { headers } from "next/headers";
 
 const API_ROUTE = "/my-api";
 
 async function GET(_request: Request) {
-    logger.info(`${API_ROUTE} | GET`, "Request received.");
+    const headersList = await headers();
+    const requestId = headersList.get("x-user-session-id") || undefined;
+
+    const loggerScope = `${API_ROUTE} | GET`;
+    const logger = getLogger(requestId);
+
+    logger.info(loggerScope, "Request received.");
     try {
-        const users = await getCachedUsers();
-        logger.info(`${API_ROUTE} | GET`, `Users fetched.`, {
+        const users = await getCachedUsers(requestId);
+        logger.info(loggerScope, "Users fetched.", {
             numUsers: users?.length,
+            status: 200,
+        });
+        logger.debug(loggerScope, "Users:.", {
+            numUsers: users?.length,
+            users,
             status: 200,
         });
         return Response.json({ data: users });
     } catch (error) {
         const message = "Failed to return users.";
         const status = 500;
-        logger.error(`${API_ROUTE} | GET`, message, {
+        logger.error(loggerScope, message, {
             status: 500,
-            error: error as Error,
+            message: (error as Error).message,
+            stack: (error as Error).stack,
         });
         return Response.json(
             {
@@ -31,11 +44,17 @@ async function GET(_request: Request) {
 }
 
 async function POST(request: Request) {
-    logger.info(`${API_ROUTE} | POST`, "Request received.");
+    const headersList = await headers();
+    const requestId = headersList.get("x-user-session-id") || undefined;
+
+    const loggerScope = `${API_ROUTE} | POST`;
+    const logger = getLogger(requestId);
+
+    logger.info(loggerScope, "Request received.");
     let body = null;
     try {
         body = await request.json();
-        logger.debug(`${API_ROUTE} | POST`, `Request body received:`, body);
+        logger.debug(loggerScope, "Request body received:", body);
 
         const parseResult = parseUserBody({
             username: body.username.trim(),
@@ -47,7 +66,7 @@ async function POST(request: Request) {
             const message = "Missing or invalid user data.";
             const errors = parseResult.result;
             const status = 400;
-            logger.error(`${API_ROUTE} | POST`, message, {
+            logger.error(loggerScope, message, {
                 body,
                 errors,
                 status,
@@ -66,10 +85,14 @@ async function POST(request: Request) {
             username: parseResult.result.username,
             email: parseResult.result.email,
             password: parseResult.result.password,
-        });
+        }, requestId);
 
-        logger.info(`${API_ROUTE} | POST`, `New user created.`, {
+        logger.info(loggerScope, "New user created.", {
             id: newUser.id,
+            status: 201,
+        });
+        logger.debug(loggerScope, "New user:", {
+            newUser,
             status: 201,
         });
 
@@ -92,10 +115,11 @@ async function POST(request: Request) {
             status = 400;
         }
 
-        logger.error(`${API_ROUTE} | POST`, message, {
+        logger.error(loggerScope, message, {
             status,
             body,
-            error: error as Error,
+            message: (error as Error).message,
+            stack: (error as Error).stack,
         });
 
         return Response.json(
