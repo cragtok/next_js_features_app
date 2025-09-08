@@ -12,7 +12,7 @@ import { SubRoute } from "@/lib/routesList";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
 const FLEX_BREAKPOINT_WIDTH = 280;
-const MAX_URL_LENGTH = 36;
+const MAX_URL_LENGTH = 42;
 
 interface Props {
     routePath: SubRoute[];
@@ -64,7 +64,7 @@ const BreadcrumbMenu = ({ routePath }: Props) => {
                     if (idx === routePath.length - 1 || !pathObj.href) {
                         return (
                             <BreadcrumbItem key={crypto.randomUUID()}>
-                                <BreadcrumbPage className="font-bold text-accent-500 wrap-anywhere">
+                                <BreadcrumbPage className="font-bold text-accent-500 wrap-anywhere text-center">
                                     {trimExcessURL(pathObj.title)}
                                 </BreadcrumbPage>
                             </BreadcrumbItem>

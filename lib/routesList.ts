@@ -41,7 +41,7 @@ const pageRoutes: PageRoute[] = [
                     "Rendering page content once on the server during build time.",
             },
             {
-                title: "Incremental Static Regeneration",
+                title: "Incremental Static Regeneration (ISR)",
                 href: "/rendering/isr",
                 description:
                     "Updating a static page with new content after a certain time period.",
