@@ -12,7 +12,7 @@ export async function retrieveUsersFromDb() {
     try {
         logger.info("Retrieving cached users...");
         const users = await getCachedUsers();
-        logger.info("Cached users retrieved...", {
+        logger.info("Cached users retrieved.", {
             numUsers: users?.length,
         });
         return users;

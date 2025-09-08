@@ -4,7 +4,7 @@ import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import CryptoPrices from "./CryptoPrices";
 
-export const revalidate = 20;
+export const revalidate = 10;
 
 async function Page() {
     return (
