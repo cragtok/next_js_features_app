@@ -6,7 +6,7 @@ import {
     DB_CACHE_PATH,
     MAX_USERS,
 } from "./constants";
-import logger from "@/lib/logging/logger";
+import { getLogger } from "@/lib/logging/logger";
 
 interface User {
     id: string;
@@ -29,22 +29,27 @@ db.exec(`
       );
 `);
 
-async function deleteOldestUser() {
+async function deleteOldestUser(requestId?: string) {
     const oldestUser = db
         .prepare("SELECT id FROM users ORDER BY createdAt ASC LIMIT 1")
         .get() as { id: string } | undefined;
 
     if (oldestUser) {
         db.prepare("DELETE FROM users WHERE id = ?").run(oldestUser.id);
+        const logger = getLogger(requestId);
         logger.info("deleteOldestUser", "Deleted oldest user.", {
             id: oldestUser.id,
+        });
+        logger.debug("deleteOldestUser", "Oldest user:", {
+            oldestUser,
         });
         revalidateTag(DB_CACHE_TAG);
     }
 }
 
 const getCachedUsers = unstable_cache(
-    async () => {
+    async (requestId?: string) => {
+        const logger = getLogger(requestId);
         try {
             const items = db.prepare("SELECT * FROM users").all() as User[];
             logger.info(
@@ -54,12 +59,18 @@ const getCachedUsers = unstable_cache(
                     numUsers: items.length,
                 }
             );
+            logger.debug("getCachedUsers", "Users:", {
+                items,
+            });
             return items;
         } catch (error) {
             logger.error(
                 "getCachedUsers",
                 "Failed to read from database cache.",
-                error as Error
+                {
+                    message: (error as Error).message,
+                    stack: (error as Error).stack,
+                }
             );
         }
     },
@@ -70,13 +81,16 @@ const getCachedUsers = unstable_cache(
     }
 );
 
-async function addUserToDb(newUser: Omit<User, "createdAt">): Promise<User> {
+async function addUserToDb(
+    newUser: Omit<User, "createdAt">,
+    requestId?: string
+): Promise<User> {
     const { count } = db
         .prepare("SELECT COUNT(*) as count FROM users")
         .get() as { count: number };
 
     if (count >= MAX_USERS) {
-        await deleteOldestUser();
+        await deleteOldestUser(requestId);
     }
 
     const createdAt = new Date().toISOString();
@@ -94,8 +108,10 @@ async function addUserToDb(newUser: Omit<User, "createdAt">): Promise<User> {
         .prepare("SELECT * FROM users WHERE id = ?")
         .get(newUser.id) as User;
 
+    const logger = getLogger(requestId);
     logger.info("addItemToDb", "Added new user.", { id: addedUser.id });
     logger.debug("addItemToDb", "Added new user:", addedUser);
+
     revalidateTag(DB_CACHE_TAG);
     return addedUser;
 }
@@ -110,7 +126,7 @@ async function findUserInDb(userId: string): Promise<User | null> {
     return null;
 }
 
-async function updateUserInDb(user: User): Promise<User> {
+async function updateUserInDb(user: User, requestId?: string): Promise<User> {
     db.prepare(
         "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?"
     ).run(user.username, user.email, user.password, user.id);
@@ -119,18 +135,20 @@ async function updateUserInDb(user: User): Promise<User> {
     const updatedUser = db
         .prepare("SELECT * FROM users WHERE id = ?")
         .get(user.id) as User;
+
+    const logger = getLogger(requestId);
     logger.info("updateUserInDb", "Updated user.", {
         id: updatedUser.id,
     });
     logger.debug("updateUserInDb", `Updated user:`, {
-        oldUser: user,
-        newUser: updatedUser,
+        updatedUser
     });
     return updatedUser;
 }
 
-async function deleteUserInDb(userId: string) {
+async function deleteUserInDb(userId: string, requestId?: string) {
     db.prepare("DELETE FROM users WHERE id = ?").run(userId);
+    const logger = getLogger(requestId);
     logger.info("deleteUserInDb", "Deleted user.", {
         id: userId,
     });
@@ -139,6 +157,7 @@ async function deleteUserInDb(userId: string) {
 
 async function clearDb(): Promise<void> {
     db.prepare("DELETE FROM users").run();
+    const logger = getLogger();
     logger.info("clearDb", "All users deleted.");
 }
 
@@ -157,6 +176,8 @@ async function seedDb(usersToSeed: User[]): Promise<void> {
             );
         }
     })(usersToSeed);
+
+    const logger = getLogger();
     logger.info("seedDb", "Users seeded.", {
         numUsers: usersToSeed.length,
     });
