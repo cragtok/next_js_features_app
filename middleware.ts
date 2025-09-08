@@ -1,32 +1,47 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import logger from "./lib/logging/logger";
+import { getLogger } from "./lib/logging/logger";
+import { v4 as uuidv4 } from "uuid";
+
+function formatCurrentTime() {
+    const now = new Date();
+
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+    const milliseconds = String(now.getMilliseconds()).padStart(3, "0");
+
+    return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+}
 
 export function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     const response = NextResponse.next();
+    const logger = getLogger();
+
+    let userRequestId = request.cookies.get("x-user-session-id")?.value;
+    if (!userRequestId) {
+        userRequestId = uuidv4();
+    }
+    logger.info(
+        "middleware",
+        `[${formatCurrentTime()}]: New ${request.method} request id ${userRequestId} for path ${request.nextUrl.pathname}`
+    );
+    response.headers.set("x-user-session-id", userRequestId);
 
     if (pathname.startsWith("/middleware/ab-testing")) {
-        logger.info("middleware | ab-testing", "AB-test middleware.");
         let abTestGroup = request.cookies.get("ab-test-group")?.value;
 
         if (!abTestGroup) {
             abTestGroup = Math.random() < 0.5 ? "A" : "B";
-            logger.info(
-                "middleware | ab-testing",
-                "Setting ab-test-group cookie..."
-            );
             response.cookies.set("ab-test-group", abTestGroup, {
                 path: "/",
                 maxAge: 5,
             }); // Set for 5 seconds
-            logger.info("middleware | ab-testing", "ab-test-group cookie set.");
         }
-        return response;
     }
 
     if (pathname.startsWith("/middleware/log")) {
-        logger.info("middleware | log", "Logging middleware.");
         const ip =
             request.headers.get("x-forwarded-for") ||
             request.headers.get("x-real-ip") ||
@@ -34,42 +49,41 @@ export function middleware(request: NextRequest) {
 
         const serverTime = new Date().toISOString();
 
-        logger.info("middleware | log", "Collecting request headers...");
         const userAgent = request.headers.get("user-agent") || "N/A";
         const country = request.headers.get("x-geo-country");
         const region = request.headers.get("x-geo-region");
         const city = request.headers.get("x-geo-city");
         const timezone = request.headers.get("x-geo-tz");
-        logger.info("middleware | log", "Request headers collected.");
 
-        logger.info("middleware | log", "Setting response headers...");
-        const responseHeaders = new Headers(request.headers);
-        responseHeaders.set("x-request-ip", ip);
-        responseHeaders.set("x-server-time", serverTime);
-        responseHeaders.set("x-user-agent", userAgent);
+        // Update headers on the response object
+        response.headers.set("x-request-ip", ip);
+        response.headers.set("x-server-time", serverTime);
+        response.headers.set("x-user-agent", userAgent);
         if (country) {
-            responseHeaders.set(
+            response.headers.set(
                 "x-geo-location",
                 `${city}, ${region}, ${country} (Timezone: ${timezone})`
             );
         } else {
-            responseHeaders.set(
+            response.headers.set(
                 "x-geo-location",
                 "Geo-Location headers not detected for path. This usually happens in local development."
             );
         }
-        logger.info("middleware | log", "Response headers set.");
-
-        return NextResponse.next({
-            request: {
-                headers: responseHeaders,
-            },
-        });
     }
 
     return response;
 }
 
 export const config = {
-    matcher: ["/middleware/ab-testing", "/middleware/log"],
+    matcher: [
+        /*
+         * Match all request paths except for the ones starting with:
+         * - api (API routes)
+         * - _next/static (static files)
+         * - _next/image (image optimization files)
+         * - favicon.ico (favicon file)
+         */
+        "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    ],
 };
