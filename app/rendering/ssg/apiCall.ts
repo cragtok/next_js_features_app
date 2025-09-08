@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { serverEnv } from "@/lib/env/serverEnv";
 import { delay } from "@/lib/utils";
-import logger from "@/lib/logging/logger";
+import { getLogger } from "@/lib/logging/logger";
 
 interface CityDateTime {
     city: string;
@@ -29,6 +29,8 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
     const MAX_RETRIES = 5;
     const RETRY_DELAY_MS = 1000;
     const ai = new GoogleGenAI({ apiKey: serverEnv.GEMINI_API_KEY });
+
+    const logger = getLogger();
 
     for (let i = 0; i < MAX_RETRIES; i++) {
         try {
@@ -64,11 +66,10 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
             // despite providing system instructions.
             // So we retry the Gemini call until we get the response
             // in the proper format.
-            logger.error(
-                "apiCall",
-                `Gemini call attempt ${i + 1} failed:`,
-                error as Error
-            );
+            logger.error("apiCall", `Gemini call attempt ${i + 1} failed:`, {
+                message: (error as Error).message,
+                stack: (error as Error).stack,
+            });
             if (i < MAX_RETRIES - 1) {
                 await delay(RETRY_DELAY_MS);
             }
