@@ -7,6 +7,8 @@ import {
     MAX_USERS,
 } from "./constants";
 import { getLogger } from "@/lib/logging/logger";
+import path from "path";
+import { fileURLToPath } from "url";
 
 interface User {
     id: string;
@@ -29,6 +31,9 @@ db.exec(`
       );
 `);
 
+const __filename = fileURLToPath(import.meta.url);
+const CURRENT_FILE_NAME = path.basename(__filename);
+
 async function deleteOldestUser(requestId?: string) {
     const oldestUser = db
         .prepare("SELECT id FROM users ORDER BY createdAt ASC LIMIT 1")
@@ -36,42 +41,34 @@ async function deleteOldestUser(requestId?: string) {
 
     if (oldestUser) {
         db.prepare("DELETE FROM users WHERE id = ?").run(oldestUser.id);
-        const logger = getLogger(requestId);
-        logger.info("deleteOldestUser", "Deleted oldest user.", {
-            id: oldestUser.id,
-        });
-        logger.debug("deleteOldestUser", "Oldest user:", {
-            oldestUser,
-        });
+        const logger = getLogger(
+            `${CURRENT_FILE_NAME} | deleteOldestUser`,
+            requestId
+        );
+        logger.info("Deleted oldest user.", { id: oldestUser.id });
+        logger.debug("Oldest user:", { oldestUser });
         revalidateTag(DB_CACHE_TAG);
     }
 }
 
 const getCachedUsers = unstable_cache(
     async (requestId?: string) => {
-        const logger = getLogger(requestId);
+        const logger = getLogger(
+            `${CURRENT_FILE_NAME} | getCachedUsers`,
+            requestId
+        );
         try {
             const items = db.prepare("SELECT * FROM users").all() as User[];
-            logger.info(
-                "getCachedUsers",
-                "Users fetched from database cache.",
-                {
-                    numUsers: items.length,
-                }
-            );
-            logger.debug("getCachedUsers", "Users:", {
-                items,
+            logger.info("Users fetched from database cache.", {
+                numUsers: items.length,
             });
+            logger.debug("Users:", { items });
             return items;
         } catch (error) {
-            logger.error(
-                "getCachedUsers",
-                "Failed to read from database cache.",
-                {
-                    message: (error as Error).message,
-                    stack: (error as Error).stack,
-                }
-            );
+            logger.error("Failed to read from database cache.", {
+                message: (error as Error).message,
+                stack: (error as Error).stack,
+            });
         }
     },
     [DB_CACHE_PATH],
@@ -108,9 +105,9 @@ async function addUserToDb(
         .prepare("SELECT * FROM users WHERE id = ?")
         .get(newUser.id) as User;
 
-    const logger = getLogger(requestId);
-    logger.info("addItemToDb", "Added new user.", { id: addedUser.id });
-    logger.debug("addItemToDb", "Added new user:", addedUser);
+    const logger = getLogger(`${CURRENT_FILE_NAME} | addUserToDb`, requestId);
+    logger.info("Added new user.", { id: addedUser.id });
+    logger.debug("Added new user:", addedUser);
 
     revalidateTag(DB_CACHE_TAG);
     return addedUser;
@@ -136,29 +133,29 @@ async function updateUserInDb(user: User, requestId?: string): Promise<User> {
         .prepare("SELECT * FROM users WHERE id = ?")
         .get(user.id) as User;
 
-    const logger = getLogger(requestId);
-    logger.info("updateUserInDb", "Updated user.", {
-        id: updatedUser.id,
-    });
-    logger.debug("updateUserInDb", `Updated user:`, {
-        updatedUser
-    });
+    const logger = getLogger(
+        `${CURRENT_FILE_NAME} | updateUserInDb`,
+        requestId
+    );
+    logger.info("Updated user.", { id: updatedUser.id });
+    logger.debug("Updated user:", { updatedUser });
     return updatedUser;
 }
 
 async function deleteUserInDb(userId: string, requestId?: string) {
     db.prepare("DELETE FROM users WHERE id = ?").run(userId);
-    const logger = getLogger(requestId);
-    logger.info("deleteUserInDb", "Deleted user.", {
-        id: userId,
-    });
+    const logger = getLogger(
+        `${CURRENT_FILE_NAME} | deleteUserInDb`,
+        requestId
+    );
+    logger.info("Deleted user.", { id: userId });
     revalidateTag(DB_CACHE_TAG);
 }
 
 async function clearDb(): Promise<void> {
     db.prepare("DELETE FROM users").run();
-    const logger = getLogger();
-    logger.info("clearDb", "All users deleted.");
+    const logger = getLogger(`${CURRENT_FILE_NAME} | clearDb`);
+    logger.info("All users deleted.");
 }
 
 async function seedDb(usersToSeed: User[]): Promise<void> {
@@ -177,10 +174,8 @@ async function seedDb(usersToSeed: User[]): Promise<void> {
         }
     })(usersToSeed);
 
-    const logger = getLogger();
-    logger.info("seedDb", "Users seeded.", {
-        numUsers: usersToSeed.length,
-    });
+    const logger = getLogger(`${CURRENT_FILE_NAME} | seedDb`);
+    logger.info("Users seeded.", { numUsers: usersToSeed.length });
 }
 
 export {

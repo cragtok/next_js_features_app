@@ -1,5 +1,10 @@
 import { serverEnv } from "@/lib/env/serverEnv";
 import { getLogger } from "@/lib/logging/logger";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const CURRENT_FILE_NAME = path.basename(__filename);
 
 interface Quote {
     quote: string;
@@ -7,16 +12,16 @@ interface Quote {
 }
 
 async function fetchQuote(requestId?: string): Promise<Quote> {
-    const logger = getLogger(requestId);
+    const logger = getLogger(`${CURRENT_FILE_NAME} | fetchQuote`, requestId);
 
-    logger.info("fetchQuote", "Fetching quote...");
+    logger.info("Fetching quote...");
     try {
         const response = await fetch(serverEnv.QUOTES_API_URL, {
             cache: "no-store",
         });
 
         if (!response.ok) {
-            logger.error("fetchQuote", "Reponse not success.", {
+            logger.error("Non-successful request.", {
                 status: response.status,
                 text: response.statusText,
             });
@@ -37,15 +42,15 @@ async function fetchQuote(requestId?: string): Promise<Quote> {
             author: data.author,
         };
 
-        logger.info("fetchQuote", "Fetched quote.");
-        logger.debug("fetchQuote", "Quote data:", {
+        logger.info("Fetched quote.");
+        logger.debug("Quote data:", {
             data: quoteData,
         });
 
         return quoteData;
     } catch (error: unknown) {
         console.error(error);
-        logger.error("fetchQuote", "Error fetching quote.", {
+        logger.error("Error fetching quote.", {
             message: (error as Error).message,
             stack: (error as Error).stack,
         });

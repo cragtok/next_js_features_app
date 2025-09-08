@@ -1,22 +1,27 @@
 import { getCachedUsers } from "@/lib/database/databaseHandler";
 import { getLogger } from "@/lib/logging/logger";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const CURRENT_FILE_NAME = path.basename(__filename);
 
 export async function retrieveUsersFromDb() {
-    const logger = getLogger();
+    const logger = getLogger(`${CURRENT_FILE_NAME} | retrieveUsersFromDb`);
 
     try {
-        logger.info("retrieveUsersFromDb", "Retrieving cached users...");
+        logger.info("Retrieving cached users...");
         const users = await getCachedUsers();
-        logger.info("retrieveUsersFromDb", "Cached users retrieved...", {
+        logger.info("Cached users retrieved...", {
             numUsers: users?.length,
         });
-        logger.debug("retrieveUsersFromDb", "Users:", {
+        logger.debug("Users:", {
             users,
         });
         return users;
     } catch (error) {
         console.error(error);
-        logger.debug("retrieveUsersFromDb", "Error retrieving cached users.", {
+        logger.debug("Error retrieving cached users.", {
             message: (error as Error).message,
             stack: (error as Error).stack,
         });

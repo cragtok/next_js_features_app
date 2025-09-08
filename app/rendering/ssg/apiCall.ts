@@ -2,6 +2,11 @@ import { GoogleGenAI } from "@google/genai";
 import { serverEnv } from "@/lib/env/serverEnv";
 import { delay } from "@/lib/utils";
 import { getLogger } from "@/lib/logging/logger";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const CURRENT_FILE_NAME = path.basename(__filename);
 
 interface CityDateTime {
     city: string;
@@ -30,7 +35,7 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
     const RETRY_DELAY_MS = 1000;
     const ai = new GoogleGenAI({ apiKey: serverEnv.GEMINI_API_KEY });
 
-    const logger = getLogger();
+    const logger = getLogger(`${CURRENT_FILE_NAME} | fetchCityDateTimes`);
 
     for (let i = 0; i < MAX_RETRIES; i++) {
         try {
@@ -38,7 +43,7 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
             // This makes each request's contents slightly different, forcing a new lookup.
             const cacheBustingContents = `${baseContents} (Request Time: ${new Date().toISOString()})`;
 
-            logger.info("fetchCityDateTimes", `Fetching city date times...`, {
+            logger.info(`Fetching city date times...`, {
                 attempt: i + 1,
             });
 
@@ -57,7 +62,7 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
             }
 
             const cityDateTimes = JSON.parse(response.text);
-            logger.info("fetchCityDateTimes", "Fetched city date times:", {
+            logger.info("Fetched city date times:", {
                 data: cityDateTimes,
             });
             return cityDateTimes;
@@ -66,7 +71,7 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
             // despite providing system instructions.
             // So we retry the Gemini call until we get the response
             // in the proper format.
-            logger.error("apiCall", `Gemini call attempt ${i + 1} failed:`, {
+            logger.error(`Gemini call attempt ${i + 1} failed:`, {
                 message: (error as Error).message,
                 stack: (error as Error).stack,
             });
@@ -79,3 +84,4 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
 }
 
 export { fetchCityDateTimes, type CityDateTime };
+

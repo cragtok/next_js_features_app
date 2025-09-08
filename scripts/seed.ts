@@ -1,6 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 import { clearDb, seedDb, User } from "@/lib/database/databaseHandler";
 import { getLogger } from "@/lib/logging/logger";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const CURRENT_FILE_NAME = path.basename(__filename);
 
 const mockUsers: User[] = [
     {
@@ -24,16 +29,16 @@ const mockUsers: User[] = [
 ];
 
 async function runSeed() {
-    const logger = getLogger();
+    const logger = getLogger(`${CURRENT_FILE_NAME} | runSeed`);
     try {
-        logger.info("runSeed", "Starting database seeding...");
+        logger.info("Starting database seeding...");
         await clearDb();
         await seedDb(mockUsers);
-        logger.info("runSeed", "Database seeding complete.", {
+        logger.info("Database seeding complete.", {
             numUsers: mockUsers.length,
         });
     } catch (error) {
-        logger.fatal("runSeed", "Database seeding failed.", {
+        logger.fatal("Database seeding failed.", {
             error: error as Error,
         });
         process.exit(1);

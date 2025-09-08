@@ -4,6 +4,11 @@ import { SqliteError } from "better-sqlite3";
 import { parseUserBody } from "@/lib/utils";
 import { extractUserRequestId } from "@/lib/headers/extractUserRequestId";
 import { getLogger } from "@/lib/logging/logger";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const CURRENT_FILE_NAME = path.basename(__filename);
 
 export interface FormState {
     message: string;
@@ -21,14 +26,14 @@ export async function createUserAction(
 ): Promise<FormState> {
     const requestId = await extractUserRequestId();
 
-    const logger = getLogger(requestId);
+    const logger = getLogger(`${CURRENT_FILE_NAME} | createUserAction`, requestId);
 
     const username = (formData.get("username") as string).trim();
     const email = (formData.get("email") as string).trim();
     const password = formData.get("password") as string;
 
-    logger.info("createUserAction", "Submitting form data...");
-    logger.debug("createUserAction", "Form data received:", {
+    logger.info("Submitting form data...");
+    logger.debug("Form data received:", {
         formData: {
             username,
             email,
@@ -43,7 +48,7 @@ export async function createUserAction(
     });
 
     if (!parseResult.success) {
-        logger.error("createUserAction", "Form data parsing failed.", {
+        logger.error("Form data parsing failed.", {
             errors: parseResult.result,
             formData: {
                 username,
@@ -67,11 +72,11 @@ export async function createUserAction(
     try {
         const newUser = await addUserToDb(rawFormData, requestId);
 
-        logger.info("createUserAction", "Form data submitted.", {
+        logger.info("Form data submitted.", {
             id: newUser.id,
         });
 
-        logger.debug("createUserAction", "New user data:", {
+        logger.debug("New user data:", {
             data: newUser,
         });
 
@@ -90,7 +95,7 @@ export async function createUserAction(
                 .split(".")[1];
             const duplicateFieldMessage = `User with ${duplicateUserField} already exists`;
 
-            logger.error("createUserAction", "Form submission failed.", {
+            logger.error("Form submission failed.", {
                 errors: {
                     [duplicateUserField]: duplicateFieldMessage,
                 },

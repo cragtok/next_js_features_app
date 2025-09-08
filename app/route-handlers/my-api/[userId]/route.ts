@@ -7,8 +7,11 @@ import { parseUserBody } from "@/lib/utils";
 import { extractUserRequestId } from "@/lib/headers/extractUserRequestId";
 import { SqliteError } from "better-sqlite3";
 import { getLogger } from "@/lib/logging/logger";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const API_ROUTE = "/my-api";
+const __filename = fileURLToPath(import.meta.url);
+const CURRENT_FILE_NAME = path.basename(__filename);
 
 async function PUT(
     request: Request,
@@ -18,17 +21,14 @@ async function PUT(
 
     const { userId } = await params;
 
-    const loggerScope = `${API_ROUTE}/${userId} | PUT`;
-    const logger = getLogger(requestId);
+    const logger = getLogger(`${CURRENT_FILE_NAME} | PUT`, requestId);
 
-    logger.info(loggerScope, "Request received.");
+    logger.info("Request received.");
 
     let body = null;
     try {
         body = await request.json();
-        logger.debug(loggerScope, "Request body received:", {
-            body,
-        });
+        logger.debug("Request body received:", { body });
 
         const parseResult = parseUserBody({
             username: body.username.trim(),
@@ -40,7 +40,7 @@ async function PUT(
             const message = "Missing or invalid user data.";
             const errors = parseResult.result;
             const status = 400;
-            logger.error(loggerScope, message, {
+            logger.error(message, {
                 body,
                 status,
                 errors,
@@ -58,9 +58,7 @@ async function PUT(
 
         if (!foundUser) {
             const status = 404;
-            logger.error(loggerScope, "User not found.", {
-                status,
-            });
+            logger.error("User not found.", { status });
             return Response.json(
                 {
                     message: `User with id '${userId}' not found.`,
@@ -79,12 +77,8 @@ async function PUT(
             requestId
         );
 
-        logger.info(loggerScope, `User updated.`, {
-            status: 200,
-        });
-        logger.debug(loggerScope, `Updated user:`, {
-            updatedUser,
-        });
+        logger.info(`User updated.`, { status: 200 });
+        logger.debug(`Updated user:`, { updatedUser });
         return Response.json({ data: updatedUser });
     } catch (error) {
         let message = "Failed to update user.";
@@ -102,7 +96,7 @@ async function PUT(
             message = `User with ${duplicateUserField} already exists.`;
             status = 400;
         }
-        logger.error(loggerScope, message, {
+        logger.error(message, {
             body,
             status,
             message: (error as Error).message,
@@ -121,10 +115,9 @@ async function DELETE(
 
     const { userId } = await params;
 
-    const loggerScope = `${API_ROUTE}/${userId} | DELETE`;
-    const logger = getLogger(requestId);
+    const logger = getLogger(`${CURRENT_FILE_NAME} | DELETE`);
 
-    logger.info(loggerScope, "Request received.");
+    logger.info("Request received.");
 
     try {
         const foundUser = await findUserInDb(userId);
@@ -132,9 +125,7 @@ async function DELETE(
         if (!foundUser) {
             const message = `User with id ${userId} not found.`;
             const status = 404;
-            logger.error(loggerScope, "User not found.", {
-                status,
-            });
+            logger.error("User not found.", { status });
             return Response.json(
                 {
                     message,
@@ -144,9 +135,7 @@ async function DELETE(
         }
 
         await deleteUserInDb(userId, requestId);
-        logger.info(loggerScope, `User deleted.`, {
-            status: 204,
-        });
+        logger.info("User deleted.", { status: 204 });
         return new Response(null, { status: 204 });
     } catch (error) {
         let message = "Failed to delete user.";
@@ -155,7 +144,7 @@ async function DELETE(
             message = error.message;
             status = 400;
         }
-        logger.error(loggerScope, message, {
+        logger.error(message, {
             status,
             message: (error as Error).message,
             stack: (error as Error).stack,

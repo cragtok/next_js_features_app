@@ -17,14 +17,13 @@ function formatCurrentTime() {
 export function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     const response = NextResponse.next();
-    const logger = getLogger();
+    const logger = getLogger("middleware.ts");
 
     let userRequestId = request.cookies.get("x-user-session-id")?.value;
     if (!userRequestId) {
         userRequestId = uuidv4();
     }
     logger.info(
-        "middleware",
         `[${formatCurrentTime()}]: New ${request.method} request id ${userRequestId} for path ${request.nextUrl.pathname}`
     );
     response.headers.set("x-user-session-id", userRequestId);

@@ -3,23 +3,25 @@ import { parseUserBody } from "@/lib/utils";
 import { extractUserRequestId } from "@/lib/headers/extractUserRequestId";
 import { SqliteError } from "better-sqlite3";
 import { getLogger } from "@/lib/logging/logger";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const API_ROUTE = "/my-api";
+const __filename = fileURLToPath(import.meta.url);
+const CURRENT_FILE_NAME = path.basename(__filename);
 
 async function GET(_request: Request) {
     const requestId = await extractUserRequestId();
 
-    const loggerScope = `${API_ROUTE} | GET`;
-    const logger = getLogger(requestId);
+    const logger = getLogger(`${CURRENT_FILE_NAME} | GET`, requestId);
 
-    logger.info(loggerScope, "Request received.");
+    logger.info("Request received.");
     try {
         const users = await getCachedUsers(requestId);
-        logger.info(loggerScope, "Users fetched.", {
+        logger.info("Users fetched.", {
             numUsers: users?.length,
             status: 200,
         });
-        logger.debug(loggerScope, "Users:.", {
+        logger.debug("Users:.", {
             numUsers: users?.length,
             users,
             status: 200,
@@ -28,7 +30,7 @@ async function GET(_request: Request) {
     } catch (error) {
         const message = "Failed to return users.";
         const status = 500;
-        logger.error(loggerScope, message, {
+        logger.error(message, {
             status: 500,
             message: (error as Error).message,
             stack: (error as Error).stack,
@@ -45,14 +47,13 @@ async function GET(_request: Request) {
 async function POST(request: Request) {
     const requestId = await extractUserRequestId();
 
-    const loggerScope = `${API_ROUTE} | POST`;
-    const logger = getLogger(requestId);
+    const logger = getLogger(`${CURRENT_FILE_NAME} | POST`, requestId);
 
-    logger.info(loggerScope, "Request received.");
+    logger.info("Request received.");
     let body = null;
     try {
         body = await request.json();
-        logger.debug(loggerScope, "Request body received:", body);
+        logger.debug("Request body received:", body);
 
         const parseResult = parseUserBody({
             username: body.username.trim(),
@@ -64,7 +65,7 @@ async function POST(request: Request) {
             const message = "Missing or invalid user data.";
             const errors = parseResult.result;
             const status = 400;
-            logger.error(loggerScope, message, {
+            logger.error(message, {
                 body,
                 errors,
                 status,
@@ -85,11 +86,11 @@ async function POST(request: Request) {
             password: parseResult.result.password,
         }, requestId);
 
-        logger.info(loggerScope, "New user created.", {
+        logger.info("New user created.", {
             id: newUser.id,
             status: 201,
         });
-        logger.debug(loggerScope, "New user:", {
+        logger.debug("New user:", {
             newUser,
             status: 201,
         });
@@ -113,7 +114,7 @@ async function POST(request: Request) {
             status = 400;
         }
 
-        logger.error(loggerScope, message, {
+        logger.error(message, {
             status,
             body,
             message: (error as Error).message,

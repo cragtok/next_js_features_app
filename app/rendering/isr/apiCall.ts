@@ -1,5 +1,10 @@
 import { serverEnv } from "@/lib/env/serverEnv";
 import { getLogger } from "@/lib/logging/logger";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const CURRENT_FILE_NAME = path.basename(__filename);
 
 interface RequestBody {
     [key: string]: {
@@ -61,9 +66,9 @@ async function fetchPrices(): Promise<CryptoData[]> {
             url: generateCoinURL(coin),
         };
     }
-    const logger = getLogger();
+    const logger = getLogger(`${CURRENT_FILE_NAME} | fetchPrices`);
 
-    logger.info("fetchPrices", "Fetching crypto prices...");
+    logger.info("Fetching crypto prices...");
 
     let result: CryptoData[] = [];
     try {
@@ -73,7 +78,7 @@ async function fetchPrices(): Promise<CryptoData[]> {
         });
 
         if (!response.ok) {
-            logger.error("fetchPrices", "Response not success.", {
+            logger.error("Response not success.", {
                 status: response.status,
                 text: response.statusText,
             });
@@ -87,14 +92,14 @@ async function fetchPrices(): Promise<CryptoData[]> {
         const payload: APIPayload = responseJson.data;
         result = formatPayload(payload);
 
-        logger.info("fetchPrices", "Fetched crypto prices.");
-        logger.debug("fetchPrices", "Crypto price data:", {
+        logger.info("Fetched crypto prices.");
+        logger.debug("Crypto price data:", {
             data: result,
         });
         return result;
     } catch (error) {
         console.error(error);
-        logger.error("fetchPrices", "Error fetching prices.", {
+        logger.error("Error fetching prices.", {
             message: (error as Error).message,
             stack: (error as Error).stack,
         });
