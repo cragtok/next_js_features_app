@@ -15,9 +15,6 @@ export async function retrieveUsersFromDb() {
         logger.info("Cached users retrieved...", {
             numUsers: users?.length,
         });
-        logger.debug("Users:", {
-            users,
-        });
         return users;
     } catch (error) {
         console.error(error);

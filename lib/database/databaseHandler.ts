@@ -62,7 +62,6 @@ const getCachedUsers = unstable_cache(
             logger.info("Users fetched from database cache.", {
                 numUsers: items.length,
             });
-            logger.debug("Users:", { items });
             return items;
         } catch (error) {
             logger.error("Failed to read from database cache.", {

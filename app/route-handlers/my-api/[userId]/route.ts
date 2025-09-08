@@ -77,8 +77,8 @@ async function PUT(
             requestId
         );
 
-        logger.info(`User updated.`, { status: 200 });
-        logger.debug(`Updated user:`, { updatedUser });
+        logger.info("User updated.", { status: 200 });
+        logger.debug("Updated user:", { updatedUser });
         return Response.json({ data: updatedUser });
     } catch (error) {
         let message = "Failed to update user.";

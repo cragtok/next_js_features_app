@@ -21,11 +21,6 @@ async function GET(_request: Request) {
             numUsers: users?.length,
             status: 200,
         });
-        logger.debug("Users:.", {
-            numUsers: users?.length,
-            users,
-            status: 200,
-        });
         return Response.json({ data: users });
     } catch (error) {
         const message = "Failed to return users.";
@@ -53,7 +48,9 @@ async function POST(request: Request) {
     let body = null;
     try {
         body = await request.json();
-        logger.debug("Request body received:", body);
+        logger.debug("Request body received:", {
+            body,
+        });
 
         const parseResult = parseUserBody({
             username: body.username.trim(),
@@ -79,12 +76,15 @@ async function POST(request: Request) {
             );
         }
 
-        const newUser = await addUserToDb({
-            id: crypto.randomUUID(),
-            username: parseResult.result.username,
-            email: parseResult.result.email,
-            password: parseResult.result.password,
-        }, requestId);
+        const newUser = await addUserToDb(
+            {
+                id: crypto.randomUUID(),
+                username: parseResult.result.username,
+                email: parseResult.result.email,
+                password: parseResult.result.password,
+            },
+            requestId
+        );
 
         logger.info("New user created.", {
             id: newUser.id,
