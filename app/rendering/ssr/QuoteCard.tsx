@@ -3,9 +3,21 @@ import { CardContent } from "@/components/ui/card";
 import { Quote, fetchQuote } from "./apiCall";
 import CardWrapper from "@/components/general/CardWrapper";
 import RefreshButton from "@/components/general/RefreshButton";
+import { headers } from "next/headers";
 
 const QuoteCard = async () => {
-    const quoteData: Quote | null = await fetchQuote();
+    const headersList = await headers();
+    const requestId = headersList.get("x-user-session-id") || undefined;
+
+    let quoteData: Quote | null = null;
+    let errorMessage: string | null = null;
+
+    try {
+        quoteData = await fetchQuote(requestId);
+    } catch (error) {
+        console.error(error);
+        errorMessage = (error as Error).message || "Failed to load quote.";
+    }
 
     return (
         <>
@@ -22,8 +34,7 @@ const QuoteCard = async () => {
                         </figure>
                     ) : (
                         <blockquote className="text-status-danger-500 font-semibold text-center">
-                            Failed to load quote. Please try refreshing the
-                            page.
+                            {errorMessage}
                         </blockquote>
                     )}
                 </CardContent>

@@ -1,13 +1,13 @@
 import { serverEnv } from "@/lib/env/serverEnv";
-import logger from "@/lib/logging/logger";
+import { getLogger } from "@/lib/logging/logger";
 
 interface Quote {
     quote: string;
     author: string;
 }
 
-async function fetchQuote() {
-    let quoteData: Quote | null = null;
+async function fetchQuote(requestId?: string): Promise<Quote> {
+    const logger = getLogger(requestId);
 
     logger.info("fetchQuote", "Fetching quote...");
     try {
@@ -16,33 +16,41 @@ async function fetchQuote() {
         });
 
         if (!response.ok) {
-            logger.error("fetchQuote", "Failed to fetch quote", {
+            logger.error("fetchQuote", "Reponse not success.", {
                 status: response.status,
+                text: response.statusText,
             });
-            return null;
+            const errorDetail = response.text();
+            throw new Error(
+                `Failed to fetch quote: ${response.status} ${response.statusText} ${errorDetail}`
+            );
         }
 
         const data = await response.json();
-        if (data && data.text && data.author) {
-            quoteData = {
-                quote: data.text,
-                author: data.author,
-            };
+
+        if (!data || !data.text || !data.author) {
+            throw new Error("Invalid quote data format.");
         }
 
+        const quoteData = {
+            quote: data.text,
+            author: data.author,
+        };
+
         logger.info("fetchQuote", "Fetched quote.");
-        logger.debug("fetchQuote", "Fetched quote.", {
+        logger.debug("fetchQuote", "Quote data:", {
             data: quoteData,
         });
 
         return quoteData;
-    } catch (error) {
+    } catch (error: unknown) {
         console.error(error);
-        logger.error("fetchQuote", "Failed to fetch quote.", {
-            error: error as Error,
+        logger.error("fetchQuote", "Error fetching quote.", {
+            message: (error as Error).message,
+            stack: (error as Error).stack,
         });
+        throw new Error("Could not retrieve quote. Please try again later.");
     }
-    return null;
 }
 
 export { type Quote, fetchQuote };
