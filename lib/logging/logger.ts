@@ -1,70 +1,76 @@
 import PinoLogger from "./pino";
+import { type PinoLoggerType } from "./pino";
 
 interface Logger {
-    debug(...meta: unknown[]): void;
-    info(...meta: unknown[]): void;
-    warn(...meta: unknown[]): void;
-    error(...meta: unknown[]): void;
-    fatal(...meta: unknown[]): void;
+    debug(scope: string, message: string, mergingObject?: object): void;
+    info(scope: string, message: string, mergingObject?: object): void;
+    warn(scope: string, message: string, mergingObject?: object): void;
+    error(scope: string, message: string, mergingObject?: object): void;
+    fatal(scope: string, message: string, mergingObject?: object): void;
 }
 
 class PinoLoggerAdapter implements Logger {
-    private logger: typeof PinoLogger;
-    private static _instance: PinoLoggerAdapter | null = null;
+    private logger: PinoLoggerType;
+    private userSessionId?: string;
 
-    private constructor(pinoLogger: typeof PinoLogger) {
+    constructor(pinoLogger: PinoLoggerType, userSessionId?: string) {
         this.logger = pinoLogger;
+        this.userSessionId = userSessionId;
     }
 
-    public static getInstance(
-        pinoLogger: typeof PinoLogger
-    ): PinoLoggerAdapter {
-        if (!PinoLoggerAdapter._instance) {
-            PinoLoggerAdapter._instance = new PinoLoggerAdapter(pinoLogger);
+    private mergeUserSessionId(mergingObject?: object): object | undefined {
+        if (this.userSessionId) {
+            return { userSessionId: this.userSessionId, ...mergingObject };
         }
-        return PinoLoggerAdapter._instance;
+        return mergingObject;
     }
 
-    debug(functionName: string, message: string, mergingObject?: object): void {
-        if (mergingObject) {
-            this.logger.debug(mergingObject, `[${functionName}]: ${message}`);
+    debug(scope: string, message: string, mergingObject?: object): void {
+        const mergedObject = this.mergeUserSessionId(mergingObject);
+        if (mergedObject) {
+            this.logger.debug(mergedObject, `[${scope}]: ${message}`);
         } else {
-            this.logger.debug(`[${functionName}]: ${message}`);
-        }
-    }
-
-    info(functionName: string, message: string, mergingObject?: object): void {
-        if (mergingObject) {
-            this.logger.info(mergingObject, `[${functionName}]: ${message}`);
-        } else {
-            this.logger.info(`[${functionName}]: ${message}`);
+            this.logger.debug(`[${scope}]: ${message}`);
         }
     }
 
-    warn(functionName: string, message: string, mergingObject?: object): void {
-        if (mergingObject) {
-            this.logger.warn(mergingObject, `[${functionName}]: ${message}`);
+    info(scope: string, message: string, mergingObject?: object): void {
+        const mergedObject = this.mergeUserSessionId(mergingObject);
+        if (mergedObject) {
+            this.logger.info(mergedObject, `[${scope}]: ${message}`);
         } else {
-            this.logger.warn(`[${functionName}]: ${message}`);
-        }
-    }
-    error(functionName: string, message: string, mergingObject?: object): void {
-        if (mergingObject) {
-            this.logger.error(mergingObject, `[${functionName}]: ${message}`);
-        } else {
-            this.logger.error(`[${functionName}]: ${message}`);
+            this.logger.info(`[${scope}]: ${message}`);
         }
     }
 
-    fatal(functionName: string, message: string, mergingObject?: object): void {
-        if (mergingObject) {
-            this.logger.fatal(mergingObject, `[${functionName}]: ${message}`);
+    warn(scope: string, message: string, mergingObject?: object): void {
+        const mergedObject = this.mergeUserSessionId(mergingObject);
+        if (mergedObject) {
+            this.logger.warn(mergedObject, `[${scope}]: ${message}`);
         } else {
-            this.logger.fatal(`[${functionName}]: ${message}`);
+            this.logger.warn(`[${scope}]: ${message}`);
+        }
+    }
+
+    error(scope: string, message: string, mergingObject?: object): void {
+        const mergedObject = this.mergeUserSessionId(mergingObject);
+        if (mergedObject) {
+            this.logger.error(mergedObject, `[${scope}]: ${message}`);
+        } else {
+            this.logger.error(`[${scope}]: ${message}`);
+        }
+    }
+
+    fatal(scope: string, message: string, mergingObject?: object): void {
+        const mergedObject = this.mergeUserSessionId(mergingObject);
+        if (mergedObject) {
+            this.logger.fatal(mergedObject, `[${scope}]: ${message}`);
+        } else {
+            this.logger.fatal(`[${scope}]: ${message}`);
         }
     }
 }
 
-const logger = PinoLoggerAdapter.getInstance(PinoLogger);
-
-export default logger;
+export function getLogger(userSessionId?: string): PinoLoggerAdapter {
+    return new PinoLoggerAdapter(PinoLogger, userSessionId);
+}
