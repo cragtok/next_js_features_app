@@ -1,5 +1,5 @@
 import { serverEnv } from "@/lib/env/serverEnv";
-import logger from "@/lib/logging/logger";
+import { getLogger } from "@/lib/logging/logger";
 
 interface RequestBody {
     [key: string]: {
@@ -56,12 +56,12 @@ async function fetchPrices(): Promise<CryptoData[]> {
     const coinsList = ["BTC", "ETH", "XMR", "XRP"];
 
     const body: RequestBody = {};
-
     for (const coin of coinsList) {
         body[coin] = {
             url: generateCoinURL(coin),
         };
     }
+    const logger = getLogger();
 
     logger.info("fetchPrices", "Fetcing crypto prices...");
 
@@ -73,26 +73,33 @@ async function fetchPrices(): Promise<CryptoData[]> {
         });
 
         if (!response.ok) {
-            logger.error("fetchPrices", "Failed to fetch crypto prices.", {
+            logger.error("fetchPrices", "Response not success.", {
                 status: response.status,
+                text: response.statusText,
             });
-            return [];
+            const errorDetail = response.text();
+            throw new Error(
+                `Failed to fetch quote: ${response.status} ${response.statusText} ${errorDetail}`
+            );
         }
 
         const responseJson: ApiResponse = await response.json();
         const payload: APIPayload = responseJson.data;
         result = formatPayload(payload);
 
-        logger.debug("fetchPrices", "Fetched crypto prices:", {
+        logger.info("fetchPrices", "Fetched crypto prices.");
+        logger.debug("fetchPrices", "Crypto price data:", {
             data: result,
         });
-        logger.info("fetchPrices", "Fetched crypto prices.");
+        return result;
     } catch (error) {
-        logger.error("fetchPrices", "Failed to fetch crypto prices.", {
-            error: error as Error,
+        console.error(error);
+        logger.error("fetchPrices", "Error fetching prices.", {
+            message: (error as Error).message,
+            stack: (error as Error).stack,
         });
+        throw new Error("Could not fetch prices. Please try again later.");
     }
-    return result;
 }
 
 export { fetchPrices, oldPrices, type CryptoData };

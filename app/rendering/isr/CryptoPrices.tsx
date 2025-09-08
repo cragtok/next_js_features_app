@@ -1,20 +1,27 @@
 import { CardContent } from "@/components/ui/card";
-import { fetchPrices } from "./apiCall";
+import { CryptoData, fetchPrices } from "./apiCall";
 import CryptoPricesCard from "./CryptoPricesCard";
 import CardWrapper from "@/components/general/CardWrapper";
 import RefreshButton from "@/components/general/RefreshButton";
 
 async function CryptoPrices() {
-    const prices = await fetchPrices();
+    let prices: CryptoData[] | null = null;
+    let errorMessage: string | null = null;
 
-    if (!prices.length) {
+    try {
+        prices = await fetchPrices();
+    } catch (error) {
+        console.error(error);
+        errorMessage = (error as Error).message || "Failed to load prices.";
+    }
+
+    if (!prices) {
         return (
             <>
                 <CardWrapper>
                     <CardContent>
                         <p className="text-status-danger-500 font-semibold">
-                            Failed to load prices. Please try refreshing the
-                            page.
+                            {errorMessage}
                         </p>
                     </CardContent>
                 </CardWrapper>
