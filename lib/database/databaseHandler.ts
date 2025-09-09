@@ -163,7 +163,7 @@ async function seedDb(usersToSeed: UserDTO[]): Promise<void> {
     db.transaction((users) => {
         for (const user of users) {
             insert.run(
-                user.id,
+                crypto.randomUUID(),
                 user.username,
                 user.email,
                 user.password,

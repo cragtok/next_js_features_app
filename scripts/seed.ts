@@ -1,5 +1,4 @@
-import { v4 as uuidv4 } from "uuid";
-import { clearDb, seedDb, User } from "@/lib/database/databaseHandler";
+import { clearDb, seedDb } from "@/lib/database/databaseHandler";
 import { getLogger } from "@/lib/logging/logger";
 import path from "path";
 import { fileURLToPath } from "url";
