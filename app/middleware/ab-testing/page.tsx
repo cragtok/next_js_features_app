@@ -2,8 +2,12 @@ import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-
 import ABTestClientComponent from "./ABTestClientComponent";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "A/B Testing Middleware",
+};
 
 function Page() {
     return (

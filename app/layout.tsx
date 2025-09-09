@@ -6,7 +6,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 export const metadata: Metadata = {
-    title: "Next.js Features App",
+    title: {
+        template: "%s | Next.js Features App",
+        default: "Next.js Features App",
+    },
     description: "An app demonstrating basic Next.js features",
 };
 

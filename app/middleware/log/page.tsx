@@ -3,6 +3,11 @@ import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import { headers } from "next/headers";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import RequestInfoCard from "./RequestInfoCard";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Middleware Request Info Logging",
+};
 
 async function Page() {
     const headersList = await headers();

@@ -29,7 +29,7 @@ const pageRoutes: PageRoute[] = [
         route: "Rendering and Data Fetching",
         subRoutes: [
             {
-                title: "Server Side Rendering (SSR)",
+                title: "Server-Side Rendering (SSR)",
                 href: "/rendering/ssr",
                 description:
                     "Rendering the page content on the server for each request.",
@@ -47,7 +47,7 @@ const pageRoutes: PageRoute[] = [
                     "Updating a static page with new content after a certain time period.",
             },
             {
-                title: "Client Side Rendering (CSR)",
+                title: "Client-Side Rendering (CSR)",
                 href: "/rendering/csr",
                 description:
                     "Rendering a page on the client via JavaScript and some basic HTML.",

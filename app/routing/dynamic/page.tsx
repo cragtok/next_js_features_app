@@ -7,6 +7,11 @@ import SectionWrapper from "@/components/general/SectionWrapper";
 import LinkWrapper from "@/components/general/LinkWrapper";
 import PathWithBreaks from "@/components/general/PathWithBreaks";
 import { STATIC_ROUTES } from "./constants";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Dynamic Routing",
+};
 
 function Page() {
     return (

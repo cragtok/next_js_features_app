@@ -5,10 +5,15 @@ import PathWithBreaks from "@/components/general/PathWithBreaks";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import { delay } from "@/lib/utils";
+import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
 const DELAY_SECONDS = 2;
+
+export const metadata: Metadata = {
+    title: "Streaming with Loading.tsx",
+};
 
 async function Page() {
     await delay(DELAY_SECONDS * 1000);

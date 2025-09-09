@@ -4,6 +4,11 @@ import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import Providers from "./providers";
 import JokeFetcher from "./JokeFetcher";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Client-Side Rendering (CSR)",
+};
 
 function Page() {
     return (

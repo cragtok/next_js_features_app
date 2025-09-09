@@ -4,14 +4,19 @@ import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import { fetchCityDateTimes } from "./apiCall";
 import CityDateTimeCard from "./CityDateTimeCard";
+import { Metadata } from "next";
 
 export const dynamic = "force-static";
+
+export const metadata: Metadata = {
+    title: "Static Site Generation (SSG)",
+};
 
 async function Page() {
     const cityDateTimes = await fetchCityDateTimes();
 
     return (
-        <PageWrapper pageTitle="Static Site Generation">
+        <PageWrapper pageTitle="Static Site Generation (SSG)">
             <SectionWrapper>
                 <ParagraphWrapper>
                     In{" "}

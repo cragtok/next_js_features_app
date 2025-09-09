@@ -7,11 +7,32 @@ import { MAX_SLUG_LENGTH } from "../constants";
 import CardWrapper from "@/components/general/CardWrapper";
 import { CardContent } from "@/components/ui/card";
 import { STATIC_ROUTES } from "../constants";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
     return STATIC_ROUTES.map((route) => ({
         slug: route.split("/"),
     }));
+}
+
+interface MetadataProps {
+    params: Promise<{ slug: string[] }>;
+}
+
+export async function generateMetadata({
+    params,
+}: MetadataProps): Promise<Metadata> {
+    const { slug } = await params;
+    const joinedSlug = slug.join("/");
+
+    const title =
+        joinedSlug.length >= 25
+            ? `${joinedSlug.substring(0, 25)}...`
+            : joinedSlug;
+
+    return {
+        title: `${title} | Dynamic Routing`,
+    };
 }
 
 async function Page({ params }: { params: Promise<{ slug: string[] }> }) {

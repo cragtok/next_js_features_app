@@ -4,6 +4,11 @@ import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import PathWithBreaks from "@/components/general/PathWithBreaks";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Static Routing",
+};
 
 function Page() {
     return (

@@ -5,10 +5,15 @@ import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import DelayedImageCard from "./DelayedImageCard";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
+import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
 const CARD_DELAY_INTERVAL_SECONDS = 1;
+
+export const metadata: Metadata = {
+    title: "Streaming with Suspense",
+};
 
 function Page() {
     return (

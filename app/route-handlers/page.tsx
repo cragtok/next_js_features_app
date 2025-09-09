@@ -5,6 +5,11 @@ import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import FolderStructureCards from "@/components/general/FolderStructureCards";
 import UsersSection from "./UsersSection/UsersSection";
 import PathWithBreaks from "@/components/general/PathWithBreaks";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Route Handlers",
+};
 
 function Page() {
     return (

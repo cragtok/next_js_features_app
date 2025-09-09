@@ -5,6 +5,11 @@ import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import ServerActionForm from "./ServerActionForm";
 import UsersList from "./UsersList";
 import { DB_CACHE_TAG } from "@/lib/database/constants";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Server Actions",
+};
 
 async function Page() {
     return (

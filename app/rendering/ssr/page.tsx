@@ -6,12 +6,17 @@ import LoadingSkeleton from "@/components/general/LoadingSkeleton";
 import { Suspense } from "react";
 import QuoteCard from "./QuoteCard";
 import LinkWrapper from "@/components/general/LinkWrapper";
+import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
+export const metadata: Metadata = {
+    title: "Server-Side Rendering (SSR)",
+};
+
 function Page() {
     return (
-        <PageWrapper pageTitle="Server Side Rendering">
+        <PageWrapper pageTitle="Server-Side Rendering (SSR)">
             <SectionWrapper>
                 <ParagraphWrapper>
                     <TextAccentWrapper>
