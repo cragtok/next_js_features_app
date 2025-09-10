@@ -1,4 +1,4 @@
-describe("SSR Rendering Page", () => {
+describe("SSR Page", () => {
     const getQuoteAndAuthor = () => {
         let quote: string;
         let author: string;

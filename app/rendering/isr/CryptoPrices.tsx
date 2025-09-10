@@ -40,7 +40,7 @@ async function CryptoPrices() {
                     />
                 ))}
             </div>
-            <RefreshButton>Refresh Page</RefreshButton>
+            <RefreshButton data-test="refresh-button">Refresh Page</RefreshButton>
         </>
     );
 }

@@ -16,8 +16,8 @@ const CryptoPricesCard = ({ cryptoData }: Props) => {
             </CardHeader>
             <CardContent>
                 <p className="text-brand-500 text">
-                    <span className="font-semibold">Price:</span> $
-                    {cryptoData.price}
+                    <span className="font-semibold">Price:</span>{" "}
+                    <span data-test="crypto-price">${cryptoData.price}</span>
                 </p>
             </CardContent>
         </CardWrapper>
