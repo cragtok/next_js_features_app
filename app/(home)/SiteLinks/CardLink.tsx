@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { SubRoute } from "@/lib/routesList";
+import { AppRoute } from "@/lib/routesList";
 
-type Props = SubRoute;
+type Props = Omit<AppRoute, "priority">;
 
 const CardLink = ({ title, description, href }: Props) => {
     return (
