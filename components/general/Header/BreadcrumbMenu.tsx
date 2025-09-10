@@ -8,14 +8,14 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { SubRoute } from "@/lib/routesList";
+import { AppRoute } from "@/lib/routesList";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
 const FLEX_BREAKPOINT_WIDTH = 280;
 const MAX_URL_LENGTH = 42;
 
 interface Props {
-    routePath: SubRoute[];
+    routePath: AppRoute[];
 }
 
 const trimExcessURL = (url: string) =>

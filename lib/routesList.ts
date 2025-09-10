@@ -1,18 +1,18 @@
-interface SubRoute {
+interface AppRoute {
     title: string;
     href: string;
     description: string;
 }
 
-interface PageRoute {
-    route: string;
-    subRoutes: SubRoute[];
+interface RouteGroup {
+    group: string;
+    routes: AppRoute[];
 }
 
-const pageRoutes: PageRoute[] = [
+const pageRoutes: RouteGroup[] = [
     {
-        route: "Routing",
-        subRoutes: [
+        group: "Routing",
+        routes: [
             {
                 title: "Static Routing",
                 href: "/routing/static",
@@ -26,8 +26,8 @@ const pageRoutes: PageRoute[] = [
         ],
     },
     {
-        route: "Rendering and Data Fetching",
-        subRoutes: [
+        group: "Rendering and Data Fetching",
+        routes: [
             {
                 title: "Server-Side Rendering (SSR)",
                 href: "/rendering/ssr",
@@ -55,8 +55,8 @@ const pageRoutes: PageRoute[] = [
         ],
     },
     {
-        route: "Streaming",
-        subRoutes: [
+        group: "Streaming",
+        routes: [
             {
                 title: "Streaming With Loading.tsx",
                 href: "/streaming/loading",
@@ -72,8 +72,8 @@ const pageRoutes: PageRoute[] = [
         ],
     },
     {
-        route: "Server Actions",
-        subRoutes: [
+        group: "Server Actions",
+        routes: [
             {
                 title: "Server Actions",
                 href: "/server-actions",
@@ -83,8 +83,8 @@ const pageRoutes: PageRoute[] = [
         ],
     },
     {
-        route: "Route Handlers",
-        subRoutes: [
+        group: "Route Handlers",
+        routes: [
             {
                 title: "Route Handlers",
                 href: "/route-handlers",
@@ -93,8 +93,8 @@ const pageRoutes: PageRoute[] = [
         ],
     },
     {
-        route: "Middleware",
-        subRoutes: [
+        group: "Middleware",
+        routes: [
             {
                 title: "Middleware A/B Testing",
                 href: "/middleware/ab-testing",
@@ -110,10 +110,10 @@ const pageRoutes: PageRoute[] = [
     },
 ];
 
-const routeObjects = (function() {
-    const routeObjects: Record<string, SubRoute> = pageRoutes.reduce(
-        (acc: Record<string, SubRoute>, pageRoute: PageRoute) => {
-            pageRoute.subRoutes.forEach((subRoute) => {
+const routeObjects: Record<string, AppRoute> = (function() {
+    const routeObjects: Record<string, AppRoute> = pageRoutes.reduce(
+        (acc: Record<string, AppRoute>, pageRoute: RouteGroup) => {
+            pageRoute.routes.forEach((subRoute) => {
                 acc[subRoute.href] = subRoute;
             });
             return acc;
@@ -133,4 +133,4 @@ const routeObjects = (function() {
     return routeObjects;
 })();
 
-export { routeObjects, pageRoutes, type SubRoute, type PageRoute };
+export { routeObjects, pageRoutes, type AppRoute, type RouteGroup };

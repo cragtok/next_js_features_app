@@ -3,7 +3,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import BreadcrumbMenu from "./BreadcrumbMenu";
 import { Suspense } from "react";
-import { SubRoute, routeObjects } from "@/lib/routesList";
+import { AppRoute, routeObjects } from "@/lib/routesList";
 
 const Header = () => {
     const pathname = usePathname();
@@ -24,7 +24,7 @@ const Header = () => {
         );
     }
 
-    let routePath: SubRoute[] = [];
+    let routePath: AppRoute[] = [];
     // match the '/routing/dynamic/*' path
     const dynamicRoutePattern = /^\/routing\/dynamic\/(.*)/;
 

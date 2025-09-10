@@ -8,15 +8,15 @@ import {
     AccordionContent,
 } from "@/components/ui/accordion";
 import CardLink from "./CardLink";
-import { PageRoute, SubRoute } from "@/lib/routesList";
+import { RouteGroup, AppRoute } from "@/lib/routesList";
 import { pageRoutes } from "@/lib/routesList";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
 
 const LOCAL_STORAGE_KEY = "accordion-open-items";
 
-const renderRoutes = (pageRoutes: PageRoute[]) => {
-    const renderSubRoutes = (subRoutes: SubRoute[]) => {
-        return subRoutes.map((subRoute: SubRoute) => (
+const renderRoutes = (pageRoutes: RouteGroup[]) => {
+    const renderSubRoutes = (subRoutes: AppRoute[]) => {
+        return subRoutes.map((subRoute: AppRoute) => (
             <CardLink
                 key={crypto.randomUUID()}
                 href={subRoute.href}
@@ -26,7 +26,7 @@ const renderRoutes = (pageRoutes: PageRoute[]) => {
         ));
     };
 
-    return pageRoutes.map((pageRoute: PageRoute, idx) => {
+    return pageRoutes.map((pageRoute: RouteGroup, idx) => {
         return (
             <AccordionItem
                 key={crypto.randomUUID()}
@@ -34,11 +34,11 @@ const renderRoutes = (pageRoutes: PageRoute[]) => {
                 value={`item-${idx + 1}`}
             >
                 <AccordionTrigger className="font-extrabold text-brand-700">
-                    {pageRoute.route}
+                    {pageRoute.group}
                 </AccordionTrigger>
 
                 <AccordionContent className="flex flex-col gap-3">
-                    {renderSubRoutes(pageRoute.subRoutes)}
+                    {renderSubRoutes(pageRoute.routes)}
                 </AccordionContent>
             </AccordionItem>
         );
