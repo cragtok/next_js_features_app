@@ -33,13 +33,19 @@ const JokeFetcher = () => {
                 <CardWrapper>
                     <CardContent>
                         {isError ? (
-                            <TextAccentWrapper classNameOverride="italic text-status-danger-500 text-center">
+                            <TextAccentWrapper
+                                classNameOverride="text-status-danger-500 text-center"
+                                data-test="joke-error"
+                            >
                                 {
                                     "Failed to load joke. Please try fetching again."
                                 }
                             </TextAccentWrapper>
                         ) : joke ? (
-                            <TextAccentWrapper classNameOverride="italic text-center">
+                            <TextAccentWrapper
+                                classNameOverride="italic text-center"
+                                data-test="joke-text"
+                            >
                                 {joke}
                             </TextAccentWrapper>
                         ) : (
@@ -51,7 +57,11 @@ const JokeFetcher = () => {
                 </CardWrapper>
             )}
 
-            <ButtonWrapper onClick={handleClick} disabled={isFetching}>
+            <ButtonWrapper
+                onClick={handleClick}
+                disabled={isFetching}
+                data-test="joke-fetch-button"
+            >
                 Fetch Joke
             </ButtonWrapper>
         </>
