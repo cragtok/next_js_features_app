@@ -24,22 +24,22 @@ const QuoteCard = async () => {
                 <CardContent>
                     {quoteData ? (
                         <figure className="text-accent-500 flex flex-col gap-3">
-                            <blockquote className="italic">
+                            <blockquote className="italic" data-test="quote">
                                 &quot;{quoteData.quote}&quot;
                             </blockquote>
-                            <figcaption className="italic font-semibold self-end">
+                            <figcaption className="italic font-semibold self-end" data-test="author">
                                 — {quoteData.author}
                             </figcaption>
                         </figure>
                     ) : (
-                        <blockquote className="text-status-danger-500 font-semibold text-center">
+                        <blockquote className="text-status-danger-500 font-semibold text-center" data-test="quote-error-message">
                             {errorMessage}
                         </blockquote>
                     )}
                 </CardContent>
             </CardWrapper>
 
-            <RefreshButton>Refresh Page</RefreshButton>
+            <RefreshButton data-test="refresh-button">Refresh Page</RefreshButton>
         </>
     );
 };
