@@ -14,7 +14,7 @@ function processEnv<T extends z.ZodSchema>(
             parsed.error // Log the Zod error for detailed context
         );
         throw new Error(
-            "Invalid client environment variables. Check your .env file or deployment config."
+            "Invalid environment variables. Check your .env file or deployment config."
         );
     }
 
