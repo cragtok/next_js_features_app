@@ -32,6 +32,7 @@ export async function generateMetadata({
 
     return {
         title: `${title} | Dynamic Routing`,
+        robots: { index: false, follow: false },
     };
 }
 
