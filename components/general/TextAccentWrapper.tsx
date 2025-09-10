@@ -1,15 +1,19 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-interface Props {
+interface Props extends React.ComponentPropsWithRef<"span"> {
     classNameOverride?: string;
     children: React.ReactNode;
 }
-const TextAccentWrapper = ({ classNameOverride, children }: Props) => {
+const TextAccentWrapper = ({ classNameOverride, children, ...rest }: Props) => {
     const defaultStyles = "text-accent-500 font-semibold";
     const mergedStyles = cn([defaultStyles, classNameOverride]);
 
-    return <span className={mergedStyles}>{children}</span>;
+    return (
+        <span className={mergedStyles} {...rest}>
+            {children}
+        </span>
+    );
 };
 
 export default TextAccentWrapper;
