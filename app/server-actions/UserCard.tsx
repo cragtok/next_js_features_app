@@ -9,7 +9,7 @@ interface Props {
 
 const UserCard = ({ user, id }: Props) => {
     return (
-        <CardWrapper classNameOverride="text-justify">
+        <CardWrapper classNameOverride="text-justify" data-test="user-card">
             <CardContent id={id}>
                 <p className="text-brand-500 text">
                     <span className="font-semibold">Username:</span>{" "}

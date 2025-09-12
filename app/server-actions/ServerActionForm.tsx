@@ -74,7 +74,7 @@ const ServerActionForm = () => {
                             handleInputChange={handleInputChange}
                             disableInputs={pending}
                         />
-                        <ButtonWrapper type="submit" disabled={pending}>
+                        <ButtonWrapper type="submit" disabled={pending} data-test="submit-button">
                             {pending ? "Submitting..." : "Submit"}
                         </ButtonWrapper>
                     </form>

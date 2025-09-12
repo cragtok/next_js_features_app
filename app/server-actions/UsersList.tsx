@@ -39,7 +39,7 @@ const UsersList = async () => {
     }
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col" data-test="users-list">
             {users.map((user, idx) => (
                 <UserCard
                     key={user.id}
