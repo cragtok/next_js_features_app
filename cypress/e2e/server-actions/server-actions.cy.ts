@@ -1,4 +1,4 @@
-describe("Server Actions Form Submission", () => {
+describe("Server Actions Page", () => {
     it("should display error messages when form is submitted with no data", () => {
         cy.visit("/server-actions");
 
