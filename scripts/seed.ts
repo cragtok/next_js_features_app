@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const CURRENT_FILE_NAME = path.basename(__filename);
 
-const mockUsers = [
+export const mockUsers = [
     {
         username: "john_doe",
         email: "john.doe@example.com",
@@ -34,6 +34,7 @@ async function runSeed() {
             numUsers: mockUsers.length,
         });
     } catch (error) {
+        console.error(error);
         logger.fatal("Database seeding failed.", {
             error: error as Error,
         });

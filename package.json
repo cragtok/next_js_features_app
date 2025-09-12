@@ -10,8 +10,8 @@
     "seed": "tsx ./scripts/seed.ts",
     "dev:seed": "pnpm run seed && pnpm run dev",
     "build:seed": "pnpm run seed && pnpm run build",
-    "cypress:run": "cypress run",
-    "cypress:open": "cypress open"
+    "cypress:run": "pnpm run seed && NODE_ENV=test cypress run",
+    "cypress:open": "pnpm run seed && NODE_ENV=test cypress open"
   },
   "dependencies": {
     "@google/genai": "^1.17.0",
