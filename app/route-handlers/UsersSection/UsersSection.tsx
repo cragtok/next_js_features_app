@@ -135,18 +135,20 @@ const UsersSection = () => {
     return (
         <>
             <CreateUserForm handleCreateUser={handleCreateUser} />
-            {users.map((user, idx) => (
-                <Fragment key={user.id}>
-                    <UserCardContainer
-                        user={user}
-                        onDelete={handleDeleteUser}
-                        onUpdate={handleEditUser}
-                        lastItemRef={
-                            idx === users.length - 1 ? lastItemRef : null
-                        }
-                    />
-                </Fragment>
-            ))}
+            <div data-test="user-cards-list">
+                {users.map((user, idx) => (
+                    <Fragment key={user.id}>
+                        <UserCardContainer
+                            user={user}
+                            onDelete={handleDeleteUser}
+                            onUpdate={handleEditUser}
+                            lastItemRef={
+                                idx === users.length - 1 ? lastItemRef : null
+                            }
+                        />
+                    </Fragment>
+                ))}
+            </div>
         </>
     );
 };

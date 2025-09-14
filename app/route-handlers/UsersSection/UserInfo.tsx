@@ -14,11 +14,11 @@ const UserInfo = ({ email, password, lastItemRef, createdAt }: Props) => {
         <div className="text-brand-500" ref={lastItemRef}>
             <p>
                 <span className="font-semibold">Email: </span>
-                {email}
+                <span data-test="user-email">{email}</span>
             </p>
             <p>
                 <span className="font-semibold">Password: </span>
-                {password}
+                <span data-test="user-password">{password}</span>
             </p>
             {createdAt && (
                 <p>

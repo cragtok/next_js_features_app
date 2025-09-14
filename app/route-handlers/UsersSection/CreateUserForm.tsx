@@ -87,6 +87,7 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                                 <ButtonWrapper
                                     onClick={onSubmit}
                                     disabled={isSubmitting}
+                                    data-test="create-user-submit-button"
                                 >
                                     {!isSubmitting
                                         ? "Create User"

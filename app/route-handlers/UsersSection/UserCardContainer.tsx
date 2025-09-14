@@ -43,7 +43,7 @@ const UserCardContainer = ({
     return (
         <CardWrapper classNameOverride="text-justify">
             <CardHeader className="flex flex-col gap-2 max-[400px]:items-center">
-                <CardTitle className="text-accent-500 wrap-anywhere">
+                <CardTitle className="text-accent-500 wrap-anywhere" data-test="user-username">
                     {user.username}
                 </CardTitle>
 
