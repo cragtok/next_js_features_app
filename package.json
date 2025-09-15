@@ -11,7 +11,9 @@
     "dev:seed": "pnpm run seed && pnpm run dev",
     "build:seed": "pnpm run seed && pnpm run build",
     "cypress:run": "pnpm run seed && NODE_ENV=test cypress run",
-    "cypress:open": "pnpm run seed && NODE_ENV=test cypress open"
+    "cypress:open": "pnpm run seed && NODE_ENV=test cypress open",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@google/genai": "^1.17.0",
@@ -38,9 +40,14 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@jest/globals": "^30.1.2",
     "@next/env": "^15.5.3",
     "@tailwindcss/postcss": "^4.1.13",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
     "@types/better-sqlite3": "^7.6.13",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.19.13",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
@@ -48,8 +55,11 @@
     "cypress": "^15.2.0",
     "eslint": "^9.35.0",
     "eslint-config-next": "15.4.6",
+    "jest": "^30.1.3",
+    "jest-environment-jsdom": "^30.1.2",
     "next-test-api-route-handler": "^5.0.3",
     "tailwindcss": "^4.1.13",
+    "ts-node": "^10.9.2",
     "tsx": "^4.20.5",
     "tw-animate-css": "^1.3.8",
     "typescript": "^5.9.2"
