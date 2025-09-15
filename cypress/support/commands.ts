@@ -19,6 +19,12 @@ declare namespace Cypress {
      * @example cy.get('.parent').findChildBySel('greeting')
      */
     findChildBySel(selector: string, options?: Partial<Cypress.Loggable & Cypress.Timeoutable & Cypress.Withinable & Cypress.Shadow>): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Custom command to select an input element by its name attribute.
+     * @example cy.getByInputName('username')
+     */
+    getByInputName(name: string, options?: Partial<Cypress.Loggable & Cypress.Timeoutable & Cypress.Withinable & Cypress.Shadow>): Chainable<JQuery<HTMLElement>>;
   }
 }
 
@@ -33,3 +39,7 @@ Cypress.Commands.add('getBySelLike', (selector, ...args) => {
 Cypress.Commands.add('findChildBySel', { prevSubject: 'element' }, (subject, selector, ...args) => {
   return cy.wrap(subject).find(`[data-test=${selector}]`, ...args)
 })
+
+Cypress.Commands.add('getByInputName', (name, ...args) => {
+  return cy.get(`input[name="${name}"]`, ...args);
+});

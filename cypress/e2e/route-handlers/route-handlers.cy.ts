@@ -1,9 +1,9 @@
-describe("Route Handlers Page", () => {
-    describe("User creation form", () => {
-        beforeEach(() => {
-            cy.request("POST", "/api/seed-db").its("status").should("eq", 200);
-        });
+describe("Route handlers page", () => {
+    beforeEach(() => {
+        cy.request("POST", "/api/seed-db").its("status").should("eq", 200);
+    });
 
+    describe("User creation form", () => {
         it("should display error messages when create user form is submitted with no data", () => {
             cy.visit("/route-handlers");
 
@@ -11,19 +11,19 @@ describe("Route Handlers Page", () => {
 
             cy.getBySel("create-user-submit-button").click();
 
-            cy.get('input[name="username"]')
+            cy.getByInputName("username")
                 .parent()
                 .find("p.text-status-danger-500")
                 .should("be.visible")
                 .and("contain", "Username");
 
-            cy.get('input[name="email"]')
+            cy.getByInputName("email")
                 .parent()
                 .find("p.text-status-danger-500")
                 .should("be.visible")
                 .and("contain", "Email");
 
-            cy.get('input[name="password"]')
+            cy.getByInputName("password")
                 .parents(".grid.gap-2")
                 .last()
                 .find("p.text-status-danger-500")
@@ -36,20 +36,20 @@ describe("Route Handlers Page", () => {
 
             cy.contains("Create New User").click();
 
-            cy.get('input[name="username"]').type("abc");
-            cy.get('input[name="email"]').type("invalid-email");
-            cy.get('input[name="password"]').type("123");
+            cy.getByInputName("username").type("abc");
+            cy.getByInputName("email").type("invalid-email");
+            cy.getByInputName("password").type("123");
 
             cy.getBySel("create-user-submit-button").click();
 
-            cy.get('input[name="username"]')
+            cy.getByInputName("username")
                 .parent()
                 .find("p.text-status-danger-500")
                 .should("be.visible")
                 .and("contain", "Username")
                 .and("contain", "5");
 
-            cy.get('input[name="password"]')
+            cy.getByInputName("password")
                 .parents(".grid.gap-2")
                 .last()
                 .find("p.text-status-danger-500")
@@ -57,7 +57,7 @@ describe("Route Handlers Page", () => {
                 .and("contain", "Password")
                 .and("contain", "5");
 
-            cy.get('input[name="email"]')
+            cy.getByInputName("email")
                 .parent()
                 .find("p.text-status-danger-500")
                 .should("be.visible")
@@ -83,9 +83,9 @@ describe("Route Handlers Page", () => {
 
             cy.contains("Create New User").click();
 
-            cy.get('input[name="username"]').type(username);
-            cy.get('input[name="email"]').type(email);
-            cy.get('input[name="password"]').type(password);
+            cy.getByInputName("username").type(username);
+            cy.getByInputName("email").type(email);
+            cy.getByInputName("password").type(password);
 
             cy.getBySel("create-user-submit-button").click();
 
@@ -108,9 +108,9 @@ describe("Route Handlers Page", () => {
                     cy.contains(`Password: ${password}`).should("be.visible");
                 });
 
-            cy.get('input[name="username"]').should("have.value", "");
-            cy.get('input[name="email"]').should("have.value", "");
-            cy.get('input[name="password"]').should("have.value", "");
+            cy.getByInputName("username").should("have.value", "");
+            cy.getByInputName("email").should("have.value", "");
+            cy.getByInputName("password").should("have.value", "");
         });
 
         it("should prevent the creation of a new user that already exists", () => {
@@ -122,17 +122,17 @@ describe("Route Handlers Page", () => {
 
             cy.contains("Create New User").click();
 
-            cy.get('input[name="username"]').type(username);
-            cy.get('input[name="email"]').type(email);
-            cy.get('input[name="password"]').type(password);
+            cy.getByInputName("username").type(username);
+            cy.getByInputName("email").type(email);
+            cy.getByInputName("password").type(password);
 
             cy.getBySel("create-user-submit-button").click();
 
             cy.contains("Successfully created user!").should("be.visible");
 
-            cy.get('input[name="username"]').should("have.value", "");
-            cy.get('input[name="email"]').should("have.value", "");
-            cy.get('input[name="password"]').should("have.value", "");
+            cy.getByInputName("username").should("have.value", "");
+            cy.getByInputName("email").should("have.value", "");
+            cy.getByInputName("password").should("have.value", "");
 
             let initialUserCount = 0;
 
@@ -151,17 +151,17 @@ describe("Route Handlers Page", () => {
                     cy.contains(`Password: ${password}`).should("be.visible");
                 });
 
-            cy.get('input[name="username"]').type(username);
-            cy.get('input[name="email"]').type(email);
-            cy.get('input[name="password"]').type(password);
+            cy.getByInputName("username").type(username);
+            cy.getByInputName("email").type(email);
+            cy.getByInputName("password").type(password);
 
             cy.getBySel("create-user-submit-button").click();
 
             cy.contains("User with email already exists.").should("be.visible");
 
-            cy.get('input[name="username"]').should("have.value", username);
-            cy.get('input[name="email"]').should("have.value", email);
-            cy.get('input[name="password"]').should("have.value", password);
+            cy.getByInputName("username").should("have.value", username);
+            cy.getByInputName("email").should("have.value", email);
+            cy.getByInputName("password").should("have.value", password);
 
             cy.getBySel("user-cards-list")
                 .children()
@@ -175,10 +175,6 @@ describe("Route Handlers Page", () => {
     });
 
     describe("Users section", () => {
-        beforeEach(() => {
-            cy.request("POST", "/api/seed-db").its("status").should("eq", 200);
-        });
-
         it("should show pre-filled user data in edit form when edit button is clicked", () => {
             cy.visit("/route-handlers");
 
@@ -373,9 +369,7 @@ describe("Route Handlers Page", () => {
             cy.contains("Successfully edited user!").should("be.visible");
 
             cy.get("@firstUserCard").contains("Save").should("not.exist");
-
             cy.get("@firstUserCard").contains("Cancel").should("not.exist");
-
             cy.get("@firstUserCard").contains("Edit").should("be.visible");
 
             cy.get("@firstUserCard")
