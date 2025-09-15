@@ -45,7 +45,7 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
             return;
         }
 
-        if (!/^[a-zA-Z0-9\-\ /]+$/.test(trimmedValue)) {
+        if (!/^[a-zA-Z0-9\-\_\ /]+$/.test(trimmedValue)) {
             setErrorMessage(
                 "Invalid characters in route segment. Only alphanumeric, spaces, hyphens, and forward slashes are allowed."
             );
