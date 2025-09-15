@@ -35,10 +35,26 @@ async function Page() {
 
             <SectionWrapper sectionTitle="Request Information">
                 <div className="flex flex-col max-w-prose">
-                    <RequestInfoCard title="IP Address" info={ip} />
-                    <RequestInfoCard title="Server Time" info={serverTime} />
-                    <RequestInfoCard title="Geo Location" info={geoLocation} />
-                    <RequestInfoCard title="User Agent" info={userAgent} />
+                    <RequestInfoCard
+                        title="IP Address"
+                        info={ip}
+                        testTitle="ip-address"
+                    />
+                    <RequestInfoCard
+                        title="Server Time"
+                        info={serverTime}
+                        testTitle="server-time"
+                    />
+                    <RequestInfoCard
+                        title="Geo Location"
+                        info={geoLocation}
+                        testTitle="geo-location"
+                    />
+                    <RequestInfoCard
+                        title="User Agent"
+                        info={userAgent}
+                        testTitle="user-agent"
+                    />
                 </div>
             </SectionWrapper>
         </PageWrapper>
