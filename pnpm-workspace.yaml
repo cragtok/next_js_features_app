@@ -1,6 +1,7 @@
 onlyBuiltDependencies:
   - '@tailwindcss/oxide'
   - better-sqlite3
+  - core-js
   - cypress
   - esbuild
   - sharp
