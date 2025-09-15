@@ -4,19 +4,19 @@ describe("Server Actions Page", () => {
 
         cy.getBySel("submit-button").contains("Submit").click();
 
-        cy.get('input[name="username"]')
+        cy.getByInputName("username")
             .parent()
             .find("p.text-status-danger-500")
             .should("be.visible")
             .and("contain", "Username");
 
-        cy.get('input[name="email"]')
+        cy.getByInputName("email")
             .parent()
             .find("p.text-status-danger-500")
             .should("be.visible")
             .and("contain", "Email");
 
-        cy.get('input[name="password"]')
+        cy.getByInputName("password")
             .parents(".grid.gap-2")
             .last()
             .find("p.text-status-danger-500")
@@ -27,11 +27,11 @@ describe("Server Actions Page", () => {
     it("should display username length error when username is less than 5 characters", () => {
         cy.visit("/server-actions");
 
-        cy.get('input[name="username"]').type("abc");
+        cy.getByInputName("username").type("abc");
 
         cy.getBySel("submit-button").contains("Submit").click();
 
-        cy.get('input[name="username"]')
+        cy.getByInputName("username")
             .parent()
             .find("p.text-status-danger-500")
             .should("be.visible")
@@ -42,11 +42,11 @@ describe("Server Actions Page", () => {
     it("should display email format error when email is not in proper format", () => {
         cy.visit("/server-actions");
 
-        cy.get('input[name="email"]').type("email");
+        cy.getByInputName("email").type("email");
 
         cy.getBySel("submit-button").contains("Submit").click();
 
-        cy.get('input[name="email"]')
+        cy.getByInputName("email")
             .parent()
             .find("p.text-status-danger-500")
             .should("be.visible")
@@ -59,11 +59,11 @@ describe("Server Actions Page", () => {
 
         cy.contains("Create an Account").should("be.visible");
 
-        cy.get('input[name="password"]').type("abc");
+        cy.getByInputName("password").type("abc");
 
         cy.getBySel("submit-button").contains("Submit").click();
 
-        cy.get('input[name="password"]')
+        cy.getByInputName("password")
             .parents(".grid.gap-2")
             .find("p.text-status-danger-500")
             .should("be.visible")
@@ -92,9 +92,9 @@ describe("Server Actions Page", () => {
                     cy.log(`Initial user count: ${initialUserCount}`);
                 });
 
-            cy.get('input[name="username"]').type(username);
-            cy.get('input[name="email"]').type(email);
-            cy.get('input[name="password"]').type(password);
+            cy.getByInputName("username").type(username);
+            cy.getByInputName("email").type(email);
+            cy.getByInputName("password").type(password);
 
             cy.getBySel("submit-button")
                 .should("not.be.disabled")
@@ -104,9 +104,9 @@ describe("Server Actions Page", () => {
 
             cy.contains("Successfully created user!").should("be.visible");
 
-            cy.get('input[name="username"]').should("have.value", "");
-            cy.get('input[name="email"]').should("have.value", "");
-            cy.get('input[name="password"]').should("have.value", "");
+            cy.getByInputName("username").should("have.value", "");
+            cy.getByInputName("email").should("have.value", "");
+            cy.getByInputName("password").should("have.value", "");
 
             cy.getBySel("users-list")
                 .children()
@@ -134,9 +134,9 @@ describe("Server Actions Page", () => {
             const email = "test@example.com";
             const password = "password123";
 
-            cy.get('input[name="username"]').type(username);
-            cy.get('input[name="email"]').type(email);
-            cy.get('input[name="password"]').type(password);
+            cy.getByInputName("username").type(username);
+            cy.getByInputName("email").type(email);
+            cy.getByInputName("password").type(password);
 
             cy.getBySel("submit-button")
                 .should("not.be.disabled")
@@ -148,9 +148,9 @@ describe("Server Actions Page", () => {
 
             cy.contains("Successfully created user!").should("be.visible");
 
-            cy.get('input[name="username"]').should("have.value", "");
-            cy.get('input[name="email"]').should("have.value", "");
-            cy.get('input[name="password"]').should("have.value", "");
+            cy.getByInputName("username").should("have.value", "");
+            cy.getByInputName("email").should("have.value", "");
+            cy.getByInputName("password").should("have.value", "");
 
             let initialUserCount = 0;
 
@@ -170,9 +170,9 @@ describe("Server Actions Page", () => {
                     cy.contains(`Password: ${password}`).should("be.visible");
                 });
 
-            cy.get('input[name="username"]').type(username);
-            cy.get('input[name="email"]').type(email);
-            cy.get('input[name="password"]').type(password);
+            cy.getByInputName("username").type(username);
+            cy.getByInputName("email").type(email);
+            cy.getByInputName("password").type(password);
 
             cy.getBySel("submit-button")
                 .should("not.be.disabled")
@@ -180,16 +180,16 @@ describe("Server Actions Page", () => {
 
             cy.getBySel("submit-button").click();
 
-            cy.get('input[name="email"]')
+            cy.getByInputName("email")
                 .parent()
                 .find("p.text-status-danger-500")
                 .should("be.visible")
                 .and("contain", "email")
                 .and("contain", "already exists");
 
-            cy.get('input[name="username"]').should("have.value", username);
-            cy.get('input[name="email"]').should("have.value", email);
-            cy.get('input[name="password"]').should("have.value", password);
+            cy.getByInputName("username").should("have.value", username);
+            cy.getByInputName("email").should("have.value", email);
+            cy.getByInputName("password").should("have.value", password);
 
             cy.getBySel("users-list")
                 .children()
