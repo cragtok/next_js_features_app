@@ -4,7 +4,9 @@ describe("CSR Page", () => {
 
         cy.getBySel("joke-text").should("not.exist");
         cy.getBySel("joke-error").should("not.exist");
-        cy.contains("Click the button to fetch a joke.").should("be.visible");
+        cy.getBySel("initial-text")
+            .should("be.visible")
+            .and("contain", "Click the button to fetch a joke");
 
         cy.getBySel("joke-fetch-button").click();
         cy.getBySel("loading-skeleton").should("exist");
@@ -13,7 +15,7 @@ describe("CSR Page", () => {
         cy.getBySel("joke-text").should("be.visible").and("not.be.empty");
         cy.getBySel("loading-skeleton").should("not.exist");
 
-        cy.contains("Click the button to fetch a joke.").should("not.exist");
+        cy.getBySel("initial-text").should("not.exist");
     });
 
     it("should display an error message when joke fetch is unsuccessful", () => {
@@ -26,7 +28,9 @@ describe("CSR Page", () => {
 
         cy.getBySel("joke-text").should("not.exist");
         cy.getBySel("joke-error").should("not.exist");
-        cy.contains("Click the button to fetch a joke.").should("be.visible");
+        cy.getBySel("initial-text")
+            .should("be.visible")
+            .and("contain", "Click the button to fetch a joke");
 
         cy.getBySel("joke-fetch-button").click();
         cy.wait("@getJokeError");
@@ -35,6 +39,6 @@ describe("CSR Page", () => {
             .should("be.visible")
             .and("contain", "Failed to load joke. Please try fetching again.");
 
-        cy.contains("Click the button to fetch a joke.").should("not.exist");
+        cy.getBySel("initial-text").should("not.exist");
     });
 });

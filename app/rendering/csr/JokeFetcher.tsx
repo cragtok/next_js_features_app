@@ -49,7 +49,7 @@ const JokeFetcher = () => {
                                 {joke}
                             </TextAccentWrapper>
                         ) : (
-                            <TextAccentWrapper classNameOverride="text-center text-brand-500">
+                            <TextAccentWrapper classNameOverride="text-center text-brand-500" data-test="initial-text">
                                 {"Click the button to fetch a joke."}
                             </TextAccentWrapper>
                         )}
