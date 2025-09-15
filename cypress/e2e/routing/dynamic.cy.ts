@@ -4,10 +4,9 @@ describe("Dynamic Routing Page", () => {
 
         cy.url().as("initialUrl");
 
-        cy.get('input[placeholder="Enter a dynamic route segment"]').should(
-            "have.value",
-            ""
-        );
+        cy.getBySel("dynamic-route-input")
+            .as("dynamicInputForm")
+            .should("have.value", "");
 
         cy.contains("button", "Navigate").click();
 
@@ -15,18 +14,19 @@ describe("Dynamic Routing Page", () => {
             cy.url().should("eq", initialUrl);
         });
 
-        cy.contains("p", "URL is empty").should("be.visible");
+        cy.get("@dynamicInputForm")
+            .next("p")
+            .contains("URL is empty")
+            .should("be.visible");
     });
 
     it("should navigate to the correct dynamic route when a single word segment is submitted", () => {
         cy.visit("/routing/dynamic");
 
         const routeSegment = "test-segment";
-        const expectedUrl = `http://localhost:3000/routing/dynamic/${routeSegment}`;
+        const expectedUrl = `${Cypress.env("baseUrl")}/routing/dynamic/${routeSegment}`;
 
-        cy.get('input[placeholder="Enter a dynamic route segment"]').type(
-            routeSegment
-        );
+        cy.getBySel("dynamic-route-input").type(routeSegment);
 
         cy.contains("button", "Navigate").click();
 
@@ -39,11 +39,9 @@ describe("Dynamic Routing Page", () => {
         cy.visit("/routing/dynamic");
 
         const routeSegment = "segment1/segment2/segment3";
-        const expectedUrl = `http://localhost:3000/routing/dynamic/${routeSegment}`;
+        const expectedUrl = `${Cypress.env("baseUrl")}/routing/dynamic/${routeSegment}`;
 
-        cy.get('input[placeholder="Enter a dynamic route segment"]').type(
-            routeSegment
-        );
+        cy.getBySel("dynamic-route-input").type(routeSegment);
 
         cy.contains("button", "Navigate").click();
 
@@ -60,9 +58,9 @@ describe("Dynamic Routing Page", () => {
         const maxLength = 80;
         const longRouteSegment = "a".repeat(maxLength + 1); // Create a string longer than max length
 
-        cy.get('input[placeholder="Enter a dynamic route segment"]').type(
-            longRouteSegment
-        );
+        cy.getBySel("dynamic-route-input")
+            .as("dynamicInputForm")
+            .type(longRouteSegment);
 
         cy.contains("button", "Navigate").click();
 
@@ -70,10 +68,12 @@ describe("Dynamic Routing Page", () => {
             cy.url().should("eq", initialUrl);
         });
 
-        cy.contains(
-            "p",
-            `Route segment cannot have more than ${maxLength} characters`
-        ).should("be.visible");
+        cy.get("@dynamicInputForm")
+            .next("p")
+            .contains(
+                `Route segment cannot have more than ${maxLength} characters`
+            )
+            .should("be.visible");
     });
 
     ["http://", "https://", "//"].forEach((prefix) => {
@@ -84,9 +84,9 @@ describe("Dynamic Routing Page", () => {
 
             const invalidRouteSegment = `${prefix}example.com/path`;
 
-            cy.get('input[placeholder="Enter a dynamic route segment"]').type(
-                invalidRouteSegment
-            );
+            cy.getBySel("dynamic-route-input")
+                .as("dynamicInputForm")
+                .type(invalidRouteSegment);
 
             cy.contains("button", "Navigate").click();
 
@@ -94,10 +94,12 @@ describe("Dynamic Routing Page", () => {
                 cy.url().should("eq", initialUrl);
             });
 
-            cy.contains(
-                "p",
-                "External URLs are not allowed in dynamic route segments."
-            ).should("be.visible");
+            cy.get("@dynamicInputForm")
+                .next("p")
+                .contains(
+                    "External URLs are not allowed in dynamic route segments."
+                )
+                .should("be.visible");
         });
     });
 
@@ -108,9 +110,9 @@ describe("Dynamic Routing Page", () => {
 
         const invalidRouteSegment = "invalid!@#segment";
 
-        cy.get('input[placeholder="Enter a dynamic route segment"]').type(
-            invalidRouteSegment
-        );
+        cy.getBySel("dynamic-route-input")
+            .as("dynamicInputForm")
+            .type(invalidRouteSegment);
 
         cy.contains("button", "Navigate").click();
 
@@ -118,21 +120,21 @@ describe("Dynamic Routing Page", () => {
             cy.url().should("eq", initialUrl);
         });
 
-        cy.contains(
-            "p",
-            "Invalid characters in route segment. Only alphanumeric, spaces, hyphens, and forward slashes are allowed."
-        ).should("be.visible");
+        cy.get("@dynamicInputForm")
+            .next("p")
+            .contains(
+                "Invalid characters in route segment. Only alphanumeric, spaces, hyphens, and forward slashes are allowed."
+            )
+            .should("be.visible");
     });
 
     it("should navigate to a statically generated dynamic route and display static content message", () => {
         cy.visit("/routing/dynamic");
 
         const staticRouteSegment = "hello_world";
-        const expectedUrl = `http://localhost:3000/routing/dynamic/${staticRouteSegment}`;
+        const expectedUrl = `${Cypress.env("baseUrl")}/routing/dynamic/${staticRouteSegment}`;
 
-        cy.get('input[placeholder="Enter a dynamic route segment"]').type(
-            staticRouteSegment
-        );
+        cy.getBySel("dynamic-route-input").type(staticRouteSegment);
 
         cy.contains("button", "Navigate").click();
 
@@ -150,11 +152,9 @@ describe("Dynamic Routing Page", () => {
         cy.visit("/routing/dynamic");
 
         const nonStaticRouteSegment = "non-static-segment";
-        const expectedUrl = `http://localhost:3000/routing/dynamic/${nonStaticRouteSegment}`;
+        const expectedUrl = `${Cypress.env("baseUrl")}/routing/dynamic/${nonStaticRouteSegment}`;
 
-        cy.get('input[placeholder="Enter a dynamic route segment"]').type(
-            nonStaticRouteSegment
-        );
+        cy.getBySel("dynamic-route-input").type(nonStaticRouteSegment);
 
         cy.contains("button", "Navigate").click();
 

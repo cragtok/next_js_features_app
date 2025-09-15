@@ -6,4 +6,7 @@ export default defineConfig({
         setupNodeEvents(on, config) { },
         baseUrl: testEnv.TEST_URL,
     },
+    env: {
+        baseUrl: testEnv.TEST_URL,
+    },
 });
