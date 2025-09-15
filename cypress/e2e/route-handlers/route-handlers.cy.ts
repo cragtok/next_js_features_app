@@ -1,4 +1,4 @@
-describe.only("Route Handlers Page", () => {
+describe("Route Handlers Page", () => {
     describe("User creation form", () => {
         beforeEach(() => {
             cy.request("POST", "/api/seed-db").its("status").should("eq", 200);
@@ -192,7 +192,7 @@ describe.only("Route Handlers Page", () => {
             let initialPassword: string;
 
             cy.get("@firstUserCard")
-                .find("[data-test=user-username]")
+                .findChildBySel("user-username")
                 .invoke("text")
                 .then((usernameText) => {
                     initialUsername = usernameText.trim();
@@ -201,7 +201,7 @@ describe.only("Route Handlers Page", () => {
                 .then(() =>
                     cy
                         .get("@firstUserCard")
-                        .find("[data-test=user-email]")
+                        .findChildBySel("user-email")
                         .invoke("text")
                 )
                 .then((emailText) => {
@@ -211,7 +211,7 @@ describe.only("Route Handlers Page", () => {
                 .then(() =>
                     cy
                         .get("@firstUserCard")
-                        .find("[data-test=user-password]")
+                        .findChildBySel("user-password")
                         .invoke("text")
                 )
                 .then((passwordText) => {
@@ -262,7 +262,7 @@ describe.only("Route Handlers Page", () => {
             let initialPassword: string;
 
             cy.get("@firstUserCard")
-                .find("[data-test=user-username]")
+                .findChildBySel("user-username")
                 .invoke("text")
                 .then((usernameText) => {
                     initialUsername = usernameText.trim();
@@ -271,7 +271,7 @@ describe.only("Route Handlers Page", () => {
                 .then(() =>
                     cy
                         .get("@firstUserCard")
-                        .find("[data-test=user-email]")
+                        .findChildBySel("user-email")
                         .invoke("text")
                 )
                 .then((emailText) => {
@@ -281,7 +281,7 @@ describe.only("Route Handlers Page", () => {
                 .then(() =>
                     cy
                         .get("@firstUserCard")
-                        .find("[data-test=user-password]")
+                        .findChildBySel("user-password")
                         .invoke("text")
                 )
                 .then((passwordText) => {
@@ -325,17 +325,17 @@ describe.only("Route Handlers Page", () => {
                         .should("be.visible");
 
                     cy.get("@firstUserCard")
-                        .find("[data-test=user-username]")
+                        .findChildBySel("user-username")
                         .should("be.visible")
                         .and("contain", initialUsername);
 
                     cy.get("@firstUserCard")
-                        .find("[data-test=user-email]")
+                        .findChildBySel("user-email")
                         .should("be.visible")
                         .and("contain", initialEmail);
 
                     cy.get("@firstUserCard")
-                        .find("[data-test=user-password]")
+                        .findChildBySel("user-password")
                         .should("be.visible")
                         .and("contain", initialPassword);
                 });
@@ -379,17 +379,17 @@ describe.only("Route Handlers Page", () => {
             cy.get("@firstUserCard").contains("Edit").should("be.visible");
 
             cy.get("@firstUserCard")
-                .find("[data-test=user-username]")
+                .findChildBySel("user-username")
                 .should("be.visible")
                 .and("contain", newUsername);
 
             cy.get("@firstUserCard")
-                .find("[data-test=user-email]")
+                .findChildBySel("user-email")
                 .should("be.visible")
                 .and("contain", newEmail);
 
             cy.get("@firstUserCard")
-                .find("[data-test=user-password]")
+                .findChildBySel("user-password")
                 .should("be.visible")
                 .and("contain", newPassword);
         });
@@ -413,7 +413,7 @@ describe.only("Route Handlers Page", () => {
                 .as("firstUserCard");
 
             cy.get("@firstUserCard")
-                .find("[data-test=user-username]")
+                .findChildBySel("user-username")
                 .invoke("text")
                 .then((usernameText) => {
                     deletedUsername = usernameText.trim();
@@ -436,7 +436,7 @@ describe.only("Route Handlers Page", () => {
                 .children()
                 .each(($card) => {
                     cy.wrap($card)
-                        .find("[data-test=user-username]")
+                        .findChildBySel("user-username")
                         .should("not.contain", deletedUsername);
                 });
         });
@@ -452,7 +452,7 @@ describe.only("Route Handlers Page", () => {
             cy.getBySel("user-cards-list")
                 .children()
                 .eq(1) // Get the second user card
-                .find("[data-test=user-username]")
+                .findChildBySel("user-username")
                 .invoke("text")
                 .then((existingUsername) => {
                     const conflictingUsername = existingUsername.trim();
