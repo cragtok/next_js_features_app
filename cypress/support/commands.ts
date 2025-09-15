@@ -13,6 +13,12 @@ declare namespace Cypress {
      * @example cy.getBySelLike('greeting')
      */
     getBySelLike(selector: string, options?: Partial<Cypress.Loggable & Cypress.Timeoutable & Cypress.Withinable & Cypress.Shadow>): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Custom command to find DOM element by data-test attribute as a child command.
+     * @example cy.get('.parent').findChildBySel('greeting')
+     */
+    findChildBySel(selector: string, options?: Partial<Cypress.Loggable & Cypress.Timeoutable & Cypress.Withinable & Cypress.Shadow>): Chainable<JQuery<HTMLElement>>;
   }
 }
 
@@ -22,4 +28,8 @@ Cypress.Commands.add('getBySel', (selector, ...args) => {
 
 Cypress.Commands.add('getBySelLike', (selector, ...args) => {
   return cy.get(`[data-test*=${selector}]`, ...args)
+})
+
+Cypress.Commands.add('findChildBySel', { prevSubject: 'element' }, (subject, selector, ...args) => {
+  return cy.wrap(subject).find(`[data-test=${selector}]`, ...args)
 })
