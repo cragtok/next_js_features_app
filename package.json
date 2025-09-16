@@ -12,8 +12,8 @@
     "build:seed": "pnpm run seed && pnpm run build",
     "cypress:run": "pnpm run seed && NODE_ENV=test cypress run",
     "cypress:open": "pnpm run seed && NODE_ENV=test cypress open",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch"
   },
   "dependencies": {
     "@google/genai": "^1.17.0",
