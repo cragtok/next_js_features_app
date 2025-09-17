@@ -81,6 +81,7 @@ async function PUT(
         logger.debug("Updated user:", { updatedUser });
         return Response.json({ data: updatedUser });
     } catch (error) {
+        console.error(error);
         let message = "Failed to update user.";
         let status = 500;
         if (error instanceof SyntaxError) {
@@ -126,18 +127,14 @@ async function DELETE(
             const message = `User with id ${userId} not found.`;
             const status = 404;
             logger.error("User not found.", { status });
-            return Response.json(
-                {
-                    message,
-                },
-                { status }
-            );
+            return Response.json({ message }, { status });
         }
 
         await deleteUserInDb(userId, requestId);
         logger.info("User deleted.", { status: 204 });
         return new Response(null, { status: 204 });
     } catch (error) {
+        console.error(error);
         let message = "Failed to delete user.";
         let status = 500;
         if (error instanceof SyntaxError) {
