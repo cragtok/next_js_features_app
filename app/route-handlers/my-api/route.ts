@@ -53,9 +53,9 @@ async function POST(request: Request) {
         });
 
         const parseResult = parseUserBody({
-            username: body.username.trim(),
-            email: body.email.trim(),
-            password: body.password,
+            username: (body.username && body.username.trim()) || "",
+            email: (body.email && body.email.trim()) || "",
+            password: body.password || "",
         });
 
         if (!parseResult.success) {
