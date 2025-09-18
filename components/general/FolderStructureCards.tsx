@@ -3,7 +3,7 @@ import { Fragment } from "react";
 
 const LEFT_PADDING_INCREMENT = 25;
 
-type FolderItem = File | Folder;
+export type FolderItem = File | Folder;
 
 interface File {
     type: "file";
