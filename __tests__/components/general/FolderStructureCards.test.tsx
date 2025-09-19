@@ -4,13 +4,17 @@
 
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { expect } from "@jest/globals";
+import { expect, beforeEach } from "@jest/globals";
 import "@testing-library/jest-dom/jest-globals";
 import FolderStructureCards, {
     FolderItem,
 } from "@/components/general/FolderStructureCards";
 
 describe("FolderStructureCards", () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     it("should render a simple folder path with a folder and a file", () => {
         const folderPath: FolderItem[] = [
             {

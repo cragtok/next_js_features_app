@@ -22,6 +22,7 @@ const Header = () => {
                     { ...routeObjects["/routing/dynamic*"], title: match[1] }, // Set page title as dynamic route segment
                 ];
             }
+            // routepath is not dynamic or home route
         } else if (routeObjects.hasOwnProperty(pathname)) {
             routePath = [routeObjects["/"], routeObjects[pathname]];
         }
