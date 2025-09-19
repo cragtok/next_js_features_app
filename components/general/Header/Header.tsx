@@ -8,6 +8,27 @@ import { AppRoute, routeObjects } from "@/lib/routesList";
 const Header = () => {
     const pathname = usePathname();
 
+    const extractRoutePath = () => {
+        let routePath: AppRoute[] = [];
+        // match the '/routing/dynamic/*' path
+        const dynamicRoutePattern = /^\/routing\/dynamic\/(.*)/;
+
+        if (pathname.match(dynamicRoutePattern)) {
+            const match = pathname.match(dynamicRoutePattern);
+            if (match) {
+                routePath = [
+                    routeObjects["/"],
+                    routeObjects["/routing/dynamic"],
+                    { ...routeObjects["/routing/dynamic*"], title: match[1] }, // Set page title as dynamic route segment
+                ];
+            }
+        } else if (routeObjects.hasOwnProperty(pathname)) {
+            routePath = [routeObjects["/"], routeObjects[pathname]];
+        }
+
+        return routePath;
+    };
+
     if (pathname === "/") {
         return (
             <header className="">
@@ -23,26 +44,9 @@ const Header = () => {
             </header>
         );
     }
-
-    let routePath: AppRoute[] = [];
-    // match the '/routing/dynamic/*' path
-    const dynamicRoutePattern = /^\/routing\/dynamic\/(.*)/;
-
-    if (pathname.match(dynamicRoutePattern)) {
-        const match = pathname.match(dynamicRoutePattern);
-        if (match) {
-            routePath = [
-                routeObjects["/"],
-                routeObjects["/routing/dynamic"],
-                { ...routeObjects["/routing/dynamic*"], title: match[1] }, // Set page title as dynamic route segment
-            ];
-        }
-    } else if (routeObjects.hasOwnProperty(pathname)) {
-        routePath = [routeObjects["/"], routeObjects[pathname]];
-    }
+    const routePath = extractRoutePath();
 
     const isValidRoute = routePath.length > 0;
-
     return (
         <header className="">
             <Suspense fallback={<p>Loading...</p>}>
