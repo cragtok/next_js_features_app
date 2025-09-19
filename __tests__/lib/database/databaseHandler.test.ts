@@ -10,7 +10,7 @@ import {
     User,
     UserDTO,
 } from "@/lib/database/databaseHandler";
-import { expect } from "@jest/globals";
+import { expect, beforeEach, afterAll } from "@jest/globals";
 import { DB_CACHE_TAG } from "@/lib/database/constants";
 import { revalidateTag } from "next/cache";
 

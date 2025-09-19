@@ -1,5 +1,5 @@
 import { testApiHandler } from "next-test-api-route-handler";
-import { expect } from "@jest/globals";
+import { expect, beforeEach } from "@jest/globals";
 import * as appHandler from "@/app/api/seed-db/route";
 
 const mockClearDb = jest.fn();
@@ -40,11 +40,7 @@ jest.mock("@/scripts/seed", () => ({
 
 describe("Seed DB API Route", () => {
     beforeEach(() => {
-        // Reset mocks before each test
-        mockClearDb.mockClear();
-        mockSeedDb.mockClear();
-        mockRevalidateTag.mockClear();
-        mockExtractUserRequestId.mockClear();
+        jest.resetAllMocks();
     });
 
     it("should successfully clear and seed the database on POST request", async () => {

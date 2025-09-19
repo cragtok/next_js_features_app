@@ -1,5 +1,5 @@
 import { testApiHandler } from "next-test-api-route-handler";
-import { expect } from "@jest/globals";
+import { expect, beforeEach } from "@jest/globals";
 import * as appHandler from "@/app/route-handlers/my-api/[userId]/route";
 import { SqliteError } from "better-sqlite3";
 
