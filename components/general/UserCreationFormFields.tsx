@@ -49,7 +49,10 @@ const UserCreationFormFields = ({
                     onChange={handleInputChange}
                 />
                 {displayErrors.username && (
-                    <p className="text-status-danger-500 text-sm max-[450px]:text-xs text-left">
+                    <p
+                        className="text-status-danger-500 text-sm max-[450px]:text-xs text-left"
+                        data-testid="username-error-text"
+                    >
                         {displayErrors.username}
                     </p>
                 )}
@@ -72,7 +75,10 @@ const UserCreationFormFields = ({
                     onChange={handleInputChange}
                 />
                 {displayErrors.email && (
-                    <p className="text-status-danger-500 text-sm max-[450px]:text-xs text-left">
+                    <p
+                        className="text-status-danger-500 text-sm max-[450px]:text-xs text-left"
+                        data-testid="email-error-text"
+                    >
                         {displayErrors.email}
                     </p>
                 )}
@@ -103,14 +109,23 @@ const UserCreationFormFields = ({
                         className="absolute right-2 top-1/2 -translate-y-1/2 p-1 h-auto bg-transparent hover:bg-transparent text-brand-500 hover:text-brand-700"
                     >
                         {showPassword ? (
-                            <EyeOffIcon className="h-4 w-4" />
+                            <EyeOffIcon
+                                className="h-4 w-4"
+                                data-testid="eye-off-icon"
+                            />
                         ) : (
-                            <EyeIcon className="h-4 w-4" />
+                            <EyeIcon
+                                className="h-4 w-4"
+                                data-testid="eye-icon"
+                            />
                         )}
                     </Button>
                 </div>
                 {displayErrors.password && (
-                    <p className="text-status-danger-500 text-sm max-[450px]:text-xs text-left">
+                    <p
+                        className="text-status-danger-500 text-sm max-[450px]:text-xs text-left"
+                        data-testid="password-error-text"
+                    >
                         {displayErrors.password}
                     </p>
                 )}
