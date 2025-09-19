@@ -2,8 +2,8 @@
 import { User } from "@/lib/database/databaseHandler";
 import ButtonWrapper from "@/components/general/ButtonWrapper";
 import { parseUserBody } from "@/lib/utils";
-import UserCreationFormFields from "@/components/general/UserCreationFormFields";
-import useUserFormFields from "@/hooks/useUserFormFields";
+import UserCreationFormFields from "@/components/general/UserCreationFormFields/UserCreationFormFields";
+import useUserFormFields from "@/components/general/UserCreationFormFields/useUserFormFields";
 
 interface Props {
     user: User;

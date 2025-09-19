@@ -7,7 +7,7 @@ import { useState } from "react";
 import "@testing-library/jest-dom";
 import { expect } from "@jest/globals";
 import "@testing-library/jest-dom/jest-globals";
-import UserCreationFormFields from "@/components/general/UserCreationFormFields";
+import UserCreationFormFields from "@/components/general/UserCreationFormFields/UserCreationFormFields";
 
 describe("UserCreationFormFields", () => {
     describe("rendering", () => {

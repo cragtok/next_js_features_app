@@ -10,8 +10,8 @@ import { useActionState, useEffect } from "react";
 import { createUserAction, FormState } from "./actions";
 import { USER_LIST_SECTION_ID } from "./constants";
 import { toast } from "sonner";
-import UserCreationFormFields from "@/components/general/UserCreationFormFields";
-import useUserFormFields from "@/hooks/useUserFormFields";
+import UserCreationFormFields from "@/components/general/UserCreationFormFields/UserCreationFormFields";
+import useUserFormFields from "@/components/general/UserCreationFormFields/useUserFormFields";
 import ButtonWrapper from "@/components/general/ButtonWrapper";
 
 const initialState: FormState = {
