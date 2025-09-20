@@ -1,8 +1,8 @@
 import { CardContent } from "@/components/ui/card";
-import { CryptoData, fetchPrices } from "./apiCall";
 import CryptoPricesCard from "./CryptoPricesCard";
 import CardWrapper from "@/components/general/CardWrapper";
 import RefreshButton from "@/components/general/RefreshButton";
+import { CryptoData, fetchPrices } from "./apiCall";
 
 async function CryptoPrices() {
     let prices: CryptoData[] | null = null;
@@ -40,7 +40,9 @@ async function CryptoPrices() {
                     />
                 ))}
             </div>
-            <RefreshButton data-test="refresh-button">Refresh Page</RefreshButton>
+            <RefreshButton data-test="refresh-button">
+                Refresh Page
+            </RefreshButton>
         </>
     );
 }

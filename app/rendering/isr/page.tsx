@@ -2,7 +2,7 @@ import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-import CryptoPrices from "./CryptoPrices";
+import CryptoPrices from "./CryptoPrices/CryptoPrices";
 import { Metadata } from "next";
 
 export const revalidate = 10;
