@@ -2,9 +2,8 @@ import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-import { fetchCityDateTimes } from "./apiCall";
-import CityDateTimeCard from "./CityDateTimeCard";
 import { Metadata } from "next";
+import CityDateTimes from "./CityDateTimes/CityDateTimes";
 
 export const dynamic = "force-static";
 
@@ -13,8 +12,6 @@ export const metadata: Metadata = {
 };
 
 async function Page() {
-    const cityDateTimes = await fetchCityDateTimes();
-
     return (
         <PageWrapper pageTitle="Static Site Generation (SSG)">
             <SectionWrapper>
@@ -56,15 +53,7 @@ async function Page() {
                     is stored on browser and is instantly accessible without
                     needing to make any more requests.
                 </ParagraphWrapper>
-
-                <div className="flex flex-col">
-                    {cityDateTimes.map((cdt) => (
-                        <CityDateTimeCard
-                            key={crypto.randomUUID()}
-                            cityDateTime={cdt}
-                        />
-                    ))}
-                </div>
+                <CityDateTimes />
             </SectionWrapper>
         </PageWrapper>
     );
