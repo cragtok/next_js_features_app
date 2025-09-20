@@ -36,6 +36,7 @@ const JokeFetcher = () => {
                             <TextAccentWrapper
                                 classNameOverride="text-status-danger-500 text-center"
                                 data-test="joke-error"
+                                data-testid="joke-error"
                             >
                                 {
                                     "Failed to load joke. Please try fetching again."
@@ -45,11 +46,16 @@ const JokeFetcher = () => {
                             <TextAccentWrapper
                                 classNameOverride="italic text-center"
                                 data-test="joke-text"
+                                data-testid="joke-text"
                             >
                                 {joke}
                             </TextAccentWrapper>
                         ) : (
-                            <TextAccentWrapper classNameOverride="text-center text-brand-500" data-test="initial-text">
+                            <TextAccentWrapper
+                                classNameOverride="text-center text-brand-500"
+                                data-test="initial-text"
+                                data-testid="initial-text"
+                            >
                                 {"Click the button to fetch a joke."}
                             </TextAccentWrapper>
                         )}
@@ -61,6 +67,7 @@ const JokeFetcher = () => {
                 onClick={handleClick}
                 disabled={isFetching}
                 data-test="joke-fetch-button"
+                data-testid="joke-fetch-button"
             >
                 Fetch Joke
             </ButtonWrapper>
