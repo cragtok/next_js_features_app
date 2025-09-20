@@ -25,7 +25,12 @@ async function CryptoPrices() {
                         </p>
                     </CardContent>
                 </CardWrapper>
-                <RefreshButton>Refresh Page</RefreshButton>
+                <RefreshButton
+                    data-test="refresh-button"
+                    data-testid="refresh-button"
+                >
+                    Refresh Page
+                </RefreshButton>
             </>
         );
     }
@@ -40,7 +45,10 @@ async function CryptoPrices() {
                     />
                 ))}
             </div>
-            <RefreshButton data-test="refresh-button">
+            <RefreshButton
+                data-test="refresh-button"
+                data-testid="refresh-button"
+            >
                 Refresh Page
             </RefreshButton>
         </>
