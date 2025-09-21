@@ -37,7 +37,7 @@ const Header = () => {
                     <Image
                         src="/vercel.svg"
                         className="bg-brand-700 rounded-[8] border-3 border-brand-700"
-                        alt="logo"
+                        alt="vercel triangle blue"
                         width={80}
                         height={80}
                     />

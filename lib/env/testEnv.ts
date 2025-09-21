@@ -5,7 +5,7 @@ import { processEnv } from "./utils";
 const testSchema = z.object({
     NODE_ENV: z
         .enum(["development", "test", "production"])
-        .default("development"),
+        .default("test"),
     TEST_URL: z.url("TEST_URL must be a valid URL"),
 });
 

@@ -29,8 +29,8 @@ describe("Header", () => {
     it("should render the Vercel logo on the home page", () => {
         (usePathname as jest.Mock).mockReturnValue("/");
         render(<Header />);
-        expect(screen.getByAltText("logo")).toBeInTheDocument();
-        expect(screen.getByAltText("logo")).toHaveAttribute(
+        expect(screen.getByAltText("vercel triangle blue")).toBeInTheDocument();
+        expect(screen.getByAltText("vercel triangle blue")).toHaveAttribute(
             "src",
             "/vercel.svg"
         );
