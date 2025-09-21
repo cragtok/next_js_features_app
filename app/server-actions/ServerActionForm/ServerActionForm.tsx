@@ -65,7 +65,7 @@ const ServerActionForm = () => {
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="text-brand-500">
-                    <form action={formAction} className="flex flex-col gap-6">
+                    <form action={formAction} className="flex flex-col gap-6" role="form">
                         <UserCreationFormFields
                             displayErrors={displayErrors}
                             username={username}
@@ -78,6 +78,7 @@ const ServerActionForm = () => {
                             type="submit"
                             disabled={pending}
                             data-test="submit-button"
+                            data-testid="submit-button"
                         >
                             {pending ? "Submitting..." : "Submit"}
                         </ButtonWrapper>
