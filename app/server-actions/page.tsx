@@ -2,8 +2,8 @@ import PageWrapper from "@/components/general/PageWrapper";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
-import ServerActionForm from "./ServerActionForm";
-import UsersList from "./UsersList";
+import ServerActionForm from "./ServerActionForm/ServerActionForm";
+import UsersList from "./UsersList/UsersList";
 import { DB_CACHE_TAG } from "@/lib/database/constants";
 import { Metadata } from "next";
 

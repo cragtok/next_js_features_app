@@ -1,9 +1,9 @@
 import { User } from "@/lib/database/databaseHandler";
 import UserCard from "./UserCard";
-import { USER_LIST_SECTION_ID } from "./constants";
+import { USER_LIST_SECTION_ID } from "../constants";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import { Card, CardContent } from "@/components/ui/card";
-import { retrieveUsersFromDb } from "./databaseCall";
+import { retrieveUsersFromDb } from "../databaseCall";
 
 const UsersList = async () => {
     let users: User[] | undefined;

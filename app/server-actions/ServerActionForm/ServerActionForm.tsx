@@ -7,8 +7,8 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { useActionState, useEffect } from "react";
-import { createUserAction, FormState } from "./actions";
-import { USER_LIST_SECTION_ID } from "./constants";
+import { createUserAction, FormState } from "../actions";
+import { USER_LIST_SECTION_ID } from "../constants";
 import { toast } from "sonner";
 import UserCreationFormFields from "@/components/general/UserCreationFormFields/UserCreationFormFields";
 import useUserFormFields from "@/components/general/UserCreationFormFields/useUserFormFields";
@@ -74,7 +74,11 @@ const ServerActionForm = () => {
                             handleInputChange={handleInputChange}
                             disableInputs={pending}
                         />
-                        <ButtonWrapper type="submit" disabled={pending} data-test="submit-button">
+                        <ButtonWrapper
+                            type="submit"
+                            disabled={pending}
+                            data-test="submit-button"
+                        >
                             {pending ? "Submitting..." : "Submit"}
                         </ButtonWrapper>
                     </form>
