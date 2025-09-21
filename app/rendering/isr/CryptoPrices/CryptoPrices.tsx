@@ -26,7 +26,6 @@ async function CryptoPrices() {
                     </CardContent>
                 </CardWrapper>
                 <RefreshButton
-                    data-test="refresh-button"
                     data-testid="refresh-button"
                 >
                     Refresh Page
@@ -46,7 +45,6 @@ async function CryptoPrices() {
                 ))}
             </div>
             <RefreshButton
-                data-test="refresh-button"
                 data-testid="refresh-button"
             >
                 Refresh Page

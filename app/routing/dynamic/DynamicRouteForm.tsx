@@ -74,7 +74,7 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
             >
                 <div className="w-full">
                     <Input
-                        data-test="dynamic-route-input"
+                        data-testid="dynamic-route-input"
                         className="text-xs"
                         placeholder="Enter a dynamic route segment"
                         type="text"

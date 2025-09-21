@@ -25,7 +25,7 @@ const ABTestClientComponent = () => {
     const generateGroupOutput = (group: string) => (
         <div
             className={`font-semibold ${group === "A" ? "text-green-400" : "text-blue-400"}`}
-            data-test="ab-test-group"
+            data-testid="ab-test-group"
         >
             You are in group {group}
         </div>

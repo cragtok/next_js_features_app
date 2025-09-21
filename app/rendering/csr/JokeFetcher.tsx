@@ -35,7 +35,6 @@ const JokeFetcher = () => {
                         {isError ? (
                             <TextAccentWrapper
                                 classNameOverride="text-status-danger-500 text-center"
-                                data-test="joke-error"
                                 data-testid="joke-error"
                             >
                                 {
@@ -45,7 +44,6 @@ const JokeFetcher = () => {
                         ) : joke ? (
                             <TextAccentWrapper
                                 classNameOverride="italic text-center"
-                                data-test="joke-text"
                                 data-testid="joke-text"
                             >
                                 {joke}
@@ -53,7 +51,6 @@ const JokeFetcher = () => {
                         ) : (
                             <TextAccentWrapper
                                 classNameOverride="text-center text-brand-500"
-                                data-test="initial-text"
                                 data-testid="initial-text"
                             >
                                 {"Click the button to fetch a joke."}
@@ -66,7 +63,6 @@ const JokeFetcher = () => {
             <ButtonWrapper
                 onClick={handleClick}
                 disabled={isFetching}
-                data-test="joke-fetch-button"
                 data-testid="joke-fetch-button"
             >
                 Fetch Joke

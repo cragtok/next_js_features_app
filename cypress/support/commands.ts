@@ -29,15 +29,15 @@ declare namespace Cypress {
 }
 
 Cypress.Commands.add('getBySel', (selector, ...args) => {
-  return cy.get(`[data-test=${selector}]`, ...args)
+  return cy.get(`[data-testid=${selector}]`, ...args)
 })
 
 Cypress.Commands.add('getBySelLike', (selector, ...args) => {
-  return cy.get(`[data-test*=${selector}]`, ...args)
+  return cy.get(`[data-testid*=${selector}]`, ...args)
 })
 
 Cypress.Commands.add('findChildBySel', { prevSubject: 'element' }, (subject, selector, ...args) => {
-  return cy.wrap(subject).find(`[data-test=${selector}]`, ...args)
+  return cy.wrap(subject).find(`[data-testid=${selector}]`, ...args)
 })
 
 Cypress.Commands.add('getByInputName', (name, ...args) => {

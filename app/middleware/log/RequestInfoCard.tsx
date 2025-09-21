@@ -13,7 +13,7 @@ const RequestInfoCard = ({ title, info, testTitle }: Props) => {
             <CardHeader>
                 <CardTitle
                     className="text-accent-500 font-semibold"
-                    data-test={`card-title-${testTitle}`}
+                    data-testid={`card-title-${testTitle}`}
                 >
                     {title}
                 </CardTitle>
@@ -21,7 +21,7 @@ const RequestInfoCard = ({ title, info, testTitle }: Props) => {
             <CardContent>
                 <p
                     className="text-brand-500"
-                    data-test={`card-content-${testTitle}`}
+                    data-testid={`card-content-${testTitle}`}
                 >
                     {info}
                 </p>

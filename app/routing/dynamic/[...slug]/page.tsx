@@ -53,7 +53,7 @@ async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
 
                 <CardWrapper>
                     <CardContent>
-                        <p className="font-semibold text-accent-500 wrap-anywhere" data-test="dynamic-segment">
+                        <p className="font-semibold text-accent-500 wrap-anywhere" data-testid="dynamic-segment">
                             {joinedSlug}
                         </p>
                     </CardContent>

@@ -135,7 +135,7 @@ const UsersSection = () => {
     return (
         <>
             <CreateUserForm handleCreateUser={handleCreateUser} />
-            <div data-test="user-cards-list">
+            <div data-testid="user-cards-list">
                 {users.map((user, idx) => (
                     <Fragment key={user.id}>
                         <UserCardContainer
