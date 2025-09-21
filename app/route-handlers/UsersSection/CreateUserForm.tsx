@@ -75,7 +75,7 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                 <AccordionContent className="flex flex-col justify-center">
                     <CardWrapper classNameOverride="text-justify max-w-full">
                         <CardContent className="text-brand-500">
-                            <form className="flex flex-col gap-6">
+                            <form className="flex flex-col gap-6" role="form">
                                 <UserCreationFormFields
                                     disableInputs={isSubmitting}
                                     displayErrors={displayErrors}
@@ -88,6 +88,7 @@ const CreateUserForm = ({ handleCreateUser }: Props) => {
                                     onClick={onSubmit}
                                     disabled={isSubmitting}
                                     data-test="create-user-submit-button"
+                                    data-testid="create-user-submit-button"
                                 >
                                     {!isSubmitting
                                         ? "Create User"
