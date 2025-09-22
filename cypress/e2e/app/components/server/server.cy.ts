@@ -1,0 +1,1 @@
+describe("Server Components Page", () => { });
