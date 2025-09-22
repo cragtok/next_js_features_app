@@ -40,13 +40,7 @@ function Page() {
                         <TextAccentWrapper>useEffect</TextAccentWrapper> hook,
                         often combined with{" "}
                         <TextAccentWrapper>fetch</TextAccentWrapper> or a data
-                        fetching library like React Query. Also, code that
-                        directly accesses browser-specific APIs like{" "}
-                        <TextAccentWrapper>window</TextAccentWrapper> or{" "}
-                        <TextAccentWrapper>document</TextAccentWrapper> outside
-                        of <TextAccentWrapper>useEffect</TextAccentWrapper> will
-                        force client-side execution for that part of the
-                        component tree.
+                        fetching library like React Query.{" "}
                     </ParagraphWrapper>
 
                     <ParagraphWrapper>

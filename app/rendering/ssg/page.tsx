@@ -22,10 +22,10 @@ async function Page() {
                     </TextAccentWrapper>
                     , a page is rendered once on the server during build time.
                     The page content can then be fetched once during the initial
-                    load and stored entirely on the browser. This makes it
-                    instantaneously accessible without needing to make another
-                    request to the server. SSG is the default behavior for
-                    Server Components unless specific data fetching options
+                    client request and stored entirely on the browser. This
+                    makes it instantaneously accessible without needing to make
+                    another request to the server. SSG is the default behavior
+                    for Server Components unless specific data fetching options
                     (like <TextAccentWrapper>revalidate = 0</TextAccentWrapper>{" "}
                     or{" "}
                     <TextAccentWrapper>

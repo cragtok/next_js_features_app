@@ -55,11 +55,11 @@ async function Page() {
             <SectionWrapper sectionTitle="ISR Data Fetching">
                 <ParagraphWrapper>
                     To demonstrate data fetching in ISR, this page will the
-                    fetch prices of some cryptocurrencies after a revalidation
-                    time of{" "}
+                    fetch prices of some cryptocurrencies when it is refreshed
+                    after a revalidation time of{" "}
                     <TextAccentWrapper>{revalidate} seconds</TextAccentWrapper>.
-                    In order to see updated prices, you must refresh the page
-                    after this time.
+                    Therefore, in order to see updated prices you must refresh
+                    the page after this time.
                 </ParagraphWrapper>
                 <CryptoPrices />
             </SectionWrapper>

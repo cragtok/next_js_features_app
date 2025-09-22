@@ -20,8 +20,8 @@ function Page() {
                 <ParagraphWrapper>
                     In Next.js, you can create a dynamic route by creating a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file inside
-                    a folder whose name is enclosed in square brackets like
-                    this: <TextAccentWrapper>[slug]</TextAccentWrapper>. The
+                    a folder whose name is enclosed in square brackets like such
+                    as: <TextAccentWrapper>[slug]</TextAccentWrapper>. The
                     square brackets denote the dynamic portion of the route
                     which can be accessed in the page.
                 </ParagraphWrapper>
@@ -31,8 +31,7 @@ function Page() {
                     i.e one where you want to capture the entire segment
                     regardless of how many forward slashes (
                     <TextAccentWrapper>/</TextAccentWrapper>) appear in it, then
-                    the folder name within the square brackets should be
-                    preceded by three dots like this:{" "}
+                    the folder name should be preceded by three dots like this:{" "}
                     <TextAccentWrapper>[...slug]</TextAccentWrapper>.
                 </ParagraphWrapper>
             </SectionWrapper>
@@ -56,26 +55,12 @@ function Page() {
                     <TextAccentWrapper>
                         /routing/dynamic/segment
                     </TextAccentWrapper>{" "}
-                    as well as those containing multiple forward slashes like{" "}
+                    as well as those containing multiple slash-separated
+                    segments like{" "}
                     <TextAccentWrapper>
                         /routing/dynamic/a/b/c
                     </TextAccentWrapper>
                     .
-                </ParagraphWrapper>
-
-                <ParagraphWrapper>
-                    Note that the current page{" "}
-                    <TextAccentWrapper>
-                        <PathWithBreaks text="/routing/dynamic" />
-                    </TextAccentWrapper>{" "}
-                    is an ordinary{" "}
-                    <LinkWrapper href="/routing/static">
-                        static route
-                    </LinkWrapper>{" "}
-                    and is not part of the dynamic route. To access the dynamic
-                    route you need to add a segment after the
-                    <TextAccentWrapper>/dynamic</TextAccentWrapper> part of the
-                    URL.
                 </ParagraphWrapper>
 
                 <div className="text-xs">
@@ -100,6 +85,21 @@ function Page() {
                         ]}
                     />
                 </div>
+
+                <ParagraphWrapper>
+                    Note that the current page{" "}
+                    <TextAccentWrapper>
+                        <PathWithBreaks text="/routing/dynamic" />
+                    </TextAccentWrapper>{" "}
+                    is an ordinary{" "}
+                    <LinkWrapper href="/routing/static">
+                        static route
+                    </LinkWrapper>{" "}
+                    and is not part of the dynamic route. To access the dynamic
+                    route you need to add a segment after the{" "}
+                    <TextAccentWrapper>/dynamic</TextAccentWrapper> part of the
+                    URL.
+                </ParagraphWrapper>
             </SectionWrapper>
 
             <SectionWrapper sectionTitle="Cached Dynamic Routes">
@@ -112,10 +112,10 @@ function Page() {
                     function to the{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file. The
                     function must return an array of objects containing the
-                    dynamic routes you want to statically generate. This will
-                    cause the page corresponding to that dynamic route to be
-                    made statically during build time and thus load faster than
-                    an ordinary dynamic route page.
+                    dynamic routes you want to statically generate. Those
+                    specific dynamic routes will be rendered statically during
+                    build time and thus load faster than an ordinary dynamically
+                    routed page.
                 </ParagraphWrapper>
 
                 <ParagraphWrapper>

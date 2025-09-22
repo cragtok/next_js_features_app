@@ -62,7 +62,8 @@ function Page() {
                 This is an application that demonstrates the core features of
                 Next.js. It consists of several pages each dedicated to
                 demonstrating and explaining a different Next.js feature. I made
-                this app to learn about Next.js and practice my Next.js skills.
+                this app to learn about Next.js and practice my Next.js
+                development skills.
             </ParagraphWrapper>
 
             <ParagraphWrapper classNameOverride="max-w-md">

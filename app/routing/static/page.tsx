@@ -22,9 +22,9 @@ function Page() {
                     . In Next.js, static routes are defined by creating a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file either
                     directly inside the{" "}
-                    <TextAccentWrapper>app</TextAccentWrapper> folder or inside
-                    any of its sub-folders. Each nested folder represents a
-                    segment of the URL path, and a{" "}
+                    <TextAccentWrapper>app</TextAccentWrapper> folder or any of
+                    its sub-folders. Each nested folder represents a segment of
+                    the URL path, and a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file inside
                     the innermost folder makes that route segment publicly
                     accessible.
@@ -33,7 +33,7 @@ function Page() {
 
             <SectionWrapper sectionTitle="Folder Structure For This Page">
                 <ParagraphWrapper>
-                    This route was made by creating an{" "}
+                    This route was made by creating a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file within
                     the{" "}
                     <TextAccentWrapper>
