@@ -3,6 +3,11 @@ import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import Counter from "./Counter";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Client Components",
+};
 
 const Page = () => {
     return (

@@ -4,8 +4,13 @@ import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import RefreshButton from "@/components/general/RefreshButton";
 import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
+import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+    title: "Server Components",
+};
 
 const Page = () => {
     return (
@@ -49,9 +54,7 @@ const Page = () => {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                    <ParagraphWrapper
-                        classNameOverride="text-center"
-                    >
+                    <ParagraphWrapper classNameOverride="text-center">
                         Here is a random number that was generated on the
                         server:
                     </ParagraphWrapper>
