@@ -17,9 +17,9 @@ const Page = () => {
                     Next.js. These components are rendered entirely on the
                     server, meaning they execute all their logic and data
                     fetching on the server, before any JavaScript is sent to the
-                    client&apos;s browser. This approach offers several benefits: it
-                    reduces the amount of JavaScript shipped to the client,
-                    leading to faster initial page loads and improved
+                    client&apos;s browser. This approach offers several
+                    benefits: it reduces the amount of JavaScript shipped to the
+                    client, leading to faster initial page loads and improved
                     performance, especially on slower networks or devices.
                     Additionally, Server Components can directly access
                     server-side resources like databases or file systems,
@@ -42,20 +42,22 @@ const Page = () => {
                     </ParagraphWrapper>
 
                     <CardWrapper>
-                        <TextAccentWrapper>
+                        <TextAccentWrapper data-testid="server-time">
                             {new Date().toLocaleString().split(", ")[1]}
                         </TextAccentWrapper>
                     </CardWrapper>
                 </div>
 
                 <div className="flex flex-col gap-3">
-                    <ParagraphWrapper classNameOverride="text-center">
+                    <ParagraphWrapper
+                        classNameOverride="text-center"
+                    >
                         Here is a random number that was generated on the
                         server:
                     </ParagraphWrapper>
 
                     <CardWrapper>
-                        <TextAccentWrapper>
+                        <TextAccentWrapper data-testid="random-number-display">
                             {Math.random().toFixed(2)}
                         </TextAccentWrapper>
                     </CardWrapper>
