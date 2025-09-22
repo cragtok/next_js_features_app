@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import localFont from "next/font/local";
 
 import "./globals.css";
+import { WebVitals } from "@/components/general/WebVitals";
 
 export const metadata: Metadata = {
     title: {
@@ -42,6 +43,7 @@ async function RootLayout({
     return (
         <html lang="en">
             <body className={`${myFont} mx-10 antialiased bg-neutral-100`}>
+                <WebVitals />
                 <Header />
                 {children}
                 <Toaster closeButton={true} />
