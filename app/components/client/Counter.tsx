@@ -10,9 +10,9 @@ const Counter = () => {
     return (
         <div className="flex flex-col gap-5">
             <CardWrapper>
-                <TextAccentWrapper>Count: {count}</TextAccentWrapper>
+                <TextAccentWrapper data-testid="counter-value">Count: {count}</TextAccentWrapper>
             </CardWrapper>
-            <ButtonWrapper onClick={() => setCount(count + 1)}>
+            <ButtonWrapper onClick={() => setCount(count + 1)} data-testid="increment-button">
                 Increment Count
             </ButtonWrapper>
         </div>
