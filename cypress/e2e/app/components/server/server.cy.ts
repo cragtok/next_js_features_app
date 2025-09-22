@@ -19,6 +19,7 @@ describe("Server Components Page", () => {
                 cy.log(`Initial Random Number: ${initialRandomNumber}`);
             });
 
+        cy.wait(1000);
         cy.getBySel("refresh-button").click();
 
         cy.getBySel("server-time")
