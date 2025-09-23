@@ -10,9 +10,6 @@ const serverSchema = z.object({
     TWELVE_DATA_API_KEY: z
         .string("TWELVE_DATA_API_KEY must be a valid string")
         .min(1),
-    TWELVE_DATA_API_BATCH_URL: z.url(
-        "TWELVE_DATA_API_BATCH_URL must be a valid URL"
-    ),
     DOMAIN_URL: z.url("DOMAIN_URL must be a valid URL"),
 });
 
@@ -20,6 +17,5 @@ export const serverEnv = processEnv(serverSchema, {
     NODE_ENV: process.env.NODE_ENV,
     GEMINI_API_KEY: process.env.GEMINI_API_KEY,
     TWELVE_DATA_API_KEY: process.env.TWELVE_DATA_API_KEY,
-    TWELVE_DATA_API_BATCH_URL: process.env.TWELVE_DATA_API_BATCH_URL,
     DOMAIN_URL: process.env.DOMAIN_URL,
 });

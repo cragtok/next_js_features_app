@@ -6,6 +6,8 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const CURRENT_FILE_NAME = path.basename(__filename);
 
+const TWELVE_DATA_API_BATCH_URL = "https://api.twelvedata.com/batch";
+
 interface RequestBody {
     [key: string]: {
         url: string;
@@ -55,7 +57,7 @@ const formatPayload = (payload: APIPayload): CryptoData[] =>
 const generateCoinURL = (coin: string) =>
     `/price?symbol=${coin}/USD&apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
 
-const apiCallURL = `${serverEnv.TWELVE_DATA_API_BATCH_URL}?apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
+const apiCallURL = `${TWELVE_DATA_API_BATCH_URL}?apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
 
 async function fetchPrices(): Promise<CryptoData[]> {
     const coinsList = ["BTC", "ETH", "XMR", "XRP"];
