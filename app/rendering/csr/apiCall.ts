@@ -1,8 +1,8 @@
-import { clientEnv } from "@/lib/env/clientEnv";
+const JOKE_API_URL = "https://icanhazdadjoke.com";
 
 export const fetchJoke = async (): Promise<string> => {
     try {
-        const response = await fetch(clientEnv.NEXT_PUBLIC_JOKE_API_URL, {
+        const response = await fetch(JOKE_API_URL, {
             headers: {
                 Accept: "application/json",
             },
