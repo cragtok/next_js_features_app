@@ -1,7 +1,8 @@
-import { serverEnv } from "@/lib/env/serverEnv";
 import { getLogger } from "@/lib/logging/logger";
 import path from "path";
 import { fileURLToPath } from "url";
+
+const QUOTES_API_URL = "https://thequoteshub.com/api/random-quote";
 
 const __filename = fileURLToPath(import.meta.url);
 const CURRENT_FILE_NAME = path.basename(__filename);
@@ -16,7 +17,7 @@ async function fetchQuote(requestId?: string): Promise<Quote> {
 
     logger.info("Fetching quote...");
     try {
-        const response = await fetch(serverEnv.QUOTES_API_URL, {
+        const response = await fetch(QUOTES_API_URL, {
             cache: "no-store",
         });
 
