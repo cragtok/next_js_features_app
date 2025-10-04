@@ -9,6 +9,9 @@ async function CryptoPrices() {
     let errorMessage: string | null = null;
 
     try {
+        // Avoid passing request ID for logging purposes to
+        // the price fetching function. Otherwise, this route
+        // changes from an ISR route to an ordinary SSR route.
         prices = await fetchPrices();
     } catch (error) {
         console.error(error);
