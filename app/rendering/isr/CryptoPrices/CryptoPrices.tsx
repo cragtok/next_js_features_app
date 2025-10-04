@@ -3,13 +3,16 @@ import CryptoPricesCard from "./CryptoPricesCard";
 import CardWrapper from "@/components/general/CardWrapper";
 import RefreshButton from "@/components/general/RefreshButton";
 import { CryptoData, fetchPrices } from "./apiCall";
+import { extractUserRequestId } from "@/lib/headers/extractUserRequestId";
 
 async function CryptoPrices() {
+    const requestId = await extractUserRequestId();
+
     let prices: CryptoData[] | null = null;
     let errorMessage: string | null = null;
 
     try {
-        prices = await fetchPrices();
+        prices = await fetchPrices(requestId);
     } catch (error) {
         console.error(error);
         errorMessage = (error as Error).message || "Failed to load prices.";

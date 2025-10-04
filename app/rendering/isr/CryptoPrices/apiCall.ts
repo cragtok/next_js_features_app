@@ -59,7 +59,7 @@ const generateCoinURL = (coin: string) =>
 
 const apiCallURL = `${TWELVE_DATA_API_BATCH_URL}?apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
 
-async function fetchPrices(): Promise<CryptoData[]> {
+const generateRequestBody = () => {
     const coinsList = ["BTC", "ETH", "XMR", "XRP"];
 
     const body: RequestBody = {};
@@ -68,7 +68,12 @@ async function fetchPrices(): Promise<CryptoData[]> {
             url: generateCoinURL(coin),
         };
     }
-    const logger = getLogger(`${CURRENT_FILE_NAME} | fetchPrices`);
+
+    return JSON.stringify(body);
+};
+
+async function fetchPrices(requestId?: string): Promise<CryptoData[]> {
+    const logger = getLogger(`${CURRENT_FILE_NAME} | fetchPrices`, requestId);
 
     logger.info("Fetching crypto prices...");
 
@@ -76,7 +81,7 @@ async function fetchPrices(): Promise<CryptoData[]> {
     try {
         const response = await fetch(apiCallURL, {
             method: "POST",
-            body: JSON.stringify(body),
+            body: generateRequestBody(),
         });
 
         if (!response.ok) {
