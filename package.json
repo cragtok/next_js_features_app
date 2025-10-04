@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "NODE_ENV=development next dev --turbopack",
-    "build": "next build",
+    "build:prod": "NODE_ENV=production tsx ./scripts/prebuild.ts && next build && tsx ./scripts/postbuild.ts",
+    "build:test": "NODE_ENV=test tsx ./scripts/prebuild.ts && next build && tsx ./scripts/postbuild.ts",
     "start": "NODE_ENV=production next start",
     "lint": "next lint",
     "seed": "tsx ./scripts/seed.ts",
