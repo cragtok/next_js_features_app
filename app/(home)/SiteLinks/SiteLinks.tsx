@@ -1,36 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Accordion } from "@/components/ui/accordion";
 import { RouteGroup } from "@/lib/routesList";
 import { pageRoutes } from "@/lib/routesList";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
 import RouteGroupAccordionItem from "./RouteGroupAccordionItem";
+import useSessionPersistedOpenItems from "./useSessionPersistedOpenItems";
 
 const LOCAL_STORAGE_KEY = "accordion-open-items";
 
 const SiteLinks = () => {
-    const [openItems, setOpenItems] = useState<string[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            const savedState = sessionStorage.getItem(LOCAL_STORAGE_KEY);
-            if (savedState) {
-                setOpenItems(JSON.parse(savedState));
-            }
-        }
-        setIsLoading(false);
-    }, []);
-
-    useEffect(() => {
-        if (typeof window !== "undefined" && !isLoading) {
-            sessionStorage.setItem(
-                LOCAL_STORAGE_KEY,
-                JSON.stringify(openItems)
-            );
-        }
-    }, [openItems, isLoading]);
+    const { openItems, setOpenItems, isLoading } =
+        useSessionPersistedOpenItems(LOCAL_STORAGE_KEY);
 
     if (isLoading) {
         return (
