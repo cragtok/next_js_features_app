@@ -1,45 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-    Accordion,
-    AccordionTrigger,
-    AccordionItem,
-    AccordionContent,
-} from "@/components/ui/accordion";
-import CardLink from "./CardLink";
-import { RouteGroup, AppRoute } from "@/lib/routesList";
+import { Accordion } from "@/components/ui/accordion";
+import { RouteGroup } from "@/lib/routesList";
 import { pageRoutes } from "@/lib/routesList";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
+import RouteGroupAccordionItem from "./RouteGroupAccordionItem";
 
 const LOCAL_STORAGE_KEY = "accordion-open-items";
-
-const renderRouteGroups = (pageRoutes: RouteGroup[]) => {
-    return pageRoutes.map((pageRoute: RouteGroup, idx) => {
-        return (
-            <AccordionItem
-                key={crypto.randomUUID()}
-                className="flex flex-col text-left px-2"
-                value={`item-${idx + 1}`}
-            >
-                <AccordionTrigger className="font-extrabold text-brand-700">
-                    {pageRoute.group}
-                </AccordionTrigger>
-
-                <AccordionContent className="flex flex-col gap-3">
-                    {pageRoute.routes.map((subRoute: AppRoute) => (
-                        <CardLink
-                            key={crypto.randomUUID()}
-                            href={subRoute.href}
-                            title={subRoute.title}
-                            description={subRoute.description}
-                        />
-                    ))}
-                </AccordionContent>
-            </AccordionItem>
-        );
-    });
-};
 
 const SiteLinks = () => {
     const [openItems, setOpenItems] = useState<string[]>([]);
@@ -79,7 +47,13 @@ const SiteLinks = () => {
             value={openItems}
             onValueChange={setOpenItems}
         >
-            {renderRouteGroups(pageRoutes)}
+            {pageRoutes.map((pageRoute: RouteGroup, idx) => (
+                <RouteGroupAccordionItem
+                    key={crypto.randomUUID()}
+                    pageRoute={pageRoute}
+                    idx={idx}
+                />
+            ))}
         </Accordion>
     );
 };
