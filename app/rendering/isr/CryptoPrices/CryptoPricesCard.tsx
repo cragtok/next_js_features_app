@@ -1,23 +1,23 @@
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CardWrapper from "@/components/general/CardWrapper";
-import { CryptoData } from "./apiCall";
 
 interface Props {
-    cryptoData: CryptoData;
+    symbol: string;
+    price: string;
 }
 
-const CryptoPricesCard = ({ cryptoData }: Props) => {
+const CryptoPricesCard = ({ symbol, price }: Props) => {
     return (
         <CardWrapper>
             <CardHeader>
                 <CardTitle className="text-accent-700 group-hover:underline">
-                    {cryptoData.symbol}
+                    {symbol}
                 </CardTitle>
             </CardHeader>
             <CardContent>
                 <p className="text-brand-500 text">
                     <span className="font-semibold">Price:</span>{" "}
-                    <span data-testid="crypto-price">${cryptoData.price}</span>
+                    <span data-testid="crypto-price">${price}</span>
                 </p>
             </CardContent>
         </CardWrapper>

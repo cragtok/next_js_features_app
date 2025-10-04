@@ -25,9 +25,7 @@ async function CryptoPrices() {
                         </p>
                     </CardContent>
                 </CardWrapper>
-                <RefreshButton
-                    data-testid="refresh-button"
-                >
+                <RefreshButton data-testid="refresh-button">
                     Refresh Page
                 </RefreshButton>
             </>
@@ -40,13 +38,12 @@ async function CryptoPrices() {
                 {prices.map((cryptoData) => (
                     <CryptoPricesCard
                         key={cryptoData.symbol}
-                        cryptoData={cryptoData}
+                        symbol={cryptoData.symbol}
+                        price={cryptoData.price}
                     />
                 ))}
             </div>
-            <RefreshButton
-                data-testid="refresh-button"
-            >
+            <RefreshButton data-testid="refresh-button">
                 Refresh Page
             </RefreshButton>
         </>
