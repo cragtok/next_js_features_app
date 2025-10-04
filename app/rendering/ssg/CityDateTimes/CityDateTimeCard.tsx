@@ -1,27 +1,26 @@
 import CardWrapper from "@/components/general/CardWrapper";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CityDateTime } from "./apiCall";
 
 interface Props {
-    cityDateTime: CityDateTime;
+    city: string;
+    date: string;
+    time: string;
 }
 
-const CityDateTimeCard = ({ cityDateTime }: Props) => {
+const CityDateTimeCard = ({ city, date, time }: Props) => {
     return (
         <CardWrapper>
             <CardHeader>
                 <CardTitle className="text-accent-700 group-hover:underline">
-                    {cityDateTime.city}
+                    {city}
                 </CardTitle>
             </CardHeader>
             <CardContent>
                 <p className="text-brand-500 text">
-                    <span className="font-semibold">Date:</span>{" "}
-                    {cityDateTime.date}
+                    <span className="font-semibold">Date:</span> {date}
                 </p>
                 <p className="text-brand-500">
-                    <span className="font-semibold">Time:</span>{" "}
-                    {cityDateTime.time}
+                    <span className="font-semibold">Time:</span> {time}
                 </p>
             </CardContent>
         </CardWrapper>

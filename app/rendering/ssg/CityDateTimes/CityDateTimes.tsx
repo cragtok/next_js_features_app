@@ -9,7 +9,9 @@ const CityDateTimes = async () => {
             {cityDateTimes.map((cdt) => (
                 <CityDateTimeCard
                     key={crypto.randomUUID()}
-                    cityDateTime={cdt}
+                    city={cdt.city}
+                    date={cdt.date}
+                    time={cdt.time}
                 />
             ))}
         </div>
