@@ -7,6 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const CURRENT_FILE_NAME = path.basename(__filename);
 
 const TWELVE_DATA_API_BATCH_URL = "https://api.twelvedata.com/batch";
+const API_CALL_URL = `${TWELVE_DATA_API_BATCH_URL}?apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
 
 interface RequestBody {
     [key: string]: {
@@ -54,13 +55,11 @@ const formatPayload = (payload: APIPayload): CryptoData[] =>
         })
         .sort((a, b) => (a.symbol >= b.symbol ? 1 : -1));
 
-const generateCoinURL = (coin: string) =>
-    `/price?symbol=${coin}/USD&apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
-
-const apiCallURL = `${TWELVE_DATA_API_BATCH_URL}?apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
-
-async function fetchPrices(): Promise<CryptoData[]> {
+const generateRequestBody = () => {
     const coinsList = ["BTC", "ETH", "XMR", "XRP"];
+
+    const generateCoinURL = (coin: string) =>
+        `/price?symbol=${coin}/USD&apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
 
     const body: RequestBody = {};
     for (const coin of coinsList) {
@@ -68,15 +67,20 @@ async function fetchPrices(): Promise<CryptoData[]> {
             url: generateCoinURL(coin),
         };
     }
+
+    return JSON.stringify(body);
+};
+
+async function fetchPrices(): Promise<CryptoData[]> {
     const logger = getLogger(`${CURRENT_FILE_NAME} | fetchPrices`);
 
     logger.info("Fetching crypto prices...");
 
     let result: CryptoData[] = [];
     try {
-        const response = await fetch(apiCallURL, {
+        const response = await fetch(API_CALL_URL, {
             method: "POST",
-            body: JSON.stringify(body),
+            body: generateRequestBody(),
         });
 
         if (!response.ok) {
