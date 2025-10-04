@@ -5,30 +5,30 @@ import BreadcrumbMenu from "./BreadcrumbMenu";
 import { Suspense } from "react";
 import { AppRoute, routeObjects } from "@/lib/routesList";
 
+const extractRoutePath = (pathname: string) => {
+    let routePath: AppRoute[] = [];
+    // match the '/routing/dynamic/*' path
+    const dynamicRoutePattern = /^\/routing\/dynamic\/(.*)/;
+
+    if (pathname.match(dynamicRoutePattern)) {
+        const match = pathname.match(dynamicRoutePattern);
+        if (match) {
+            routePath = [
+                routeObjects["/"],
+                routeObjects["/routing/dynamic"],
+                { ...routeObjects["/routing/dynamic*"], title: match[1] }, // Set page title as dynamic route segment
+            ];
+        }
+        // routepath is not dynamic or home route
+    } else if (routeObjects.hasOwnProperty(pathname)) {
+        routePath = [routeObjects["/"], routeObjects[pathname]];
+    }
+
+    return routePath;
+};
+
 const Header = () => {
     const pathname = usePathname();
-
-    const extractRoutePath = () => {
-        let routePath: AppRoute[] = [];
-        // match the '/routing/dynamic/*' path
-        const dynamicRoutePattern = /^\/routing\/dynamic\/(.*)/;
-
-        if (pathname.match(dynamicRoutePattern)) {
-            const match = pathname.match(dynamicRoutePattern);
-            if (match) {
-                routePath = [
-                    routeObjects["/"],
-                    routeObjects["/routing/dynamic"],
-                    { ...routeObjects["/routing/dynamic*"], title: match[1] }, // Set page title as dynamic route segment
-                ];
-            }
-            // routepath is not dynamic or home route
-        } else if (routeObjects.hasOwnProperty(pathname)) {
-            routePath = [routeObjects["/"], routeObjects[pathname]];
-        }
-
-        return routePath;
-    };
 
     if (pathname === "/") {
         return (
@@ -45,8 +45,10 @@ const Header = () => {
             </header>
         );
     }
-    const routePath = extractRoutePath();
-
+    // Place these after the check for homepage
+    // else it creates weird behaviour when on invalid
+    // pages
+    const routePath = extractRoutePath(pathname);
     const isValidRoute = routePath.length > 0;
     return (
         <header className="">
