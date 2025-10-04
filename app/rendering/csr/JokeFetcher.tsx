@@ -25,41 +25,49 @@ const JokeFetcher = () => {
         refetch();
     };
 
+    if (isFetching) {
+        return (
+            <>
+                <LoadingSkeleton numRows={4} />
+                <ButtonWrapper
+                    onClick={handleClick}
+                    disabled={isFetching}
+                    data-testid="joke-fetch-button"
+                >
+                    Fetch Joke
+                </ButtonWrapper>
+            </>
+        );
+    }
+
     return (
         <>
-            {isFetching ? (
-                <LoadingSkeleton numRows={4} />
-            ) : (
-                <CardWrapper>
-                    <CardContent>
-                        {isError ? (
-                            <TextAccentWrapper
-                                classNameOverride="text-status-danger-500 text-center"
-                                data-testid="joke-error"
-                            >
-                                {
-                                    "Failed to load joke. Please try fetching again."
-                                }
-                            </TextAccentWrapper>
-                        ) : joke ? (
-                            <TextAccentWrapper
-                                classNameOverride="italic text-center"
-                                data-testid="joke-text"
-                            >
-                                {joke}
-                            </TextAccentWrapper>
-                        ) : (
-                            <TextAccentWrapper
-                                classNameOverride="text-center text-brand-500"
-                                data-testid="initial-text"
-                            >
-                                {"Click the button to fetch a joke."}
-                            </TextAccentWrapper>
-                        )}
-                    </CardContent>
-                </CardWrapper>
-            )}
-
+            <CardWrapper>
+                <CardContent>
+                    {isError ? (
+                        <TextAccentWrapper
+                            classNameOverride="text-status-danger-500 text-center"
+                            data-testid="joke-error"
+                        >
+                            {"Failed to load joke. Please try fetching again."}
+                        </TextAccentWrapper>
+                    ) : joke ? (
+                        <TextAccentWrapper
+                            classNameOverride="italic text-center"
+                            data-testid="joke-text"
+                        >
+                            {joke}
+                        </TextAccentWrapper>
+                    ) : (
+                        <TextAccentWrapper
+                            classNameOverride="text-center text-brand-500"
+                            data-testid="initial-text"
+                        >
+                            {"Click the button to fetch a joke."}
+                        </TextAccentWrapper>
+                    )}
+                </CardContent>
+            </CardWrapper>
             <ButtonWrapper
                 onClick={handleClick}
                 disabled={isFetching}
