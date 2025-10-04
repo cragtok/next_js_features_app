@@ -45,9 +45,8 @@ const Header = () => {
             </header>
         );
     }
-    // Place these after the check for homepage
-    // else it creates weird behaviour when on invalid
-    // pages
+    // Place these after the check for homepage pathname.
+    // Otherwise, it creates weird behaviour when on invalid pages.
     const routePath = extractRoutePath(pathname);
     const isValidRoute = routePath.length > 0;
     return (

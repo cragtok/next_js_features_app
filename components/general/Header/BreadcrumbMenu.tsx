@@ -7,59 +7,34 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment } from "react";
 import { AppRoute } from "@/lib/routesList";
 import { ChevronDown, ChevronRight } from "lucide-react";
+import useSmallScreenWidthObserver from "./useSmallScreenWidthObserver";
 
 const FLEX_BREAKPOINT_WIDTH = 280;
 const MAX_URL_LENGTH = 42;
-
-interface Props {
-    routePath: AppRoute[];
-}
 
 const trimExcessURL = (url: string) =>
     url.length < MAX_URL_LENGTH
         ? url
         : `${url.substring(0, MAX_URL_LENGTH)}...`;
 
+interface Props {
+    routePath: AppRoute[];
+}
+
 const BreadcrumbMenu = ({ routePath }: Props) => {
-    const [isSmall, setIsSmall] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
+    const { isSmall, ref } = useSmallScreenWidthObserver(FLEX_BREAKPOINT_WIDTH);
 
-    useEffect(() => {
-        const observer = new ResizeObserver((entries) => {
-            for (const entry of entries) {
-                const { width } = entry.contentRect;
-                if (width < FLEX_BREAKPOINT_WIDTH) {
-                    setIsSmall(true);
-                } else {
-                    setIsSmall(false);
-                }
-            }
-        });
-
-        const currentRef = ref.current;
-
-        if (currentRef) {
-            observer.observe(currentRef);
-        }
-
-        return () => {
-            if (currentRef) {
-                observer.unobserve(currentRef);
-            }
-        };
-    }, []);
+    const breadcrumbListStyles = `${isSmall ? "flex flex-col justify-center text-xs items-center gap-y-2" : "flex justify-center items-center"}`;
 
     return (
         <Breadcrumb
             ref={ref}
             className="flex justify-center mt-10 text-balance"
         >
-            <BreadcrumbList
-                className={`${isSmall ? "flex flex-col justify-center text-xs items-center gap-y-2" : "flex justify-center items-center"}`}
-            >
+            <BreadcrumbList className={breadcrumbListStyles}>
                 {routePath.map((pathObj, idx) => {
                     if (idx === routePath.length - 1 || !pathObj.href) {
                         return (
