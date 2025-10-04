@@ -13,10 +13,10 @@ jest.mock("@/app/rendering/isr/CryptoPrices/apiCall", () => ({
 }));
 
 jest.mock("@/app/rendering/isr/CryptoPrices/CryptoPricesCard", () => {
-    return jest.fn(({ cryptoData }) => (
+    return jest.fn(({ symbol, price }) => (
         <div data-testid="mock-crypto-prices-card">
-            <span>{cryptoData.symbol}</span>
-            <span>Price: {cryptoData.price}</span>
+            <span>{symbol}</span>
+            <span>Price: {price}</span>
         </div>
     ));
 });
