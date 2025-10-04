@@ -14,8 +14,8 @@ import LoadingSpinner from "@/components/general/LoadingSpinner";
 
 const LOCAL_STORAGE_KEY = "accordion-open-items";
 
-const renderRoutes = (pageRoutes: RouteGroup[]) => {
-    const renderSubRoutes = (subRoutes: AppRoute[]) => {
+const renderRouteGroups = (pageRoutes: RouteGroup[]) => {
+    const renderRoutes = (subRoutes: AppRoute[]) => {
         return subRoutes.map((subRoute: AppRoute) => (
             <CardLink
                 key={crypto.randomUUID()}
@@ -38,7 +38,7 @@ const renderRoutes = (pageRoutes: RouteGroup[]) => {
                 </AccordionTrigger>
 
                 <AccordionContent className="flex flex-col gap-3">
-                    {renderSubRoutes(pageRoute.routes)}
+                    {renderRoutes(pageRoute.routes)}
                 </AccordionContent>
             </AccordionItem>
         );
@@ -83,7 +83,7 @@ const SiteLinks = () => {
             value={openItems}
             onValueChange={setOpenItems}
         >
-            {renderRoutes(pageRoutes)}
+            {renderRouteGroups(pageRoutes)}
         </Accordion>
     );
 };
