@@ -101,7 +101,7 @@ To set up your environment variables:
 
     (Replace `<repository-url>` with the actual URL of your Git repository.)
 
-3.  **Install dependencies:**
+2.  **Install dependencies:**
 
     This project uses `pnpm` as its package manager. If you don't have `pnpm` installed, you can install it globally:
 
@@ -181,7 +181,7 @@ To set up your environment variables:
     npm run build:prod
     ```
 
-4.  **Start production server:**
+3.  **Start production server:**
 
     Using `pnpm`:
 
