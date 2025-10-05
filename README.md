@@ -95,7 +95,7 @@ To set up your environment variables:
 1.  **Clone the repository:**
 
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/cragtok/next_js_features_app.git
     cd next_js_features_app
     ```
 
