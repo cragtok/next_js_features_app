@@ -30,12 +30,12 @@ The following features are demonstrated on this app:
     *   [End-to-End (E2E) Tests](#end-to-end-e2e-tests)
     *   [Component Tests](#component-tests)
 *   [Features](#features)
-    *   [Components](#components)
-        *   [🖥️ Server Components](#️-server-components)
-        *   [⚛️ Client Components](#️-client-components)
-    *   [Routing](#routing)
-        *   [🔗 Static Routing](#️-static-routing)
-        *   [🔄 Dynamic Routing](#️-dynamic-routing)
+    *   [🍱 Components](#-components)
+        *   [Server Components](#server-components)
+        *   [Client Components](#client-components)
+    *   [🛣 Routing](#-routing)
+        *   [Static Routing](#static-routing)
+        *   [Dynamic Routing](#dynamic-routing)
     *   [🖼️ Rendering and 📥 Data Fetching](#️-rendering-and--data-fetching)
         *   [Server-Side Rendering (SSR)](#server-side-rendering-ssr)
         *   [Incremental Static Regeneration (ISR)](#incremental-static-regeneration-isr)
@@ -328,37 +328,37 @@ To run the Component tests:
 
 Here is an explanation of all the different Next.js features the app demonstrates.
 
-### Components
+### 🍱 Components
 
 **Route Folder:** `app/components/`
 
 Demonstrates the use of server and client components in Next.js.
 
-#### 🖥️ Server Components
+#### Server Components
 
 **Route:** `/components/server`
 
 A simple page demonstrating the use of Server Components in Next.js. For each request, it sends the time on the server and a random number to the client.
 
-#### ⚛️ Client Components
+#### Client Components
 
 **Route:** `/components/client`
 
 A simple page demonstrating the use of Client Components in Next.js. It contains a simple Client Component consisting of a button that increments a counter when clicked.
 
-### Routing
+### 🛣 Routing
 
 **Route Folder:** `app/routing/`
 
 Demonstrates how routing works in Next.js.
 
-#### 🔗 Static Routing
+#### Static Routing
 
 **Route:** `/routing/static`
 
 A simple page demonstrating the use of Static Routing in Next.js. It is just a static page with a fixed route.
 
-#### 🔄 Dynamic Routing
+#### Dynamic Routing
 
 **Routes:** `/routing/dynamic`, `/routing/dynamic/[...slug]`
 
