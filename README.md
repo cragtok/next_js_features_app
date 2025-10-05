@@ -427,7 +427,7 @@ Demonstrates the use of server actions to submit form data from the client to th
 A page consisting of a list of users fetched from a database and a form for creating new users.
 - The user inputs the information of a into the form.
 - Submiting the form passes the data to a server action that processes the data and uses it to create a new user in the database.
-- More information on the database can be found in the [database section](#-database).
+- More information on the database can be found in the [database section](#️-database)
 
 ### 🛣️ Route Handlers
 
@@ -445,7 +445,7 @@ A page consisting of a list of users fetched from a database and a form for crea
 **API:** `/route-handlers/my-api`
 
 This is an API built using route handlers for performing CRUD operations on users in the SQLite database.
-- More information on the database can be found in the [database section](#-database).
+- More information on the database can be found in the [database section](#️-database)
 
 ### 🚦 Middleware
 
