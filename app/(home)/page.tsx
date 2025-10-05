@@ -69,7 +69,11 @@ function Page() {
             <ParagraphWrapper classNameOverride="max-w-md">
                 To view the source code of this application or run it on your
                 own machine, check out the Github repo:{" "}
-                <LinkWrapper href="https://www.github.com">
+                <LinkWrapper
+                    href="https://github.com/cragtok/next_js_features_app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     github.com
                 </LinkWrapper>
             </ParagraphWrapper>
