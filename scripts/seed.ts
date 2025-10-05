@@ -1,10 +1,4 @@
 import { clearDb, seedDb } from "@/lib/database/databaseHandler";
-import { getLogger } from "@/lib/logging/logger";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const CURRENT_FILE_NAME = path.basename(__filename);
 
 export const mockUsers = [
     {
@@ -25,19 +19,13 @@ export const mockUsers = [
 ];
 
 async function runSeed() {
-    const logger = getLogger(`${CURRENT_FILE_NAME} | runSeed`);
     try {
-        logger.info("Starting database seeding...");
+        console.log("Starting database seeding...");
         await clearDb();
         await seedDb(mockUsers);
-        logger.info("Database seeding complete.", {
-            numUsers: mockUsers.length,
-        });
+        console.log("Database seeding complete.");
     } catch (error) {
         console.error(error);
-        logger.fatal("Database seeding failed.", {
-            error: error as Error,
-        });
         process.exit(1);
     }
 }
