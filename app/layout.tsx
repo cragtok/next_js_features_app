@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Header from "@/components/general/Header/Header";
 import { Toaster } from "sonner";
 import localFont from "next/font/local";
+import { serverEnv } from "@/lib/env/serverEnv";
 
 import "./globals.css";
 import { WebVitals } from "@/components/general/WebVitals";
 
 export const metadata: Metadata = {
+    metadataBase: new URL(serverEnv.DOMAIN_URL),
     title: {
         template: "%s | Next.js Features App",
         default: "Next.js Features App",
