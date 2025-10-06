@@ -3,6 +3,7 @@ interface AppRoute {
     href: string;
     description: string;
     priority: number;
+    disablePrefetch?: boolean;
 }
 
 interface RouteGroup {
@@ -43,6 +44,7 @@ const pageRoutes: RouteGroup[] = [
                 href: "/routing/dynamic",
                 description: "Routing with dynamic URLs.",
                 priority: 0.7,
+                disablePrefetch: true,
             },
         ],
     },
@@ -76,6 +78,7 @@ const pageRoutes: RouteGroup[] = [
                 description:
                     "Rendering a page on the client via JavaScript and some basic HTML.",
                 priority: 0.7,
+                disablePrefetch: true,
             },
         ],
     },
@@ -107,6 +110,7 @@ const pageRoutes: RouteGroup[] = [
                 description:
                     "Functions that run on the server and can be called from client components.",
                 priority: 0.7,
+                disablePrefetch: true,
             },
         ],
     },
@@ -118,6 +122,7 @@ const pageRoutes: RouteGroup[] = [
                 href: "/route-handlers",
                 description: "Basic CRUD operations via Route Handlers.",
                 priority: 0.7,
+                disablePrefetch: true,
             },
         ],
     },
@@ -129,6 +134,7 @@ const pageRoutes: RouteGroup[] = [
                 href: "/middleware/ab-testing",
                 description: "Using middleware to run A/B tests.",
                 priority: 0.7,
+                disablePrefetch: true,
             },
             {
                 title: "Middleware Request Logging",
@@ -136,6 +142,7 @@ const pageRoutes: RouteGroup[] = [
                 description:
                     "Using middleware to log information about incoming requests.",
                 priority: 0.7,
+                disablePrefetch: true,
             },
         ],
     },

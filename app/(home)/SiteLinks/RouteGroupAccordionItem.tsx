@@ -9,11 +9,16 @@ import { AppRoute, RouteGroup } from "@/lib/routesList";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
-type CardLinkProps = Omit<AppRoute, "priority">;
+interface CardLinkProps {
+    title: string;
+    description: string;
+    href: string;
+    prefetch: boolean;
+}
 
-const CardLink = ({ title, description, href }: CardLinkProps) => {
+const CardLink = ({ title, description, href, prefetch }: CardLinkProps) => {
     return (
-        <Link href={href} className="group">
+        <Link href={href} className="group" prefetch={prefetch}>
             <Card className="bg-neutral-100">
                 <CardHeader>
                     <CardTitle className="text-accent-700 group-hover:underline">
@@ -54,6 +59,7 @@ const RouteGroupAccordionItem = ({
                         href={subRoute.href}
                         title={subRoute.title}
                         description={subRoute.description}
+                        prefetch={subRoute.disablePrefetch ? false : true}
                     />
                 ))}
             </AccordionContent>
