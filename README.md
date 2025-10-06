@@ -81,8 +81,6 @@ You will need API keys from these services:
     cd next_js_features_app
     ```
 
-    (Replace `<repository-url>` with the actual URL of your Git repository.)
-
 2.  **Install dependencies:**
 
     It is recommended to use `pnpm` as a package manager for this project. If you don't have `pnpm` installed, you can install it globally:
@@ -472,9 +470,11 @@ A page that shows the values of various request headers set by middleware.
 
 A small SQLite database is used in this app to demonstrate server action mutations and route handler CRUD operations.
 - When the app is started, the database file will be created in the `/data` folder.
-- The `lib/database` folder contains the database communication interface used by the application.
 - To clear the database and seed it with some sample users, run the `scripts/seed.ts` script which can be run using `pnpm` or `npm`.
-- Running the seed script will also create the database folder if it does not already exist.
+    - Running the seed script will also create the database folder if it does not already exist.
+- The `lib/database` folder contains the database communication interface used by the application.
+    - In the `constants.ts` file, the `MAX_USERS` constant specifies the maximum number of items which are allowed in the database.
+    - When a new item is added, and this limit is exceeded, the oldest item in the database will be deleted to make room for the new item.
 
 ## Built With
 
