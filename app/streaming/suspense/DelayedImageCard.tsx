@@ -30,6 +30,7 @@ const DelayedImageCard = async ({
                         fill={true}
                         className="object-cover rounded-md"
                         sizes="100%"
+                        priority={true}
                     />
                 </div>
                 <p className="text-brand-500 min-[400px]:text-justify text-pretty leading-6 flex-2 text-sm">
