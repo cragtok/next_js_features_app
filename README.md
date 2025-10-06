@@ -52,6 +52,7 @@ The following features are demonstrated on this app:
         *   [A/B Testing](#ab-testing)
         *   [Request Logging](#request-logging)
 *   [🗄️ Database](#️-database)
+*   [Built With](#built-with)
 *   [License](#license)
 
 ## Getting Started
@@ -474,6 +475,22 @@ A small SQLite database is used in this app to demonstrate server action mutatio
 - The `lib/database` folder contains the database communication interface used by the application.
 - To clear the database and seed it with some sample users, run the `scripts/seed.ts` script which can be run using `pnpm` or `npm`.
 - Running the seed script will also create the database folder if it does not already exist.
+
+## Built With
+
+*   [Next.js](https://nextjs.org/) – A React framework for building full-stack web applications.
+*   [React](https://react.dev/) – A JavaScript library for building user interfaces.
+*   [TypeScript](https://www.typescriptlang.org/) – A strongly typed superset of JavaScript that compiles to plain JavaScript.
+*   [Tailwind CSS](https://tailwindcss.com/) – A utility-first CSS framework for rapidly building custom designs.
+*   [Shadcn/ui](https://ui.shadcn.com/) – A collection of reusable components built using Radix UI and Tailwind CSS.
+*   [Jest](https://jestjs.io/) – A delightful JavaScript Testing Framework used for component tests.
+*   [React Testing Library](https://testing-library.com/react/) – A set of utilities for testing React components.
+*   [Cypress](https://www.cypress.io/) – A fast, easy, and reliable testing for anything that runs in a browser, used for E2E tests.
+*   [Better SQLite3](https://github.com/WiseLibs/better-sqlite3) – A simple, fast, and reliable Node.js SQLite3 library.
+*   [pnpm](https://pnpm.io/) – A fast, disk space efficient package manager used for managing project dependencies.
+*   [Lucide React](https://lucide.dev/) – A collection of beautiful and customizable open-source icons.
+*   [Zod](https://zod.dev/) – A TypeScript-first schema declaration and validation library.
+*   [Pino](https://getpino.io/) – A very fast, low overhead Node.js logger.
 
 ## License
 
