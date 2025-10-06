@@ -54,8 +54,6 @@ The following features are demonstrated on this app:
 *   [🗄️ Database](#️-database)
 *   [License](#license)
 
-
-
 ## Getting Started
 
 To get this project up and running on your local machine, follow these steps:
@@ -472,9 +470,10 @@ A page that shows the values of various request headers set by middleware.
 ## 🗄️ Database
 
 A small SQLite database is used in this app to demonstrate server action mutations and route handler CRUD operations.
-- When the app is started, the database file will be created and in the `/data` folder.
+- When the app is started, the database file will be created in the `/data` folder.
 - The `lib/database` folder contains the database communication interface used by the application.
 - To clear the database and seed it with some sample users, run the `scripts/seed.ts` script which can be run using `pnpm` or `npm`.
+- Running the seed script will also create the database folder if it does not already exist.
 
 ## License
 
