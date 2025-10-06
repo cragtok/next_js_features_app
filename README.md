@@ -45,9 +45,7 @@ The following features are demonstrated on this app:
         *   [Streaming With Loading.tsx](#streaming-with-loadingtsx)
         *   [Streaming With Suspense](#streaming-with-suspense)
     *   [⚡ Server Actions](#-server-actions)
-        *   [Server Actions](#server-actions)
     *   [🛣️ Route Handlers](#️-route-handlers)
-        *   [Route Handlers](#route-handlers)
     *   [🚦 Middleware](#-middleware)
         *   [A/B Testing](#ab-testing)
         *   [Request Logging](#request-logging)
@@ -215,7 +213,7 @@ To set up your environment variables:
 
 This project includes both End-to-End (E2E) tests and Component (Unit) tests to ensure the application's functionality and reliability.
 
-Before running the tests, ensure that you have set up environment variables as demonstrated in the [environment variables section](#environment-variables).
+Before running the tests, ensure that you have set up environment variables as demonstrated in the [environment variables section](#setting-environment-variables).
 
 ### End-to-End (E2E) Tests
 
@@ -307,7 +305,7 @@ To run the Component tests:
     Alternatively, using `npm`:
 
     ```bash
-    npm test
+    npm run test
     ```
 
 *   **Run tests in watch mode (for development):**
@@ -419,8 +417,6 @@ A page that demonstrates using React `Suspense` boundaries with a fallback loadi
 
 Demonstrates the use of server actions to submit form data from the client to the server.
 
-#### Server Actions
-
 **Route:** `/server-actions`
 
 A page consisting of a list of users fetched from a database and a form for creating new users.
@@ -433,8 +429,6 @@ A page consisting of a list of users fetched from a database and a form for crea
 **Route Folder:** `app/route-handlers`
 
 Demonstrates using route handlers to create a basic REST API that can perform CRUD operations on a database.
-
-#### Route Handlers
 
 **Route:** `/route-handlers`
 
