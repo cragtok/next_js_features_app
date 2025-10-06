@@ -9,6 +9,7 @@ import {
 import { getLogger } from "@/lib/logging/logger";
 import path from "path";
 import { fileURLToPath } from "url";
+import { mkdirSync, existsSync } from "fs";
 
 interface User {
     id: string;
@@ -19,6 +20,11 @@ interface User {
 }
 
 type UserDTO = Omit<User, "id">;
+
+const dbDirectory = path.dirname(DB_FILE_PATH);
+if (!existsSync(dbDirectory)) {
+    mkdirSync(dbDirectory, { recursive: true });
+}
 
 const db = new Database(DB_FILE_PATH);
 db.pragma("journal_mode = WAL");
