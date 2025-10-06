@@ -20,9 +20,9 @@ The following features are demonstrated on this app:
 
 *   [Getting Started](#getting-started)
     *   [Prerequisites](#prerequisites)
-    *   [Environment Variables](#environment-variables)
 *   [Running](#running)
     *   [Installation](#installation)
+    *   [Setting Environment Variables](#setting-environment-variables)
     *   [Running Development Build](#running-development-build)
     *   [Running Production Build](#running-production-build)
     *   [Scripts](#scripts)
@@ -71,23 +71,6 @@ You will need API keys from these services:
 - [Twelve Data](https://twelvedata.com/)
 - [Google AI Studio](https://aistudio.google.com/app/apikey)
 
-### Environment Variables
-
-Before running the application, you need to set up the environment variables.
-
-This project uses environment variables for different modes (development, production, and testing). Template files are provided in the root directory:
-*   `.env.development.template`
-*   `.env.production.template`
-*   `.env.test.template`
-
-To set up your environment variables:
-1.  **Rename the appropriate template file:** For example, to run the app in development mode, rename `.env.development.template` to `.env.development`.
-2.  **Fill in the values:** Open the renamed `.env` file and replace all `<your value here>` placeholders with your actual API keys and URLs.
-    1. `GEMINI_API_KEY`: API key from Google AI Studio.
-    1. `TWELVE_DATA_API_KEY`: API key from Twelve Data.
-    1. `DOMAIN_URL`: The URL of the running application in development or production. Should be `http://localhost:<port>` (where `<port>` is usually `3000` or some other port) if running locally in development mode, or the domain name of the hosted production application if running on a VPS or PaaS.
-    1. `TEST_URL`: The URL of the running application in test mode. Should be `http://localhost:<port>`, where `<port>` is usually `3000` or some other port set by Next.js.
-
 ## Running
 
 ### Installation
@@ -103,7 +86,7 @@ To set up your environment variables:
 
 2.  **Install dependencies:**
 
-    This project uses `pnpm` as its package manager. If you don't have `pnpm` installed, you can install it globally:
+    It is recommended to use `pnpm` as a package manager for this project. If you don't have `pnpm` installed, you can install it globally:
 
     ```bash
     npm install -g pnpm
@@ -115,10 +98,29 @@ To set up your environment variables:
     pnpm install
 
     ```
-    Alternatively, you can use `npm`:
+
+    Alternatively, you can use `npm` if required:
+
     ```bash
     npm install
     ```
+
+### Setting Environment Variables
+
+Before running the application, you need to set up the environment variables.
+
+This project uses environment variables for different modes (development, production, and testing). Template files are provided in the root directory:
+*   `.env.development.template`
+*   `.env.production.template`
+*   `.env.test.template`
+
+To set up your environment variables:
+1.  **Rename the appropriate template file:** For example, to run the app in development mode, rename `.env.development.template` to `.env.development`.
+2.  **Fill in the values:** Open the renamed `.env` file and replace all `<your value here>` placeholders with your actual API keys and URLs.
+    1. `GEMINI_API_KEY`: API key from Google AI Studio.
+    1. `TWELVE_DATA_API_KEY`: API key from Twelve Data.
+    1. `DOMAIN_URL`: The URL of the running application in development or production. Should be `http://localhost:<port>` (where `<port>` is usually `3000` or some other port) if running locally in development mode, or the domain name of the hosted production application if running on a VPS or PaaS.
+    1. `TEST_URL`: The URL of the running application in test mode. Should be `http://localhost:<port>`, where `<port>` is usually `3000` or some other port set by Next.js.
 
 ### Running Development Build
 
