@@ -5,18 +5,18 @@
   "scripts": {
     "build:prod": "NODE_ENV=production tsx ./scripts/prebuild.ts && next build && tsx ./scripts/postbuild.ts",
     "build:test": "NODE_ENV=test tsx ./scripts/prebuild.ts && next build && tsx ./scripts/postbuild.ts",
-    "cypress:open": "pnpm run seed && NODE_ENV=test cypress open",
-    "cypress:run": "pnpm run seed && NODE_ENV=test cypress run",
+    "cypress:open": "pnpm run db:seed && NODE_ENV=test cypress open",
+    "cypress:run": "pnpm run db:seed && NODE_ENV=test cypress run",
     "dev": "NODE_ENV=development next dev --turbopack",
     "lint": "next lint",
-    "seed": "tsx ./scripts/seed.ts",
     "start": "NODE_ENV=production next start",
     "test": "NODE_ENV=test jest",
     "test:watch": "NODE_ENV=test jest --watch",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "db:seed": "tsx ./scripts/seed.ts"
   },
   "dependencies": {
     "@google/genai": "^1.22.0",
