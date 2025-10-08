@@ -1,7 +1,7 @@
 import { testApiHandler } from "next-test-api-route-handler";
 import { expect, beforeEach } from "@jest/globals";
 import * as appHandler from "@/app/route-handlers/my-api/[userId]/route";
-import { SqliteError } from "better-sqlite3";
+import { DrizzleQueryError } from "drizzle-orm/errors";
 
 const mockDeleteUserInDb = jest.fn();
 const mockFindUserInDb = jest.fn();
@@ -27,12 +27,19 @@ jest.mock("@/lib/headers/extractUserRequestId", () => ({
     extractUserRequestId: () => mockExtractUserRequestId(),
 }));
 
-class MockSqliteError extends SqliteError {
-    code: string;
-    constructor(message: string, code: string) {
-        super(message, code);
-        this.name = "SqliteError";
-        this.code = code;
+class MockDrizzleQueryError extends DrizzleQueryError {
+    cause: any;
+    constructor(message: string, code: string, field: string) {
+        super(message, []);
+        this.name = "DrizzleQueryError";
+        this.cause = {
+            cause: {
+                code: code,
+                proto: {
+                    message: `SQLite error: UNIQUE constraint failed: users.${field}`,
+                },
+            },
+        };
     }
 }
 
@@ -440,9 +447,10 @@ describe("Route Handlers API", () => {
                 result: updateUserBody,
             });
             mockUpdateUserInDb.mockImplementationOnce(() => {
-                throw new MockSqliteError(
-                    "UNIQUE constraint failed: users.username",
-                    "SQLITE_CONSTRAINT_UNIQUE"
+                throw new MockDrizzleQueryError(
+                    "Drizzle error",
+                    "SQLITE_CONSTRAINT",
+                    "username"
                 );
             });
 
@@ -499,9 +507,10 @@ describe("Route Handlers API", () => {
                 result: updateUserBody,
             });
             mockUpdateUserInDb.mockImplementationOnce(() => {
-                throw new MockSqliteError(
-                    "UNIQUE constraint failed: users.email",
-                    "SQLITE_CONSTRAINT_UNIQUE"
+                throw new MockDrizzleQueryError(
+                    "Drizzle error",
+                    "SQLITE_CONSTRAINT",
+                    "email"
                 );
             });
 

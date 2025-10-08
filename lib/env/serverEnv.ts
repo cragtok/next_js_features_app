@@ -1,17 +1,19 @@
 import { z } from "zod";
 import { processEnv } from "./utils";
-import "server-only";
+import { loadEnvConfig } from "@next/env";
+loadEnvConfig(process.cwd(), process.env.NODE_ENV === "development");
 
 const serverSchema = z.object({
-    NODE_ENV: z
-        .enum(["development", "test", "production"])
-        .default("development"),
+    NODE_ENV: z.enum(["development", "test", "production"]),
     GEMINI_API_KEY: z.string("GEMINI_API_KEY must be a valid string").min(1),
     TWELVE_DATA_API_KEY: z
         .string("TWELVE_DATA_API_KEY must be a valid string")
         .min(1),
     DOMAIN_URL: z.url("DOMAIN_URL must be a valid URL"),
-    TURSO_DATABASE_URL: z.url("TURSO_DATABASE_URL must be a valid URL"),
+    TURSO_DATABASE_URL:
+        process.env.NODE_ENV === "test"
+            ? z.string("TURSO_DATABASE_URL must be valid string")
+            : z.url("TURSO_DATABASE_URL must be a valid URL"),
     TURSO_AUTH_TOKEN: z.string("TURSO_AUTH_TOKEN must be a valid string"),
 });
 

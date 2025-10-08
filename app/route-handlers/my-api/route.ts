@@ -1,10 +1,11 @@
 import { getCachedUsers, addUserToDb } from "@/lib/database/databaseHandler";
 import { parseUserBody } from "@/lib/utils";
 import { extractUserRequestId } from "@/lib/headers/extractUserRequestId";
-import { SqliteError } from "better-sqlite3";
 import { getLogger } from "@/lib/logging/logger";
 import path from "path";
 import { fileURLToPath } from "url";
+import { DrizzleQueryError } from "drizzle-orm/errors";
+import { DrizzleLibSqlErrorCause } from "@/lib/database/types";
 
 const __filename = fileURLToPath(import.meta.url);
 const CURRENT_FILE_NAME = path.basename(__filename);
@@ -103,11 +104,14 @@ async function POST(request: Request) {
             message = error.message;
             status = 400;
         } else if (
-            error instanceof SqliteError &&
-            error.code == "SQLITE_CONSTRAINT_UNIQUE"
+            error instanceof DrizzleQueryError &&
+            (error.cause as DrizzleLibSqlErrorCause)?.cause.code ===
+            "SQLITE_CONSTRAINT"
         ) {
-            const duplicateUserField = error.message
-                .split(": ")[1]
+            const nestedError = (error.cause as DrizzleLibSqlErrorCause)?.cause;
+            const errorMessage = nestedError?.proto?.message;
+            const duplicateUserField = errorMessage
+                .split(": ")[2]
                 .split(".")[1];
             message = `User with ${duplicateUserField} already exists.`;
             status = 400;

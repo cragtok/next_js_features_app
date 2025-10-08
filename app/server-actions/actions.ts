@@ -1,11 +1,13 @@
 "use server";
 import { addUserToDb } from "@/lib/database/databaseHandler";
-import { SqliteError } from "better-sqlite3";
+
 import { parseUserBody } from "@/lib/utils";
 import { extractUserRequestId } from "@/lib/headers/extractUserRequestId";
 import { getLogger } from "@/lib/logging/logger";
 import path from "path";
 import { fileURLToPath } from "url";
+import { DrizzleQueryError } from "drizzle-orm";
+import { DrizzleLibSqlErrorCause } from "@/lib/database/types";
 
 const __filename = fileURLToPath(import.meta.url);
 const CURRENT_FILE_NAME = path.basename(__filename);
@@ -26,7 +28,10 @@ export async function createUserAction(
 ): Promise<FormState> {
     const requestId = await extractUserRequestId();
 
-    const logger = getLogger(`${CURRENT_FILE_NAME} | createUserAction`, requestId);
+    const logger = getLogger(
+        `${CURRENT_FILE_NAME} | createUserAction`,
+        requestId
+    );
 
     const username = (formData.get("username") as string).trim();
     const email = (formData.get("email") as string).trim();
@@ -85,12 +90,16 @@ export async function createUserAction(
         };
     } catch (error) {
         console.error(error);
+
         if (
-            error instanceof SqliteError &&
-            error.code == "SQLITE_CONSTRAINT_UNIQUE"
+            error instanceof DrizzleQueryError &&
+            (error.cause as DrizzleLibSqlErrorCause)?.cause.code ===
+            "SQLITE_CONSTRAINT"
         ) {
-            const duplicateUserField = error.message
-                .split(": ")[1]
+            const nestedError = (error.cause as DrizzleLibSqlErrorCause)?.cause;
+            const errorMessage = nestedError?.proto?.message;
+            const duplicateUserField = errorMessage
+                .split(": ")[2]
                 .split(".")[1];
             const duplicateFieldMessage = `User with ${duplicateUserField} already exists`;
 

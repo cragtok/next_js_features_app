@@ -1,5 +1,4 @@
 import {
-    db,
     getCachedUsers,
     addUserToDb,
     findUserInDb,
@@ -10,9 +9,11 @@ import {
     User,
     UserDTO,
 } from "@/lib/database/databaseHandler";
-import { expect, beforeEach, afterAll } from "@jest/globals";
+import db from "@/lib/database/db";
+import { expect, beforeEach } from "@jest/globals";
 import { DB_CACHE_TAG } from "@/lib/database/constants";
 import { revalidateTag } from "next/cache";
+import { migrate } from "drizzle-orm/libsql/migrator";
 
 jest.mock("next/cache", () => ({
     revalidateTag: jest.fn(),
@@ -20,13 +21,13 @@ jest.mock("next/cache", () => ({
 }));
 
 describe("Database Handler Integration Tests", () => {
+    beforeAll(async () => {
+        await migrate(db, { migrationsFolder: "./migrations" });
+    });
+
     beforeEach(async () => {
         await clearDb();
         jest.clearAllMocks();
-    });
-
-    afterAll(() => {
-        db.close();
     });
 
     describe("addUserToDb", () => {
@@ -99,7 +100,7 @@ describe("Database Handler Integration Tests", () => {
             };
 
             await expect(addUserToDb(duplicateUser)).rejects.toThrow(
-                /UNIQUE constraint failed: users.username/
+                /Failed query: insert/
             );
         });
 
@@ -118,7 +119,7 @@ describe("Database Handler Integration Tests", () => {
             };
 
             await expect(addUserToDb(duplicateUser)).rejects.toThrow(
-                /UNIQUE constraint failed: users.email/
+                /Failed query: insert/
             );
         });
     });
@@ -190,7 +191,7 @@ describe("Database Handler Integration Tests", () => {
             };
 
             await expect(updateUserInDb(updatedUserData)).rejects.toThrow(
-                /UNIQUE constraint failed: users.username/
+                /Failed query: update/
             );
         });
 
@@ -214,7 +215,7 @@ describe("Database Handler Integration Tests", () => {
             };
 
             await expect(updateUserInDb(updatedUserData)).rejects.toThrow(
-                /UNIQUE constraint failed: users.email/
+                /Failed query: update/
             );
         });
     });
