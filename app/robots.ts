@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
-import { serverEnv } from "@/lib/env/serverEnv";
+import { appEnv } from "@/lib/env/appEnv";
 
-const DOMAIN_URL = serverEnv.DOMAIN_URL;
+const DOMAIN_URL = appEnv.DOMAIN_URL;
 
 export default function robots(): MetadataRoute.Robots {
     return {

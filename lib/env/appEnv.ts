@@ -1,9 +1,10 @@
 import { z } from "zod";
 import { processEnv } from "./utils";
 import { loadEnvConfig } from "@next/env";
-loadEnvConfig(process.cwd(), process.env.NODE_ENV === "development");
 
-const serverSchema = z.object({
+loadEnvConfig(process.cwd(), process.env.NODE_ENV !== "production");
+
+const envSchema = z.object({
     NODE_ENV: z.enum(["development", "test", "production"]),
     GEMINI_API_KEY: z.string("GEMINI_API_KEY must be a valid string").min(1),
     TWELVE_DATA_API_KEY: z
@@ -17,7 +18,7 @@ const serverSchema = z.object({
     TURSO_AUTH_TOKEN: z.string("TURSO_AUTH_TOKEN must be a valid string"),
 });
 
-export const serverEnv = processEnv(serverSchema, {
+export const appEnv = processEnv(envSchema, {
     NODE_ENV: process.env.NODE_ENV,
     GEMINI_API_KEY: process.env.GEMINI_API_KEY,
     TWELVE_DATA_API_KEY: process.env.TWELVE_DATA_API_KEY,

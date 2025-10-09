@@ -1,4 +1,4 @@
-import { serverEnv } from "@/lib/env/serverEnv";
+import { appEnv } from "@/lib/env/appEnv";
 import { getLogger } from "@/lib/logging/logger";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const CURRENT_FILE_NAME = path.basename(__filename);
 
 const TWELVE_DATA_API_BATCH_URL = "https://api.twelvedata.com/batch";
-const API_CALL_URL = `${TWELVE_DATA_API_BATCH_URL}?apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
+const API_CALL_URL = `${TWELVE_DATA_API_BATCH_URL}?apikey=${appEnv.TWELVE_DATA_API_KEY}`;
 
 interface RequestBody {
     [key: string]: {
@@ -59,7 +59,7 @@ const generateRequestBody = () => {
     const coinsList = ["BTC", "ETH", "XMR", "XRP"];
 
     const generateCoinURL = (coin: string) =>
-        `/price?symbol=${coin}/USD&apikey=${serverEnv.TWELVE_DATA_API_KEY}`;
+        `/price?symbol=${coin}/USD&apikey=${appEnv.TWELVE_DATA_API_KEY}`;
 
     const body: RequestBody = {};
     for (const coin of coinsList) {

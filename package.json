@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:prod": "NODE_ENV=production tsx ./scripts/prebuild.ts && next build && tsx ./scripts/postbuild.ts",
-    "build:test": "NODE_ENV=test tsx ./scripts/prebuild.ts && next build && tsx ./scripts/postbuild.ts",
-    "cypress:open": "pnpm run db:seed && NODE_ENV=test cypress open",
-    "cypress:run": "pnpm run db:seed && NODE_ENV=test cypress run",
+    "build": "NODE_ENV=production tsx ./scripts/prebuild.ts && next build && tsx ./scripts/postbuild.ts",
+    "build:test": "next build",
+    "cypress:open": "NODE_ENV=production cypress open",
+    "cypress:run": "NODE_ENV=production cypress run",
     "dev": "NODE_ENV=development next dev --turbopack",
     "lint": "next lint",
     "start": "NODE_ENV=production next start",
@@ -16,7 +16,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
-    "db:seed": "tsx ./scripts/seed.ts"
+    "db:seed:prod": "NODE_ENV=production tsx ./scripts/seed.ts",
+    "db:seed:dev": "NODE_ENV=development tsx ./scripts/seed.ts"
   },
   "dependencies": {
     "@google/genai": "^1.22.0",
@@ -27,7 +28,6 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@tanstack/react-query": "^5.90.2",
     "class-variance-authority": "^0.7.1",
-    "client-only": "^0.0.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.44.6",
     "lucide-react": "^0.544.0",
@@ -36,7 +36,6 @@
     "pino": "^10.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "server-only": "^0.0.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "uuid": "^13.0.0",

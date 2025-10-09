@@ -1,12 +1,12 @@
 import { defineConfig } from "cypress";
-import { testEnv } from "./lib/env/testEnv";
+import { appEnv } from "./lib/env/appEnv";
 
 export default defineConfig({
     e2e: {
         setupNodeEvents(on, config) { },
-        baseUrl: testEnv.TEST_URL,
+        baseUrl: appEnv.DOMAIN_URL,
     },
     env: {
-        baseUrl: testEnv.TEST_URL,
+        baseUrl: appEnv.DOMAIN_URL,
     },
 });

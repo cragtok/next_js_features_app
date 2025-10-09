@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 import { routeObjects } from "@/lib/routesList";
-import { serverEnv } from "@/lib/env/serverEnv";
+import { appEnv } from "@/lib/env/appEnv";
 
-const DOMAIN_URL = serverEnv.DOMAIN_URL;
+const DOMAIN_URL = appEnv.DOMAIN_URL;
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const sitemapEntries: MetadataRoute.Sitemap = [];

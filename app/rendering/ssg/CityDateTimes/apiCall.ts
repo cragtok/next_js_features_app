@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { serverEnv } from "@/lib/env/serverEnv";
+import { appEnv } from "@/lib/env/appEnv";
 import { delay } from "@/lib/utils";
 import { getLogger } from "@/lib/logging/logger";
 import path from "path";
@@ -33,7 +33,7 @@ const systemInstruction = `
 async function fetchCityDateTimes(): Promise<CityDateTime[]> {
     const MAX_RETRIES = 5;
     const RETRY_DELAY_MS = 1000;
-    const ai = new GoogleGenAI({ apiKey: serverEnv.GEMINI_API_KEY });
+    const ai = new GoogleGenAI({ apiKey: appEnv.GEMINI_API_KEY });
 
     const logger = getLogger(`${CURRENT_FILE_NAME} | fetchCityDateTimes`);
 
@@ -84,4 +84,3 @@ async function fetchCityDateTimes(): Promise<CityDateTime[]> {
 }
 
 export { fetchCityDateTimes, type CityDateTime };
-
