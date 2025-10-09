@@ -25,7 +25,6 @@ The following features are demonstrated on this app:
     *   [Setting Environment Variables](#setting-environment-variables)
     *   [Running Development Build](#running-development-build)
     *   [Running Production Build](#running-production-build)
-    *   [Scripts](#scripts)
 *   [Tests](#tests)
     *   [End-to-End (E2E) Tests](#end-to-end-e2e-tests)
     *   [Component Tests](#component-tests)
@@ -67,6 +66,7 @@ Before you begin, ensure you have the following installed:
 You will need API keys from these services:
 - [Twelve Data](https://twelvedata.com/)
 - [Google AI Studio](https://aistudio.google.com/app/apikey)
+- [Turso](https://turso.tech/)
 
 ## Running
 
@@ -113,9 +113,11 @@ To set up your environment variables:
 1.  **Rename the appropriate template file:** For example, to run the app in development mode, rename `.env.development.template` to `.env.development`.
 2.  **Fill in the values:** Open the renamed `.env` file and replace all `<your value here>` placeholders with your actual API keys and URLs.
     1. `GEMINI_API_KEY`: API key from Google AI Studio.
-    1. `TWELVE_DATA_API_KEY`: API key from Twelve Data.
-    1. `DOMAIN_URL`: The URL of the running application in development or production. Should be `http://localhost:<port>` (where `<port>` is usually `3000` or some other port) if running locally in development mode, or the domain name of the hosted production application if running on a VPS or PaaS.
-    1. `TEST_URL`: The URL of the running application in test mode. Should be `http://localhost:<port>`, where `<port>` is usually `3000` or some other port set by Next.js.
+    2. `TWELVE_DATA_API_KEY`: API key from Twelve Data.
+    3. `DOMAIN_URL`: The URL of the running application in development or production. Should be `http://localhost:<port>` (where `<port>` is usually `3000` or some other port) if running locally in development mode, or the domain name of the hosted production application if running on a VPS or PaaS.
+    4. `TURSO_DATABASE_URL`: The URL of the SQLite database that is hosted on Turso.
+    5. `TURSO_AUTH_TOKEN`: The authentication token used access the SQLite database that is hosted on Turso.
+    6. `NODE_ENV`: Set to `"production"`, `"development"` or `"test"`, depending on which file is being used.
 
 ### Running Development Build
 
@@ -124,12 +126,13 @@ To set up your environment variables:
     If you want to clear the SQLite database and populate it with some sample data, run the database seed script:
 
     ```bash
-    pnpm seed
+    pnpm db:seed:dev
     ```
 
     Alternatively, using `npm`:
+
     ```bash
-    npm run seed
+    npm run db:seed:dev
     ```
 
 2.  **Run the development server:**
@@ -155,13 +158,13 @@ To set up your environment variables:
     If you want to clear the SQLite database and populate it with some sample data, run the database seed script:
 
     ```bash
-    pnpm seed
+    pnpm db:seed:prod
     ```
 
     Alternatively, using `npm`:
 
     ```bash
-    npm run seed
+    npm run db:seed:prod
     ```
 
 2.  **Generate production build:**
@@ -169,13 +172,13 @@ To set up your environment variables:
     Using `pnpm`:
 
     ```bash
-    pnpm build:prod
+    pnpm build
     ```
 
     Alternatively, using `npm`:
 
     ```bash
-    npm run build:prod
+    npm run build
     ```
 
 3.  **Start production server:**
@@ -194,20 +197,13 @@ To set up your environment variables:
 
     The production application will also be accessible at `http://localhost:3000` (or another port if 3000 is in use).
 
-### Scripts
+**Build Minimization**
 
-**`package.json` Scripts**
-
-*   `build:prod`: Builds the application for production, excluding test-specific API routes.
-*   `build:test`: Builds the application for testing, including test-specific API routes.
-*   `cypress:open`: Opens the Cypress test runner UI for End-to-End tests.
-*   `cypress:run`: Runs Cypress End-to-End tests in headless mode.
-*   `dev`: Starts the Next.js development server with Turbopack enabled.
-*   `lint`: Runs ESLint to check for code quality issues.
-*   `seed`: Executes the database seeding script to clear the database and populate it with sample data.
-*   `start`: Starts the Next.js production server.
-*   `test`: Runs Jest unit tests.
-*   `test:watch`: Runs Jest unit tests in watch mode, re-running tests on file changes.
+The `app/api` folder contains an API that is used in [End-to-End (E2E) testing](#end-to-end-e2e-tests) to clear and seed the database when running tests.
+- This API is only needed in E2E testing, and is therefore excluded from the production build of the application.
+- This is done by running a `scripts/preinstall.ts` script before the production build, which temporarily moves the `app/api` folder out of the `app` folder, and a `scripts/postinstall.ts` script which returns it back after the build has finished.
+- The `build` script defined in `package.json` performs these steps automatically.
+- On the other hand, the `build:test` script is used to run a production build specifically for E2E testing. This script simply runs the normal `next build` command while including the `app/api` folder in the production build.
 
 ## Tests
 
@@ -250,6 +246,7 @@ To run the E2E tests:
     ```
 
     The production application will also be accessible at `http://localhost:3000` (or another port if 3000 is in use).
+
 3.  **Run E2E tests**
 
     Run in headless mode (CLI):
@@ -309,6 +306,7 @@ To run the Component tests:
     ```
 
 *   **Run tests in watch mode (for development):**
+
     Using `pnpm`:
 
     ```bash
@@ -462,29 +460,35 @@ A page that shows the values of various request headers set by middleware.
 
 ## 🗄️ Database
 
-A small SQLite database is used in this app to demonstrate server action mutations and route handler CRUD operations.
-- When the app is started, the database file will be created in the `/data` folder.
-- To clear the database and seed it with some sample users, run the `scripts/seed.ts` script which can be run using `pnpm` or `npm`.
-    - Running the seed script will also create the database folder if it does not already exist.
-- The `lib/database` folder contains the database communication interface used by the application.
+An SQLite database is used in this app to demonstrate server action mutations and route handler CRUD operations.
+- The database is hosted on [Turso](https://turso.tech/) and [Drizzle](https://orm.drizzle.team/) is used as the ORM layer.
+- It contains just one table called "users".
+- The `lib/database` folder handles any database-related functionality in application.
+    - The `db.ts` file creates the database client that is used throughout the application.
+    - The `databaseHandler.ts` file contains the interface used to perform operations on the database.
+    - The schema for the "users" table can be found in the `schema.ts` file.
     - In the `constants.ts` file, the `MAX_USERS` constant specifies the maximum number of items which are allowed in the database.
-    - When a new item is added, and this limit is exceeded, the oldest item in the database will be deleted to make room for the new item.
+        - When a new item is added, and this limit is exceeded, the oldest item in the database will be deleted to make room for the new item.
+- To clear the table and seed it with some sample users, run the `scripts/seed.ts` script which can be run using `pnpm` or `npm`.
+    - The `db:seed:dev` package.json script seeds the development database (defined in the development environment variable file), while `db:seed:prod` seeds the production database (defined in the production environment variable file).
+    - The seed script will also create the table in the database if it does not already exist.
 
 ## Built With
 
-*   [Next.js](https://nextjs.org/) – A React framework for building full-stack web applications.
-*   [React](https://react.dev/) – A JavaScript library for building user interfaces.
-*   [TypeScript](https://www.typescriptlang.org/) – A strongly typed superset of JavaScript that compiles to plain JavaScript.
-*   [Tailwind CSS](https://tailwindcss.com/) – A utility-first CSS framework for rapidly building custom designs.
-*   [Shadcn/ui](https://ui.shadcn.com/) – A collection of reusable components built using Radix UI and Tailwind CSS.
-*   [Jest](https://jestjs.io/) – A delightful JavaScript Testing Framework used for component tests.
-*   [React Testing Library](https://testing-library.com/react/) – A set of utilities for testing React components.
-*   [Cypress](https://www.cypress.io/) – A fast, easy, and reliable testing for anything that runs in a browser, used for E2E tests.
-*   [Better SQLite3](https://github.com/WiseLibs/better-sqlite3) – A simple, fast, and reliable Node.js SQLite3 library.
-*   [pnpm](https://pnpm.io/) – A fast, disk space efficient package manager used for managing project dependencies.
-*   [Lucide React](https://lucide.dev/) – A collection of beautiful and customizable open-source icons.
-*   [Zod](https://zod.dev/) – A TypeScript-first schema declaration and validation library.
-*   [Pino](https://getpino.io/) – A very fast, low overhead Node.js logger.
+* [Next.js](https://nextjs.org/) - A React framework for building full-stack web applications.
+* [React](https://react.dev/) - A JavaScript library for building user interfaces.
+* [TypeScript](https://www.typescriptlang.org/) - A strongly typed superset of JavaScript that compiles to plain JavaScript.
+* [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs.
+* [Shadcn/ui](https://ui.shadcn.com/) - A collection of reusable components built using Radix UI and Tailwind CSS.
+* [Jest](https://jestjs.io/) - A delightful JavaScript Testing Framework used for component tests.
+* [React Testing Library](https://testing-library.com/react/) - A set of utilities for testing React components.
+* [Cypress](https://www.cypress.io/) - A fast, easy, and reliable testing for anything that runs in a browser, used for E2E tests.
+* [libSQL](https://github.com/tursodatabase/libsql) - An open source, open contribution fork of SQLite, created and maintained by [Turso](https://turso.tech/).
+* [Drizzle](https://orm.drizzle.team/) - A simple and lighweight TypeScript ORM.
+* [pnpm](https://pnpm.io/) - A fast, disk space efficient package manager used for managing project dependencies.
+* [Lucide React](https://lucide.dev/) - A collection of beautiful and customizable open-source icons.
+* [Zod](https://zod.dev/) - A TypeScript-first schema declaration and validation library.
+* [Pino](https://getpino.io/) - A very fast, low overhead Node.js logger.
 
 ## License
 
