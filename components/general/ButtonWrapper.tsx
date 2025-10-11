@@ -9,18 +9,40 @@ interface Props extends React.ComponentPropsWithoutRef<"button"> {
 }
 
 // Use to deal with Tailwind dynamic color issues which sometimes occur with dynamic class names
-const buttonColorMap: Record<string, { bg: string; hoverBg: string }> = {
-    brand: { bg: "bg-brand-500", hoverBg: "hover:bg-brand-700" },
-    red: { bg: "bg-red-500", hoverBg: "hover:bg-red-700" },
-    blue: { bg: "bg-blue-500", hoverBg: "hover:bg-blue-700" },
-    green: { bg: "bg-green-500", hoverBg: "hover:bg-green-700" },
+const buttonColorMap: Record<
+    string,
+    {
+        bg: string;
+        hoverBg: string;
+        focusRing: string;
+        activeBg: string;
+        disabledBg: string;
+        disabledText: string;
+    }
+> = {
+    brand: {
+        bg: "bg-brand-500",
+        hoverBg: "hover:bg-brand-700",
+        focusRing: "focus-visible:ring-brand-900",
+        activeBg: "active:bg-brand-900",
+        disabledBg: "disabled:bg-brand-500",
+        disabledText: "disabled:text-brand-100",
+    },
     "status-danger": {
         bg: "bg-status-danger-500",
         hoverBg: "hover:bg-status-danger-700",
+        focusRing: "focus-visible:ring-status-danger-900",
+        activeBg: "active:bg-status-danger-900",
+        disabledBg: "disabled:bg-status-danger-500",
+        disabledText: "disabled:text-status-danger-100",
     },
     "status-warning": {
         bg: "bg-status-warning-500",
         hoverBg: "hover:bg-status-warning-700",
+        focusRing: "focus-visible:ring-status-warning-900",
+        activeBg: "active:bg-status-warning-900",
+        disabledBg: "disabled:bg-status-warning-500",
+        disabledText: "disabled:text-status-warning-100",
     },
 };
 
@@ -31,7 +53,14 @@ const ButtonWrapper = ({
     ...rest
 }: Props) => {
     const colors = buttonColorMap[buttonColor] || buttonColorMap.brand;
-    const defaultStyles = `${colors.bg} ${colors.hoverBg}`;
+    const defaultStyles = cn(
+        colors.bg,
+        colors.hoverBg,
+        colors.focusRing,
+        colors.activeBg,
+        colors.disabledBg,
+        colors.disabledText
+    );
     const mergedStyles = cn([defaultStyles, classNameOverride]);
     return (
         <Button className={mergedStyles} {...rest}>

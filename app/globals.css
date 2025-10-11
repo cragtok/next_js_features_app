@@ -186,18 +186,21 @@
     --color-neutral-50: #fbfdfc;
 
     /* Status Colors */
+    --color-status-danger-900: #522339;
     --color-status-danger-700: #7d264f;
     --color-status-danger-500: #9e3264;
     --color-status-danger-300: #c26992;
     --color-status-danger-100: #e5aec7;
     --color-status-danger-50: #f9e2eb;
 
+    --color-status-warning-900: #785834;
     --color-status-warning-700: #a16b2e;
     --color-status-warning-500: #c2884a;
     --color-status-warning-300: #e0ac72;
     --color-status-warning-100: #f5d6ae;
     --color-status-warning-50: #fdf3e2;
 
+    --color-status-success-900: #255e41;
     --color-status-success-700: #257a4e;
     --color-status-success-500: #34a86b;
     --color-status-success-300: #68c094;
