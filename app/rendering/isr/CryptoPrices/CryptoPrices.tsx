@@ -3,12 +3,15 @@ import CryptoPricesCard from "./CryptoPricesCard";
 import CardWrapper from "@/components/general/CardWrapper";
 import RefreshButton from "@/components/general/RefreshButton";
 import { CryptoData, fetchPrices } from "./apiCall";
+import TextAccentWrapper from "@/components/general/TextAccentWrapper";
+import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 
 async function CryptoPrices() {
     let prices: CryptoData[] | null = null;
     let errorMessage: string | null = null;
-
+    let lastFetchingTime = null;
     try {
+        lastFetchingTime = new Date().toLocaleTimeString();
         // Avoid passing request ID for logging purposes to
         // the price fetching function. Otherwise, this route
         // changes from an ISR route to an ordinary SSR route.
@@ -37,6 +40,13 @@ async function CryptoPrices() {
 
     return (
         <>
+            {lastFetchingTime && (
+                <ParagraphWrapper classNameOverride="text-center">
+                    <TextAccentWrapper>
+                        Last Fetch (Server Time): {lastFetchingTime}
+                    </TextAccentWrapper>
+                </ParagraphWrapper>
+            )}
             <div className="flex flex-col">
                 {prices.map((cryptoData) => (
                     <CryptoPricesCard
