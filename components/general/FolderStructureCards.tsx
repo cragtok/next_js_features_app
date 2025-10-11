@@ -1,4 +1,5 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { FileText, FolderIcon } from "lucide-react";
 import { Fragment } from "react";
 
 const LEFT_PADDING_INCREMENT = 25;
@@ -29,13 +30,21 @@ const renderItem = (
         <Card className="bg-neutral-100 rounded-md pt-5 pb-3">
             <CardHeader>
                 <CardTitle
-                    className="flex gap-2 text-accent-500 font-semibold"
+                    className="flex gap-2 text-accent-500 font-semibold items-center"
                     style={{
                         paddingLeft: `${leftPadding}px`,
                     }}
                 >
-                    {type === "folder" ? <span>🗁</span> : <span>🗐</span>}
-                    <span>{name}</span>
+                    {type === "folder" ? (
+                        <span>
+                            <FolderIcon size={24} strokeWidth={1.5} />
+                        </span>
+                    ) : (
+                        <span>
+                            <FileText size={24} strokeWidth={1.5} />
+                        </span>
+                    )}
+                    <span className="max-sm:text-xs text-sm">{name}</span>
                 </CardTitle>
             </CardHeader>
         </Card>
