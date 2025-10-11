@@ -76,77 +76,46 @@
     --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
     --sidebar-border: oklch(0.929 0.013 255.508);
     --sidebar-ring: oklch(0.704 0.04 256.788);
+
     /* Custom Colors */
-    /* Main Brand Palette (derived from your Coolors: #1d3557, #31587a, #457b9d, #77abbd, #a8dadc) */
     --color-brand-900: #1d3557;
-    /* Very Dark Main Brand Color */
     --color-brand-700: #31587a;
-    /* Darker Main Brand Color */
     --color-brand-500: #457b9d;
-    /* Medium Main Brand Color (Default) */
     --color-brand-300: #77abbd;
-    /* Lighter Main Brand Color */
     --color-brand-100: #a8dadc;
-    /* Very Light Main Brand Color */
     --color-brand-50: #e0f2f7;
-    /* Extremely Light Main Brand Color for backgrounds */
 
-    /* Accent Color Palette (from your Coolors: #61c0bf) */
+    --color-accent-900: #3f7574;
     --color-accent-700: #429f9e;
-    /* Darker Accent */
     --color-accent-500: #61c0bf;
-    /* Medium Accent (Default) */
     --color-accent-300: #88d4d3;
-    /* Lighter Accent */
     --color-accent-100: #bef6f5;
-    /* Very Light Accent */
     --color-accent-50: #e0fcfc;
-    /* Extremely Light Accent for backgrounds */
 
-    /* Neutral/Background Palette (from your Coolors: #f1faee) */
     --color-neutral-100: #f1faee;
-    /* Off-White/Light Cream (Default Background) */
     --color-neutral-50: #fbfdfc;
-    /* Almost White */
 
-    /* Status Colors (adjusted for bluish scheme, with shades) */
-    /* Danger: Deep purplish-red for urgency, but with cool undertones */
+    --color-status-danger-900: #522339;
     --color-status-danger-700: #7d264f;
-    /* Deeper Danger */
     --color-status-danger-500: #9e3264;
-    /* Default Danger */
     --color-status-danger-300: #c26992;
-    /* Lighter Danger */
     --color-status-danger-100: #e5aec7;
-    /* Very Light Danger */
     --color-status-danger-50: #f9e2eb;
-    /* Extremely Light Danger for backgrounds */
 
-    /* Warning: Muted gold/olive for caution, leaning green-blueish */
+    --color-status-warning-900: #785834;
     --color-status-warning-700: #a16b2e;
-    /* Deeper Warning */
     --color-status-warning-500: #c2884a;
-    /* Default Warning */
     --color-status-warning-300: #e0ac72;
-    /* Lighter Warning */
     --color-status-warning-100: #f5d6ae;
-    /* Very Light Warning */
     --color-status-warning-50: #fdf3e2;
-    /* Extremely Light Warning for backgrounds */
 
-    /* Success: Forest/Sea Green for positive feedback, blending with blues */
+    --color-status-success-900: #255e41;
     --color-status-success-700: #257a4e;
-    /* Deeper Success */
     --color-status-success-500: #34a86b;
-    /* Default Success */
     --color-status-success-300: #68c094;
-    /* Lighter Success */
     --color-status-success-100: #aee0c7;
-    /* Very Light Success */
     --color-status-success-50: #e2f4ea;
-    /* Extremely Light Success for backgrounds */
 
-    /* Semantic aliases for easier use in general cases (optional, but good practice) */
     --color-primary-50: var(--color-brand-50);
     --color-primary-100: var(--color-brand-100);
     --color-primary-300: var(--color-brand-300);
@@ -175,6 +144,7 @@
     --color-brand-50: #e0f2f7;
 
     /* Accent Color Palette */
+    --color-accent-900: #3f7574;
     --color-accent-700: #429f9e;
     --color-accent-500: #61c0bf;
     --color-accent-300: #88d4d3;

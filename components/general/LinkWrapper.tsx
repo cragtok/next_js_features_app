@@ -9,7 +9,7 @@ interface Props extends React.ComponentPropsWithRef<"a"> {
 }
 const LinkWrapper = ({ classNameOverride, children, href, ...rest }: Props) => {
     const defaultStyles =
-        "text-accent-500 font-semibold whitespace-normal break-words inline-block underline hover:text-accent-700";
+        "text-accent-500 font-semibold whitespace-normal break-words inline-block underline hover:text-accent-700 active:text-accent-900";
     const mergedStyles = cn([defaultStyles, classNameOverride]);
     return (
         <Link href={href} className={mergedStyles} {...rest}>

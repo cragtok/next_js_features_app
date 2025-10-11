@@ -21,7 +21,7 @@ const CardLink = ({ title, description, href, prefetch }: CardLinkProps) => {
         <Link href={href} className="group" prefetch={prefetch}>
             <Card className="bg-neutral-100">
                 <CardHeader>
-                    <CardTitle className="text-accent-700 group-hover:underline">
+                    <CardTitle className="text-accent-700 group-hover:underline group-active:text-accent-900">
                         {title}
                     </CardTitle>
                 </CardHeader>
