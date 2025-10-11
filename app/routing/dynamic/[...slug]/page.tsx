@@ -44,6 +44,12 @@ async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
         throw new Error("Max slug length exceeded");
     }
 
+    if (!/^[a-zA-Z0-9\-\_\ /]+$/.test(joinedSlug)) {
+        throw new Error(
+            "Only alphanumeric, spaces, hyphens, underscores and forward slashes are allowed."
+        );
+    }
+
     return (
         <PageWrapper pageTitle="Dynamic Route">
             <SectionWrapper classNameOverride="items-center gap-4">
@@ -53,7 +59,10 @@ async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
 
                 <CardWrapper>
                     <CardContent>
-                        <p className="font-semibold text-accent-500 wrap-anywhere" data-testid="dynamic-segment">
+                        <p
+                            className="font-semibold text-accent-500 wrap-anywhere"
+                            data-testid="dynamic-segment"
+                        >
                             {joinedSlug}
                         </p>
                     </CardContent>
