@@ -13,11 +13,13 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
     const [value, setValue] = useState("");
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [isNavigating, setIsNavigating] = useState(false);
 
     const router = useRouter();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+        setIsNavigating(true);
         const trimmedValue = value.trim();
         if (trimmedValue.length > MAX_SLUG_LENGTH) {
             setErrorMessage(
@@ -30,6 +32,7 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
         if (!trimmedValue) {
             setErrorMessage("URL is empty");
             setShowError(true);
+            setIsNavigating(false);
             return;
         }
 
@@ -42,20 +45,21 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
                 "External URLs are not allowed in dynamic route segments."
             );
             setShowError(true);
+            setIsNavigating(false);
             return;
         }
 
         if (!/^[a-zA-Z0-9\-\_\ /]+$/.test(trimmedValue)) {
             setErrorMessage(
-                "Invalid characters in route segment. Only alphanumeric, spaces, hyphens, and forward slashes are allowed."
+                "Only alphanumeric, spaces, hyphens, underscores, and forward slashes are allowed."
             );
             setShowError(true);
+            setIsNavigating(false);
             return;
         }
 
         const dynamicPath = trimmedValue;
         router.push(`${baseRoute}/${dynamicPath}`);
-        setValue("");
     };
 
     const onChangeValue = (event: React.FormEvent<HTMLInputElement>) => {
@@ -88,7 +92,9 @@ const DynamicRouteForm = ({ baseRoute }: Props) => {
                     )}
                 </div>
 
-                <ButtonWrapper>Navigate</ButtonWrapper>
+                <ButtonWrapper disabled={isNavigating}>
+                    {isNavigating ? "Navigating..." : "Navigate"}
+                </ButtonWrapper>
             </form>
         </div>
     );
