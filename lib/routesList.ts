@@ -91,6 +91,7 @@ const pageRoutes: RouteGroup[] = [
                 description:
                     "Streaming an entire page with a loading.tsx file.",
                 priority: 0.7,
+                disablePrefetch: true,
             },
             {
                 title: "Streaming With Suspense",
@@ -98,6 +99,7 @@ const pageRoutes: RouteGroup[] = [
                 description:
                     "Streaming parts of a page with Suspense boundaries.",
                 priority: 0.7,
+                disablePrefetch: true,
             },
         ],
     },
