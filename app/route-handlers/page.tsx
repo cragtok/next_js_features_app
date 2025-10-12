@@ -4,6 +4,7 @@ import SectionWrapper from "@/components/general/SectionWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import FolderStructureCards from "@/components/general/FolderStructureCards";
 import UsersSection from "./UsersSection/UsersSection";
+import LazyOnLoadView from "@/components/general/LazyOnLoadView";
 import PathWithBreaks from "@/components/general/PathWithBreaks";
 import { Metadata } from "next";
 
@@ -123,7 +124,9 @@ function Page() {
                     using the route handlers from the API.
                 </ParagraphWrapper>
 
-                <UsersSection />
+                <LazyOnLoadView>
+                    <UsersSection />
+                </LazyOnLoadView>
             </SectionWrapper>
         </PageWrapper>
     );
