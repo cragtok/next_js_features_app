@@ -30,13 +30,12 @@ export function middleware(request: NextRequest) {
 
     if (pathname.startsWith("/middleware/ab-testing")) {
         let abTestGroup = request.cookies.get("ab-test-group")?.value;
-
         if (!abTestGroup) {
             abTestGroup = Math.random() < 0.5 ? "A" : "B";
             response.cookies.set("ab-test-group", abTestGroup, {
                 path: "/",
                 maxAge: 5,
-            }); // Set for 5 seconds
+            });
         }
     }
 
