@@ -54,7 +54,7 @@ async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
     return (
         <PageWrapper pageTitle="Dynamic Route">
             <SectionWrapper classNameOverride="items-center gap-4">
-                <ParagraphWrapper classNameOverride={"text-center"}>
+                <ParagraphWrapper classNameOverride="text-center max-[400px]:text-center">
                     You have entered a page with a dynamic route segment:
                 </ParagraphWrapper>
 
@@ -70,8 +70,8 @@ async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
                 </CardWrapper>
 
                 {STATIC_ROUTES.includes(joinedSlug) && (
-                    <ParagraphWrapper classNameOverride={"text-center"}>
-                        <TextAccentWrapper classNameOverride="font-normal italic">
+                    <ParagraphWrapper classNameOverride="text-center max-[400px]:text-center">
+                        <TextAccentWrapper classNameOverride="font-normal italic text-center">
                             This dynamic route segment is statically generated
                             at build time.
                         </TextAccentWrapper>
@@ -80,7 +80,7 @@ async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
             </SectionWrapper>
 
             <SectionWrapper sectionTitle="Dynamic Route Navigation">
-                <ParagraphWrapper>
+                <ParagraphWrapper classNameOverride="max-[400px]:text-center">
                     Enter a dynamic route segment in the form below to
                     automatically navigate to that route:
                 </ParagraphWrapper>

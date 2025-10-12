@@ -41,7 +41,7 @@ async function CryptoPrices() {
     return (
         <>
             {lastFetchingTime && (
-                <ParagraphWrapper classNameOverride="text-center">
+                <ParagraphWrapper classNameOverride="text-center max-[400px]:text-center">
                     <TextAccentWrapper>
                         Last Fetch (Server Time): {lastFetchingTime}
                     </TextAccentWrapper>

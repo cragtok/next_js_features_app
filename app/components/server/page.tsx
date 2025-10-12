@@ -35,7 +35,7 @@ const Page = () => {
             </SectionWrapper>
             <SectionWrapper sectionTitle="Server Rendered Data">
                 <ParagraphWrapper>
-                    To demonstrate Server Components, this page generates
+                    To demonstrate this feature of Next.js, this page generates
                     dynamic data on the server for each request it receives.
                 </ParagraphWrapper>
 

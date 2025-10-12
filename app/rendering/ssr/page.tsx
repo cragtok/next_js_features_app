@@ -39,7 +39,7 @@ function Page() {
                 sectionTitle="Server-Side Data Fetching"
                 classNameOverride="gap-8"
             >
-                <ParagraphWrapper>
+                <ParagraphWrapper classNameOverride="max-[400px]:text-center">
                     To demonstrate SSR, this page will fetch a random quote from{" "}
                     <LinkWrapper href="https://thequoteshub.com/api/">
                         The Quotes Hub API

@@ -53,12 +53,12 @@ function Page() {
                     setup will match ordinary dynamic route segments conaining a
                     single word like{" "}
                     <TextAccentWrapper>
-                        /routing/dynamic/segment
+                        <PathWithBreaks text="/routing/dynamic/segment" />
                     </TextAccentWrapper>{" "}
                     as well as those containing multiple slash-separated
                     segments like{" "}
                     <TextAccentWrapper>
-                        /routing/dynamic/a/b/c
+                        <PathWithBreaks text="/routing/dynamic/a/b/c" />
                     </TextAccentWrapper>
                     .
                 </ParagraphWrapper>

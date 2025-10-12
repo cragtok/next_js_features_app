@@ -44,7 +44,7 @@ async function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${myFont} mx-10 antialiased bg-neutral-100`}>
+            <body className={`${myFont} mx-8 antialiased bg-neutral-100`}>
                 <WebVitals />
                 <Header />
                 {children}

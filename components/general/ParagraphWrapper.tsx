@@ -7,7 +7,7 @@ interface Props {
 }
 const ParagraphWrapper = ({ classNameOverride, children }: Props) => {
     const defaultStyles =
-        "text-brand-500 max-w-prose max-[400px]:text-center max-[450px]:text-sm text-justify leading-8 text-pretty";
+        "text-brand-500 max-w-prose max-[400px]:text-left max-[450px]:text-sm text-justify leading-8 text-pretty";
     const mergedStyles = cn([defaultStyles, classNameOverride]);
     return <p className={mergedStyles}>{children}</p>;
 };

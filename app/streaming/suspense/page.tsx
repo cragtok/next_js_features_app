@@ -19,7 +19,7 @@ function Page() {
     return (
         <PageWrapper pageTitle="Streaming with Suspense">
             <SectionWrapper>
-                <ParagraphWrapper>
+                <ParagraphWrapper classNameOverride="max-[400px]:text-center">
                     To demonstrate streaming with{" "}
                     <TextAccentWrapper>Suspense</TextAccentWrapper>, this
                     section renders three components that are loaded after each
