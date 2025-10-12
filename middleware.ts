@@ -46,29 +46,14 @@ export function middleware(request: NextRequest) {
             request.headers.get("x-real-ip") ||
             "N/A";
 
-        const serverTime = new Date().toISOString();
+        const serverTime = new Date().toLocaleTimeString();
 
         const userAgent = request.headers.get("user-agent") || "N/A";
-        const country = request.headers.get("x-geo-country");
-        const region = request.headers.get("x-geo-region");
-        const city = request.headers.get("x-geo-city");
-        const timezone = request.headers.get("x-geo-tz");
 
         // Update headers on the response object
         response.headers.set("x-request-ip", ip);
         response.headers.set("x-server-time", serverTime);
         response.headers.set("x-user-agent", userAgent);
-        if (country) {
-            response.headers.set(
-                "x-geo-location",
-                `${city}, ${region}, ${country} (Timezone: ${timezone})`
-            );
-        } else {
-            response.headers.set(
-                "x-geo-location",
-                "Geo-Location headers not detected for path. This usually happens in local development."
-            );
-        }
     }
 
     return response;

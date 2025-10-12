@@ -12,13 +12,8 @@ export const metadata: Metadata = {
 async function Page() {
     const headersList = await headers();
     const ip = headersList.get("x-request-ip") || "N/A";
-    const serverTimeRaw = headersList.get("x-server-time") || "N/A";
-    const serverTime =
-        serverTimeRaw !== "N/A"
-            ? new Date(serverTimeRaw).toLocaleString()
-            : "N/A";
+    const serverTime = headersList.get("x-server-time") || "N/A";
     const userAgent = headersList.get("x-user-agent") || "N/A";
-    const geoLocation = headersList.get("x-geo-location") || "N/A";
 
     return (
         <PageWrapper pageTitle="Middleware Request Info Logging">
@@ -44,11 +39,6 @@ async function Page() {
                         title="Server Time"
                         info={serverTime}
                         testTitle="server-time"
-                    />
-                    <RequestInfoCard
-                        title="Geo Location"
-                        info={geoLocation}
-                        testTitle="geo-location"
                     />
                     <RequestInfoCard
                         title="User Agent"
