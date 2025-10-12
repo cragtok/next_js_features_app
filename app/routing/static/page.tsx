@@ -33,7 +33,7 @@ function Page() {
 
             <SectionWrapper sectionTitle="Folder Structure For This Page">
                 <ParagraphWrapper>
-                    This route was made by creating a{" "}
+                    This route for the app was made by placing a{" "}
                     <TextAccentWrapper>page.tsx</TextAccentWrapper> file within
                     the{" "}
                     <TextAccentWrapper>
@@ -43,7 +43,7 @@ function Page() {
                     <TextAccentWrapper>
                         <PathWithBreaks text="/routing/static" />
                     </TextAccentWrapper>{" "}
-                    part of the file path appears in the URL route.
+                    part of the file path appears in the URL.
                 </ParagraphWrapper>
 
                 <div className="text-xs">

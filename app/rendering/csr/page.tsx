@@ -25,9 +25,8 @@ function Page() {
                         JavaScript then fetches data and builds the rest of the
                         page directly on the client. This approach is suitable
                         for highly interactive pages or dashboards where data
-                        changes frequently and real-time updates are crucial, as
-                        it allows for dynamic content without requiring a full
-                        page reload from the server.
+                        changes frequently and real-time updates are
+                        crucial.{" "}
                     </ParagraphWrapper>
 
                     <ParagraphWrapper>

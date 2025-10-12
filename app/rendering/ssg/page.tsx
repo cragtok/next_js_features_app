@@ -24,8 +24,8 @@ async function Page() {
                     The page content can then be fetched once during the initial
                     client request and stored entirely on the browser. This
                     makes it instantaneously accessible without needing to make
-                    another request to the server. SSG is the default behavior
-                    for Server Components unless specific data fetching options
+                    another server request. SSG is the default behavior for
+                    Server Components unless specific data fetching options
                     (like <TextAccentWrapper>revalidate = 0</TextAccentWrapper>{" "}
                     or{" "}
                     <TextAccentWrapper>
@@ -49,9 +49,9 @@ async function Page() {
                 <ParagraphWrapper>
                     At build time, this page fetches the dates and times of
                     various cities around the world and pre-renders them as part
-                    of the page HTML. Thus, when the page is first accessed, it
-                    is stored on browser and is instantly accessible without
-                    needing to make any more requests.
+                    of the page. Thus, when the page is first accessed, the
+                    browser receives a fully-formed page that is instantly
+                    accessible without needing to make any further requests.
                 </ParagraphWrapper>
                 <CityDateTimes />
             </SectionWrapper>

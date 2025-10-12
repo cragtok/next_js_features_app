@@ -25,9 +25,8 @@ const Page = () => {
                     client&apos;s browser. This approach offers several
                     benefits: it reduces the amount of JavaScript shipped to the
                     client, leading to faster initial page loads and improved
-                    performance, especially on slower networks or devices.
-                    Additionally, Server Components can directly access
-                    server-side resources like databases or file systems,
+                    performance. Additionally, Server Components can directly
+                    access server-side resources like databases or file systems,
                     simplifying data fetching and eliminating the need for API
                     layers in many cases. They are ideal for displaying static
                     or data-driven content that doesn&apos;t require client-side

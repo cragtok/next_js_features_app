@@ -26,15 +26,13 @@ async function Page() {
                     <TextAccentWrapper>loading.tsx</TextAccentWrapper> file. In
                     this setup, you place a{" "}
                     <TextAccentWrapper>loading.tsx</TextAccentWrapper> file
-                    containing the loading UI within a route segment folder
-                    where the <TextAccentWrapper>page.tsx</TextAccentWrapper>{" "}
-                    file is located. Next.js then automatically streams the
-                    loading UI while the data for the{" "}
-                    <TextAccentWrapper>page.tsx</TextAccentWrapper> is being
-                    fetched on the server. Once the data is ready, the actual
-                    page content replaces the loading fallback. This provides
-                    visual feedback to the user indicating that the page is
-                    being loaded, leading to a better user experience.
+                    containing the loading UI within a route segment folder.
+                    Next.js then automatically streams the loading UI while the
+                    data for the <TextAccentWrapper>page.tsx</TextAccentWrapper>{" "}
+                    is being fetched on the server. Once the data is ready, the
+                    actual page content replaces the loading fallback. In this
+                    way visual feedback is provided to the user indicating that
+                    the page is being loaded.
                 </ParagraphWrapper>
             </SectionWrapper>
 

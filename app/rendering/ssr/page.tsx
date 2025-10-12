@@ -25,7 +25,7 @@ function Page() {
                     </TextAccentWrapper>{" "}
                     involves rendering HTML on the server for each incoming
                     request. This results in the client receiving a fully formed
-                    HTML page, leading to a faster initial page loads for the
+                    HTML page, leading to a faster initial page load for the
                     user. It also greatly improves Search Engine Optimization
                     (SEO) metrics, as search engine crawlers can easily read the
                     pre-rendered content. However, SSR can also lead to a higher
@@ -44,8 +44,8 @@ function Page() {
                     <LinkWrapper href="https://thequoteshub.com/api/">
                         The Quotes Hub API
                     </LinkWrapper>{" "}
-                    each time it is refreshed. The data is fetched entirely on
-                    the server.
+                    each time it is refreshed. The data fetching is performed
+                    entirely on the server.
                 </ParagraphWrapper>
 
                 <Suspense fallback={<LoadingSkeleton numRows={4} />}>
