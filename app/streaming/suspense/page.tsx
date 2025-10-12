@@ -29,16 +29,18 @@ function Page() {
                     </TextAccentWrapper>{" "}
                     gap in between.
                 </ParagraphWrapper>
-                {[1, 2, 3].map((num) => (
-                    <Suspense key={num} fallback={<LoadingSpinner />}>
-                        <DelayedImageCard
-                            imagePath={`/nature-image-${num}.jpg`}
-                            title={`Component ${num}`}
-                            alt={`Nature Image ${num}`}
-                            delaySeconds={num * CARD_DELAY_INTERVAL_SECONDS}
-                        />
-                    </Suspense>
-                ))}
+                <div className="flex flex-col">
+                    {[1, 2, 3].map((num) => (
+                        <Suspense key={num} fallback={<LoadingSpinner />}>
+                            <DelayedImageCard
+                                imagePath={`/nature-image-${num}.jpg`}
+                                title={`Component ${num}`}
+                                alt={`Nature Image ${num}`}
+                                delaySeconds={num * CARD_DELAY_INTERVAL_SECONDS}
+                            />
+                        </Suspense>
+                    ))}
+                </div>
             </SectionWrapper>
 
             <SectionWrapper>
