@@ -9,6 +9,11 @@ import FolderStructureCards, {
     FolderItem,
 } from "@/components/general/FolderStructureCards";
 
+jest.mock("lucide-react", () => ({
+    FolderIcon: () => <span data-testid="folder-icon" />,
+    FileText: () => <span data-testid="file-icon" />,
+}));
+
 describe("FolderStructureCards", () => {
     beforeEach(() => {
         jest.clearAllMocks();
@@ -31,11 +36,11 @@ describe("FolderStructureCards", () => {
         const folder = screen.getByText("folder");
         expect(folder).toBeInTheDocument();
         expect(folder.parentNode).toHaveStyle({ "padding-left": "0px" });
-        expect(folder.previousSibling).toHaveTextContent("🗁");
+        expect(screen.getByTestId("folder-icon")).toBeInTheDocument();
 
         const file = screen.getByText("file.txt");
         expect(file).toBeInTheDocument();
-        expect(file.previousSibling).toHaveTextContent("🗐");
+        expect(screen.getByTestId("file-icon")).toBeInTheDocument();
         expect(file.parentNode).toHaveStyle({ "padding-left": "25px" });
     });
 
@@ -69,21 +74,21 @@ describe("FolderStructureCards", () => {
         const folder = screen.getByText("parentFolder");
         expect(folder).toBeInTheDocument();
         expect(folder.parentNode).toHaveStyle({ "padding-left": "0px" });
-        expect(folder.previousSibling).toHaveTextContent("🗁");
+        expect(screen.getAllByTestId("folder-icon")[0]).toBeInTheDocument();
 
         const childFolder = screen.getByText("childFolder");
         expect(childFolder).toBeInTheDocument();
         expect(childFolder.parentNode).toHaveStyle({ "padding-left": "25px" });
-        expect(childFolder.previousSibling).toHaveTextContent("🗁");
+        expect(screen.getAllByTestId("folder-icon")[1]).toBeInTheDocument();
 
         const file1 = screen.getByText("file1.txt");
         expect(file1).toBeInTheDocument();
-        expect(file1.previousSibling).toHaveTextContent("🗐");
+        expect(screen.getAllByTestId("file-icon")[0]).toBeInTheDocument();
         expect(file1.parentNode).toHaveStyle({ "padding-left": "50px" });
 
-        const file2 = screen.getByText("file1.txt");
+        const file2 = screen.getByText("file2.txt");
         expect(file2).toBeInTheDocument();
-        expect(file2.previousSibling).toHaveTextContent("🗐");
+        expect(screen.getAllByTestId("file-icon")[1]).toBeInTheDocument();
         expect(file2.parentNode).toHaveStyle({ "padding-left": "50px" });
     });
 });
