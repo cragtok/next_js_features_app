@@ -27,10 +27,18 @@ export async function generateMetadata({
     const { slug } = await params;
     const joinedSlug = slug.join("/");
 
-    const title =
-        joinedSlug.length >= 25
-            ? `${joinedSlug.substring(0, 25)}...`
-            : joinedSlug;
+    let title;
+    if (
+        joinedSlug.length > MAX_SLUG_LENGTH ||
+        !/^[a-zA-Z0-9\-\_\ /]+$/.test(joinedSlug)
+    ) {
+        title = "Error";
+    } else {
+        title =
+            joinedSlug.length >= 25
+                ? `${joinedSlug.substring(0, 25)}...`
+                : joinedSlug;
+    }
 
     return {
         title: `${title} | Dynamic Routing`,

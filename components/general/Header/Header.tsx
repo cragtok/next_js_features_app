@@ -5,26 +5,35 @@ import BreadcrumbMenu from "./BreadcrumbMenu";
 import { Suspense } from "react";
 import { AppRoute, routeObjects } from "@/lib/routesList";
 
-const extractRoutePath = (pathname: string) => {
-    let routePath: AppRoute[] = [];
+const extractRoutePath = (pathname: string): AppRoute[] => {
     // match the '/routing/dynamic/*' path
     const dynamicRoutePattern = /^\/routing\/dynamic\/(.*)/;
-
-    if (pathname.match(dynamicRoutePattern)) {
-        const match = pathname.match(dynamicRoutePattern);
-        if (match) {
-            routePath = [
-                routeObjects["/"],
-                routeObjects["/routing/dynamic"],
-                { ...routeObjects["/routing/dynamic*"], title: match[1] }, // Set page title as dynamic route segment
-            ];
+    const match = pathname.match(dynamicRoutePattern);
+    if (match) {
+        // If dynamic portion of route exceeds 50
+        // characters or contains invalid characters,
+        // then the route is invalid
+        const dynamicPortion = match ? match[1] : "";
+        if (
+            dynamicPortion.length > 80 ||
+            !/^[a-zA-Z0-9\-\_\ /]+$/.test(dynamicPortion)
+        ) {
+            return [];
         }
-        // routepath is not dynamic or home route
-    } else if (routeObjects.hasOwnProperty(pathname)) {
-        routePath = [routeObjects["/"], routeObjects[pathname]];
+
+        return [
+            routeObjects["/"],
+            routeObjects["/routing/dynamic"],
+            { ...routeObjects["/routing/dynamic*"], title: match[1] }, // Set page title as dynamic route segment
+        ];
     }
 
-    return routePath;
+    // routepath is not dynamic or home route
+    if (routeObjects.hasOwnProperty(pathname)) {
+        return [routeObjects["/"], routeObjects[pathname]];
+    }
+
+    return [];
 };
 
 const Header = () => {

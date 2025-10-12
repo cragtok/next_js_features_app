@@ -123,7 +123,7 @@ describe("Dynamic Routing Page", () => {
         cy.get("@dynamicInputForm")
             .next("p")
             .contains(
-                "Invalid characters in route segment. Only alphanumeric, spaces, hyphens, and forward slashes are allowed."
+                "Only alphanumeric, spaces, hyphens, underscores, and forward slashes are allowed."
             )
             .should("be.visible");
     });
