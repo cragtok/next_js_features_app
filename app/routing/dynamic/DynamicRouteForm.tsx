@@ -2,7 +2,7 @@
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { MAX_SLUG_LENGTH } from "./constants";
+import { MAX_SLUG_LENGTH } from "@/lib/utils";
 import ButtonWrapper from "@/components/general/ButtonWrapper";
 
 interface Props {

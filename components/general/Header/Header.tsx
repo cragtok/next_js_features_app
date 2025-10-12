@@ -4,27 +4,22 @@ import { usePathname } from "next/navigation";
 import BreadcrumbMenu from "./BreadcrumbMenu";
 import { Suspense } from "react";
 import { AppRoute, routeObjects } from "@/lib/routesList";
+import { isValidDynamicRouteSegment } from "@/lib/utils";
 
 const extractRoutePath = (pathname: string): AppRoute[] => {
     // match the '/routing/dynamic/*' path
     const dynamicRoutePattern = /^\/routing\/dynamic\/(.*)/;
     const match = pathname.match(dynamicRoutePattern);
     if (match) {
-        // If dynamic portion of route exceeds 50
-        // characters or contains invalid characters,
-        // then the route is invalid
-        const dynamicPortion = match ? match[1] : "";
-        if (
-            dynamicPortion.length > 80 ||
-            !/^[a-zA-Z0-9\-\_\ /]+$/.test(dynamicPortion)
-        ) {
+        const dynamicPortion = match[1];
+        if (!isValidDynamicRouteSegment(dynamicPortion)) {
             return [];
         }
 
         return [
             routeObjects["/"],
             routeObjects["/routing/dynamic"],
-            { ...routeObjects["/routing/dynamic*"], title: match[1] }, // Set page title as dynamic route segment
+            { ...routeObjects["/routing/dynamic*"], title: dynamicPortion }, // Set page title as dynamic route segment
         ];
     }
 

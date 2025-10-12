@@ -8,7 +8,7 @@ import { expect, beforeEach } from "@jest/globals";
 import "@testing-library/jest-dom/jest-globals";
 import DynamicRouteForm from "@/app/routing/dynamic/DynamicRouteForm";
 import { useRouter } from "next/navigation";
-import { MAX_SLUG_LENGTH } from "@/app/routing/dynamic/constants";
+import { MAX_SLUG_LENGTH } from "@/lib/utils";
 
 jest.mock("next/navigation", () => ({
     useRouter: jest.fn(),

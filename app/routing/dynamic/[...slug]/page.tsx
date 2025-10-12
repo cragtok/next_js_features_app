@@ -3,11 +3,11 @@ import DynamicRouteForm from "../DynamicRouteForm";
 import ParagraphWrapper from "@/components/general/ParagraphWrapper";
 import TextAccentWrapper from "@/components/general/TextAccentWrapper";
 import SectionWrapper from "@/components/general/SectionWrapper";
-import { MAX_SLUG_LENGTH } from "../constants";
 import CardWrapper from "@/components/general/CardWrapper";
 import { CardContent } from "@/components/ui/card";
 import { STATIC_ROUTES } from "../constants";
 import { Metadata } from "next";
+import { isValidDynamicRouteSegment } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -28,16 +28,13 @@ export async function generateMetadata({
     const joinedSlug = slug.join("/");
 
     let title;
-    if (
-        joinedSlug.length > MAX_SLUG_LENGTH ||
-        !/^[a-zA-Z0-9\-\_\ /]+$/.test(joinedSlug)
-    ) {
-        title = "Error";
-    } else {
+    if (isValidDynamicRouteSegment(joinedSlug)) {
         title =
             joinedSlug.length >= 25
                 ? `${joinedSlug.substring(0, 25)}...`
                 : joinedSlug;
+    } else {
+        title = "Error";
     }
 
     return {
@@ -50,14 +47,8 @@ async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
     const { slug } = await params;
     const joinedSlug = slug.join("/");
 
-    if (joinedSlug.length > MAX_SLUG_LENGTH) {
-        throw new Error("Max slug length exceeded");
-    }
-
-    if (!/^[a-zA-Z0-9\-\_\ /]+$/.test(joinedSlug)) {
-        throw new Error(
-            "Only alphanumeric, spaces, hyphens, underscores and forward slashes are allowed."
-        );
+    if (!isValidDynamicRouteSegment(joinedSlug)) {
+        throw new Error("Invald Dynamic Segment");
     }
 
     return (
