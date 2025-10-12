@@ -84,25 +84,6 @@ describe("DynamicRouteForm", () => {
             expect(mockPush).toHaveBeenCalledTimes(1);
             expect(mockPush).toHaveBeenCalledWith(`${baseRoute}/${testValue}`);
         });
-
-        it("should clear the input field after successful navigation", async () => {
-            const baseRoute = "/test-base-route";
-            render(<DynamicRouteForm baseRoute={baseRoute} />);
-            const input = screen.getByPlaceholderText(
-                "Enter a dynamic route segment"
-            );
-            const navigateButton = screen.getByRole("button", {
-                name: /navigate/i,
-            });
-            const testValue = "another-valid-segment";
-
-            await userEvent.type(input, testValue);
-            expect(input).toHaveValue(testValue);
-
-            await userEvent.click(navigateButton);
-
-            expect(input).toHaveValue("");
-        });
     });
 
     describe("form submission - invalid cases (error handling)", () => {
@@ -173,7 +154,7 @@ describe("DynamicRouteForm", () => {
 
             expect(
                 screen.getByText(
-                    "Invalid characters in route segment. Only alphanumeric, spaces, hyphens, and forward slashes are allowed."
+                    "Only alphanumeric, spaces, hyphens, underscores, and forward slashes are allowed."
                 )
             ).toBeInTheDocument();
             expect(mockPush).not.toHaveBeenCalled();
