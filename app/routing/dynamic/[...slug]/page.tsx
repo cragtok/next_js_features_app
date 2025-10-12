@@ -9,6 +9,8 @@ import { CardContent } from "@/components/ui/card";
 import { STATIC_ROUTES } from "../constants";
 import { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
     return STATIC_ROUTES.map((route) => ({
         slug: route.split("/"),
