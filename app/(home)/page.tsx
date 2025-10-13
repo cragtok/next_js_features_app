@@ -58,14 +58,14 @@ function Page() {
 
     return (
         <PageWrapper pageTitle="Next.js Features App">
-            <ParagraphWrapper classNameOverride="max-w-md max-[400px]:text-center">
+            <ParagraphWrapper classNameOverride="max-w-md max-[400px]:text-center font-medium">
                 This is an application that demonstrates the core features of
                 Next.js. It consists of several pages each demonstrating and
                 each explaining a different Next.js feature. I made this app to
                 learn Next.js and practice my Next.js development skills.
             </ParagraphWrapper>
 
-            <ParagraphWrapper classNameOverride="max-w-md max-[400px]:text-center">
+            <ParagraphWrapper classNameOverride="max-w-md max-[400px]:text-center font-medium">
                 To view the source code of this application or run it on your
                 own machine, check out the Github repo:{" "}
                 <LinkWrapper

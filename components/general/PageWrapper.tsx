@@ -12,7 +12,7 @@ const PageWrapper = ({ children, pageTitle, ...rest }: Props) => {
             {...rest}
         >
             {pageTitle && (
-                <h1 className="text-brand-700 font-extrabold text-4xl text-center">
+                <h1 className="text-brand-700 font-black text-4xl text-center">
                     {pageTitle}
                 </h1>
             )}

@@ -20,18 +20,33 @@ export const metadata: Metadata = {
 const myFont = localFont({
     src: [
         {
-            path: "../public/fonts/NotoSans-Regular.ttf",
+            path: "../public/fonts/Geist-Regular.ttf",
             weight: "400",
             style: "normal",
         },
         {
-            path: "../public/fonts/NotoSans-SemiBold.ttf",
+            path: "../public/fonts/Geist-Medium.ttf",
+            weight: "500",
+            style: "normal",
+        },
+        {
+            path: "../public/fonts/Geist-SemiBold.ttf",
             weight: "600",
             style: "normal",
         },
         {
-            path: "../public/fonts/NotoSans-Bold.ttf",
+            path: "../public/fonts/Geist-Bold.ttf",
             weight: "700",
+            style: "normal",
+        },
+        {
+            path: "../public/fonts/Geist-ExtraBold.ttf",
+            weight: "800",
+            style: "normal",
+        },
+        {
+            path: "../public/fonts/Geist-Black.ttf",
+            weight: "900",
             style: "normal",
         },
     ],
