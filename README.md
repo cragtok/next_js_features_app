@@ -23,6 +23,7 @@ The following features are demonstrated on this app:
 *   [Running](#running)
     *   [Installation](#installation)
     *   [Setting Environment Variables](#setting-environment-variables)
+    *   [Initializing The Database](#initializing-the-database)
     *   [Running Development Build](#running-development-build)
     *   [Running Production Build](#running-production-build)
 *   [Tests](#tests)
@@ -63,10 +64,10 @@ Before you begin, ensure you have the following installed:
 * [pnpm](https://pnpm.io/) (recommended) or [npm](https://www.npmjs.com/)
 * [Git](https://git-scm.com/)
 
-You will need API keys from these services:
-- [Twelve Data](https://twelvedata.com/)
-- [Google AI Studio](https://aistudio.google.com/app/apikey)
-- [Turso](https://turso.tech/)
+You will need API keys and tokens from these services:
+- [Twelve Data](https://twelvedata.com/): Create a Twelve Data account and generate an API key.
+- [Google AI Studio](https://aistudio.google.com/app/apikey): Create a Google account and generate an API key in AI Studio.
+- [Turso](https://turso.tech/): Create an account with Turso, then create a new database and get its URL and access token.
 
 ## Running
 
@@ -115,9 +116,25 @@ To set up your environment variables:
     1. `GEMINI_API_KEY`: API key from Google AI Studio.
     2. `TWELVE_DATA_API_KEY`: API key from Twelve Data.
     3. `DOMAIN_URL`: The URL of the running application in development or production. Should be `http://localhost:<port>` (where `<port>` is usually `3000` or some other port) if running locally in development mode, or the domain name of the hosted production application if running on a VPS or PaaS.
-    4. `TURSO_DATABASE_URL`: The URL of the SQLite database that is hosted on Turso.
+    4. `TURSO_DATABASE_URL`: The URL of the SQLite database that is hosted on Turso. For test mode, it is recommended to set it to `":memory"` to use an in-memory database.
     5. `TURSO_AUTH_TOKEN`: The authentication token used access the SQLite database that is hosted on Turso.
     6. `NODE_ENV`: Set to `"production"`, `"development"` or `"test"`, depending on which file is being used.
+
+### Initializing The Database
+
+You also need to initialize the database by generating the schema and applying it to the database. Ensure you have set up the `TURSO_AUTH_TOKEN` and `TURSO_DATABASE_URL` environment variables as instructed in the previous section.
+
+Run the database initialization script:
+
+```bash
+pnpm db:init
+``` 
+
+Alternatively, using `npm`:
+
+```bash
+npm run db:init
+```
 
 ### Running Development Build
 
