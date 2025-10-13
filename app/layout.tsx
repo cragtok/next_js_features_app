@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import { appEnv } from "@/lib/env/appEnv";
 import { WebVitals } from "@/components/general/WebVitals";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -50,6 +51,7 @@ async function RootLayout({
                 {children}
                 <Toaster closeButton={true} />
                 <SpeedInsights />
+                <Analytics />
             </body>
         </html>
     );
