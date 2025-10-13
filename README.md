@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a Next.js application that serves as a demonstration of Next.js's major features. I made this app to learn Next.js and practice what I have learned. It's an ideal resource for developers looking to understand various Next.js functionalities and can also be used as a practical project for practicing deployments on platforms like Vercel or a custom VPS.
+This is a Next.js application that serves as a demonstration of its major features. I made this app to learn Next.js and put into practice whatever knowledge I learned. It is an ideal resource for developers looking to understand various Next.js functionalities and can also be used as a practical project for practicing deployments on platforms like Vercel or a custom VPS.
 
 The following features are demonstrated on this app:
 - ⚛️ Client Components
@@ -104,14 +104,14 @@ You will need API keys from these services:
 
 Before running the application, you need to set up the environment variables.
 
-This project uses environment variables for different modes (development, production, and testing). Template files are provided in the root directory:
-*   `.env.development.template`
-*   `.env.production.template`
-*   `.env.test.template`
+This project uses environment variables for different modes (development, production, and testing). Template files are provided in the root directory, named according to the mode the application will be run in:
+*   `.env.development.template`: Environment variables for development mode.
+*   `.env.production.template`: Environment variables for production mode.
+*   `.env.test.template`: Environment variables for test mode.
 
 To set up your environment variables:
 1.  **Rename the appropriate template file:** For example, to run the app in development mode, rename `.env.development.template` to `.env.development`.
-2.  **Fill in the values:** Open the renamed `.env` file and replace all `<your value here>` placeholders with your actual API keys and URLs.
+2.  **Fill in the values:** Open the renamed `.env` file and replace all `<your value here>` placeholders with your actual API keys and other values:
     1. `GEMINI_API_KEY`: API key from Google AI Studio.
     2. `TWELVE_DATA_API_KEY`: API key from Twelve Data.
     3. `DOMAIN_URL`: The URL of the running application in development or production. Should be `http://localhost:<port>` (where `<port>` is usually `3000` or some other port) if running locally in development mode, or the domain name of the hosted production application if running on a VPS or PaaS.
@@ -199,11 +199,11 @@ To set up your environment variables:
 
 **Build Minimization**
 
-The `app/api` folder contains an API that is used in [End-to-End (E2E) testing](#end-to-end-e2e-tests) to clear and seed the database when running tests.
+The `app/api` folder contains an API that is used in [End-to-End (E2E) testing](#end-to-end-e2e-tests) to clear and seed the database when running E2E tests.
 - This API is only needed in E2E testing, and is therefore excluded from the production build of the application.
 - This is done by running a `scripts/preinstall.ts` script before the production build, which temporarily moves the `app/api` folder out of the `app` folder, and a `scripts/postinstall.ts` script which returns it back after the build has finished.
 - The `build` script defined in `package.json` performs these steps automatically.
-- On the other hand, the `build:test` script is used to run a production build specifically for E2E testing. This script simply runs the normal `next build` command while including the `app/api` folder in the production build.
+- On the other hand, the `build:test` script is used to run a production build specifically for E2E testing. This script simply runs the normal `next build` command while including the `app/api` folder in the final production build.
 
 ## Tests
 
@@ -351,13 +351,13 @@ Demonstrates how routing works in Next.js.
 
 **Route:** `/routing/static`
 
-A simple page demonstrating the use of Static Routing in Next.js. It is just a static page with a fixed route.
+A simple page demonstrating the use of Static Routing in Next.js. It is a simple static page within a simple static route.
 
 #### Dynamic Routing
 
 **Routes:** `/routing/dynamic`, `/routing/dynamic/[...slug]`
 
-Consists of a page at `/routing/dynamic` that contains a form where the user can enter a string representing a dynamic route segment.
+Consists of a page at the `/routing/dynamic` route that contains a form where the user can enter a string representing a dynamic route segment.
 - Submitting the form navigates to the page represented by the `/routing/dynamic/[...slug]` route where the `[...slug]` represents the catch-all dynamic route entered by the user.
 - This page simply accesses the dynamic route segment and displays it back to the user.
 
