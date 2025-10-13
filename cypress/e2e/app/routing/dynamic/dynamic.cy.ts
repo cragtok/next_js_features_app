@@ -167,4 +167,45 @@ describe("Dynamic Routing Page", () => {
 
         cy.getBySel("dynamic-segment").should("contain", nonStaticRouteSegment);
     });
+
+    it("should automatically escape spaces in the dynamic segment within the URL with '%20'", () => {
+        const segmentWithSpaces = "this segment contains spaces";
+        const escapedSegment = segmentWithSpaces.replaceAll(" ", "%20");
+        cy.visit(`/routing/dynamic/${segmentWithSpaces}`);
+
+        const expectedUrl = `${Cypress.env("baseUrl")}/routing/dynamic/${escapedSegment}`;
+
+        cy.url().should("eq", expectedUrl);
+
+        cy.contains(
+            "p",
+            "This dynamic route segment is statically generated at build time."
+        ).should("not.exist");
+
+        cy.getBySel("dynamic-segment").should("contain", escapedSegment);
+    });
+
+    it("should show an error page when the dynamic segment within the URL contains invalid characters", () => {
+        const invalidSegment = "123()*&kj";
+        cy.visit(`/routing/dynamic/${invalidSegment}`, {
+            failOnStatusCode: false,
+        });
+
+        cy.get("h1").contains("Error!").should("be.visible");
+
+        cy.getBySel("dynamic-segment").should("not.exist");
+    });
+
+    it("should show an error page when the dynamic segment within the URL exceeds max length", () => {
+        const maxLength = 80;
+        const longRouteSegment = "a".repeat(maxLength + 1); // Create a string longer than max length
+
+        cy.visit(`/routing/dynamic/${longRouteSegment}`, {
+            failOnStatusCode: false,
+        });
+
+        cy.get("h1").contains("Error!").should("be.visible");
+
+        cy.getBySel("dynamic-segment").should("not.exist");
+    });
 });
