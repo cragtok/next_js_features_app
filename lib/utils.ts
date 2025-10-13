@@ -5,16 +5,18 @@ import * as z from "zod";
 
 const MAX_SLUG_LENGTH = 80;
 
-function isValidDynamicRouteSegment(joinedSlug: string) {
-    if (!joinedSlug.length) {
+function isValidDynamicRouteSegment(dynamicSegment: string) {
+    if (!dynamicSegment.length) {
         return true;
     }
     // If dynamic portion of route exceeds 80
     // characters or contains invalid characters,
     // then the route is invalid
     return (
-        joinedSlug.length <= MAX_SLUG_LENGTH &&
-        /^[a-zA-Z0-9\-\_\ /]+$/.test(joinedSlug)
+        dynamicSegment.length <= MAX_SLUG_LENGTH &&
+        // only alphanumeric, underscores, dashes, spaces, and percentage signs allowed
+        // (spaces get auto converted to percentage signs in browser URL bar)
+        /^[a-zA-Z0-9\-\_\\%\\ /]+$/.test(dynamicSegment)
     );
 }
 
@@ -72,4 +74,10 @@ function parseUserBody(body: Partial<User>) {
 
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-export { cn, parseUserBody, delay, isValidDynamicRouteSegment, MAX_SLUG_LENGTH };
+export {
+    cn,
+    parseUserBody,
+    delay,
+    isValidDynamicRouteSegment,
+    MAX_SLUG_LENGTH,
+};
