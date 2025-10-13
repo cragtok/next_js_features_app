@@ -6,6 +6,7 @@ describe("Route handlers page", () => {
     describe("User creation form", () => {
         it("should display error messages when create user form is submitted with no data", () => {
             cy.visit("/route-handlers");
+            cy.scrollTo("bottom");
 
             cy.contains("Create New User").click();
 
@@ -33,6 +34,7 @@ describe("Route handlers page", () => {
 
         it("should display correct error messages for invalid input formats", () => {
             cy.visit("/route-handlers");
+            cy.scrollTo("bottom");
 
             cy.contains("Create New User").click();
 
@@ -67,6 +69,7 @@ describe("Route handlers page", () => {
 
         it("should successfully submit the form, clear fields, and add a new user card", () => {
             cy.visit("/route-handlers");
+            cy.scrollTo("bottom");
 
             const username = "newuser_rh";
             const email = "newuser_rh@example.com";
@@ -115,6 +118,7 @@ describe("Route handlers page", () => {
 
         it("should prevent the creation of a new user that already exists", () => {
             cy.visit("/route-handlers");
+            cy.scrollTo("bottom");
 
             const username = "newuser_rh";
             const email = "newuser_rh@example.com";
@@ -177,6 +181,7 @@ describe("Route handlers page", () => {
     describe("Users section", () => {
         it("should show pre-filled user data in edit form when edit button is clicked", () => {
             cy.visit("/route-handlers");
+            cy.scrollTo("bottom");
 
             cy.getBySel("user-cards-list")
                 .children()
@@ -247,6 +252,7 @@ describe("Route handlers page", () => {
 
         it("should revert to normal state with initial data when cancel button is clicked in edit mode", () => {
             cy.visit("/route-handlers");
+            cy.scrollTo("bottom");
 
             cy.getBySel("user-cards-list")
                 .children()
@@ -339,6 +345,7 @@ describe("Route handlers page", () => {
 
         it("should update user data and revert to normal state when save button is clicked with valid data", () => {
             cy.visit("/route-handlers");
+            cy.scrollTo("bottom");
 
             cy.getBySel("user-cards-list")
                 .children()
@@ -390,6 +397,7 @@ describe("Route handlers page", () => {
 
         it("should delete a user card when the delete button is clicked", () => {
             cy.visit("/route-handlers");
+            cy.scrollTo("bottom");
 
             let initialUserCount = 0;
             let deletedUsername: string;
@@ -437,6 +445,7 @@ describe("Route handlers page", () => {
 
         it("should display an error and remain in edit mode when updating with an existing username", () => {
             cy.visit("/route-handlers");
+            cy.scrollTo("bottom");
 
             cy.getBySel("user-cards-list")
                 .children()
