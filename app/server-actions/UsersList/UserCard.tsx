@@ -9,21 +9,21 @@ interface Props {
 
 const UserCard = ({ user, id }: Props) => {
     return (
-        <CardWrapper classNameOverride="text-justify" data-testid="user-card">
-            <CardContent id={id}>
-                <p className="text-brand-500 text">
+        <CardWrapper data-testid="user-card">
+            <CardContent id={id} className="text-left">
+                <p className="text-brand-500">
                     <span className="font-semibold">Username:</span>{" "}
                     {user.username}
                 </p>
-                <p className="text-brand-500 text">
+                <p className="text-brand-500">
                     <span className="font-semibold">Email:</span> {user.email}
                 </p>
-                <p className="text-brand-500 text">
+                <p className="text-brand-500">
                     <span className="font-semibold">Password:</span>{" "}
                     {user.password}
                 </p>
                 {user.createdAt && (
-                    <p className="text-brand-500 text">
+                    <p className="text-brand-500">
                         <span className="font-semibold">Created At:</span>{" "}
                         {new Date(user.createdAt).toUTCString()}
                     </p>
