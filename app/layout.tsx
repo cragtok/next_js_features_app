@@ -3,9 +3,9 @@ import Header from "@/components/general/Header/Header";
 import { Toaster } from "sonner";
 import localFont from "next/font/local";
 import { appEnv } from "@/lib/env/appEnv";
-
-import "./globals.css";
 import { WebVitals } from "@/components/general/WebVitals";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import "./globals.css";
 
 export const metadata: Metadata = {
     metadataBase: new URL(appEnv.DOMAIN_URL),
@@ -49,6 +49,7 @@ async function RootLayout({
                 <Header />
                 {children}
                 <Toaster closeButton={true} />
+                <SpeedInsights />
             </body>
         </html>
     );
